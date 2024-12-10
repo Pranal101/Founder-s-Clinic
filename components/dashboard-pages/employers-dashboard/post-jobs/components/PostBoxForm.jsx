@@ -1,6 +1,4 @@
-
-'use client'
-
+"use client";
 import Map from "../../../Map";
 import Select from "react-select";
 

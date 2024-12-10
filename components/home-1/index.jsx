@@ -135,14 +135,14 @@ const index = () => {
       </section>
       {/* <!-- End News Section --> */}
 
-      <section className="app-section">
+      {/* <section className="app-section">
         <div className="auto-container">
           <AppSection />
         </div>
-      </section>
+      </section> */}
       {/* <!-- End App Section --> */}
 
-      <CallToAction />
+      {/* <CallToAction /> */}
       {/* <!-- End Call To Action --> */}
 
       <FooterDefault />

@@ -1,43 +1,48 @@
+"use client";
 import Link from "next/link";
 
-const Pricing = () => {
+const selectRole = () => {
   const pricingCotent = [
     {
       id: 1,
-      packageType: "Basic",
-      price: "199",
+      packageType: "",
+      price: "Enterprise",
       tag: "",
-      features: [
-        "30 job posting",
-        "3 featured job",
-        "Job displayed for 15 days",
-        "Premium Support 24/7",
-      ],
+      features: [],
+      redirectTo: "/onboarding/enterprise-onboarding",
     },
     {
       id: 2,
-      packageType: "Standard",
-      price: "499",
+      packageType: "",
+      price: "Professional",
       tag: "",
-      features: [
-        "40 job posting",
-        "5 featured job",
-        "Job displayed for 20 days",
-        "Premium Support 24/7",
-      ],
+      features: [],
+      redirectTo: "/onboarding/professional-onboarding",
     },
     {
       id: 3,
-      packageType: "Extended",
-      price: "799",
+      packageType: "",
+      price: "Intern",
       tag: "",
-      features: [
-        "50 job posting",
-        "10 featured job",
-        "Job displayed for 60 days",
-        "Premium Support 24/7",
-      ],
+      features: [],
+      redirectTo: "/onboarding/intern-onboarding",
     },
+    // {
+    //   id: 4,
+    //   packageType: "",
+    //   price: "Networking community",
+    //   tag: "",
+    //   features: [],
+    //   redirectTo: "/onboarding/intern-onboarding",
+    // },
+    // {
+    //   id: 5,
+    //   packageType: "",
+    //   price: "Investor",
+    //   tag: "",
+    //   features: [],
+    //   redirectTo: "/onboarding/intern-onboarding",
+    // },
   ];
 
   return (
@@ -60,7 +65,7 @@ const Pricing = () => {
 
               <div className="title">{item.packageType}</div>
               <div className="price">
-                ${item.price} <span className="duration">/ monthly</span>
+                {item.price} <span className="duration"></span>
               </div>
               <div className="table-content">
                 <ul>
@@ -72,8 +77,11 @@ const Pricing = () => {
                 </ul>
               </div>
               <div className="table-footer">
-                <Link href="/shop/cart" className="theme-btn btn-style-three">
-                  Add to Cart
+                <Link
+                  href={item.redirectTo}
+                  className="theme-btn btn-style-three"
+                >
+                  Select
                 </Link>
               </div>
             </div>
@@ -84,4 +92,4 @@ const Pricing = () => {
   );
 };
 
-export default Pricing;
+export default selectRole;

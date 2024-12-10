@@ -1,16 +1,61 @@
+"use client";
+import React, { useState } from "react";
 import Link from "next/link";
 import LoginWithSocial from "./LoginWithSocial";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  getAdditionalUserInfo,
+} from "firebase/auth";
 
 const FormContent = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const handleEmailLogin = async (e) => {
+    e.preventDefault(); // Prevent form submission default behavior
+    setError(""); // Reset error message
+
+    try {
+      const auth = getAuth();
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      const additionalUserInfo = getAdditionalUserInfo(userCredential);
+      const isNewUser = additionalUserInfo?.isNewUser;
+      console.log("User signed in:", user);
+      console.log("Is New User:", isNewUser);
+
+      // Redirect user based on new/returning status
+      if (isNewUser) {
+        window.location.href = "/selectRole";
+      } else {
+        window.location.href = "/dashboard";
+      }
+    } catch (err) {
+      console.error("Error signing in:", err);
+      setError("Invalid email or password. Please try again.");
+    }
+  };
   return (
     <div className="form-inner">
       <h3>Login to Superio</h3>
 
       {/* <!--Login Form--> */}
-      <form method="post">
+      <form method="post" onSubmit={handleEmailLogin}>
         <div className="form-group">
           <label>Username</label>
-          <input type="text" name="username" placeholder="Username" required />
+          <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
         </div>
         {/* name */}
 
@@ -20,6 +65,8 @@ const FormContent = () => {
             type="password"
             name="password"
             placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
         </div>
@@ -39,6 +86,7 @@ const FormContent = () => {
           </div>
         </div>
         {/* forgot password */}
+        {error && <p style={{ color: "red" }}>{error}</p>}
 
         <div className="form-group">
           <button
