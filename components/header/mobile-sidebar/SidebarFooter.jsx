@@ -20,8 +20,8 @@ const SidebarFooter = () => {
             <a href="tel:+919106526820">+919106526820</a>
           </span>
           <span className="address">
-            329 Queensberry Street, North Melbourne VIC <br />
-            3051, Australia.
+            201 Sears Tower, Gulbai Tekra, Ambawadi <br />
+            Ahmedabad - 380006
           </span>
           <a href="mailto:info@foundersclinic.com" className="email">
             info@foundersclinic.com
