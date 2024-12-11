@@ -12,9 +12,94 @@ const FormContent = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  // const handleEmailLogin = async (e) => {
+  //   e.preventDefault(); // Prevent form submission default behavior
+  //   setError(""); // Reset error message
+
+  //   try {
+  //     const auth = getAuth();
+  //     const userCredential = await signInWithEmailAndPassword(
+  //       auth,
+  //       email,
+  //       password
+  //     );
+  //     const user = userCredential.user;
+  //     const additionalUserInfo = getAdditionalUserInfo(userCredential);
+  //     const isNewUser = additionalUserInfo?.isNewUser;
+  //     console.log("User signed in:", user);
+  //     console.log("Is New User:", isNewUser);
+
+  //     // Redirect user based on new/returning status
+  //     if (isNewUser) {
+  //       window.location.href = "/selectRole";
+  //     } else {
+  //       window.location.href = "/dashboard";
+  //     }
+  //   } catch (err) {
+  //     console.error("Error signing in:", err);
+  //     setError("Invalid email or password. Please try again.");
+  //   }
+  // };
+  // const handleEmailLogin = async (e) => {
+  //   e.preventDefault(); // Prevent form submission default behavior
+  //   setError(""); // Reset error message
+
+  //   try {
+  //     const auth = getAuth();
+  //     const userCredential = await signInWithEmailAndPassword(
+  //       auth,
+  //       email,
+  //       password
+  //     );
+  //     const user = userCredential.user;
+  //     const name = user.displayName || `User_${user.email.split("@")[0]}`;
+  //     const additionalUserInfo = getAdditionalUserInfo(userCredential);
+  //     const isNewUser = additionalUserInfo?.isNewUser;
+
+  //     console.log("User signed in:", user);
+  //     console.log("Is New User:", isNewUser);
+
+  //     // Get Firebase ID token
+  //     const token = await user.getIdToken();
+
+  //     // Send user info to the backend for registration
+  //     const response = await fetch("http://localhost:4000/api/user/register", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${token}`, // Token for backend verification
+  //       },
+  //       body: JSON.stringify({
+  //         uid: user.uid,
+  //         name: name || user.displayName,
+  //         email: user.email || "Unknown Email",
+  //       }),
+  //     });
+
+  //     const data = await response.json();
+
+  //     if (response.ok) {
+  //       console.log("User successfully registered or logged in:", data);
+
+  //       // Redirect user based on new/returning status
+  //       window.location.href = data.newUser ? "/selectRole" : "/dashboard";
+  //     } else {
+  //       console.error("Error during user registration:", data.message);
+  //       setError("An error occurred during login. Please try again.");
+  //     }
+  //   } catch (err) {
+  //     console.error("Error signing in:", err);
+  //     setError("Invalid email or password. Please try again.");
+  //   }
+  // };
   const handleEmailLogin = async (e) => {
-    e.preventDefault(); // Prevent form submission default behavior
-    setError(""); // Reset error message
+    e.preventDefault();
+    setError("");
+
+    if (!email.includes("@") || !email.includes(".")) {
+      setError("Please enter a valid email address.");
+      return;
+    }
 
     try {
       const auth = getAuth();
@@ -23,23 +108,38 @@ const FormContent = () => {
         email,
         password
       );
-      const user = userCredential.user;
-      const additionalUserInfo = getAdditionalUserInfo(userCredential);
-      const isNewUser = additionalUserInfo?.isNewUser;
-      console.log("User signed in:", user);
-      console.log("Is New User:", isNewUser);
 
-      // Redirect user based on new/returning status
-      if (isNewUser) {
-        window.location.href = "/selectRole";
+      // Proceed with user token and backend operations
+      const user = userCredential.user;
+      const token = await user.getIdToken();
+
+      const response = await fetch("http://localhost:4000/api/user/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ uid: user.uid, email: user.email }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        window.location.href = data.newUser ? "/selectRole" : "/dashboard";
       } else {
-        window.location.href = "/dashboard";
+        setError("Server error. Please try again.");
       }
     } catch (err) {
       console.error("Error signing in:", err);
-      setError("Invalid email or password. Please try again.");
+      if (err.code === "auth/user-not-found") {
+        setError("User not found. Please sign up first.");
+      } else if (err.code === "auth/invalid-credential") {
+        setError("Invalid email or password. Please try again.");
+      } else {
+        setError("An error occurred. Please try again.");
+      }
     }
   };
+
   return (
     <div className="form-inner">
       <h3>Login to Founder's Clinic</h3>
