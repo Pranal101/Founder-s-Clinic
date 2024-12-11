@@ -1,5 +1,4 @@
-
-'use client'
+"use client";
 
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import LoginWithSocial from "./LoginWithSocial";
@@ -9,11 +8,11 @@ import Link from "next/link";
 const Register2 = () => {
   return (
     <div className="form-inner">
-      <h3>Create a Free Superio Account</h3>
+      <h3>Create an Account</h3>
 
       <Tabs>
         <div className="form-group register-dual">
-          <TabList className="btn-box row">
+          {/* <TabList className="btn-box row">
             <Tab className="col-lg-6 col-md-12">
               <button className="theme-btn btn-style-four">
                 <i className="la la-user"></i> Candidate
@@ -25,7 +24,7 @@ const Register2 = () => {
                 <i className="la la-briefcase"></i> Employer
               </button>
             </Tab>
-          </TabList>
+          </TabList> */}
         </div>
         {/* End .form-group */}
 

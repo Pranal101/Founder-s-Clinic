@@ -36,7 +36,7 @@ const DefaulHeader2 = () => {
                 <Image
                   width={154}
                   height={50}
-                  src="/images/fc_logo.png"
+                  src="/images/logo.svg"
                   alt="brand"
                 />
               </Link>

@@ -42,7 +42,7 @@ const FormContent = () => {
   };
   return (
     <div className="form-inner">
-      <h3>Login to Superio</h3>
+      <h3>Login to Founder's Clinic</h3>
 
       {/* <!--Login Form--> */}
       <form method="post" onSubmit={handleEmailLogin}>
