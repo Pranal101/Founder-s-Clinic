@@ -1,10 +1,8 @@
 "use client";
 import Link from "next/link";
 import {
-  blogItems,
   candidateItems,
   employerItems,
-  findJobItems,
   homeItems,
   pageItems,
   shopItems,
@@ -112,7 +110,7 @@ const HeaderNavContent = () => {
                 : ""
             } dropdown`}
           >
-            <span>Enterprise</span>
+            <span>Enterprises</span>
             <ul>
               <li
                 className={
@@ -204,33 +202,6 @@ const HeaderNavContent = () => {
               >
                 <Link href="/candidates-single-v1/1">Professionals Single</Link>
               </li>
-              {/* {candidateItems.map((item) => (
-                <li className="dropdown" key={item.id}>
-                  <span
-                    className={
-                      isActiveParentChaild(item.items, usePathname())
-                        ? "current"
-                        : ""
-                    }
-                  >
-                    {item.title}
-                  </span>
-                  <ul>
-                    {item.items.map((menu, i) => (
-                      <li
-                        className={
-                          isActiveLink(menu.routePath, usePathname())
-                            ? "current"
-                            : ""
-                        }
-                        key={i}
-                      >
-                        <Link href={menu.routePath}>{menu.name}</Link>
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              ))} */}
               <li
                 className={
                   usePathname()?.includes("/candidates-dashboard/")
@@ -276,35 +247,6 @@ const HeaderNavContent = () => {
               >
                 <Link href="/candidates-single-v1/1">Intern Single</Link>
               </li>
-              {/* End findjobs menu items */}
-              {/* {candidateItems.map((item) => (
-                <li className="dropdown" key={item.id}>
-                  <span
-                    className={
-                      isActiveParentChaild(item.items, usePathname())
-                        ? "current"
-                        : ""
-                    }
-                  >
-                    {item.title}
-                  </span>
-                  <ul>
-                    {item.items.map((menu, i) => (
-                      <li
-                        className={
-                          isActiveLink(menu.routePath, usePathname())
-                            ? "current"
-                            : ""
-                        }
-                        key={i}
-                      >
-                        <Link href={menu.routePath}>{menu.name}</Link>
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              ))} */}
-
               <li
                 className={
                   usePathname()?.includes("/candidates-dashboard/")

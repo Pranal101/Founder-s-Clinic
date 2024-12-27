@@ -94,8 +94,9 @@ const FormContent = () => {
   // };
   const handleEmailLogin = async (e) => {
     e.preventDefault();
-    setError("");
+    setError(""); // Reset any previous error messages
 
+    // Input validation
     if (!email.includes("@") || !email.includes(".")) {
       setError("Please enter a valid email address.");
       return;
@@ -109,10 +110,10 @@ const FormContent = () => {
         password
       );
 
-      // Proceed with user token and backend operations
       const user = userCredential.user;
       const token = await user.getIdToken();
 
+      // Send user details to the backend
       const response = await fetch("http://localhost:4000/api/user/register", {
         method: "POST",
         headers: {
@@ -123,19 +124,23 @@ const FormContent = () => {
       });
 
       const data = await response.json();
+
       if (response.ok) {
+        // Redirect based on user status
         window.location.href = data.newUser ? "/selectRole" : "/dashboard";
       } else {
-        setError("Server error. Please try again.");
+        setError(`Server error: ${data.message || "Please try again."}`);
       }
     } catch (err) {
-      console.error("Error signing in:", err);
+      // Handle Firebase errors
       if (err.code === "auth/user-not-found") {
         setError("User not found. Please sign up first.");
-      } else if (err.code === "auth/invalid-credential") {
-        setError("Invalid email or password. Please try again.");
+      } else if (err.code === "auth/wrong-password") {
+        setError("Incorrect password. Please try again.");
+      } else if (err.code === "auth/too-many-requests") {
+        setError("Too many failed attempts. Please try again later.");
       } else {
-        setError("An error occurred. Please try again.");
+        setError("An unexpected error occurred. Please try again.");
       }
     }
   };

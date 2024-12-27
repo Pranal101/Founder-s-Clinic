@@ -5,19 +5,19 @@ const Block1 = () => {
     {
       id: 1,
       icon: "/images/resource/work-1.png",
-      title: "Free Resume Assessments",
+      title: "Enterprises",
       text: `Employers on average spend 31 seconds scanning resumes to identify potential matches.`,
     },
     {
       id: 2,
       icon: "/images/resource/work-2.png",
-      title: "Job Fit Scoring",
+      title: "Professioanals",
       text: `Employers on average spend 31 seconds scanning resumes to identify potential matches.`,
     },
     {
       id: 3,
       icon: "/images/resource/work-3.png",
-      title: "Help Every Step of the Way",
+      title: "Interns",
       text: `Employers on average spend 31 seconds scanning resumes to identify potential matches.`,
     },
   ];

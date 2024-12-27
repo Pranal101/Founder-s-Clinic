@@ -1,125 +1,225 @@
-
-'use client'
-
+"use client";
+import { useState, useEffect } from "react";
 import Select from "react-select";
+import axios from "axios";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const FormInfoBox = () => {
-    const catOptions = [
-        { value: "Banking", label: "Banking" },
-        { value: "Digital & Creative", label: "Digital & Creative" },
-        { value: "Retail", label: "Retail" },
-        { value: "Human Resources", label: "Human Resources" },
-        { value: "Managemnet", label: "Managemnet" },
-        { value: "Accounting & Finance", label: "Accounting & Finance" },
-        { value: "Digital", label: "Digital" },
-        { value: "Creative Art", label: "Creative Art" },
-    ];
+  const [formData, setFormData] = useState({
+    entityName: "",
+    emailAddress: "",
+    contactNumber: "",
+    websiteLink: "",
+    foundedYear: "",
+    teamSize: "",
+    categories: [],
+    allowSearchListing: "",
+    businessDescription: "",
+    socialMediaLinks: "",
+    country: "",
+    city: "",
+    completeAddress: "",
+  });
 
-    return (
-        <form className="default-form">
-            <div className="row">
-                {/* <!-- Input --> */}
-                <div className="form-group col-lg-6 col-md-12">
-                    <label>Company name (optional)</label>
-                    <input
-                        type="text"
-                        name="name"
-                        placeholder="Invisionn"
-                        required
-                    />
-                </div>
+  const [loading, setLoading] = useState(true);
 
-                {/* <!-- Input --> */}
-                <div className="form-group col-lg-6 col-md-12">
-                    <label>Email address</label>
-                    <input
-                        type="text"
-                        name="name"
-                        placeholder="ib-themes"
-                        required
-                    />
-                </div>
+  const catOptions = [
+    { value: "Banking", label: "Banking" },
+    { value: "Digital & Creative", label: "Digital & Creative" },
+    { value: "Retail", label: "Retail" },
+    { value: "Human Resources", label: "Human Resources" },
+    { value: "Management", label: "Management" },
+    { value: "Accounting & Finance", label: "Accounting & Finance" },
+    { value: "Digital", label: "Digital" },
+    { value: "Creative Art", label: "Creative Art" },
+  ];
 
-                {/* <!-- Input --> */}
-                <div className="form-group col-lg-6 col-md-12">
-                    <label>Phone</label>
-                    <input
-                        type="text"
-                        name="name"
-                        placeholder="0 123 456 7890"
-                        required
-                    />
-                </div>
+  useEffect(() => {
+    const fetchProfile = async (user) => {
+      try {
+        const userToken = await user.getIdToken();
+        const response = await axios.get(
+          "http://localhost:4000/api/user/company-profile",
+          {
+            headers: {
+              Authorization: `Bearer ${userToken}`,
+            },
+          }
+        );
 
-                {/* <!-- Input --> */}
-                <div className="form-group col-lg-6 col-md-12">
-                    <label>Website</label>
-                    <input
-                        type="text"
-                        name="name"
-                        placeholder="www.invision.com"
-                        required
-                    />
-                </div>
+        const profile = response.data.profile;
 
-                {/* <!-- Input --> */}
-                <div className="form-group col-lg-6 col-md-12">
-                    <label>Est. Since</label>
-                    <input
-                        type="text"
-                        name="name"
-                        placeholder="06.04.2020"
-                        required
-                    />
-                </div>
+        setFormData({
+          entityName: profile.entityName || "",
+          emailAddress: profile.emailAddress || "",
+          contactNumber: profile.contactNumber || "",
+          websiteLink: profile.websiteLink || "",
+          foundedYear: profile.foundedYear || "",
+          teamSize: profile.teamSize || "",
+          categories: profile.categories || [],
+          allowSearchListing: profile.allowSearchListing ? "Yes" : "No",
+          businessDescription: profile.businessDescription || "",
+          socialMediaLinks: profile.socialMediaLinks || "",
+          country: profile.country || "",
+          city: profile.city || "",
+          completeAddress: profile.completeAddress || "",
+        });
+      } catch (error) {
+        console.error("Error fetching profile:", error.response?.data || error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-                {/* <!-- Input --> */}
-                <div className="form-group col-lg-6 col-md-12">
-                    <label>Team Size</label>
-                    <select className="chosen-single form-select" required>
-                        <option>50 - 100</option>
-                        <option>100 - 150</option>
-                        <option>200 - 250</option>
-                        <option>300 - 350</option>
-                        <option>500 - 1000</option>
-                    </select>
-                </div>
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        fetchProfile(user);
+      } else {
+        console.error("User not authenticated");
+        setLoading(false);
+      }
+    });
 
-                {/* <!-- Search Select --> */}
-                <div className="form-group col-lg-6 col-md-12">
-                    <label>Multiple Select boxes </label>
-                    <Select
-                        defaultValue={[catOptions[2]]}
-                        isMulti
-                        name="colors"
-                        options={catOptions}
-                        className="basic-multi-select"
-                        classNamePrefix="select"
-                    />
-                </div>
+    return () => unsubscribe(); // Clean up the observer on unmount
+  }, []);
 
-                {/* <!-- Input --> */}
-                <div className="form-group col-lg-6 col-md-12">
-                    <label>Allow In Search & Listing</label>
-                    <select className="chosen-single form-select">
-                        <option>Yes</option>
-                        <option>No</option>
-                    </select>
-                </div>
+  if (loading) {
+    return <div>Loading...</div>; // Display a loader while fetching the profile
+  }
 
-                {/* <!-- About Company --> */}
-                <div className="form-group col-lg-12 col-md-12">
-                    <label>About Company</label>
-                    <textarea placeholder="Spent several years working on sheep on Wall Street. Had moderate success investing in Yugo's on Wall Street. Managed a small team buying and selling Pogo sticks for farmers. Spent several years licensing licorice in West Palm Beach, FL. Developed several new methods for working it banjos in the aftermarket. Spent a weekend importing banjos in West Palm Beach, FL.In this position, the Software Engineer collaborates with Evention's Development team to continuously enhance our current software solutions as well as create new solutions to eliminate the back-office operations and management challenges present"></textarea>
-                </div>
+  return (
+    <form className="default-form">
+      <div className="row">
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Company Name (optional)</label>
+          <input
+            type="text"
+            name="entityName"
+            value={formData.entityName}
+            placeholder="Invisionn"
+            readOnly
+          />
+        </div>
 
-                {/* <!-- Input --> */}
-                <div className="form-group col-lg-6 col-md-12">
-                    <button className="theme-btn btn-style-one">Save</button>
-                </div>
-            </div>
-        </form>
-    );
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Email Address</label>
+          <input
+            type="text"
+            name="emailAddress"
+            value={formData.emailAddress}
+            placeholder="Email Address"
+            readOnly
+          />
+        </div>
+
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Phone</label>
+          <input
+            type="text"
+            name="contactNumber"
+            value={formData.contactNumber}
+            placeholder="0 123 456 7890"
+            readOnly
+          />
+        </div>
+
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Website</label>
+          <input
+            type="text"
+            name="websiteLink"
+            value={formData.websiteLink}
+            placeholder="www.invision.com"
+            readOnly
+          />
+        </div>
+
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Est. Since</label>
+          <input
+            type="text"
+            name="foundedYear"
+            value={formData.foundedYear}
+            placeholder="06.04.2020"
+            readOnly
+          />
+        </div>
+
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Team Size</label>
+          <select
+            className="chosen-single form-select"
+            name="teamSize"
+            value={formData.teamSize}
+            readOnly
+          >
+            <option value="50 - 100">50 - 100</option>
+            <option value="100 - 150">100 - 150</option>
+            <option value="200 - 250">200 - 250</option>
+            <option value="300 - 350">300 - 350</option>
+            <option value="500 - 1000">500 - 1000</option>
+          </select>
+        </div>
+
+        <div className="form-group col-lg-12 col-md-12">
+          <label>About Company</label>
+          <textarea
+            name="businessDescription"
+            value={formData.businessDescription}
+            placeholder="About the company..."
+            readOnly
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Social Media Links</label>
+          <input
+            type="text"
+            name="socialMediaLinks"
+            value={formData.socialMediaLinks}
+            placeholder="06.04.2020"
+            readOnly
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Country</label>
+          <input
+            type="text"
+            name="country"
+            value={formData.country}
+            placeholder="06.04.2020"
+            readOnly
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>City</label>
+          <input
+            type="text"
+            name="city"
+            value={formData.city}
+            placeholder="06.04.2020"
+            readOnly
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Complete Address</label>
+          <input
+            type="text"
+            name="completeAddress"
+            value={formData.completeAddress}
+            placeholder="06.04.2020"
+            readOnly
+          />
+        </div>
+
+        <div className="form-group col-lg-6 col-md-12">
+          <button type="submit" className="theme-btn btn-style-one">
+            Save
+          </button>
+        </div>
+      </div>
+    </form>
+  );
 };
 
 export default FormInfoBox;

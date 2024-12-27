@@ -1,91 +1,164 @@
 "use client";
-import Link from "next/link";
+import { useState } from "react";
+import { getAuth } from "firebase/auth";
+import axios from "axios";
+import Education from "@/components/dashboard-pages/candidates-dashboard/my-resume/components/Education";
 
-const PostBoxForm = () => {
-  const specialisms = [
-    { value: "Banking", label: "Banking" },
-    { value: "Digital & Creative", label: "Digital & Creative" },
-    { value: "Retail", label: "Retail" },
-    { value: "Human Resources", label: "Human Resources" },
-    { value: "Managemnet", label: "Managemnet" },
-    { value: "Accounting & Finance", label: "Accounting & Finance" },
-    { value: "Digital", label: "Digital" },
-    { value: "Creative Art", label: "Creative Art" },
-  ];
+const PostBoxForm = ({ pricingContent }) => {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    organizarionRole: "",
+    emailAddress: "",
+    contactNumber: "",
+    country: "",
+    city: "",
+    completeAddress: "",
+    acceptTerms: false,
+  });
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const auth = getAuth();
+      const user = auth.currentUser;
+
+      if (!user) {
+        throw new Error("User not authenticated");
+      }
+
+      const userToken = await user.getIdToken();
+
+      if (!userToken) {
+        throw new Error("User not authenticated");
+      }
+
+      // Call the addRole API to ensure the role is already set
+      const role = localStorage.getItem("userRole"); // Assume role is already selected
+      if (!role) {
+        throw new Error("User role is not set. Please select a role first.");
+      }
+
+      console.log("Role already set in backend:", role);
+
+      // Send form data to the backend to update the profile
+      const response = await axios.patch(
+        "http://localhost:4000/api/user/profile", // Backend endpoint
+        { profileData: formData }, // Send the form data
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`, // Include the user token
+          },
+        }
+      );
+
+      console.log("Profile updated successfully:", response.data);
+
+      // Redirect to the next page if needed
+      window.location.assign("/onboarding/professional-onboarding/form-2");
+    } catch (error) {
+      console.error("Error updating profile:", error.response?.data || error);
+    }
+  };
 
   return (
-    <form className="default-form">
+    <form className="default-form" onSubmit={handleSubmit}>
       <div className="row">
-        {/* <!-- Input --> */}
+        {/* Input Fields */}
         <div className="form-group col-lg-6 col-md-12">
           <label>First Name</label>
-          <input type="text" name="firstName" placeholder="First name" />
+          <input
+            type="text"
+            name="firstName"
+            placeholder="First name"
+            value={formData.firstName}
+            onChange={handleChange}
+          />
         </div>
-        {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Last Name</label>
-          <input type="text" name="lastName" placeholder="Last name" />
+          <input
+            type="text"
+            name="lastName"
+            placeholder="Last name"
+            value={formData.lastName}
+            onChange={handleChange}
+          />
         </div>
-        {/* <!-- Input --> */}
-        <div className="form-group col-lg-6 col-md-12">
-          <label>Entity Name</label>
-          <input type="text" placeholder="Entity name" />
-        </div>
-        {/* <!-- Input --> */}
-        <div className="form-group col-lg-6 col-md-12">
-          <label>Role</label>
-          <input type="text" placeholder="Role" />
-        </div>
-
-        {/* <!-- Input --> */}
+        <Education />
         <div className="form-group col-lg-6 col-md-12">
           <label>Email Address</label>
-          <input type="text" name="name" placeholder="" />
+          <input
+            type="text"
+            name="emailAddress"
+            placeholder="Email"
+            value={formData.emailAddress}
+            onChange={handleChange}
+          />
         </div>
-        {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Contact Number</label>
-          <input type="text" placeholder="Contact Number" />
+          <input
+            type="text"
+            name="contactNumber"
+            placeholder="Contact Number"
+            value={formData.contactNumber}
+            onChange={handleChange}
+          />
         </div>
-
-        {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Country</label>
-          <select className="chosen-single form-select">
+          <select
+            name="country"
+            value={formData.country}
+            onChange={handleChange}
+          >
             <option>Australia</option>
             <option>Pakistan</option>
-            <option>Chaina</option>
+            <option>China</option>
             <option>Japan</option>
             <option>India</option>
           </select>
         </div>
-
-        {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>City</label>
-          <select className="chosen-single form-select">
+          <select name="city" value={formData.city} onChange={handleChange}>
             <option>Melbourne</option>
-            <option>Pakistan</option>
-            <option>Chaina</option>
-            <option>Japan</option>
-            <option>India</option>
+            <option>Karachi</option>
+            <option>Beijing</option>
+            <option>Tokyo</option>
+            <option>Mumbai</option>
           </select>
         </div>
-
-        {/* <!-- Input --> */}
         <div className="form-group col-lg-12 col-md-12">
           <label>Complete Address</label>
           <input
             type="text"
-            name="name"
+            name="completeAddress"
             placeholder="329 Queensberry Street, North Melbourne VIC 3051, Australia."
+            value={formData.completeAddress}
+            onChange={handleChange}
           />
         </div>
-        {/* <!-- Conditions checkbox --> */}
         <div className="form-group col-lg-12 col-md-12">
           <div className="field-outer">
-            <div className="input-group new-checkboxes square">
-              <input type="checkbox" name="accept-terms" id="accept-terms" />
+            <div className="input-group checkboxes square">
+              <input
+                type="checkbox"
+                name="acceptTerms"
+                id="accept-terms"
+                checked={formData.acceptTerms}
+                onChange={handleChange}
+              />
               <label htmlFor="accept-terms" className="accept-terms">
                 <span className="custom-checkbox"></span> I accept Founders
                 Clinic’s Terms & Condition
@@ -93,27 +166,10 @@ const PostBoxForm = () => {
             </div>
           </div>
         </div>
-        {/* <!-- Input --> */}
-        {/* <div className="form-group col-lg-12 col-md-12">
-          <button className="theme-btn btn-style-three">Search Location</button>
-        </div>
-
-        <div className="form-group col-lg-12 col-md-12">
-          <div className="map-outer">
-            <div style={{ height: "420px", width: "100%" }}>
-              <Map />
-            </div>
-          </div>
-        </div> */}
-
-        {/* <!-- Button --> */}
         <div className="form-group col-lg-12 col-md-12 text-right">
-          <Link
-            href="/onboarding/professional-onboarding/form-2"
-            className="theme-btn btn-style-one"
-          >
+          <button type="submit" className="theme-btn btn-style-one">
             Next
-          </Link>
+          </button>
         </div>
       </div>
     </form>

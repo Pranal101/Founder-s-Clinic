@@ -1,6 +1,4 @@
-
-
-'use client'
+"use client";
 
 import AddPortfolio from "./AddPortfolio";
 import Awards from "./Awards";
@@ -44,10 +42,9 @@ const index = () => {
         </div>
         {/* <!-- End more portfolio upload --> */}
 
-        <div className="form-group col-lg-12 col-md-12">
-          {/* <!-- Resume / Awards --> */}
+        {/* <div className="form-group col-lg-12 col-md-12">
           <Awards />
-        </div>
+        </div> */}
         {/* <!-- End Award --> */}
 
         <div className="form-group col-lg-6 col-md-12">

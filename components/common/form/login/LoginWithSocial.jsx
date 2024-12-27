@@ -146,6 +146,57 @@ const LoginWithSocial = () => {
   //     console.error("Error during Google Sign-In:", error.message);
   //   }
   // };
+  // const handleGoogleLogin = async () => {
+  //   const provider = new GoogleAuthProvider();
+
+  //   try {
+  //     // Sign in with Google
+  //     const result = await signInWithPopup(auth, provider);
+  //     const user = result.user;
+
+  //     console.log("Google Sign-In successful. User:", user);
+
+  //     // Get the Firebase ID token for backend authentication
+  //     const token = await user.getIdToken();
+
+  //     // Check if the user is new
+  //     const isNewUser =
+  //       user.metadata.creationTime === user.metadata.lastSignInTime;
+
+  //     console.log("Is new user:", isNewUser);
+
+  //     // Send user info to the backend for registration
+  //     const response = await fetch("http://localhost:4000/api/user/register", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${token}`, // Token for backend verification
+  //       },
+  //       body: JSON.stringify({
+  //         uid: user.uid,
+  //         name: user.displayName || "Unknown Name",
+  //         email: user.email || "Unknown Email",
+  //       }),
+  //     });
+  //     const roleData = await fetch("http://localhost:4000/api/getRole", {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`, // Pass the token for authentication
+  //       },
+  //     });
+  //     const data = await roleData.json();
+
+  //     if (response.ok) {
+  //       console.log("User successfully registered or logged in:", data);
+
+  //       // Redirect based on the backend response
+  //       window.location.href = data.newUser ? "/selectRole" : "/selectRole";
+  //     } else {
+  //       console.error("Error during user registration:", data.message);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error during Google Sign-In:", error.message);
+  //   }
+  // };
   const handleGoogleLogin = async () => {
     const provider = new GoogleAuthProvider();
 
@@ -166,33 +217,75 @@ const LoginWithSocial = () => {
       console.log("Is new user:", isNewUser);
 
       // Send user info to the backend for registration
-      const response = await fetch("http://localhost:4000/api/user/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // Token for backend verification
-        },
-        body: JSON.stringify({
-          uid: user.uid,
-          name: user.displayName || "Unknown Name",
-          email: user.email || "Unknown Email",
-        }),
-      });
+      const registrationResponse = await fetch(
+        "http://localhost:4000/api/user/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // Token for backend verification
+          },
+          body: JSON.stringify({
+            uid: user.uid,
+            name: user.displayName || "Unknown Name",
+            email: user.email || "Unknown Email",
+          }),
+        }
+      );
 
-      const data = await response.json();
+      const registrationData = await registrationResponse.json();
 
-      if (response.ok) {
-        console.log("User successfully registered or logged in:", data);
+      if (!registrationResponse.ok) {
+        console.error(
+          "Error during user registration:",
+          registrationData.message
+        );
+        return;
+      }
 
-        // Redirect based on the backend response
-        window.location.href = data.newUser ? "/selectRole" : "/selectRole";
+      console.log(
+        "User successfully registered or logged in:",
+        registrationData
+      );
+
+      // Fetch the role from the backend
+      const roleResponse = await fetch(
+        "http://localhost:4000/api/user/getRole",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Pass the token for authentication
+          },
+        }
+      );
+
+      const roleData = await roleResponse.json();
+
+      if (!roleResponse.ok) {
+        console.error("Error fetching user role:", roleData.message);
+        return;
+      }
+
+      console.log("User role from backend:", roleData.role);
+
+      // Redirect based on the role
+      if (roleData.role === "Enterprise") {
+        window.location.href = "/employers-dashboard/dashboard";
+      } else if (roleData.role === "Professional") {
+        window.location.href = "/candidates-dashboard/dashboard";
+      } else if (roleData.role === "Intern") {
+        window.location.href = "/candidates-dashboard/dashboard";
+      } else if (isNewUser) {
+        // Redirect to role selection page for new users without a role
+        window.location.href = "/selectRole";
       } else {
-        console.error("Error during user registration:", data.message);
+        console.error("Unhandled role or scenario");
+        window.location.href = "/selectRole"; // Fallback
       }
     } catch (error) {
       console.error("Error during Google Sign-In:", error.message);
     }
   };
+
   return (
     <div className="btn-box row">
       <div className="col-lg-6 col-md-12">

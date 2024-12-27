@@ -3,7 +3,7 @@ const PostJobSteps = () => {
     <div className="post-job-steps">
       <div className="step">
         <span className="icon flaticon-briefcase"></span>
-        <h5>Job Detail</h5>
+        <h5>Project Detail</h5>
       </div>
 
       <div className="step">
