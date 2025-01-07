@@ -22,7 +22,7 @@ module.exports = [
   // },
   {
     id: 3,
-    name: "Manage Investements",
+    name: "Investment Seekers",
     icon: "la-briefcase",
     routePath: "/investors-dashboard/manage-investements",
     active: "",

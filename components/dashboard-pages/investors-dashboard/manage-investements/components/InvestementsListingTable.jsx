@@ -110,7 +110,7 @@ const JobListingsTable = () => {
   return (
     <div className="tabs-box">
       <div className="widget-title">
-        <h4>My Investements</h4>
+        <h4>Companies Looking for Investements</h4>
         {/* <div className="chosen-outer">
           <select className="chosen-single form-select">
             <option>Last 6 Months</option>
