@@ -68,6 +68,7 @@
 // };
 
 // export default ApplyJobModalContent;
+"use client";
 import { useState } from "react";
 import { getAuth } from "firebase/auth";
 import axios from "axios";
