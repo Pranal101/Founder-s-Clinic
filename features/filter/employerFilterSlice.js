@@ -104,6 +104,15 @@ export const employerFilterSlice = createSlice({
   name: "employer-filter", // Updated slice name
   initialState,
   reducers: {
+    addCategory: (state, { payload }) => {
+      state.keyword = payload;
+    },
+    addDestination: (state, { payload }) => {
+      state.keyword = payload;
+    },
+    addFoundationDate: (state, { payload }) => {
+      state.keyword = payload;
+    },
     addKeyword: (state, { payload }) => {
       state.keyword = payload;
     },
@@ -154,6 +163,9 @@ export const employerFilterSlice = createSlice({
 });
 
 export const {
+  addCategory,
+  addDestination,
+  addFoundationDate,
   addKeyword,
   addLocation,
   addBudget,
