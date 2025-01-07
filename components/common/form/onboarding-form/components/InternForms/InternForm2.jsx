@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import Link from "next/link";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
 import axios from "axios";
 import { getAuth } from "firebase/auth";
@@ -62,6 +63,12 @@ const PostBoxForm = () => {
     { value: "Administrative Support", label: "Administrative Support" },
     { value: "Project Management", label: "Project Management" },
   ];
+  const handleDateChange = (date, fieldName) => {
+    setFormData((prev) => ({
+      ...prev,
+      [fieldName]: date ? date.toISOString() : null,
+    }));
+  };
   const handleWorkExperienceChange = (index, field, value) => {
     const updatedWorkExperience = [...formData.workExperience];
     updatedWorkExperience[index][field] = value;
@@ -265,14 +272,14 @@ const PostBoxForm = () => {
           </select>
         </div>
         {/* <!-- Internship Interests and Preferences --> */}
-        <div className="form-group col-lg-6 col-md-12">
-          <label>Preferred Start Date</label>
-          <input
-            type="text"
-            name="preferredStartDate"
-            value={formData.preferredStartDate}
-            onChange={handleChange}
-            placeholder=""
+        <div className="custom-form-group form-group col-lg-6 col-md-12">
+          <label className="custom-form-label">Prefered Start Date</label>
+          <DatePicker
+            selected={formData.preferredStartDate}
+            onChange={(date) => handleDateChange(date, "preferredStartDate")}
+            dateFormat="dd/MM/yyyy"
+            placeholderText="Select a start date"
+            className="custom-margin"
           />
         </div>
         {/* <!-- Internship Interests and Preferences --> */}

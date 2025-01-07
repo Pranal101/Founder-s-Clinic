@@ -20,6 +20,18 @@ const Block1 = () => {
       title: "Interns",
       text: `Employers on average spend 31 seconds scanning resumes to identify potential matches.`,
     },
+    {
+      id: 4,
+      icon: "/images/resource/work-1.png",
+      title: "Investors",
+      text: `Employers on average spend 31 seconds scanning resumes to identify potential matches.`,
+    },
+    {
+      id: 5,
+      icon: "/images/resource/work-2.png",
+      title: "Networking Communities",
+      text: `Employers on average spend 31 seconds scanning resumes to identify potential matches.`,
+    },
   ];
   return (
     <>

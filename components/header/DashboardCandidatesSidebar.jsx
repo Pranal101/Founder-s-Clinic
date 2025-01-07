@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import Link from "next/link";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
@@ -9,18 +9,31 @@ import { isActiveLink } from "../../utils/linkActiveChecker";
 import { useDispatch, useSelector } from "react-redux";
 import { menuToggle } from "../../features/toggle/toggleSlice";
 import { usePathname } from "next/navigation";
+import { getAuth, signOut } from "firebase/auth";
+import { toast } from "react-toastify";
 
 const DashboardCandidatesSidebar = () => {
   const { menu } = useSelector((state) => state.toggle);
   const percentage = 30;
 
-
   const dispatch = useDispatch();
+  const pathname = usePathname();
   // menu togggle handler
   const menuToggleHandler = () => {
     dispatch(menuToggle());
   };
-
+  // Logout handler
+  const handleLogout = async () => {
+    const auth = getAuth();
+    try {
+      await signOut(auth); // Firebase sign-out
+      toast.success("Logged out!");
+      console.log("User logged out successfully");
+      // Redirect will happen via the `routePath` of the menu item
+    } catch (error) {
+      console.error("Error during logout:", error.message);
+    }
+  };
   return (
     <div className={`user-sidebar ${menu ? "sidebar_open" : ""}`}>
       {/* Start sidebar close icon */}
@@ -36,10 +49,15 @@ const DashboardCandidatesSidebar = () => {
           {candidatesuData.map((item) => (
             <li
               className={`${
-                isActiveLink(item.routePath, usePathname()) ? "active" : ""
+                isActiveLink(item.routePath, pathname) ? "active" : ""
               } mb-1`}
               key={item.id}
-              onClick={menuToggleHandler}
+              onClick={async () => {
+                menuToggleHandler();
+                if (item.name === "Logout") {
+                  await handleLogout(); // Trigger logout if item is "Logout"
+                }
+              }}
             >
               <Link href={item.routePath}>
                 <i className={`la ${item.icon}`}></i> {item.name}
@@ -69,7 +87,6 @@ const DashboardCandidatesSidebar = () => {
               text={`${percentage}%`}
             />
           </div>{" "}
-          {/* <!-- Pie Graph --> */}
         </div>
       </div>
     </div>

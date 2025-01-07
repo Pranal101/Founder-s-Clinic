@@ -430,7 +430,7 @@ const JobSingleDynamicV3 = ({ params }) => {
                         </div>
                         {/* End modal-header */}
 
-                        <ApplyJobModalContent />
+                        <ApplyJobModalContent jobId={job._id} />
                         {/* End PrivateMessageBox */}
                       </div>
                       {/* End .send-private-message-wrapper */}

@@ -58,6 +58,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { menuToggle } from "../../features/toggle/toggleSlice";
 import { usePathname } from "next/navigation";
 import { getAuth, signOut } from "firebase/auth";
+import { toast } from "react-toastify";
 
 const DashboardEmployerSidebar = () => {
   const { menu } = useSelector((state) => state.toggle);
@@ -74,6 +75,7 @@ const DashboardEmployerSidebar = () => {
     const auth = getAuth();
     try {
       await signOut(auth); // Firebase sign-out
+      toast.success("Logged out!");
       console.log("User logged out successfully");
       // Redirect will happen via the `routePath` of the menu item
     } catch (error) {

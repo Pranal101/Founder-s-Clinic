@@ -41,7 +41,22 @@ const Index = () => {
             <TopCardBlock />
           </div>
           {/* End .row top card block */}
+          <div className="col-lg-12">
+            {/* <!-- applicants Widget --> */}
+            <div className="applicants-widget ls-widget">
+              <div className="widget-title">
+                <h4>Recent Applicants</h4>
+              </div>
+              <div className="widget-content">
+                <div className="row">
+                  {/* <!-- Candidate block three --> */}
 
+                  <Applicants />
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* End .col */}
           <div className="row">
             <div className="col-xl-7 col-lg-12">
               {/* <!-- Graph widget --> */}
@@ -60,23 +75,6 @@ const Index = () => {
                 </div>
                 <div className="widget-content">
                   <Notification />
-                </div>
-              </div>
-            </div>
-            {/* End .col */}
-
-            <div className="col-lg-12">
-              {/* <!-- applicants Widget --> */}
-              <div className="applicants-widget ls-widget">
-                <div className="widget-title">
-                  <h4>Recent Applicants</h4>
-                </div>
-                <div className="widget-content">
-                  <div className="row">
-                    {/* <!-- Candidate block three --> */}
-
-                    <Applicants />
-                  </div>
                 </div>
               </div>
             </div>

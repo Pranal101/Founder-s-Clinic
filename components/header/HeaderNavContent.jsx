@@ -101,8 +101,14 @@ const HeaderNavContent = () => {
             <Link href="/job-list-v3">Find Jobs</Link>
           </li> */}
           {/* End findjobs menu items */}
-
           <li
+            className={
+              usePathname()?.includes("/employers-dashboard") ? "current" : ""
+            }
+          >
+            <Link href="/employers-dashboard/dashboard">Enterprises</Link>
+          </li>
+          {/* <li
             className={`${
               isActiveParent(employerItems, usePathname()) ||
               usePathname()?.split("/")[1] === "employers-dashboard"
@@ -129,8 +135,8 @@ const HeaderNavContent = () => {
                 }
               >
                 <Link href="/employers-single-v1/1">Enterprise Single</Link>
-              </li>
-              {/* {employerItems.map((item) => (
+              </li> */}
+          {/* {employerItems.map((item) => (
                 <li className="current" key={item.id}>
                   <span
                     className={
@@ -157,7 +163,7 @@ const HeaderNavContent = () => {
                   </ul>
                 </li>
               ))} */}
-              <li
+          {/* <li
                 className={
                   usePathname()?.includes("/employers-dashboard")
                     ? "current"
@@ -169,10 +175,10 @@ const HeaderNavContent = () => {
                 </Link>
               </li>
             </ul>
-          </li>
+          </li> */}
           {/* End Employers menu items */}
 
-          <li
+          {/* <li
             className={`${
               isActiveParent(candidateItems, usePathname()) ||
               usePathname()?.split("/")[1] === "candidates-dashboard"
@@ -214,10 +220,24 @@ const HeaderNavContent = () => {
                 </Link>
               </li>
             </ul>
+          </li> */}
+          <li
+            className={
+              usePathname()?.includes("/candidates-dashboard") ? "current" : ""
+            }
+          >
+            <Link href="/candidates-dashboard/dashboard">Professionals</Link>
           </li>
           {/* End Candidates menu items */}
           {/* Intern Menu */}
           <li
+            className={
+              usePathname()?.includes("/candidates-dashboard") ? "current" : ""
+            }
+          >
+            <Link href="/candidates-dashboard/dashboard">Interns</Link>
+          </li>
+          {/* <li
             className={`${
               isActiveParent(candidateItems, usePathname()) ||
               usePathname()?.split("/")[1] === "candidates-dashboard"
@@ -259,20 +279,22 @@ const HeaderNavContent = () => {
                 </Link>
               </li>
             </ul>
+          </li> */}
+          <li
+            className={
+              usePathname()?.includes("/investors-dashboard") ? "current" : ""
+            }
+          >
+            <Link href="/investors-dashboard/dashboard">Investors</Link>
           </li>
           <li
             className={
-              usePathname()?.includes("/employers-dashboard") ? "current" : ""
+              usePathname()?.includes("/networking-dashboard") ? "current" : ""
             }
           >
-            <Link href="/job-list-v3">Investor</Link>
-          </li>
-          <li
-            className={
-              usePathname()?.includes("/employers-dashboard") ? "current" : ""
-            }
-          >
-            <Link href="/job-list-v3">Networking Community</Link>
+            <Link href="/networking-dashboard/dashboard">
+              Networking Communities
+            </Link>
           </li>
           {/* <li
             className={`${

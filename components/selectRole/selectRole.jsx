@@ -116,6 +116,21 @@ const SelectRole = () => {
       price: "Intern",
       redirectTo: "/onboarding/intern-onboarding",
     },
+    {
+      id: 4,
+      price: "Investor",
+      redirectTo: "/onboarding/investor-onboarding",
+    },
+    {
+      id: 5,
+      price: "Networking Community",
+      redirectTo: "/onboarding/networkingCommunity-onboarding",
+    },
+    // {
+    //   id: 6,
+    //   price: "Event Hosts",
+    //   redirectTo: "/onboarding/eventHosts-onboarding",
+    // },
   ];
 
   const handleSelectRole = async (role) => {

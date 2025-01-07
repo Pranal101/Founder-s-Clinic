@@ -80,7 +80,9 @@ const EmployersSingleV1 = ({ params }) => {
                   {/* End .job-info */}
 
                   <ul className="job-other-info">
-                    <li className="time">Open Jobs – {employer.jobNumber}</li>
+                    <li className="time">
+                      Open Jobs – {employer?.jobNumber || "Job Number"}
+                    </li>
                   </ul>
                   {/* End .job-other-info */}
                 </div>

@@ -303,6 +303,10 @@ module.exports = [
         name: "Intern Dashboard",
         routePath: "/candidates-dashboard/dashboard",
       },
+      {
+        name: "Investor Dashboard",
+        routePath: "/investors-dashboard/dashboard",
+      },
     ],
   },
 ];
