@@ -147,7 +147,7 @@ const EventListingsTable = () => {
                           <div className="inner-box">
                             <div className="content">
                               <h4>
-                                <Link href={`/event-details/${event._id}`}>
+                                <Link href={`/blog-details/${event._id}`}>
                                   {event.eventTitle}
                                 </Link>
                               </h4>
