@@ -35,7 +35,8 @@ const LoginWithSocial = () => {
 
       if (!idToken) {
         // If no `id_token`, redirect to LinkedIn authorization URL
-        const authorizationURL = "http://localhost:4000/api/linkedin/authorize";
+        const authorizationURL =
+          "https://founders-clinic-backend.onrender.com/api/linkedin/authorize";
         window.location.href = authorizationURL;
         return;
       }
@@ -58,18 +59,21 @@ const LoginWithSocial = () => {
       console.log("Firebase LinkedIn login successful. User:", user);
 
       // Send user info to your backend for registration or login
-      const response = await fetch("http://localhost:4000/api/user/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // Send token for backend authentication
-        },
-        body: JSON.stringify({
-          name: user.displayName || "Unknown Name",
-          email: user.email || "Unknown Email",
-          uid: user.uid,
-        }),
-      });
+      const response = await fetch(
+        "https://founders-clinic-backend.onrender.com/api/user/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // Send token for backend authentication
+          },
+          body: JSON.stringify({
+            name: user.displayName || "Unknown Name",
+            email: user.email || "Unknown Email",
+            uid: user.uid,
+          }),
+        }
+      );
 
       const data = await response.json();
       console.log("Backend response:", data);
@@ -110,7 +114,7 @@ const LoginWithSocial = () => {
   //     console.log("Google Sign-In successful. User:", user);
 
   //     // Send user info to your backend via the /register API
-  //     const response = await fetch("http://localhost:4000/api/user/register", {
+  //     const response = await fetch("https://founders-clinic-backend.onrender.com/api/user/register", {
   //       method: "POST",
   //       headers: {
   //         "Content-Type": "application/json",
@@ -184,18 +188,21 @@ const LoginWithSocial = () => {
       console.log("Is new user:", isNewUser);
 
       // Send user info to the backend for registration
-      const response = await fetch("http://localhost:4000/api/user/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // Token for backend verification
-        },
-        body: JSON.stringify({
-          uid: user.uid,
-          name: user.displayName || "Unknown Name",
-          email: user.email || "Unknown Email",
-        }),
-      });
+      const response = await fetch(
+        "https://founders-clinic-backend.onrender.com/api/user/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // Token for backend verification
+          },
+          body: JSON.stringify({
+            uid: user.uid,
+            name: user.displayName || "Unknown Name",
+            email: user.email || "Unknown Email",
+          }),
+        }
+      );
 
       const data = await response.json();
 

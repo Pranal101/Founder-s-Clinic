@@ -15,12 +15,15 @@ const index = () => {
             >
               <div className="title-box">
                 <h3>
-                  There Are <span className="colored">93,178</span> Postings
-                  Here
-                  <br /> For you!
+                  AI-Powered Matchmaking{" "}
+                  <span className="colored">
+                    No Commissions, Just Connections.
+                    <br />
+                  </span>
                 </h3>
                 <div className="text">
-                  Find Jobs, Employment & Career Opportunities
+                  Register on the platform for free and tell us what you need,
+                  we will do the rest.
                 </div>
               </div>
 
@@ -31,7 +34,7 @@ const index = () => {
               {/* <!-- Job Search Form --> */}
 
               {/* <!-- Popular Search --> */}
-              <PopularSearch />
+              {/* <PopularSearch /> */}
               {/* <!-- End Popular Search --> */}
             </div>
           </div>

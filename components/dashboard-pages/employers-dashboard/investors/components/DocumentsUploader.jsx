@@ -41,7 +41,7 @@ const DocumentsUploader = () => {
         const token = await getUserToken(); // Get the Firebase token
 
         const response = await axios.post(
-          "http://localhost:4000/api/user/upload-logo", // Your API endpoint for logo upload
+          "https://founders-clinic-backend.onrender.com/api/user/upload-logo", // Your API endpoint for logo upload
           formData,
           {
             headers: {

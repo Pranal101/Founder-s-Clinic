@@ -19,14 +19,12 @@ const CopyrightFooter2 = () => {
               </Link>
             </div>
             <div className="copyright-text">
-              © {new Date().getFullYear()} Superio by{" "}
+              © {new Date().getFullYear()} Founders’ Clinic{" "}
               <a
                 href="https://themeforest.net/user/ib-themes"
                 target="_blank"
                 rel="noopener noreferrer"
-              >
-                ib-themes
-              </a>
+              ></a>
               . All Right Reserved.
             </div>
           </div>

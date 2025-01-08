@@ -8,8 +8,7 @@ const FeaturedBlock = () => {
       block: [
         {
           img: "/images/resource/featured-1.png",
-          city: "New York",
-          jobNumber: "12",
+          city: "Enterprises",
           width: "411",
           height: "511",
         },
@@ -20,15 +19,15 @@ const FeaturedBlock = () => {
       block: [
         {
           img: "/images/resource/featured-2.png",
-          city: "Paris",
-          jobNumber: "17",
+          city: "Professionals",
+
           width: "411",
           height: "240",
         },
         {
           img: "/images/resource/featured-4.png",
-          city: "Miami",
-          jobNumber: "12",
+          city: "Interns",
+
           width: "411",
           height: "240",
         },
@@ -39,15 +38,14 @@ const FeaturedBlock = () => {
       block: [
         {
           img: "/images/resource/featured-3.png",
-          city: "London",
-          jobNumber: "14",
+          city: "Investors",
+
           width: "411",
           height: "240",
         },
         {
           img: "/images/resource/featured-5.png",
-          city: "Los Angeles",
-          jobNumber: "15",
+          city: "Networking Communities",
           width: "411",
           height: "240",
         },
@@ -72,11 +70,7 @@ const FeaturedBlock = () => {
                 <div className="overlay-box">
                   <div className="content">
                     <h5>{value.city}</h5>
-                    <span className="total-jobs">{value.jobNumber} Jobs</span>
-                    <Link
-                      href="/job-list-v12"
-                      className="overlay-link"
-                    ></Link>
+                    <Link href="/job-list-v12" className="overlay-link"></Link>
                   </div>
                 </div>
               </div>

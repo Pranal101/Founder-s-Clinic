@@ -1,9 +1,9 @@
-'use client'
+"use client";
 
 import { useRouter } from "next/navigation";
 
 const SearchForm = () => {
-  const router = useRouter()
+  const router = useRouter();
   const handleSubmit = (event) => {
     event.preventDefault();
   };
@@ -11,23 +11,35 @@ const SearchForm = () => {
   return (
     <form onClick={handleSubmit}>
       <div className="row">
-        <div className="form-group col-lg-5 col-md-12 col-sm-12">
+        <div className="form-group col-lg-4 col-md-12 col-sm-12">
           <span className="icon flaticon-search-1"></span>
           <input
             type="text"
             name="field_name"
-            placeholder="Job title, keywords, or company"
+            placeholder="Keywords/Enterprise Name"
           />
         </div>
         {/* <!-- Form Group --> */}
 
-        <div className="form-group col-lg-4 col-md-12 col-sm-12 location">
+        <div className="form-group col-lg-3 col-md-12 col-sm-12 location">
           <span className="icon flaticon-map-locator"></span>
           <input type="text" name="field_name" placeholder="City or postcode" />
         </div>
         {/* <!-- Form Group --> */}
 
-        <div className="form-group col-lg-3 col-md-12 col-sm-12 btn-box">
+        {/* Dropdown List */}
+        <div className="form-group col-lg-3 col-md-12 col-sm-12">
+          <span className="icon flaticon-briefcase"></span>
+          <select name="jobType" className="form-control">
+            <option value="">Select Category</option>
+            <option value="freelance">Woman owned</option>
+            <option value="full-time">Home-grown</option>
+            <option value="part-time">Micro & Small</option>
+            <option value="freelance">Medium & large</option>
+          </select>
+        </div>
+
+        <div className="form-group col-lg-2 col-md-12 col-sm-12 btn-box">
           <button
             type="submit"
             className="theme-btn btn-style-one"

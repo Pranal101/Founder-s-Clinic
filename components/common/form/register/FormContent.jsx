@@ -44,7 +44,7 @@
 //       };
 //       console.log("Sending user data to server:", userData);
 
-//       const response = await fetch("http://localhost:4000/api/user/register", {
+//       const response = await fetch("https://founders-clinic-backend.onrender.com/api/user/register", {
 //         method: "POST",
 //         headers: {
 //           "Content-Type": "application/json",
@@ -167,13 +167,16 @@ const FormContent = () => {
       console.log("Generated ID Token with displayName:", idToken);
 
       // Send the token to the backend
-      const response = await fetch("http://localhost:4000/api/user/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${idToken}`, // Token with displayName included
-        },
-      });
+      const response = await fetch(
+        "https://founders-clinic-backend.onrender.com/api/user/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${idToken}`, // Token with displayName included
+          },
+        }
+      );
 
       const data = await response.json();
       if (!response.ok) {

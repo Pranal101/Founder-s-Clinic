@@ -136,7 +136,7 @@ const JobListingsTable = () => {
 
         const userToken = await user.getIdToken();
         const response = await axios.get(
-          "http://localhost:4000/api/jobs/all-jobs",
+          "https://founders-clinic-backend.onrender.com/api/jobs/all-jobs",
           {
             headers: {
               Authorization: `Bearer ${userToken}`, // Secure API call
@@ -171,11 +171,14 @@ const JobListingsTable = () => {
         const user = auth.currentUser;
         const userToken = await user.getIdToken();
 
-        await axios.delete(`http://localhost:4000/api/jobs/${jobId}`, {
-          headers: {
-            Authorization: `Bearer ${userToken}`,
-          },
-        });
+        await axios.delete(
+          `https://founders-clinic-backend.onrender.com/api/jobs/${jobId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${userToken}`,
+            },
+          }
+        );
 
         // Update job list
         setJobs((prevJobs) => prevJobs.filter((job) => job._id !== jobId));
@@ -197,7 +200,7 @@ const JobListingsTable = () => {
       const userToken = await user.getIdToken();
 
       const response = await axios.patch(
-        `http://localhost:4000/api/jobs/${editingJob._id}`,
+        `https://founders-clinic-backend.onrender.com/api/jobs/${editingJob._id}`,
         updatedData,
         {
           headers: {
@@ -223,7 +226,7 @@ const JobListingsTable = () => {
   return (
     <div className="tabs-box">
       <div className="widget-title">
-        <h4>My Job Listings</h4>
+        <h4>My Inqueries</h4>
         {/* <div className="chosen-outer">
           <select className="chosen-single form-select">
             <option>Last 6 Months</option>
@@ -236,7 +239,7 @@ const JobListingsTable = () => {
       <div className="widget-content">
         <div className="table-outer">
           {loading ? (
-            <p>Loading jobs...</p>
+            <p>Loading inqueries...</p>
           ) : error ? (
             <p>{error}</p>
           ) : (
@@ -315,7 +318,7 @@ const JobListingsTable = () => {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="5">No jobs found</td>
+                    <td colSpan="5">No inqueries found</td>
                   </tr>
                 )}
               </tbody>

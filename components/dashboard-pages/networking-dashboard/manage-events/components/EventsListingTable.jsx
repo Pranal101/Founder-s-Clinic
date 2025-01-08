@@ -5,14 +5,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-const JobListingsTable = () => {
-  const [jobs, setJobs] = useState([]);
+const EventListingsTable = () => {
+  const [events, setEvents] = useState([]); // Changed to events instead of jobs
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [editingJob, setEditingJob] = useState(null);
+  const [editingEvent, setEditingEvent] = useState(null);
 
   useEffect(() => {
-    const fetchUserJobs = async () => {
+    const fetchUserEvents = async () => {
       try {
         const auth = getAuth();
         const user = auth.currentUser;
@@ -23,7 +23,7 @@ const JobListingsTable = () => {
 
         const userToken = await user.getIdToken();
         const response = await axios.get(
-          "http://localhost:4000/api/jobs/all-jobs",
+          "https://founders-clinic-backend.onrender.com/api/user/get-events",
           {
             headers: {
               Authorization: `Bearer ${userToken}`, // Secure API call
@@ -31,7 +31,7 @@ const JobListingsTable = () => {
           }
         );
 
-        setJobs(response.data.jobs);
+        setEvents(response.data.events); // Fetching events instead of jobs
       } catch (error) {
         console.error("Error fetching events:", error);
         setError("Failed to load events");
@@ -39,10 +39,11 @@ const JobListingsTable = () => {
         setLoading(false);
       }
     };
+
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        fetchUserJobs(user);
+        fetchUserEvents(); // Changed function name to fetch events
       } else {
         console.error("User not authenticated");
         setLoading(false);
@@ -51,40 +52,46 @@ const JobListingsTable = () => {
 
     return () => unsubscribe(); // Clean up the observer on unmount
   }, []);
-  const handleDeleteJob = async (jobId) => {
-    if (confirm("Are you sure you want to delete this job?")) {
+
+  const handleDeleteEvent = async (eventId) => {
+    if (confirm("Are you sure you want to delete this event?")) {
       try {
         const auth = getAuth();
         const user = auth.currentUser;
         const userToken = await user.getIdToken();
 
-        await axios.delete(`http://localhost:4000/api/jobs/${jobId}`, {
-          headers: {
-            Authorization: `Bearer ${userToken}`,
-          },
-        });
+        await axios.delete(
+          `https://founders-clinic-backend.onrender.com/api/user/events/${eventId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${userToken}`,
+            },
+          }
+        );
 
-        // Update job list
-        setJobs((prevJobs) => prevJobs.filter((job) => job._id !== jobId));
+        // Update event list after deletion
+        setEvents((prevEvents) =>
+          prevEvents.filter((event) => event._id !== eventId)
+        );
       } catch (error) {
-        console.error("Error deleting job:", error);
-        alert("Failed to delete the job. Please try again.");
+        console.error("Error deleting event:", error);
+        alert("Failed to delete the event. Please try again.");
       }
     }
   };
 
-  const handleEditJob = (job) => {
-    setEditingJob(job); // Open a modal with job details (state to manage modal visibility)
+  const handleEditEvent = (event) => {
+    setEditingEvent(event); // Open a modal with event details
   };
 
-  const updateJob = async (updatedData) => {
+  const updateEvent = async (updatedData) => {
     try {
       const auth = getAuth();
       const user = auth.currentUser;
       const userToken = await user.getIdToken();
 
       const response = await axios.patch(
-        `http://localhost:4000/api/jobs/${editingJob._id}`,
+        `https://founders-clinic-backend.onrender.com/api/events/${editingEvent._id}`,
         updatedData,
         {
           headers: {
@@ -93,17 +100,17 @@ const JobListingsTable = () => {
         }
       );
 
-      // Update the job list with the updated job
-      setJobs((prevJobs) =>
-        prevJobs.map((job) =>
-          job._id === editingJob._id ? response.data.job : job
+      // Update the event list with the updated event
+      setEvents((prevEvents) =>
+        prevEvents.map((event) =>
+          event._id === editingEvent._id ? response.data.event : event
         )
       );
 
-      setEditingJob(null); // Close the modal
+      setEditingEvent(null); // Close the modal
     } catch (error) {
-      console.error("Error updating job:", error);
-      alert("Failed to update the job. Please try again.");
+      console.error("Error updating event:", error);
+      alert("Failed to update the event. Please try again.");
     }
   };
 
@@ -111,13 +118,6 @@ const JobListingsTable = () => {
     <div className="tabs-box">
       <div className="widget-title">
         <h4>My Events</h4>
-        {/* <div className="chosen-outer">
-          <select className="chosen-single form-select">
-            <option>Last 6 Months</option>
-            <option>Last 12 Months</option>
-            <option>Last 24 Months</option>
-          </select>
-        </div> */}
       </div>
 
       <div className="widget-content">
@@ -130,67 +130,54 @@ const JobListingsTable = () => {
             <table className="default-table manage-job-table">
               <thead>
                 <tr>
-                  <th>Title</th>
-                  <th>Applications</th>
-                  <th>Created & Expired</th>
+                  <th>Event Title</th>
+                  <th>Event Type</th>
+                  <th>Dates</th>
                   <th>Status</th>
                   <th>Action</th>
                 </tr>
               </thead>
 
               <tbody>
-                {jobs.length > 0 ? (
-                  jobs.map((job) => (
-                    <tr key={job._id}>
+                {events.length > 0 ? (
+                  events.map((event) => (
+                    <tr key={event._id}>
                       <td>
                         <div className="job-block">
                           <div className="inner-box">
                             <div className="content">
-                              <span className="company-logo">
-                                <Image
-                                  width={50}
-                                  height={49}
-                                  src={
-                                    job.logoUrl || "/images/default-logo.png"
-                                  }
-                                  alt="logo"
-                                />
-                              </span>
                               <h4>
-                                <Link href={`/job-single-v3/${job._id}`}>
-                                  {job.title}
+                                <Link href={`/event-details/${event._id}`}>
+                                  {event.eventTitle}
                                 </Link>
                               </h4>
                               <ul className="job-info">
                                 <li>
-                                  <span className="icon flaticon-briefcase"></span>
-                                  {job.entityName}
-                                </li>
-                                <li>
                                   <span className="icon flaticon-map-locator"></span>
-                                  {job.jobLocation}
+                                  {event.city},{event.country}
                                 </li>
                               </ul>
                             </div>
                           </div>
                         </div>
                       </td>
-                      <td className="applied">
-                        <a href="#">3+ Applied</a>
-                      </td>
+                      <td>{event.eventType.join(", ")}</td>{" "}
+                      {/* Display event types */}
                       <td>
-                        {new Date(job.expectedStartDate).toLocaleDateString()}{" "}
+                        {new Date(event.eventStartDate).toLocaleDateString()}{" "}
                         <br />
-                        {new Date(job.completionTimeline).toLocaleDateString()}
+                        {new Date(event.eventEndDate).toLocaleDateString()}
                       </td>
-                      <td className="status">{job.status || "Active"}</td>
+                      <td className="status">
+                        {event.isApproved ? "Approved" : "Pending"}
+                      </td>
                       <td>
                         <div className="option-box">
                           <ul className="option-list">
                             <li>
                               <button
-                                onClick={() => handleDeleteJob(job._id)}
-                                data-text="Delete Application"
+                                onClick={() => handleDeleteEvent(event._id)}
+                                data-text="Delete Event"
                               >
                                 <span className="la la-trash"></span>
                               </button>
@@ -202,7 +189,7 @@ const JobListingsTable = () => {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="5">No jobs found</td>
+                    <td colSpan="5">No events found</td>
                   </tr>
                 )}
               </tbody>
@@ -210,13 +197,15 @@ const JobListingsTable = () => {
           )}
         </div>
       </div>
-      {editingJob && (
+      {editingEvent && (
         <div className="modal">
-          {/* Modal Content for Editing Job */}
-          <h4>Edit Job</h4>
-          {/* Form with pre-filled job data */}
-          <button onClick={() => setEditingJob(null)}>Close</button>
-          <button onClick={() => updateJob({ title: "Updated Title" })}>
+          {/* Modal Content for Editing Event */}
+          <h4>Edit Event</h4>
+          {/* Form with pre-filled event data */}
+          <button onClick={() => setEditingEvent(null)}>Close</button>
+          <button
+            onClick={() => updateEvent({ eventTitle: "Updated Event Title" })}
+          >
             Save
           </button>
         </div>
@@ -225,4 +214,4 @@ const JobListingsTable = () => {
   );
 };
 
-export default JobListingsTable;
+export default EventListingsTable;

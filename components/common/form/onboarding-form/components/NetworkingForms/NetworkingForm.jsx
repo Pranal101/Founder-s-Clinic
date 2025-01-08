@@ -42,7 +42,7 @@ const PostBoxForm = () => {
       }
 
       const response = await axios.patch(
-        "http://localhost:4000/api/user/profile",
+        "https://founders-clinic-backend.onrender.com/api/user/profile",
         { profileData: formData },
         {
           headers: {
@@ -53,7 +53,9 @@ const PostBoxForm = () => {
 
       console.log("Profile updated successfully:", response.data);
 
-      window.location.assign("/onboarding/intern-onboarding/form-2");
+      window.location.assign(
+        "/onboarding/networkingCommunity-onboarding/form-2"
+      );
     } catch (error) {
       console.error("Error updating profile:", error.response?.data || error);
     }

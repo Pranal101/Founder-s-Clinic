@@ -4,14 +4,14 @@ const TopCardBlock = () => {
       id: 1,
       icon: "flaticon-briefcase",
       countNumber: "22",
-      metaName: "Applied Jobs",
+      metaName: "Inqueries Responded",
       uiClass: "ui-blue",
     },
     {
       id: 2,
       icon: "la-file-invoice",
       countNumber: "9382",
-      metaName: "Job Alerts",
+      metaName: "Proposal Alerts",
       uiClass: "ui-red",
     },
     {
@@ -25,7 +25,7 @@ const TopCardBlock = () => {
       id: 4,
       icon: "la-bookmark-o",
       countNumber: "32",
-      metaName: "Shortlist",
+      metaName: "Shortlisted Inqueries",
       uiClass: "ui-green",
     },
   ];

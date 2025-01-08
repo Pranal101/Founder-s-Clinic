@@ -121,7 +121,7 @@ const ApplyJobModalContent = ({ jobId }) => {
       dataToSend.append("jobId", jobId);
 
       const response = await axios.post(
-        "http://localhost:4000/api/user/apply",
+        "https://founders-clinic-backend.onrender.com/api/user/apply",
         dataToSend,
         {
           headers: {

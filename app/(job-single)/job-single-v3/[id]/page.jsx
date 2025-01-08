@@ -266,12 +266,15 @@ const JobSingleDynamicV3 = ({ params }) => {
   const fetchJob = async (user) => {
     try {
       const userToken = await user.getIdToken();
-      const { data } = await axios.get(`http://localhost:4000/api/jobs/${id}`, {
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-          "Content-Type": "application/json",
-        },
-      });
+      const { data } = await axios.get(
+        `https://founders-clinic-backend.onrender.com/api/jobs/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
       setJob(data.job);
     } catch (error) {
       console.error("Error fetching job:", error.response?.data || error);

@@ -15,15 +15,14 @@ const ImageBox = () => {
       {/* hero image */}
       {/* <!-- Info BLock One --> */}
       <div className="info_block" data-aos="fade-in" data-aos-delay="1000">
-        <span className="icon flaticon-email-3"></span>
+        <span className="icon flaticon-money-1"></span>
         <p>
-          Work Inquiry From <br />
-          Ali Tufan
+          Zero Commission <br />
         </p>
       </div>
       {/* <!-- Info BLock Two --> */}
       <div className="info_block_two" data-aos="fade-in" data-aos-delay="2000">
-        <p>10k+ Candidates</p>
+        <p>Seamless Communication Tools</p>
         <div className="image">
           <Image
             width={206}
@@ -40,16 +39,16 @@ const ImageBox = () => {
         data-aos-delay="1500"
       >
         <span className="icon flaticon-briefcase"></span>
-        <p>Creative Agency</p>
-        <span className="sub-text">Startup</span>
+        <p>Verified Service Providers</p>
+        {/* <span className="sub-text">Startup</span> */}
         <span className="right_icon fa fa-check"></span>
       </div>
       {/* <!-- Info BLock Four --> */}
       <div className="info_block_four" data-aos="fade-in" data-aos-delay="2500">
-        <span className="icon flaticon-file"></span>
+        <span className="icon flaticon-search-1"></span>
         <div className="inner">
-          <p>Upload Your CV</p>
-          <span className="sub-text">It only takes a few seconds</span>
+          <p>Customizable Filters</p>
+          {/* <span className="sub-text">It only takes a few seconds</span> */}
         </div>
       </div>{" "}
     </div>

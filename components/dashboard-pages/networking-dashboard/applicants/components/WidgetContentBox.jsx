@@ -18,7 +18,7 @@ const WidgetContentBox = () => {
         const userToken = await user.getIdToken();
 
         const { data } = await axios.get(
-          "http://localhost:4000/api/user/applicants",
+          "https://founders-clinic-backend.onrender.com/api/user/applicants",
           {
             headers: { Authorization: `Bearer ${userToken}` },
           }
@@ -54,7 +54,7 @@ const WidgetContentBox = () => {
         const userToken = await user.getIdToken();
 
         const response = await axios.put(
-          `http://localhost:4000/api/user/${applicationId}/status`,
+          `https://founders-clinic-backend.onrender.com/api/user/${applicationId}/status`,
           { status },
           { headers: { Authorization: `Bearer ${userToken}` } }
         );

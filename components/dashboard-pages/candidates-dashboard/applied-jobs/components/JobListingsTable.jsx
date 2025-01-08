@@ -118,7 +118,7 @@ const JobListingsTable = () => {
         const userToken = await user.getIdToken();
 
         const { data } = await axios.get(
-          "http://localhost:4000/api/user/applied-jobs",
+          "https://founders-clinic-backend.onrender.com/api/user/applied-jobs",
           {
             headers: { Authorization: `Bearer ${userToken}` },
           }
@@ -149,7 +149,7 @@ const JobListingsTable = () => {
   }
 
   if (!applications.length) {
-    return <div>No applications found.</div>;
+    return <div>No inqueries found.</div>;
   }
 
   return (

@@ -5,6 +5,7 @@ import axios from "axios";
 import Select from "react-select";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { toast } from "react-toastify";
 
 const PostBoxForm = () => {
   const [formData, setFormData] = useState({
@@ -137,7 +138,7 @@ const PostBoxForm = () => {
       }
 
       const response = await axios.post(
-        "http://localhost:4000/api/jobs/create-job", // Backend job posting endpoint
+        "https://founders-clinic-backend.onrender.com/api/user/new-events", // Backend job posting endpoint
         { ...formData },
         {
           headers: {
@@ -146,8 +147,8 @@ const PostBoxForm = () => {
           },
         }
       );
-
-      console.log("Job posted successfully:", response.data);
+      toast.success("Event Posted!");
+      console.log("Event posted successfully:", response.data);
       resetForm();
     } catch (error) {
       console.error("Error posting job:", error.response?.data || error);
@@ -347,7 +348,7 @@ const PostBoxForm = () => {
           <div className="form-group col-lg-6 col-md-12">
             <label>Event Link</label>
             <input
-              type="url"
+              type="text"
               name="eventLink"
               value={formData.eventLink}
               onChange={handleChange}
@@ -407,7 +408,7 @@ const PostBoxForm = () => {
           />
         </div>
         {/* "Other" Event Type Specification */}
-        {formData.eventType.includes("Other") && (
+        {formData.eventType && formData.eventType.includes("Other") && (
           <div className="form-group col-lg-6 col-md-12">
             <label>Please Specify</label>
             <input
@@ -491,18 +492,19 @@ const PostBoxForm = () => {
           />
         </div>
         {/* "Other" Target Audience Specification */}
-        {formData.targetAudience.includes("Other") && (
-          <div className="form-group col-lg-6 col-md-12">
-            <label>Please Specify</label>
-            <input
-              type="text"
-              name="targetAudienceOther"
-              value={formData.targetAudienceOther}
-              onChange={handleChange}
-              placeholder="Please specify the target audience"
-            />
-          </div>
-        )}
+        {formData.targetAudience &&
+          formData.targetAudience.includes("Other") && (
+            <div className="form-group col-lg-6 col-md-12">
+              <label>Please Specify</label>
+              <input
+                type="text"
+                name="targetAudienceOther"
+                value={formData.targetAudienceOther}
+                onChange={handleChange}
+                placeholder="Please specify the target audience"
+              />
+            </div>
+          )}
 
         <div className="form-group col-lg-6 col-md-12">
           <label>Expected number of attendees</label>
@@ -592,7 +594,7 @@ const PostBoxForm = () => {
           </select>
         </div>
         {/* "Other" Specification */}
-        {formData.recurringEvent.includes("Yes") && (
+        {formData.recurringEvent && formData.recurringEvent.includes("Yes") && (
           <div className="form-group col-lg-6 col-md-12">
             <label>Please specify the frequency</label>
             <input

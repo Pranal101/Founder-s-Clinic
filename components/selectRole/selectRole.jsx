@@ -147,14 +147,17 @@ const SelectRole = () => {
       }
 
       // Update the role in the database
-      const response = await fetch("http://localhost:4000/api/user/role", {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${userToken}`, // Include user token for authentication
-        },
-        body: JSON.stringify({ role }),
-      });
+      const response = await fetch(
+        "https://founders-clinic-backend.onrender.com/api/user/role",
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${userToken}`, // Include user token for authentication
+          },
+          body: JSON.stringify({ role }),
+        }
+      );
 
       const data = await response.json();
 

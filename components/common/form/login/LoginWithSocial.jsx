@@ -18,7 +18,7 @@ const LoginWithSocial = () => {
 
   //     if (!idToken) {
   //       // If no `id_token`, redirect to LinkedIn authorization URL
-  //       const authorizationURL = "http://localhost:4000/api/linkedin/authorize";
+  //       const authorizationURL = "https://founders-clinic-backend.onrender.com/api/linkedin/authorize";
   //       window.location.href = authorizationURL;
   //       return;
   //     }
@@ -41,7 +41,7 @@ const LoginWithSocial = () => {
   //     console.log("Firebase LinkedIn login successful. User:", user);
 
   //     // Send user info to your backend for registration or login
-  //     const response = await fetch("http://localhost:4000/api/user/register", {
+  //     const response = await fetch("https://founders-clinic-backend.onrender.com/api/user/register", {
   //       method: "POST",
   //       headers: {
   //         "Content-Type": "application/json",
@@ -75,7 +75,8 @@ const LoginWithSocial = () => {
 
       if (!idToken) {
         // If no `id_token`, redirect to LinkedIn authorization URL
-        const authorizationURL = "http://localhost:4000/api/linkedin/authorize";
+        const authorizationURL =
+          "https://founders-clinic-backend.onrender.com/api/linkedin/authorize";
         window.location.href = authorizationURL;
         return;
       }
@@ -98,18 +99,21 @@ const LoginWithSocial = () => {
       console.log("Firebase LinkedIn login successful. User:", user);
 
       // Send user info to your backend for registration or login
-      const response = await fetch("http://localhost:4000/api/user/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // Send token for backend authentication
-        },
-        body: JSON.stringify({
-          name: user.displayName || "Unknown Name",
-          email: user.email || "Unknown Email",
-          uid: user.uid,
-        }),
-      });
+      const response = await fetch(
+        "https://founders-clinic-backend.onrender.com/api/user/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // Send token for backend authentication
+          },
+          body: JSON.stringify({
+            name: user.displayName || "Unknown Name",
+            email: user.email || "Unknown Email",
+            uid: user.uid,
+          }),
+        }
+      );
 
       const data = await response.json();
       console.log("Backend response:", data);
@@ -120,7 +124,7 @@ const LoginWithSocial = () => {
 
         // Fetch the role from the backend
         const roleResponse = await fetch(
-          "http://localhost:4000/api/user/getRole",
+          "https://founders-clinic-backend.onrender.com/api/user/getRole",
           {
             headers: {
               Authorization: `Bearer ${token}`, // Pass the token for authentication
@@ -144,6 +148,10 @@ const LoginWithSocial = () => {
           window.location.href = "/candidates-dashboard/dashboard";
         } else if (roleData.role === "Intern") {
           window.location.href = "/candidates-dashboard/dashboard";
+        } else if (roleData.role === "Investor") {
+          window.location.href = "/investors-dashboard/dashboard";
+        } else if (roleData.role === "Networking Community") {
+          window.location.href = "/networking-dashboard/dashboard";
         } else {
           console.error("Unhandled role or scenario");
           window.location.href = "/selectRole"; // Fallback for undefined roles
@@ -176,7 +184,7 @@ const LoginWithSocial = () => {
 
       // Send user info to the backend for registration
       const registrationResponse = await fetch(
-        "http://localhost:4000/api/user/register",
+        "https://founders-clinic-backend.onrender.com/api/user/register",
         {
           method: "POST",
           headers: {
@@ -208,7 +216,7 @@ const LoginWithSocial = () => {
       toast.success("Logged in successfully via Google!");
       // Fetch the role from the backend
       const roleResponse = await fetch(
-        "http://localhost:4000/api/user/getRole",
+        "https://founders-clinic-backend.onrender.com/api/user/getRole",
         {
           headers: {
             Authorization: `Bearer ${token}`, // Pass the token for authentication
@@ -232,6 +240,10 @@ const LoginWithSocial = () => {
         window.location.href = "/candidates-dashboard/dashboard";
       } else if (roleData.role === "Intern") {
         window.location.href = "/candidates-dashboard/dashboard";
+      } else if (roleData.role === "Investor") {
+        window.location.href = "/investors-dashboard/dashboard";
+      } else if (roleData.role === "Networking Community") {
+        window.location.href = "/networking-dashboard/dashboard";
       } else if (isNewUser) {
         // Redirect to role selection page for new users without a role
         window.location.href = "/selectRole";

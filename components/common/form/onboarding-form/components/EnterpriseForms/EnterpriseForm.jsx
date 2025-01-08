@@ -99,7 +99,7 @@ const EnterprisePostBoxForm = () => {
       }
 
       const response = await axios.patch(
-        "http://localhost:4000/api/user/profile",
+        "https://founders-clinic-backend.onrender.com/api/user/profile",
         { profileData: formData },
         {
           headers: {

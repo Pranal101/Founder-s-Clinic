@@ -9,7 +9,7 @@ const JobCategorie8 = () => {
       catName: (
         <>
           Accounting
-          <br /> Finance Jobs
+          <br /> Finance Inqueries
         </>
       ),
       logo: "/images/index-14/jobs/logos.png",
@@ -38,7 +38,7 @@ const JobCategorie8 = () => {
       catName: (
         <>
           Accounting
-          <br /> Finance Jobs
+          <br /> Finance Inqueries
         </>
       ),
       logo: "/images/index-14/jobs/logos.png",
@@ -85,7 +85,7 @@ const JobCategorie8 = () => {
 
               <div className="cat-content">
                 <Link href="/job-list-v9" className="title">
-                  {item.jobNumber} Jobs
+                  {item.jobNumber} Inqueries
                 </Link>
                 <p>{item.text}</p>
               </div>

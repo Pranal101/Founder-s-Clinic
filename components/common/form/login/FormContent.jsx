@@ -63,7 +63,7 @@ const FormContent = () => {
   //     const token = await user.getIdToken();
 
   //     // Send user info to the backend for registration
-  //     const response = await fetch("http://localhost:4000/api/user/register", {
+  //     const response = await fetch("https://founders-clinic-backend.onrender.com/api/user/register", {
   //       method: "POST",
   //       headers: {
   //         "Content-Type": "application/json",
@@ -114,14 +114,17 @@ const FormContent = () => {
       const token = await user.getIdToken();
 
       // Send user details to the backend
-      const response = await fetch("http://localhost:4000/api/user/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ uid: user.uid, email: user.email }),
-      });
+      const response = await fetch(
+        "https://founders-clinic-backend.onrender.com/api/user/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ uid: user.uid, email: user.email }),
+        }
+      );
 
       const data = await response.json();
 

@@ -69,7 +69,7 @@ const PostBoxForm = () => {
       const userToken = await user.getIdToken();
 
       const response = await axios.patch(
-        "http://localhost:4000/api/user/profile",
+        "https://founders-clinic-backend.onrender.com/api/user/profile",
         { profileData: formData },
         {
           headers: {
@@ -86,12 +86,16 @@ const PostBoxForm = () => {
         formDataObj.append("documentName", file.name);
         formDataObj.append("file", file);
 
-        await axios.post("http://localhost:4000/api/user/upload", formDataObj, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${userToken}`,
-          },
-        });
+        await axios.post(
+          "https://founders-clinic-backend.onrender.com/api/user/upload",
+          formDataObj,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${userToken}`,
+            },
+          }
+        );
       }
 
       window.location.assign("/investors-dashboard/dashboard");

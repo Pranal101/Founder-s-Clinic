@@ -23,7 +23,7 @@ const JobListingsTable = () => {
 
         const userToken = await user.getIdToken();
         const response = await axios.get(
-          "http://localhost:4000/api/jobs/all-jobs",
+          "https://founders-clinic-backend.onrender.com/api/jobs/all-jobs",
           {
             headers: {
               Authorization: `Bearer ${userToken}`, // Secure API call
@@ -58,11 +58,14 @@ const JobListingsTable = () => {
         const user = auth.currentUser;
         const userToken = await user.getIdToken();
 
-        await axios.delete(`http://localhost:4000/api/jobs/${jobId}`, {
-          headers: {
-            Authorization: `Bearer ${userToken}`,
-          },
-        });
+        await axios.delete(
+          `https://founders-clinic-backend.onrender.com/api/jobs/${jobId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${userToken}`,
+            },
+          }
+        );
 
         // Update job list
         setJobs((prevJobs) => prevJobs.filter((job) => job._id !== jobId));
@@ -84,7 +87,7 @@ const JobListingsTable = () => {
       const userToken = await user.getIdToken();
 
       const response = await axios.patch(
-        `http://localhost:4000/api/jobs/${editingJob._id}`,
+        `https://founders-clinic-backend.onrender.com/api/jobs/${editingJob._id}`,
         updatedData,
         {
           headers: {

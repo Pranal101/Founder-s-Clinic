@@ -52,7 +52,7 @@ const PostBoxForm = ({ pricingContent }) => {
 
       // Send form data to the backend to update the profile
       const response = await axios.patch(
-        "http://localhost:4000/api/user/profile", // Backend endpoint
+        "https://founders-clinic-backend.onrender.com/api/user/profile", // Backend endpoint
         { profileData: formData }, // Send the form data
         {
           headers: {

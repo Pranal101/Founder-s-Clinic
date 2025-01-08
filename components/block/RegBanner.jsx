@@ -6,7 +6,7 @@ const RegBanner = () => {
     {
       id: 1,
       bgImage: `url("/images/index-13/banner/bg-1.png")`,
-      name: "Employers",
+      name: "Enterprise",
       text: ` Sit amet, consectetur adipiscing elit, sed do eiusmod tempor
             incididunt. Labore et dolore nostrud exercitation.`,
       avatar: "/images/resource/employ.png",
@@ -17,13 +17,35 @@ const RegBanner = () => {
     {
       id: 2,
       bgImage: `url("/images/index-13/banner/bg-2.png")`,
-      name: "Candidate",
+      name: "Professionals",
       text: ` Sit amet, consectetur adipiscing elit, sed do eiusmod tempor
             incididunt. Labore et dolore nostrud exercitation.`,
       avatar: "/images/resource/candidate.png",
       bannerClass: "banner-style-two dark",
       width: "207",
       height: "283",
+    },
+    {
+      id: 3,
+      bgImage: `url("/images/index-13/banner/bg-2.png")`,
+      name: "Interns",
+      text: ` Sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt. Labore et dolore nostrud exercitation.`,
+      avatar: "/images/resource/candidate.png",
+      bannerClass: "banner-style-two dark",
+      width: "207",
+      height: "283",
+    },
+    {
+      id: 4,
+      bgImage: `url("/images/index-13/banner/bg-1.png")`,
+      name: "Networking",
+      text: ` Sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt. Labore et dolore nostrud exercitation.`,
+      avatar: "/images/resource/employ.png",
+      bannerClass: "banner-style-one",
+      width: "221",
+      height: "281",
     },
   ];
   return (
