@@ -6,19 +6,42 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const FormInfoBox = () => {
   const [formData, setFormData] = useState({
+    name: "",
     entityName: "",
+    investmentFirmName: "",
+    position: "",
     emailAddress: "",
     contactNumber: "",
-    websiteLink: "",
-    foundedYear: "",
-    teamSize: "",
-    categories: [],
-    allowSearchListing: "",
-    businessDescription: "",
-    socialMediaLinks: "",
+    websiteUrl: "",
+    linkedinUrl: "",
     country: "",
     city: "",
     completeAddress: "",
+    investorType: "",
+    otherInvestorType: "",
+    investmentYears: "",
+    investmentExperience: "",
+    otherInvestmentExperience: "",
+    notableInvestments: "",
+    preferredIndustries: "",
+    otherPreferredIndustries: "",
+    preferredBusinessStage: "",
+    preferredGeography: "",
+    investmentThesis: "",
+    investmentTimeline: "",
+    involvementType: "",
+    exitStrategy: "",
+    otherExitStrategy: "",
+    successfulExits: "",
+    currentInvestmentNetworks: "",
+    specificInvestmentNetworks: "",
+    interestedInMentoring: "",
+    requiredServices: "",
+    otherRequiredServices: "",
+    keyExpectations: "",
+    otherKeyExpectations: "",
+    notableAchievements: "",
+    successStories: "",
   });
 
   const [loading, setLoading] = useState(true);
@@ -50,19 +73,23 @@ const FormInfoBox = () => {
         const profile = response.data.profile;
 
         setFormData({
+          name: profile.name || "",
           entityName: profile.entityName || "",
+          investmentFirmName: profile.investmentFirmName || "",
+          position: profile.position || "",
           emailAddress: profile.emailAddress || "",
           contactNumber: profile.contactNumber || "",
-          websiteLink: profile.websiteLink || "",
-          foundedYear: profile.foundedYear || "",
-          teamSize: profile.teamSize || "",
-          categories: profile.categories || [],
-          allowSearchListing: profile.allowSearchListing ? "Yes" : "No",
-          businessDescription: profile.businessDescription || "",
-          socialMediaLinks: profile.socialMediaLinks || "",
+          websiteUrl: profile.websiteUrl || "",
+          linkedinUrl: profile.linkedinUrl || "",
           country: profile.country || "",
           city: profile.city || "",
           completeAddress: profile.completeAddress || "",
+          investorType: profile.investorType || "",
+          otherInvestorType: profile.otherInvestorType || "",
+          investmentYears: profile.investmentYears || [],
+          investmentExperience: profile.investmentExperience || "",
+          otherInvestmentExperience: profile.otherInvestmentExperience || "",
+          notableInvestments: profile.notableInvestments || "",
         });
       } catch (error) {
         console.error("Error fetching profile:", error.response?.data || error);
@@ -92,7 +119,17 @@ const FormInfoBox = () => {
     <form className="default-form">
       <div className="row">
         <div className="form-group col-lg-6 col-md-12">
-          <label>Company Name (optional)</label>
+          <label>Name</label>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            placeholder="Name"
+            readOnly
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Entity Name</label>
           <input
             type="text"
             name="entityName"
@@ -101,7 +138,26 @@ const FormInfoBox = () => {
             readOnly
           />
         </div>
-
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Investment Firm Name</label>
+          <input
+            type="text"
+            name="investmentFirmName"
+            value={formData.investmentFirmName}
+            placeholder="Invisionn"
+            readOnly
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Position</label>
+          <input
+            type="text"
+            name="position"
+            value={formData.position}
+            placeholder="Invisionn"
+            readOnly
+          />
+        </div>
         <div className="form-group col-lg-6 col-md-12">
           <label>Email Address</label>
           <input
@@ -128,56 +184,20 @@ const FormInfoBox = () => {
           <label>Website</label>
           <input
             type="text"
-            name="websiteLink"
-            value={formData.websiteLink}
+            name="websiteUrl"
+            value={formData.websiteUrl}
             placeholder="www.invision.com"
             readOnly
           />
         </div>
 
         <div className="form-group col-lg-6 col-md-12">
-          <label>Est. Since</label>
+          <label>Linkedin Url</label>
           <input
             type="text"
-            name="foundedYear"
-            value={formData.foundedYear}
-            placeholder="06.04.2020"
-            readOnly
-          />
-        </div>
-
-        <div className="form-group col-lg-6 col-md-12">
-          <label>Team Size</label>
-          <select
-            className="chosen-single form-select"
-            name="teamSize"
-            value={formData.teamSize}
-            readOnly
-          >
-            <option value="50 - 100">50 - 100</option>
-            <option value="100 - 150">100 - 150</option>
-            <option value="200 - 250">200 - 250</option>
-            <option value="300 - 350">300 - 350</option>
-            <option value="500 - 1000">500 - 1000</option>
-          </select>
-        </div>
-
-        <div className="form-group col-lg-12 col-md-12">
-          <label>About Company</label>
-          <textarea
-            name="businessDescription"
-            value={formData.businessDescription}
-            placeholder="About the company..."
-            readOnly
-          />
-        </div>
-        <div className="form-group col-lg-6 col-md-12">
-          <label>Social Media Links</label>
-          <input
-            type="text"
-            name="socialMediaLinks"
-            value={formData.socialMediaLinks}
-            placeholder="06.04.2020"
+            name="linkedinUrl"
+            value={formData.linkedinUrl}
+            placeholder="www.Linkedin.com"
             readOnly
           />
         </div>
@@ -208,6 +228,65 @@ const FormInfoBox = () => {
             name="completeAddress"
             value={formData.completeAddress}
             placeholder="06.04.2020"
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Investor Type</label>
+          <input
+            type="text"
+            name="investorType"
+            value={formData.investorType}
+            placeholder="Investor Type"
+            readOnly
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Other Investor Type</label>
+          <input
+            type="text"
+            name="otherInvestorType"
+            value={formData.otherInvestorType}
+            placeholder="Other Investor Type"
+            readOnly
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Investement Years</label>
+          <input
+            type="text"
+            name="investmentYears"
+            value={formData.investmentYears}
+            placeholder="Investement Years"
+            readOnly
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Investement Experience</label>
+          <input
+            type="text"
+            name="investmentExperience"
+            value={formData.investmentExperience}
+            placeholder="Investement Exp"
+            readOnly
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Investement Experience</label>
+          <input
+            type="text"
+            name="otherInvestmentExperience"
+            value={formData.otherInvestmentExperience}
+            placeholder="Investement Exp"
+            readOnly
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Notable Investments</label>
+          <input
+            type="text"
+            name="notableInvestments"
+            value={formData.notableInvestments}
+            placeholder="Notable Investments"
             readOnly
           />
         </div>

@@ -7,6 +7,7 @@ import {
   signInWithEmailAndPassword,
   getAdditionalUserInfo,
 } from "firebase/auth";
+import { toast } from "react-toastify";
 
 const FormContent = () => {
   const [email, setEmail] = useState("");
@@ -113,6 +114,15 @@ const FormContent = () => {
       const user = userCredential.user;
       const token = await user.getIdToken();
 
+      // Check for admin credentials (example hardcoded credentials)
+      const adminEmail = "admin@foundersclinic.com";
+      const adminPassword = "admin@123";
+      if (email === adminEmail && password === adminPassword) {
+        // Redirect to admin dashboard
+        toast.success("Welcome Admin!");
+        window.location.href = "/404";
+        return;
+      }
       // Send user details to the backend
       const response = await fetch(
         "https://founders-clinic-backend.onrender.com/api/user/register",

@@ -2,7 +2,10 @@
 import { useState, useEffect } from "react";
 import countryData from "@/data/countries.json";
 import Select from "react-select";
-import DocumentsUploader from "./DocumentsUploader";
+// import DocumentsUploader from "./DocumentsUploader";
+import axios from "axios";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { toast } from "react-toastify";
 
 const FormInfoBox = () => {
   const [isLookingForInvestment, setIsLookingForInvestment] = useState(null);
@@ -28,13 +31,24 @@ const FormInfoBox = () => {
     fundingStage: "",
     seekingFunding: "",
     seekingFundingAmount: "",
-    platformServices: [],
-    platformExpectations: "",
-    acceptTerms: false,
   });
   const [countryOptions, setCountryOptions] = useState([]);
   const [cityOptions, setCityOptions] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState(null);
+  const [userToken, setUserToken] = useState("");
+  useEffect(() => {
+    const auth = getAuth();
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const token = await user.getIdToken();
+        setUserToken(token);
+        // Fetch user data after the country options are ready
+        if (countryOptions.length > 0) {
+          fetchUserInvestmentData(token);
+        }
+      }
+    });
+  }, [countryOptions]); // Add dependency on countryOptions
 
   useEffect(() => {
     if (Array.isArray(countryData)) {
@@ -52,6 +66,71 @@ const FormInfoBox = () => {
       console.error("Invalid JSON structure:", countryData);
     }
   }, []);
+
+  const fetchUserInvestmentData = async (token) => {
+    try {
+      const response = await axios.get(
+        "http://localhost:4000/api/user/all-investments", // Replace with your endpoint
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (Array.isArray(response.data) && response.data.length > 0) {
+        const data = response.data[0]; // Access the first object in the array
+
+        setIsLookingForInvestment(true);
+
+        // Pre-select country and cities after verifying countryOptions is ready
+        const selectedCountryOption = countryOptions.find(
+          (option) => option.value === data.country
+        );
+        if (selectedCountryOption) {
+          setSelectedCountry(selectedCountryOption);
+
+          if (selectedCountryOption.cities.length > 0) {
+            const cities = selectedCountryOption.cities.map((city) => ({
+              value: city,
+              label: city,
+            }));
+            setCityOptions(cities);
+          }
+        }
+
+        // Update formData with API response
+        setFormData((prev) => ({
+          ...prev,
+          businessName: data.businessName || "",
+          businessType: data.businessType || "",
+          foundedYear: data.foundedYear || "",
+          coFounderName: data.coFounderName || "",
+          country: data.country || "",
+          city: data.city || "",
+          contactNumber: data.contactNumber || "",
+          emailAddress: data.emailAddress || "",
+          businessDescription: data.businessDescription || "",
+          currentBusninessStage: data.currentBusninessStage || "",
+          hasRaisedFunding: data.hasRaisedFunding || "",
+          fundingAmount: data.fundingAmount || "",
+          fundingStage: data.fundingStage || "",
+          seekingFunding: data.seekingFunding || "",
+          seekingFundingAmount: data.seekingFundingAmount || "",
+          industryType: data.industryType || "",
+          servicesOffered: data.servicesOffered || "",
+          socialMediaLinks: data.socialMediaLinks || "",
+          targetMarket: data.targetMarket || "",
+          teamSize: data.teamSize || "",
+          websiteLink: data.websiteLink || "",
+        }));
+      } else {
+        console.warn("No data found in API response.");
+      }
+    } catch (error) {
+      console.error("Error fetching user investment data:", error);
+      toast.error("Failed to fetch existing data. Please try again.");
+    }
+  };
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
@@ -114,14 +193,62 @@ const FormInfoBox = () => {
         : "",
     }));
   };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/api/user/investments",
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+
+      toast.success("Investment created successfully!");
+      // Reset form data to initial values
+      setFormData({
+        businessName: "",
+        businessType: "",
+        foundedYear: "",
+        coFounderName: "",
+        country: "",
+        city: "",
+        emailAddress: "",
+        contactNumber: "",
+        websiteLink: "",
+        socialMediaLinks: "",
+        industryType: "",
+        businessDescription: "",
+        currentBusninessStage: "",
+        servicesOffered: "",
+        targetMarket: "",
+        teamSize: "",
+        hasRaisedFunding: "",
+        fundingAmount: "",
+        fundingStage: "",
+        seekingFunding: "",
+        seekingFundingAmount: "",
+      });
+    } catch (error) {
+      console.error("Error creating investment:", error);
+      toast.error(
+        "There was an error creating the investment. Please try again."
+      );
+    }
+  };
   return (
-    <form className="default-form">
+    <form className="default-form" onSubmit={handleSubmit}>
       <div className="row">
         <div className="form-group col-lg-6 col-md-12">
           <label>Are you looking for an investment?</label>
           <select
             className="chosen-single form-select"
             onChange={handleInvestmentChange}
+            value={isLookingForInvestment ? "yes" : "no"}
           >
             <option value="">Select an option</option>
             <option value="yes">Yes</option>
@@ -141,6 +268,16 @@ const FormInfoBox = () => {
                 onChange={handleChange}
               />
             </div>
+            {/* <div className="form-group col-lg-6 col-md-12">
+              <label>Form of organisation</label>
+              <Select
+                options={businessRegistration}
+                onChange={(selected) =>
+                  handleSelectChange("businessType", selected)
+                }
+                placeholder="Select Organization Form"
+              />
+            </div> */}
             <div className="form-group col-lg-6 col-md-12">
               <label>Form of organisation</label>
               <Select
@@ -148,6 +285,10 @@ const FormInfoBox = () => {
                 onChange={(selected) =>
                   handleSelectChange("businessType", selected)
                 }
+                value={{
+                  value: formData.businessType,
+                  label: formData.businessType,
+                }}
                 placeholder="Select Organization Form"
               />
             </div>
@@ -176,16 +317,38 @@ const FormInfoBox = () => {
               <Select
                 name="country"
                 options={countryOptions}
+                value={
+                  selectedCountry ||
+                  (formData.country && {
+                    value: formData.country,
+                    label: formData.country,
+                  })
+                }
                 onChange={handleCountryChange}
                 placeholder="Select a country"
               />
             </div>
+            {/* <div className="form-group col-lg-6 col-md-12">
+              <label>City</label>
+              <Select
+                name="city"
+                options={cityOptions}
+                onChange={handleCityChange}
+                placeholder="Select a city"
+                isDisabled={!selectedCountry || cityOptions.length === 0}
+              />
+            </div> */}
             <div className="form-group col-lg-6 col-md-12">
               <label>City</label>
               <Select
                 name="city"
                 options={cityOptions}
                 onChange={handleCityChange}
+                value={
+                  formData.city
+                    ? { value: formData.city, label: formData.city }
+                    : null
+                }
                 placeholder="Select a city"
                 isDisabled={!selectedCountry || cityOptions.length === 0}
               />
@@ -368,7 +531,7 @@ const FormInfoBox = () => {
                 placeholder="Funding amount"
               />
             </div>
-            <DocumentsUploader />
+            {/* <DocumentsUploader /> */}
           </>
         )}
 

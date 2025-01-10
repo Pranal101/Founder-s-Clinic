@@ -7,6 +7,7 @@ import BreadCrumb from "../../BreadCrumb";
 // import ProfileChart from "./components/ProfileChart";
 // import Notification from "./components/Notification";
 // import Applicants from "./components/Applicants";
+import InvestementsListingTable from "../manage-investements/components/InvestementsListingTable";
 import CopyrightFooter from "../../CopyrightFooter";
 import MenuToggler from "../../MenuToggler";
 
@@ -43,12 +44,14 @@ const Index = () => {
             {/* <!-- applicants Widget --> */}
             <div className="applicants-widget ls-widget">
               <div className="widget-title">
-                <h4>Recent Investments</h4>
+                {/* <h4>Recent Investments</h4> */}
+
+                {/* End .row */}
               </div>
               <div className="widget-content">
                 <div className="row">
                   {/* <!-- Candidate block three --> */}
-
+                  <InvestementsListingTable />
                   {/* <Applicants /> */}
                 </div>
               </div>

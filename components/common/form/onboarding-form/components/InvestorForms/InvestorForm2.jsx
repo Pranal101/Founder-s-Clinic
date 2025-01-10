@@ -366,21 +366,6 @@ const PostBoxForm = () => {
         </div>
 
         <div className="form-group col-lg-6 col-md-12">
-          <label>What is your typical investment timeline?</label>
-          <select
-            className="chosen-single form-select"
-            name="investmentTimeline"
-            value={formData.investmentTimeline}
-            onChange={handleChange}
-          >
-            <option>Select</option>
-            <option>Short-term (less than 3 years)</option>
-            <option>Medium-term (3-5 years)</option>
-            <option>Long-term (5+ years)</option>
-          </select>
-        </div>
-
-        <div className="form-group col-lg-6 col-md-12">
           <label>
             What is your preferred exit strategy?(Select all that apply)
           </label>
@@ -414,10 +399,10 @@ const PostBoxForm = () => {
           </label>
           <input
             type="text"
-            name="successStories"
-            value={formData.successStories}
+            name="successfulExits"
+            value={formData.successfulExits}
             onChange={handleChange}
-            placeholder="Success Stories"
+            placeholder="Successful Exits"
           />
         </div>
 

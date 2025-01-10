@@ -1,5 +1,4 @@
-
-'use client'
+"use client";
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -53,7 +52,7 @@ const DefaulHeader = () => {
 
         <div className="outer-box">
           {/* <!-- Login/Register --> */}
-          <div className="btn-box">
+          {/* <div className="btn-box">
             <a
               href="#"
               className="theme-btn btn-style-three call-modal"
@@ -68,7 +67,7 @@ const DefaulHeader = () => {
             >
               Job Post
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
     </header>

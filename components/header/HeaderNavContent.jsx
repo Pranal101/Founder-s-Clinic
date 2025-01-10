@@ -374,6 +374,139 @@
 // };
 
 // export default HeaderNavContent;
+// "use client";
+
+// import { useEffect, useState } from "react";
+// import Link from "next/link";
+// import { usePathname } from "next/navigation";
+// import { auth } from "../../firebase"; // Firebase instance
+// import axios from "axios";
+
+// const HeaderNavContent = () => {
+//   const pathname = usePathname();
+//   const [user, setUser] = useState(null);
+//   const [role, setRole] = useState(null);
+
+//   useEffect(() => {
+//     // Listen for Firebase auth state changes
+//     const unsubscribe = auth.onAuthStateChanged(async (currentUser) => {
+//       if (currentUser) {
+//         setUser(currentUser);
+//         // Fetch role from the backend if the user is logged in
+//         try {
+//           const token = await currentUser.getIdToken();
+//           const response = await axios.get(
+//             "https://founders-clinic-backend.onrender.com/api/user/getRole",
+//             {
+//               headers: {
+//                 Authorization: `Bearer ${token}`,
+//               },
+//             }
+//           );
+//           setRole(response.data.role);
+//         } catch (error) {
+//           console.error("Error fetching role:", error);
+//         }
+//       } else {
+//         setUser(null);
+//         setRole(null);
+//       }
+//     });
+
+//     return () => unsubscribe();
+//   }, []);
+
+//   const navItems = [
+//     {
+//       role: "Enterprise",
+//       label: "Enterprises",
+//       loggedInLink: "/employers-dashboard/dashboard",
+//       guestLink: "/employers-dashboard/overview",
+//     },
+//     {
+//       role: "Professional",
+//       label: "Professionals",
+//       loggedInLink: "/candidates-dashboard/dashboard",
+//       guestLink: "/candidates-dashboard/overview",
+//     },
+//     {
+//       role: "Intern",
+//       label: "Interns",
+//       loggedInLink: "/candidates-dashboard/dashboard",
+//       guestLink: "/candidates-dashboard/overview",
+//     },
+//     {
+//       role: "Investor",
+//       label: "Investors",
+//       loggedInLink: "/investors-dashboard/dashboard",
+//       guestLink: "/investors-dashboard/overview",
+//     },
+//     {
+//       role: "Networking Community",
+//       label: "Networking Communities",
+//       loggedInLink: "/networking-dashboard/dashboard",
+//       guestLink: "/networking-dashboard/overview",
+//     },
+//   ];
+
+//   const pagesMenu = [
+//     { id: 1, name: "Events", routePath: "/events" },
+//     { id: 2, name: "Contact Us", routePath: "/contact-us" },
+//   ];
+
+//   return (
+//     <nav className="nav main-menu">
+//       <ul className="navigation" id="navbar">
+//         {user
+//           ? // Render items based on user role for logged-in users
+//             navItems
+//               .filter((item) => item.role === role)
+//               .map((item) => (
+//                 <li
+//                   key={item.role}
+//                   className={
+//                     pathname?.includes(item.loggedInLink) ? "current" : ""
+//                   }
+//                 >
+//                   <Link href={item.loggedInLink}>{item.label}</Link>
+//                 </li>
+//               ))
+//           : // Render all items with guest links for unauthenticated users
+//             navItems.map((item) => (
+//               <li
+//                 key={item.role}
+//                 className={pathname?.includes(item.guestLink) ? "current" : ""}
+//               >
+//                 <Link href={item.guestLink}>{item.label}</Link>
+//               </li>
+//             ))}
+
+//         {/* Always visible Pages menu */}
+//         <li
+//           className={`dropdown ${
+//             pagesMenu.some((item) => pathname?.includes(item.routePath))
+//               ? "current"
+//               : ""
+//           }`}
+//         >
+//           <span>Pages</span>
+//           <ul>
+//             {pagesMenu.map((page) => (
+//               <li
+//                 key={page.id}
+//                 className={pathname?.includes(page.routePath) ? "current" : ""}
+//               >
+//                 <Link href={page.routePath}>{page.name}</Link>
+//               </li>
+//             ))}
+//           </ul>
+//         </li>
+//       </ul>
+//     </nav>
+//   );
+// };
+
+// export default HeaderNavContent;
 "use client";
 
 import { useEffect, useState } from "react";
@@ -386,13 +519,21 @@ const HeaderNavContent = () => {
   const pathname = usePathname();
   const [user, setUser] = useState(null);
   const [role, setRole] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false); // New state for admin check
 
   useEffect(() => {
     // Listen for Firebase auth state changes
     const unsubscribe = auth.onAuthStateChanged(async (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
-        // Fetch role from the backend if the user is logged in
+
+        // Check if the user is the admin
+        if (currentUser.email === "admin@foundersclinic.com") {
+          setIsAdmin(true);
+          return; // No need to fetch role if it's the admin
+        }
+
+        // Fetch role from the backend if the user is not admin
         try {
           const token = await currentUser.getIdToken();
           const response = await axios.get(
@@ -410,6 +551,7 @@ const HeaderNavContent = () => {
       } else {
         setUser(null);
         setRole(null);
+        setIsAdmin(false); // Reset admin state
       }
     });
 
@@ -421,31 +563,31 @@ const HeaderNavContent = () => {
       role: "Enterprise",
       label: "Enterprises",
       loggedInLink: "/employers-dashboard/dashboard",
-      guestLink: "/employers-dashboard/dashboard",
+      guestLink: "/employers-dashboard/overview",
     },
     {
       role: "Professional",
       label: "Professionals",
       loggedInLink: "/candidates-dashboard/dashboard",
-      guestLink: "/candidates-dashboard/dashboard",
+      guestLink: "/candidates-dashboard/overview",
     },
     {
       role: "Intern",
       label: "Interns",
       loggedInLink: "/candidates-dashboard/dashboard",
-      guestLink: "/candidates-dashboard/dashboard",
+      guestLink: "/candidates-dashboard/overview",
     },
     {
       role: "Investor",
       label: "Investors",
       loggedInLink: "/investors-dashboard/dashboard",
-      guestLink: "/investors-dashboard/dashboard",
+      guestLink: "/investors-dashboard/overview",
     },
     {
       role: "Networking Community",
       label: "Networking Communities",
       loggedInLink: "/networking-dashboard/dashboard",
-      guestLink: "/networking-dashboard/dashboard",
+      guestLink: "/networking-dashboard/overview",
     },
   ];
 
@@ -457,29 +599,46 @@ const HeaderNavContent = () => {
   return (
     <nav className="nav main-menu">
       <ul className="navigation" id="navbar">
-        {user
-          ? // Render items based on user role for logged-in users
-            navItems
-              .filter((item) => item.role === role)
-              .map((item) => (
-                <li
-                  key={item.role}
-                  className={
-                    pathname?.includes(item.loggedInLink) ? "current" : ""
-                  }
-                >
-                  <Link href={item.loggedInLink}>{item.label}</Link>
-                </li>
-              ))
-          : // Render all items with guest links for unauthenticated users
-            navItems.map((item) => (
+        {user ? (
+          <>
+            {isAdmin ? (
+              // Add Admin link if user is admin
               <li
-                key={item.role}
-                className={pathname?.includes(item.guestLink) ? "current" : ""}
+                className={
+                  pathname?.includes("/admin-dashboard/dashboard")
+                    ? "current"
+                    : ""
+                }
               >
-                <Link href={item.guestLink}>{item.label}</Link>
+                <Link href="/404">Admin</Link>
               </li>
-            ))}
+            ) : (
+              // Render items based on user role for logged-in users
+              navItems
+                .filter((item) => item.role === role)
+                .map((item) => (
+                  <li
+                    key={item.role}
+                    className={
+                      pathname?.includes(item.loggedInLink) ? "current" : ""
+                    }
+                  >
+                    <Link href={item.loggedInLink}>{item.label}</Link>
+                  </li>
+                ))
+            )}
+          </>
+        ) : (
+          // Render all items with guest links for unauthenticated users
+          navItems.map((item) => (
+            <li
+              key={item.role}
+              className={pathname?.includes(item.guestLink) ? "current" : ""}
+            >
+              <Link href={item.guestLink}>{item.label}</Link>
+            </li>
+          ))
+        )}
 
         {/* Always visible Pages menu */}
         <li

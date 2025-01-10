@@ -31,7 +31,7 @@ const index = () => {
           {/* End logo */}
 
           <h1>404!</h1>
-          <p>The page you are looking for could not be found.</p>
+          <p>Google My Business Verification Issue.</p>
 
           <Link className="theme-btn btn-style-three call-modal" href="/">
             BACK TO HOME

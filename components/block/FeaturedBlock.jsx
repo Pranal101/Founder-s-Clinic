@@ -1,3 +1,88 @@
+// import Image from "next/image";
+// import Link from "next/link";
+
+// const FeaturedBlock = () => {
+//   const blockContent = [
+//     {
+//       id: 1,
+//       block: [
+//         {
+//           img: "/images/enterprise.jpeg",
+//           city: "Enterprises",
+//           width: "411",
+//           height: "511",
+//         },
+//       ],
+//     },
+//     {
+//       id: 2,
+//       block: [
+//         {
+//           img: "/images/user-2.jpg",
+//           city: "Professionals",
+
+//           width: "411",
+//           height: "240",
+//         },
+//         {
+//           img: "/images/user-3.jpg",
+//           city: "Interns",
+
+//           width: "411",
+//           height: "240",
+//         },
+//       ],
+//     },
+//     {
+//       id: 3,
+//       block: [
+//         {
+//           img: "/images/user-4.jpg",
+//           city: "Investors",
+
+//           width: "411",
+//           height: "240",
+//         },
+//         {
+//           img: "/images/user-5.jpg",
+//           city: "Networking Communities",
+//           width: "411",
+//           height: "240",
+//         },
+//       ],
+//     },
+//   ];
+//   return (
+//     <>
+//       {blockContent.map((item) => (
+//         <div className="column col-lg-4 col-md-6 col-sm-12" key={item.id}>
+//           {item.block.map((value, i) => (
+//             <div className="feature-block" key={i}>
+//               <div className="inner-box">
+//                 <figure className="image">
+//                   <Image
+//                     width={value.width}
+//                     height={value.height}
+//                     src={value.img}
+//                     alt="featued"
+//                   />
+//                 </figure>
+//                 <div className="overlay-box">
+//                   <div className="content">
+//                     <h5>{value.city}</h5>
+//                     <Link href="/job-list-v12" className="overlay-link"></Link>
+//                   </div>
+//                 </div>
+//               </div>
+//             </div>
+//           ))}
+//         </div>
+//       ))}
+//     </>
+//   );
+// };
+
+// export default FeaturedBlock;
 import Image from "next/image";
 import Link from "next/link";
 
@@ -7,10 +92,11 @@ const FeaturedBlock = () => {
       id: 1,
       block: [
         {
-          img: "/images/resource/featured-1.png",
+          img: "/images/enterprise.jpeg",
           city: "Enterprises",
           width: "411",
           height: "511",
+          link: "/employers-dashboard/overview", // Add the route link for each item
         },
       ],
     },
@@ -18,18 +104,18 @@ const FeaturedBlock = () => {
       id: 2,
       block: [
         {
-          img: "/images/resource/featured-2.png",
+          img: "/images/user-2.jpg",
           city: "Professionals",
-
           width: "411",
           height: "240",
+          link: "/candidates-dashboard/overview", // Add the route link for each item
         },
         {
-          img: "/images/resource/featured-4.png",
+          img: "/images/user-3.jpg",
           city: "Interns",
-
           width: "411",
           height: "240",
+          link: "/candidates-dashboard/overview", // Add the route link for each item
         },
       ],
     },
@@ -37,21 +123,23 @@ const FeaturedBlock = () => {
       id: 3,
       block: [
         {
-          img: "/images/resource/featured-3.png",
+          img: "/images/user-4.jpg",
           city: "Investors",
-
           width: "411",
           height: "240",
+          link: "/investors-dashboard/overview", // Add the route link for each item
         },
         {
-          img: "/images/resource/featured-5.png",
+          img: "/images/user-5.jpg",
           city: "Networking Communities",
           width: "411",
           height: "240",
+          link: "/networking-dashboard/overview", // Add the route link for each item
         },
       ],
     },
   ];
+
   return (
     <>
       {blockContent.map((item) => (
@@ -64,13 +152,14 @@ const FeaturedBlock = () => {
                     width={value.width}
                     height={value.height}
                     src={value.img}
-                    alt="featued"
+                    alt={value.city}
                   />
                 </figure>
                 <div className="overlay-box">
                   <div className="content">
                     <h5>{value.city}</h5>
-                    <Link href="/job-list-v12" className="overlay-link"></Link>
+                    {/* Link to the respective page using value.link */}
+                    <Link href={value.link} className="overlay-link"></Link>
                   </div>
                 </div>
               </div>
