@@ -22,7 +22,7 @@ const InvestmentListingsTable = () => {
 
         const userToken = await user.getIdToken();
         const response = await axios.get(
-          "http://localhost:4000/api/user/all-investors",
+          "https://founders-clinic-backend.onrender.com/api/user/all-investors",
           {
             headers: {
               Authorization: `Bearer ${userToken}`, // Secure API call

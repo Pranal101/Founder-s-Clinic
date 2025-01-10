@@ -18,7 +18,7 @@ const FilterTopBox = () => {
     const fetchNetworkingCommunities = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:4000/api/user/view-networking"
+          "https://founders-clinic-backend.onrender.com/api/user/view-networking"
         );
         setNetworkingCommunities(response.data.data);
         handlePageChange(1, response.data.data); // Set initial display items based on fetched data
