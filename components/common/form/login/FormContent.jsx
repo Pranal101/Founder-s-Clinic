@@ -120,18 +120,21 @@ const FormContent = () => {
       //   return;
       // }
       // Send user details to the backend
-      const response = await fetch("http://localhost:4000/api/user/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          uid: user.uid,
-          email: user.email,
-          password, // Include the plain-text password for validation
-        }),
-      });
+      const response = await fetch(
+        "https://founders-clinic-backend.onrender.com/api/user/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            uid: user.uid,
+            email: user.email,
+            password, // Include the plain-text password for validation
+          }),
+        }
+      );
 
       const data = await response.json();
 
