@@ -8,8 +8,7 @@ import blogs from "@/data/blogs";
 import Image from "next/image";
 
 export const metadata = {
-  title: "Blog Details Dyanmic V1 || Superio - Job Borad React NextJS Template",
-  description: "Superio - Job Borad React NextJS Template",
+  title: "Event Details",
 };
 
 const BlogDetailsDynamic = ({ params }) => {

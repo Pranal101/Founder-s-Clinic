@@ -160,23 +160,35 @@ const FormContent = () => {
       console.log("Updating user profile with name:", name);
       await updateProfile(user, { displayName: name });
 
+      // Get the sign-in method from provider data
+      const authProvider = user.providerData[0]?.providerId || "unknown";
+      console.log("Auth Provider:", authProvider);
+
       // Force refresh the token to ensure it includes the displayName
       await user.reload();
       const idToken = await user.getIdToken(true); // Refresh the token
 
       console.log("Generated ID Token with displayName:", idToken);
 
+      // Prepare data to send to the backend
+      const userData = {
+        name,
+        email,
+        uid: user.uid,
+        authProvider,
+        password,
+      };
+
+      console.log("Sending user data to backend:", userData);
       // Send the token to the backend
-      const response = await fetch(
-        "https://founders-clinic-backend.onrender.com/api/user/register",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${idToken}`, // Token with displayName included
-          },
-        }
-      );
+      const response = await fetch("http://localhost:4000/api/user/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${idToken}`, // Token with displayName included
+        },
+        body: JSON.stringify(userData),
+      });
 
       const data = await response.json();
       if (!response.ok) {

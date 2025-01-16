@@ -1,10 +1,10 @@
 import MobileMenu from "../../../header/MobileMenu";
 import DashboardCandidatesHeader from "../../../header/DashboardCandidatesHeader";
 import LoginPopup from "../../../common/form/login/LoginPopup";
-import DashboardCandidatesSidebar from "../../../header/DashboardCandidatesSidebar";
+import DashboardAdminSidebar from "../../../header/DashboardAdminSidebar";
 import BreadCrumb from "../../BreadCrumb";
 import CopyrightFooter from "../../CopyrightFooter";
-import JobListingsTable from "./components/JobListingsTable";
+import ProfileListingsTable from "./components/ProfileListingsTables";
 import MenuToggler from "../../MenuToggler";
 
 const index = () => {
@@ -22,13 +22,13 @@ const index = () => {
       <MobileMenu />
       {/* End MobileMenu */}
 
-      <DashboardCandidatesSidebar />
+      <DashboardAdminSidebar />
       {/* <!-- End Candidates Sidebar Menu --> */}
 
       {/* <!-- Dashboard --> */}
       <section className="user-dashboard">
         <div className="dashboard-outer">
-          <BreadCrumb title="Approve Inqueries!" />
+          <BreadCrumb title="Approve Users!" />
           {/* breadCrumb */}
 
           <MenuToggler />
@@ -38,7 +38,7 @@ const index = () => {
             <div className="col-lg-12">
               {/* <!-- Ls widget --> */}
               <div className="ls-widget">
-                <JobListingsTable />
+                <ProfileListingsTable />
               </div>
             </div>
           </div>

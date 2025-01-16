@@ -111,6 +111,7 @@ const LoginWithSocial = () => {
             name: user.displayName || "Unknown Name",
             email: user.email || "Unknown Email",
             uid: user.uid,
+            authProvider: provider.providerId,
           }),
         }
       );
@@ -195,6 +196,7 @@ const LoginWithSocial = () => {
             uid: user.uid,
             name: user.displayName || "Unknown Name",
             email: user.email || "Unknown Email",
+            authProvider: provider.providerId,
           }),
         }
       );

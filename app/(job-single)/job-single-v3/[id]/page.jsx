@@ -235,7 +235,6 @@
 // });
 "use client";
 import dynamic from "next/dynamic";
-import jobs from "@/data/job-featured";
 import LoginPopup from "@/components/common/form/login/LoginPopup";
 import FooterDefault from "@/components/footer/common-footer";
 import DefaulHeader from "@/components/header/DefaulHeader";

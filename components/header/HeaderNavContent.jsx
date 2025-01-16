@@ -527,12 +527,6 @@ const HeaderNavContent = () => {
       if (currentUser) {
         setUser(currentUser);
 
-        // Check if the user is the admin
-        if (currentUser.email === "admin@foundersclinic.com") {
-          setIsAdmin(true);
-          return; // No need to fetch role if it's the admin
-        }
-
         // Fetch role from the backend if the user is not admin
         try {
           const token = await currentUser.getIdToken();
@@ -544,7 +538,11 @@ const HeaderNavContent = () => {
               },
             }
           );
-          setRole(response.data.role);
+          const fetchedRole = response.data.role;
+          setRole(fetchedRole);
+
+          // Check if the fetched role is Admin
+          setIsAdmin(fetchedRole === "Admin");
         } catch (error) {
           console.error("Error fetching role:", error);
         }
@@ -605,12 +603,10 @@ const HeaderNavContent = () => {
               // Add Admin link if user is admin
               <li
                 className={
-                  pathname?.includes("/admin-dashboard/dashboard")
-                    ? "current"
-                    : ""
+                  pathname?.includes("/admin-dashboard") ? "current" : ""
                 }
               >
-                <Link href="/404">Admin</Link>
+                <Link href="/admin-dashboard/dashboard">Admin</Link>
               </li>
             ) : (
               // Render items based on user role for logged-in users

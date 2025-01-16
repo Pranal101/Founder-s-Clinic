@@ -1,13 +1,14 @@
 import MobileMenu from "../../../header/MobileMenu";
-import DashboardCandidatesHeader from "../../../header/DashboardCandidatesHeader";
 import LoginPopup from "../../../common/form/login/LoginPopup";
-import DashboardCandidatesSidebar from "../../../header/DashboardCandidatesSidebar";
+import DashboardAdminSidebar from "../../../header/DashboardAdminSidebar";
 import BreadCrumb from "../../BreadCrumb";
+import CouponListingsTable from "./components/CouponListingsTable";
+import AddCoupon from "./components/AddCoupon";
 import CopyrightFooter from "../../CopyrightFooter";
-import JobListingsTable from "./components/JobListingsTable";
+import DashboardCandidatesHeader from "../../../header/DashboardCandidatesHeader";
 import MenuToggler from "../../MenuToggler";
 
-const index = () => {
+const Index = () => {
   return (
     <div className="page-wrapper dashboard">
       <span className="header-span"></span>
@@ -22,27 +23,41 @@ const index = () => {
       <MobileMenu />
       {/* End MobileMenu */}
 
-      <DashboardCandidatesSidebar />
+      <DashboardAdminSidebar />
       {/* <!-- End Candidates Sidebar Menu --> */}
 
       {/* <!-- Dashboard --> */}
       <section className="user-dashboard">
         <div className="dashboard-outer">
-          <BreadCrumb title="Approve Inqueries!" />
+          <BreadCrumb title="Hello!" />
           {/* breadCrumb */}
 
           <MenuToggler />
           {/* Collapsible sidebar button */}
 
+          {/* End .col */}
           <div className="row">
-            <div className="col-lg-12">
-              {/* <!-- Ls widget --> */}
-              <div className="ls-widget">
-                <JobListingsTable />
+            {/* <div className="col-xl-8 col-lg-12">
+              <div className="graph-widget ls-widget">
+                <CouponListingsTable />
+              </div>
+            </div> */}
+            {/* End .col */}
+
+            <div className="col-xl-12 col-lg-12">
+              {/* <!-- Notification Widget --> */}
+              <div className="notification-widget ls-widget">
+                <div className="widget-title">
+                  <h4>Add Coupon</h4>
+                </div>
+                <div className="widget-content">
+                  <AddCoupon />
+                </div>
               </div>
             </div>
+            {/* End .col */}
           </div>
-          {/* End .row */}
+          {/* End .row profile and notificatins */}
         </div>
         {/* End dashboard-outer */}
       </section>
@@ -55,4 +70,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

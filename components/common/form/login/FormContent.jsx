@@ -2,11 +2,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import LoginWithSocial from "./LoginWithSocial";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  getAdditionalUserInfo,
-} from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { toast } from "react-toastify";
 
 const FormContent = () => {
@@ -115,34 +111,53 @@ const FormContent = () => {
       const token = await user.getIdToken();
 
       // Check for admin credentials (example hardcoded credentials)
-      const adminEmail = "admin@foundersclinic.com";
-      const adminPassword = "admin@123";
-      if (email === adminEmail && password === adminPassword) {
-        // Redirect to admin dashboard
-        toast.success("Welcome Admin!");
-        window.location.href = "/404";
-        return;
-      }
+      // const adminEmail = "admin@foundersclinic.com";
+      // const adminPassword = "admin@123";
+      // if (email === adminEmail && password === adminPassword) {
+      //   // Redirect to admin dashboard
+      //   toast.success("Welcome Admin!");
+      //   window.location.href = "/404";
+      //   return;
+      // }
       // Send user details to the backend
-      const response = await fetch(
-        "https://founders-clinic-backend.onrender.com/api/user/register",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ uid: user.uid, email: user.email }),
-        }
-      );
+      const response = await fetch("http://localhost:4000/api/user/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          uid: user.uid,
+          email: user.email,
+          password, // Include the plain-text password for validation
+        }),
+      });
 
       const data = await response.json();
 
       if (response.ok) {
-        // Redirect based on user status
-        window.location.href = data.newUser ? "/selectRole" : "/dashboard";
+        const { role } = data.user; // Assuming the backend returns `user` with `role` field
+
+        // Role-based redirection
+        if (role === "Enterprise") {
+          window.location.href = "/employers-dashboard/dashboard";
+        } else if (role === "Professional") {
+          window.location.href = "/candidates-dashboard/dashboard";
+        } else if (role === "Intern") {
+          window.location.href = "/candidates-dashboard/dashboard";
+        } else if (role === "Investor") {
+          window.location.href = "/investors-dashboard/dashboard";
+        } else if (role === "Networking Community") {
+          window.location.href = "/networking-dashboard/dashboard";
+        } else if (role === "Admin") {
+          window.location.href = "/admin-dashboard/dashboard";
+        } else {
+          setError("Invalid role. Please contact support.");
+        }
       } else {
-        setError(`Server error: ${data.message || "Please try again."}`);
+        setError(
+          data.message || "An error occurred during login. Please try again."
+        );
       }
     } catch (err) {
       // Handle Firebase errors
@@ -165,11 +180,11 @@ const FormContent = () => {
       {/* <!--Login Form--> */}
       <form method="post" onSubmit={handleEmailLogin}>
         <div className="form-group">
-          <label>Username</label>
+          <label>Email</label>
           <input
             type="text"
-            name="username"
-            placeholder="Username"
+            name="email"
+            placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required

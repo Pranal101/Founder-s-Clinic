@@ -99,104 +99,104 @@ module.exports = [
   //     },
   //   ],
   // },
-  {
-    id: 4,
-    label: "Enterprise List",
-    routePath: "/employers-list-v3",
-    items: [
-      // {
-      //   name: "Employers List V1",
-      //   routePath: "/employers-list-v1",
-      // },
-      // {
-      //   name: "Employers List V2",
-      //   routePath: "/employers-list-v2",
-      // },
-      // {
-      //   name: "Employers List V3",
-      //   routePath: "/employers-list-v3",
-      // },
-      // {
-      //   name: "Employers List V4",
-      //   routePath: "/employers-list-v4",
-      // },
-    ],
-  },
-  {
-    id: 5,
-    label: "Enterprise Single",
-    routePath: "/employers-single-v1/1",
-    items: [
-      // {
-      //   name: "Employers Single V1",
-      //   routePath: "/employers-single-v1/1",
-      // },
-      // {
-      //   name: "Employers Single V2",
-      //   routePath: "/employers-single-v2/2",
-      // },
-      // {
-      //   name: "Employers Single V3",
-      //   routePath: "/employers-single-v3/3",
-      // },
-    ],
-  },
-  {
-    id: 6,
-    label: "Professionals List",
-    routePath: "/candidates-list-v3",
-    items: [
-      // {
-      //   name: "Candidates List V1",
-      //   routePath: "/candidates-list-v1",
-      // },
-      // {
-      //   name: "Candidates List V2",
-      //   routePath: "/candidates-list-v2",
-      // },
-      // {
-      //   name: "Candidates List V3",
-      //   routePath: "/candidates-list-v3",
-      // },
-      // {
-      //   name: "Candidates List V4",
-      //   routePath: "/candidates-list-v4",
-      // },
-      // {
-      //   name: "Candidates List V5",
-      //   routePath: "/candidates-list-v5",
-      // },
-    ],
-  },
-  {
-    id: 7,
-    label: "Professionals Single",
-    routePath: "/candidates-single-v1/1",
-    items: [
-      // {
-      //   name: "Candidates Single V1",
-      //   routePath: "/candidates-single-v1/1",
-      // },
-      // {
-      //   name: "Candidates Single V2",
-      //   routePath: "/candidates-single-v2/2",
-      // },
-      // {
-      //   name: "Candidates Single V3",
-      //   routePath: "/candidates-single-v3/3",
-      // },
-    ],
-  },
-  {
-    id: 8,
-    label: "Intern List",
-    routePath: "/candidates-list-v3",
-  },
-  {
-    id: 10,
-    label: "Intern Single",
-    routePath: "/candidates-single-v1/1",
-  },
+  // {
+  //   id: 4,
+  //   label: "Enterprise List",
+  //   routePath: "/employers-list-v3",
+  //   items: [
+  //     {
+  //       name: "Employers List V1",
+  //       routePath: "/employers-list-v1",
+  //     },
+  //     {
+  //       name: "Employers List V2",
+  //       routePath: "/employers-list-v2",
+  //     },
+  //     {
+  //       name: "Employers List V3",
+  //       routePath: "/employers-list-v3",
+  //     },
+  //     {
+  //       name: "Employers List V4",
+  //       routePath: "/employers-list-v4",
+  //     },
+  //   ],
+  // },
+  // {
+  //   id: 5,
+  //   label: "Enterprise Single",
+  //   routePath: "/employers-single-v1/1",
+  //   items: [
+  //     {
+  //       name: "Employers Single V1",
+  //       routePath: "/employers-single-v1/1",
+  //     },
+  //     {
+  //       name: "Employers Single V2",
+  //       routePath: "/employers-single-v2/2",
+  //     },
+  //     {
+  //       name: "Employers Single V3",
+  //       routePath: "/employers-single-v3/3",
+  //     },
+  //   ],
+  // },
+  // {
+  //   id: 6,
+  //   label: "Professionals List",
+  //   routePath: "/candidates-list-v3",
+  //   items: [
+  //     {
+  //       name: "Candidates List V1",
+  //       routePath: "/candidates-list-v1",
+  //     },
+  //     {
+  //       name: "Candidates List V2",
+  //       routePath: "/candidates-list-v2",
+  //     },
+  //     {
+  //       name: "Candidates List V3",
+  //       routePath: "/candidates-list-v3",
+  //     },
+  //     {
+  //       name: "Candidates List V4",
+  //       routePath: "/candidates-list-v4",
+  //     },
+  //     {
+  //       name: "Candidates List V5",
+  //       routePath: "/candidates-list-v5",
+  //     },
+  //   ],
+  // },
+  // {
+  //   id: 7,
+  //   label: "Professionals Single",
+  //   routePath: "/candidates-single-v1/1",
+  //   items: [
+  //     {
+  //       name: "Candidates Single V1",
+  //       routePath: "/candidates-single-v1/1",
+  //     },
+  //     {
+  //       name: "Candidates Single V2",
+  //       routePath: "/candidates-single-v2/2",
+  //     },
+  //     {
+  //       name: "Candidates Single V3",
+  //       routePath: "/candidates-single-v3/3",
+  //     },
+  //   ],
+  // },
+  // {
+  //   id: 8,
+  //   label: "Intern List",
+  //   routePath: "/candidates-list-v3",
+  // },
+  // {
+  //   id: 10,
+  //   label: "Intern Single",
+  //   routePath: "/candidates-single-v1/1",
+  // },
   // {
   //   id: 8,
   //   label: "Blog",
@@ -247,10 +247,10 @@ module.exports = [
         name: "Contact",
         routePath: "/contact",
       },
-      {
-        name: "404",
-        routePath: "/404",
-      },
+      // {
+      //   name: "404",
+      //   routePath: "/404",
+      // },
     ],
   },
   // {
@@ -306,6 +306,10 @@ module.exports = [
       {
         name: "Investor Dashboard",
         routePath: "/investors-dashboard/dashboard",
+      },
+      {
+        name: "Networking Dashboard",
+        routePath: "/networking-dashboard/dashboard",
       },
     ],
   },
