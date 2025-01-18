@@ -181,9 +181,9 @@ const Pricing3 = () => {
             <h4 className="pricingCard__title">{item.type}</h4>
             <div className="pricingCard__subtitle">{item.duration}</div>
 
-            <div className="pricingCard__img">
+            {/* <div className="pricingCard__img">
               <Image width={90} height={91} src={item.img} alt="images" />
-            </div>
+            </div> */}
 
             <ul className="pricingCard__list">
               {item.features.map((val, i) => (

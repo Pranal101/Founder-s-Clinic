@@ -35,41 +35,7 @@ const index = () => {
       <Hero1 />
       {/* End Hero Section */}
 
-      <section className="features-section">
-        <div className="auto-container">
-          <div className="sec-title text-center">
-            <h2>User Types</h2>
-            <div className="text">
-              Lorem ipsum dolor sit amet elit, sed do eiusmod tempor
-            </div>
-          </div>
-
-          <div className="row" data-aos="fade-up">
-            <FeaturedBlock />
-          </div>
-        </div>
-      </section>
       {/* <!-- End Features Section --> */}
-
-      <section className="layout-pt-120 layout-pb-60 testimonial-section style-two">
-        <div className="auto-container">
-          {/* <!-- Sec Title --> */}
-          <div className="sec-title text-center">
-            <h2 className="fw-700">How it Works</h2>
-            <div className="text">
-              All registered users on our platform undergo a rigorous vetting
-              process to ensure they're credible, reliable, and highly
-              qualified.
-            </div>
-          </div>
-
-          <div className="row grid-base">
-            <Block9 />
-          </div>
-        </div>
-      </section>
-      {/* <!-- End Business Block --> */}
-      {/* <!-- End Process Section --> */}
       <section className="layout-pt-60 layout-pb-60">
         <div className="auto-container">
           <div className="row justify-content-center">
@@ -92,13 +58,34 @@ const index = () => {
           {/* End .row */}
         </div>
       </section>
+
+      <section className="layout-pt-120 layout-pb-60 testimonial-section style-two">
+        <div className="auto-container">
+          {/* <!-- Sec Title --> */}
+          <div className="sec-title text-center">
+            <h2 className="fw-700">How it Works</h2>
+            <div className="text">
+              All registered users on our platform undergo a rigorous vetting
+              process to ensure they're credible, reliable, and highly
+              qualified.
+            </div>
+          </div>
+
+          <div className="row grid-base">
+            <Block9 />
+          </div>
+        </div>
+      </section>
+      {/* <!-- End Business Block --> */}
+      {/* <!-- End Process Section --> */}
+
       {/* <!-- End Pricing Section --> */}
       <section className="layout-pt-120 layout-pb-120 border-bottom-none">
         <div className="auto-container">
           <div className="row grid-base justify-content-between align-items-end">
             <div className="col-lg-6">
               <div className="sec-title mb-0">
-                <h2>Explore Popular Inqueries</h2>
+                <h2>Featured Services</h2>
               </div>
             </div>
             {/* End .col */}
@@ -199,14 +186,14 @@ const index = () => {
       </section>
       {/* <!-- End Testimonial Section --> */}
 
-      <section className="clients-section">
+      {/* <section className="clients-section">
         <div className="sponsors-outer" data-aos="fade">
-          {/* <!--Sponsors Carousel--> */}
+          <!--Sponsors Carousel-->
           <ul className="sponsors-carousel">
             <Partner />
           </ul>
         </div>
-      </section>
+      </section> */}
       {/* <!-- End Clients Section--> */}
 
       {/* <section className="layout-pt-60 layout-pb-60">
@@ -216,6 +203,20 @@ const index = () => {
           </div>
         </div>
       </section> */}
+      <section className="features-section">
+        <div className="auto-container">
+          <div className="sec-title text-center">
+            {/* <h2>User Types</h2>
+            <div className="text">
+              Lorem ipsum dolor sit amet elit, sed do eiusmod tempor
+            </div> */}
+          </div>
+
+          <div className="row" data-aos="fade-up">
+            <FeaturedBlock />
+          </div>
+        </div>
+      </section>
       {/* <!-- End Registeration Banners --> */}
       <section className="faqs-section">
         <div className="auto-container">
