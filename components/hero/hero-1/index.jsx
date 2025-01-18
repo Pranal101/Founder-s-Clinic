@@ -15,9 +15,10 @@ const index = () => {
             >
               <div className="title-box">
                 <h3>
-                  AI-Powered Matchmaking{" "}
+                  Founders’ Clinic helps you connect with the best service
+                  providers and resources for your business,{" "}
                   <span className="colored">
-                    No Commissions, Just Connections.
+                    smartly matched by AI to accelerate your success.
                     <br />
                   </span>
                 </h3>
@@ -28,9 +29,9 @@ const index = () => {
               </div>
 
               {/* <!-- Job Search Form --> */}
-              <div className="job-search-form">
+              {/* <div className="job-search-form">
                 <SearchForm />
-              </div>
+              </div> */}
               {/* <!-- Job Search Form --> */}
 
               {/* <!-- Popular Search --> */}

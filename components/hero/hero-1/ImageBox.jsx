@@ -22,7 +22,7 @@ const ImageBox = () => {
       </div>
       {/* <!-- Info BLock Two --> */}
       <div className="info_block_two" data-aos="fade-in" data-aos-delay="2000">
-        <p>Seamless Communication Tools</p>
+        <p>Tailored Business Resources</p>
         <div className="image">
           <Image
             width={206}
@@ -39,7 +39,7 @@ const ImageBox = () => {
         data-aos-delay="1500"
       >
         <span className="icon flaticon-briefcase"></span>
-        <p>Verified Service Providers</p>
+        <p>Discover Verified Professionals</p>
         {/* <span className="sub-text">Startup</span> */}
         <span className="right_icon fa fa-check"></span>
       </div>

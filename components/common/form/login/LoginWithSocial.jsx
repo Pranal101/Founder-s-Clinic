@@ -148,7 +148,7 @@ const LoginWithSocial = () => {
         } else if (roleData.role === "Professional") {
           window.location.href = "/candidates-dashboard/dashboard";
         } else if (roleData.role === "Intern") {
-          window.location.href = "/candidates-dashboard/dashboard";
+          window.location.href = "/intern-dashboard/dashboard";
         } else if (roleData.role === "Investor") {
           window.location.href = "/investors-dashboard/dashboard";
         } else if (roleData.role === "Networking Community") {
@@ -241,7 +241,7 @@ const LoginWithSocial = () => {
       } else if (roleData.role === "Professional") {
         window.location.href = "/candidates-dashboard/dashboard";
       } else if (roleData.role === "Intern") {
-        window.location.href = "/candidates-dashboard/dashboard";
+        window.location.href = "/intern-dashboard/dashboard";
       } else if (roleData.role === "Investor") {
         window.location.href = "/investors-dashboard/dashboard";
       } else if (roleData.role === "Networking Community") {

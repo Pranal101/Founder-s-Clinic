@@ -572,8 +572,8 @@ const HeaderNavContent = () => {
     {
       role: "Intern",
       label: "Interns",
-      loggedInLink: "/candidates-dashboard/dashboard",
-      guestLink: "/candidates-dashboard/overview",
+      loggedInLink: "/intern-dashboard/dashboard",
+      guestLink: "/intern-dashboard/overview",
     },
     {
       role: "Investor",

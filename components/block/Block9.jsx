@@ -7,7 +7,8 @@ const Block9 = () => {
       img: "/images/how-it-works-1.png",
       serialNo: "01",
       title: "Define Your Needs",
-      text: `Tell us about your business goals, challenges, and the services you're looking for—whether it's finance, marketing, legal, HR, or IT.`,
+      text: `Tell us about your goals, challenges, and the resources you're looking for. Find the
+best resource in the area of finance, marketing, legal, HR, IT or investment`,
     },
     {
       id: 2,
@@ -21,7 +22,8 @@ const Block9 = () => {
       img: "/images/how-it-works-3.png",
       serialNo: "03",
       title: "Instant Connections",
-      text: `Get introduced to vetted professionals and companies who can provide the exact support you need, saving you hours of research.`,
+      text: `Get introduced to vetted professionals, enterprises, investors, business communities
+who can provide the exact support you need, saving you hours of research.`,
     },
   ];
 

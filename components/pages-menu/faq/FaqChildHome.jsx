@@ -23,10 +23,11 @@ const FaqChild = () => {
             <div className="accordion-body ">
               <div className="content">
                 <p>
-                  We connect businesses and service providers directly, without
-                  charging any commissions or hidden fees. What you agree to
-                  with the service provider is the total cost—there are no
-                  additional charges from us.
+                  We connect businesses with resources directly, without
+                  charging commission. What you agree to with the service
+                  provider is the total cost. Founders’ Clinic is charging an
+                  amount for responding to inquiries, getting featured,
+                  registering as an intern and posting special offers/ events.
                 </p>
               </div>
             </div>
@@ -57,7 +58,7 @@ const FaqChild = () => {
                   Our platform uses advanced AI algorithms to analyze your
                   business profile and needs, then cross-references that with
                   our database of service providers to offer the most relevant
-                  matches.
+                  matches
                 </p>
               </div>
             </div>
@@ -73,7 +74,7 @@ const FaqChild = () => {
               aria-expanded="false"
               aria-controls="collapseThree"
             >
-              Are the service providers vetted?
+              Are the service providers, interns and other users vetted?
             </button>
           </h2>
           <div
@@ -115,9 +116,10 @@ const FaqChild = () => {
             <div className="accordion-body">
               <div className="content">
                 <p>
-                  We offer a wide variety of business support services,
-                  including marketing, legal, financial, HR, IT, consulting, and
-                  much more.
+                  Our users can connect with the professionals offering a wide
+                  variety of business support services, including marketing,
+                  legal, financial, HR, IT, consulting, investment, internship,
+                  etc.
                 </p>
               </div>
             </div>
@@ -146,9 +148,10 @@ const FaqChild = () => {
             <div className="accordion-body">
               <div className="content">
                 <p>
-                  We offer flexible pricing plans based on your business size
-                  and usage. You can try our platform for free with limited
-                  matches, or opt for a premium plan for unlimited access.
+                  The professional may offer flexible pricing plans based on
+                  your business size and project timeline. You can try our
+                  platform for free with limited features, or opt for the
+                  upgraded plan for faster growth.
                 </p>
               </div>
             </div>

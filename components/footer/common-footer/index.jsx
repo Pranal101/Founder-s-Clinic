@@ -22,12 +22,14 @@ const index = ({ footerStyle = "" }) => {
                   </a>
                 </div>
                 <p className="phone-num">
-                  <span>Call us </span>
+                  <span>Contact Us </span>
                   <a href="tel:+919106526820">+919106526820</a>
                 </p>
                 <p className="address">
                   201 Sears Tower, Gulbai Tekra, Ambawadi
                   <br /> Ahmedabad-380006. <br />
+                  Need help? Reach out to our support team at
+                  <br />
                   <a href="mailto:info@foundersclinic.com" className="email">
                     info@foundersclinic.com
                   </a>

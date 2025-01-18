@@ -22,14 +22,18 @@ const index = () => {
       <MobileMenu />
       {/* End MobileMenu */}
 
-      <Breadcrumb title="Select Role" meta="selectRole" />
+      {/* <Breadcrumb title="Select User Type" meta="selectRole" /> */}
       {/* <!--End Page Title--> */}
 
       <section className="pricing-section">
         <div className="auto-container">
           <div className="sec-title text-center">
-            <h2>Select a role</h2>
-            <div className="text">Choose how you want to login.</div>
+            <h2>Select User Type</h2>
+            <div className="text">
+              We have created this space where you can discover, analyze and
+              connect throughout the global business ecosystem and learn about
+              the best resources with our Matching algorithms.
+            </div>
           </div>
           {/* End title */}
           <SelectRole />

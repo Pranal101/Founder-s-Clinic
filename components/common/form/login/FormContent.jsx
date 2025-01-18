@@ -147,7 +147,7 @@ const FormContent = () => {
         } else if (role === "Professional") {
           window.location.href = "/candidates-dashboard/dashboard";
         } else if (role === "Intern") {
-          window.location.href = "/candidates-dashboard/dashboard";
+          window.location.href = "/intern-dashboard/dashboard";
         } else if (role === "Investor") {
           window.location.href = "/investors-dashboard/dashboard";
         } else if (role === "Networking Community") {
@@ -178,7 +178,7 @@ const FormContent = () => {
 
   return (
     <div className="form-inner">
-      <h3>Login to Founder's Clinic</h3>
+      <h3>Login to Founders' Clinic</h3>
 
       {/* <!--Login Form--> */}
       <form method="post" onSubmit={handleEmailLogin}>

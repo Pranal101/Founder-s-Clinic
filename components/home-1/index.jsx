@@ -57,7 +57,7 @@ const index = () => {
           <div className="sec-title text-center">
             <h2 className="fw-700">How it Works</h2>
             <div className="text">
-              All service providers on our platform undergo a rigorous vetting
+              All registered users on our platform undergo a rigorous vetting
               process to ensure they're credible, reliable, and highly
               qualified.
             </div>
@@ -75,10 +75,11 @@ const index = () => {
           <div className="row justify-content-center">
             <div className="col-lg-6">
               <div className="sec-title -type-2 text-center">
-                <h2>Choose a plan that’s right for you.</h2>
+                <h2>Find the best services for your enterprise</h2>
                 <div className="text">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna
+                  We connect you with the best service providers specialized in
+                  each sector, who will help you improve and solve internal
+                  needs.
                 </div>
               </div>
             </div>
@@ -122,9 +123,9 @@ const index = () => {
       <section className="candidates-section-two">
         <div className="auto-container">
           <div className="sec-title">
-            <h2>Featured Candidates</h2>
+            <h2>Featured Founders</h2>
             <div className="text">
-              Lorem ipsum dolor sit amet elit, sed do eiusmod tempor
+              Get inspired by the success of our spotlighted founder
             </div>
           </div>
 
@@ -140,7 +141,8 @@ const index = () => {
           <div className="sec-title text-center">
             <h2>Featured Events</h2>
             <div className="text">
-              Fresh job related news content posted each day.
+              Don't miss out on the latest events shaping the future of business
+              and innovation
             </div>
           </div>
           {/* End .sec-title */}
@@ -182,9 +184,9 @@ const index = () => {
         <div className="container-fluid">
           {/* <!-- Sec Title --> */}
           <div className="sec-title text-center">
-            <h2>Testimonials From Our Customers</h2>
+            <h2>Testimonials</h2>
             <div className="text">
-              Lorem ipsum dolor sit amet elit, sed do eiusmod tempor
+              Hear from those who’ve experienced our impact firsthand
             </div>
           </div>
         </div>
@@ -207,13 +209,13 @@ const index = () => {
       </section>
       {/* <!-- End Clients Section--> */}
 
-      <section className="layout-pt-60 layout-pb-60">
+      {/* <section className="layout-pt-60 layout-pb-60">
         <div className="auto-container">
           <div className="row" data-aos="fade-up">
             <RegBanner />
           </div>
         </div>
-      </section>
+      </section> */}
       {/* <!-- End Registeration Banners --> */}
       <section className="faqs-section">
         <div className="auto-container">

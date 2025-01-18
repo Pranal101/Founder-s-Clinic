@@ -162,7 +162,7 @@ const PostBoxForm = () => {
 
         console.log("File uploaded successfully:", fileUploadResponse.data);
       }
-      window.location.assign("/candidates-dashboard/dashboard");
+      window.location.assign("/intern-dashboard/dashboard");
     } catch (error) {
       console.error("Error updating profile:", error.response?.data || error);
     }
