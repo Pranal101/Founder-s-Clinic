@@ -123,7 +123,7 @@ const JobAlertsTable = () => {
     try {
       const userToken = await user.getIdToken();
       const { data } = await axios.get(
-        "https://founders-clinic-backend.onrender.com/api/jobs/get-all-jobs",
+        "https://founders-clinic-backend.onrender.com/api/jobs/match-skills",
         {
           headers: {
             Authorization: `Bearer ${userToken}`,
@@ -158,7 +158,7 @@ const JobAlertsTable = () => {
     <div className="tabs-box">
       <div className="widget-title">
         <h4>Projects for you</h4>
-        <div className="chosen-outer">
+        {/* <div className="chosen-outer">
           <select className="chosen-single form-select">
             <option>Last 6 Months</option>
             <option>Last 12 Months</option>
@@ -166,7 +166,7 @@ const JobAlertsTable = () => {
             <option>Last 24 Months</option>
             <option>Last 5 year</option>
           </select>
-        </div>
+        </div> */}
       </div>
 
       <div className="widget-content">
@@ -178,7 +178,7 @@ const JobAlertsTable = () => {
               <thead>
                 <tr>
                   <th>Title</th>
-                  <th>Criteria</th>
+                  {/* <th>Criteria</th> */}
                   <th>Posted on</th>
                   <th>Required Skills</th>
                   <th>Experience</th>
@@ -219,7 +219,7 @@ const JobAlertsTable = () => {
                         </div>
                       </div>
                     </td>
-                    <td>{item.criteria || "Human Resources, Junior"}</td>
+                    {/* <td>{item.criteria || "Human Resources, Junior"}</td> */}
                     <td>{new Date(item.postedDate).toLocaleDateString()}</td>
                     <td>
                       {item.skillsRequired.length > 0

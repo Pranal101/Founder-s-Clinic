@@ -9,6 +9,7 @@ import Notification from "./components/Notification";
 import Applicants from "./components/Applicants";
 import CopyrightFooter from "../../CopyrightFooter";
 import MenuToggler from "../../MenuToggler";
+import Candidates2 from "@/components/candidates/Candidates2";
 
 const Index = () => {
   return (
@@ -42,33 +43,30 @@ const Index = () => {
           </div>
           {/* End .row top card block */}
           <div className="col-lg-12">
-            {/* <!-- applicants Widget --> */}
             <div className="applicants-widget ls-widget">
               <div className="widget-title">
-                <h4>Recent Proposals</h4>
+                <h4>Featured Founders</h4>
               </div>
               <div className="widget-content">
                 <div className="row">
-                  {/* <!-- Candidate block three --> */}
-
-                  <Applicants />
+                  <Candidates2 />
                 </div>
               </div>
             </div>
           </div>
           {/* End .col */}
-          <div className="row">
+          {/* <div className="row">
             <div className="col-xl-7 col-lg-12">
-              {/* <!-- Graph widget --> */}
+
               <div className="graph-widget ls-widget">
                 <ProfileChart />
               </div>
-              {/* End profile chart */}
+
             </div>
-            {/* End .col */}
+
 
             <div className="col-xl-5 col-lg-12">
-              {/* <!-- Notification Widget --> */}
+
               <div className="notification-widget ls-widget">
                 <div className="widget-title">
                   <h4>Notifications</h4>
@@ -78,8 +76,8 @@ const Index = () => {
                 </div>
               </div>
             </div>
-            {/* End .col */}
-          </div>
+
+          </div> */}
           {/* End .row profile and notificatins */}
         </div>
         {/* End dashboard-outer */}

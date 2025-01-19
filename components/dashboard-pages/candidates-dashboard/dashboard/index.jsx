@@ -9,6 +9,7 @@ import CopyrightFooter from "../../CopyrightFooter";
 import JobApplied from "./components/JobApplied";
 import DashboardCandidatesHeader from "../../../header/DashboardCandidatesHeader";
 import MenuToggler from "../../MenuToggler";
+import Candidates2 from "@/components/candidates/Candidates2";
 
 const Index = () => {
   return (
@@ -44,9 +45,9 @@ const Index = () => {
           <div className="col-lg-12">
             {/* <!-- applicants Widget --> */}
             <div className="applicants-widget ls-widget">
-              <div className="widget-title">
+              {/* <div className="widget-title">
                 <h4>Inqueries Applied</h4>
-              </div>
+              </div> */}
               <div className="widget-content">
                 <div className="row">
                   {/* <!-- Candidate block three --> */}
@@ -56,19 +57,31 @@ const Index = () => {
               </div>
             </div>
           </div>
+          <div className="col-lg-12">
+            <div className="applicants-widget ls-widget">
+              <div className="widget-title">
+                <h4>Featured Founders</h4>
+              </div>
+              <div className="widget-content">
+                <div className="row">
+                  <Candidates2 />
+                </div>
+              </div>
+            </div>
+          </div>
           {/* End .col */}
-          <div className="row">
+          {/* <div className="row">
             <div className="col-xl-7 col-lg-12">
-              {/* <!-- Graph widget --> */}
+
               <div className="graph-widget ls-widget">
                 <ProfileChart />
               </div>
-              {/* End profile chart */}
+
             </div>
-            {/* End .col */}
+
 
             <div className="col-xl-5 col-lg-12">
-              {/* <!-- Notification Widget --> */}
+
               <div className="notification-widget ls-widget">
                 <div className="widget-title">
                   <h4>Notifications</h4>
@@ -78,9 +91,8 @@ const Index = () => {
                 </div>
               </div>
             </div>
-            {/* End .col */}
-          </div>
-          {/* End .row profile and notificatins */}
+
+          </div> */}
         </div>
         {/* End dashboard-outer */}
       </section>

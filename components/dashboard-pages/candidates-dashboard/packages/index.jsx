@@ -1,6 +1,6 @@
 import MobileMenu from "../../../header/MobileMenu";
 import LoginPopup from "../../../common/form/login/LoginPopup";
-import DashboardCandidatesSidebar from "../../../header/DashboardCandidatesSidebar";
+import DashboardInternSidebar from "../../../header/DashboardInternSidebar";
 import BreadCrumb from "../../BreadCrumb";
 import CopyrightFooter from "../../CopyrightFooter";
 import PackageDataTable from "./components/PackageDataTable";
@@ -22,7 +22,7 @@ const index = () => {
       <MobileMenu />
       {/* End MobileMenu */}
 
-      <DashboardCandidatesSidebar />
+      <DashboardInternSidebar />
       {/* <!-- End Candidates Sidebar Menu --> */}
 
       {/* <!-- Dashboard --> */}
@@ -44,9 +44,9 @@ const index = () => {
                   {/* End widget-title */}
 
                   <div className="widget-content">
-                    <div className="table-outer">
-                      <PackageDataTable />
-                    </div>
+                    {/* <div className="table-outer"> */}
+                    <PackageDataTable />
+                    {/* </div> */}
                   </div>
                   {/* End widget-content */}
                 </div>

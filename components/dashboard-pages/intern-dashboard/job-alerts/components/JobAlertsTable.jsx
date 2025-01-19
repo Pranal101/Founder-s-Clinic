@@ -123,7 +123,7 @@ const JobAlertsTable = () => {
     try {
       const userToken = await user.getIdToken();
       const { data } = await axios.get(
-        "https://founders-clinic-backend.onrender.com/api/jobs/get-all-jobs",
+        "https://founders-clinic-backend.onrender.com/api/jobs/match-skills",
         {
           headers: {
             Authorization: `Bearer ${userToken}`,
@@ -169,7 +169,7 @@ const JobAlertsTable = () => {
               <thead>
                 <tr>
                   <th>Title</th>
-                  <th>Criteria</th>
+                  {/* <th>Criteria</th> */}
                   <th>Posted on</th>
                   <th>Required Skills</th>
                   <th>Experience</th>
@@ -210,7 +210,7 @@ const JobAlertsTable = () => {
                         </div>
                       </div>
                     </td>
-                    <td>{item.criteria || "Human Resources, Junior"}</td>
+                    {/* <td>{item.criteria || "Human Resources, Junior"}</td> */}
                     <td>{new Date(item.postedDate).toLocaleDateString()}</td>
                     <td>
                       {item.skillsRequired.length > 0

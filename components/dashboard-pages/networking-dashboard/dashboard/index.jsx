@@ -8,6 +8,7 @@ import TopCardBlock from "./components/TopCardBlock";
 // import Applicants from "./components/Applicants";
 import CopyrightFooter from "../../CopyrightFooter";
 import MenuToggler from "../../MenuToggler";
+import Candidates2 from "@/components/candidates/Candidates2";
 
 const Index = () => {
   return (
@@ -36,9 +37,9 @@ const Index = () => {
           <MenuToggler />
           {/* Collapsible sidebar button */}
 
-          <div className="row">
+          {/* <div className="row">
             <TopCardBlock />
-          </div>
+          </div> */}
           {/* End .row top card block */}
           <div className="col-lg-12">
             {/* <!-- applicants Widget --> */}
@@ -56,6 +57,18 @@ const Index = () => {
             </div>
           </div>
           {/* End .col */}
+          <div className="col-lg-12">
+            <div className="applicants-widget ls-widget">
+              <div className="widget-title">
+                <h4>Featured Founders</h4>
+              </div>
+              <div className="widget-content">
+                <div className="row">
+                  <Candidates2 />
+                </div>
+              </div>
+            </div>
+          </div>
           <div className="row">
             <div className="col-xl-7 col-lg-12">
               {/* <!-- Graph widget --> */}

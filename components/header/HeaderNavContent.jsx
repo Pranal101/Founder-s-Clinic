@@ -591,7 +591,7 @@ const HeaderNavContent = () => {
 
   const pagesMenu = [
     { id: 1, name: "Events", routePath: "/events" },
-    { id: 2, name: "Contact Us", routePath: "/contact-us" },
+    { id: 2, name: "Contact Us", routePath: "/contact" },
   ];
 
   return (

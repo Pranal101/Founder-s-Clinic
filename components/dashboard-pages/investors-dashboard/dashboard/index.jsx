@@ -10,6 +10,7 @@ import BreadCrumb from "../../BreadCrumb";
 import InvestementsListingTable from "../manage-investements/components/InvestementsListingTable";
 import CopyrightFooter from "../../CopyrightFooter";
 import MenuToggler from "../../MenuToggler";
+import Candidates2 from "@/components/candidates/Candidates2";
 
 const Index = () => {
   return (
@@ -43,11 +44,11 @@ const Index = () => {
           <div className="col-lg-12">
             {/* <!-- applicants Widget --> */}
             <div className="applicants-widget ls-widget">
-              <div className="widget-title">
-                {/* <h4>Recent Investments</h4> */}
+              {/* <div className="widget-title"> */}
+              {/* <h4>Recent Investments</h4> */}
 
-                {/* End .row */}
-              </div>
+              {/* End .row */}
+              {/* </div> */}
               <div className="widget-content">
                 <div className="row">
                   {/* <!-- Candidate block three --> */}
@@ -58,6 +59,18 @@ const Index = () => {
             </div>
           </div>
           {/* End .col */}
+          <div className="col-lg-12">
+            <div className="applicants-widget ls-widget">
+              <div className="widget-title">
+                <h4>Featured Founders</h4>
+              </div>
+              <div className="widget-content">
+                <div className="row">
+                  <Candidates2 />
+                </div>
+              </div>
+            </div>
+          </div>
           <div className="row">
             <div className="col-xl-7 col-lg-12">
               {/* <!-- Graph widget --> */}

@@ -12,13 +12,30 @@ const TopCardBlock = () => {
   useEffect(() => {
     const fetchUserCounts = async () => {
       try {
-        const { data } = await axios.get(
-          "https://founders-clinic-backend.onrender.com/api/admin/user-counts" // Adjust the API endpoint if needed
-        );
-        setUserCounts(data.data);
+        const [
+          userCountsResponse,
+          closedJobCountResponse,
+          totalJobCountResponse,
+        ] = await Promise.all([
+          axios.get(
+            "https://founders-clinic-backend.onrender.com/api/admin/user-counts"
+          ), // Existing endpoint
+          axios.get(
+            "https://founders-clinic-backend.onrender.com/api/admin/closed-jobs"
+          ), // Closed jobs endpoint
+          axios.get(
+            "https://founders-clinic-backend.onrender.com/api/admin/total-job-count"
+          ), // Total jobs endpoint
+        ]);
+
+        setUserCounts({
+          ...userCountsResponse.data.data,
+          ClosedJobs: closedJobCountResponse.data.data,
+          TotalJobs: totalJobCountResponse.data.data,
+        });
       } catch (error) {
-        console.error("Error fetching user counts:", error);
-        toast.error("Failed to fetch user counts.");
+        console.error("Error fetching counts:", error);
+        toast.error("Failed to fetch counts.");
       } finally {
         setLoading(false);
       }
@@ -26,7 +43,6 @@ const TopCardBlock = () => {
 
     fetchUserCounts();
   }, []);
-
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -64,14 +80,38 @@ const TopCardBlock = () => {
       uiClass: "ui-green",
       route: "/candidates-dashboard/investor",
     },
-    // {
-    //   id: 5,
-    //   icon: "la-bookmark-o",
-    //   metaName: "Networking Community",
-    //   countNumber: userCounts.NetworkingCommunity || "0",
-    //   uiClass: "ui-green",
-    //   route: "/candidates-dashboard/investor",
-    // },
+    {
+      id: 5,
+      icon: "la-times-circle-o",
+      metaName: "Projects Alloted",
+      countNumber: userCounts.ClosedJobs || "0",
+      uiClass: "ui-green",
+      route: "/candidates-dashboard/closed-jobs",
+    },
+    {
+      id: 6,
+      icon: "la-clipboard-list",
+      metaName: "All Inqueries",
+      countNumber: userCounts.TotalJobs || "0",
+      uiClass: "ui-yellow",
+      route: "/candidates-dashboard/total-jobs",
+    },
+    {
+      id: 7,
+      icon: "la-clipboard-list",
+      metaName: "Total Subscriptions",
+      countNumber: "13",
+      uiClass: "ui-red",
+      route: "/candidates-dashboard/total-jobs",
+    },
+    {
+      id: 8,
+      icon: "la-clipboard-list",
+      metaName: "Avg Allotment Time",
+      countNumber: "2 Hr",
+      uiClass: "ui-blue",
+      route: "/candidates-dashboard/total-jobs",
+    },
   ];
 
   return (

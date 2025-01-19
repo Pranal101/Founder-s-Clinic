@@ -44,9 +44,9 @@ const index = () => {
                   {/* End widget-title */}
 
                   <div className="widget-content">
-                    <div className="table-outer">
-                      <PackageDataTable />
-                    </div>
+                    {/* <div className="table-outer"> */}
+                    <PackageDataTable />
+                    {/* </div> */}
                   </div>
                   {/* End widget-content */}
                 </div>

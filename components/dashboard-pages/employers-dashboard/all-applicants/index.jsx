@@ -42,7 +42,6 @@ const index = () => {
                 <div className="tabs-box">
                   <div className="widget-title">
                     <h4>Proposals</h4>
-                    <WidgetTopFilterBox />
                   </div>
                   {/* End top widget filter bar */}
 

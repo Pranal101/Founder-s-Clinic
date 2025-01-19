@@ -48,13 +48,13 @@ module.exports = [
   //   routePath: "/candidates-dashboard/cv-manager",
   //   active: "",
   // },
-  // {
-  //   id: 8,
-  //   name: "Packages",
-  //   icon: "la-box",
-  //   routePath: "/candidates-dashboard/packages",
-  //   active: "",
-  // },
+  {
+    id: 8,
+    name: "Packages",
+    icon: "la-box",
+    routePath: "/candidates-dashboard/packages",
+    active: "",
+  },
   {
     id: 9,
     name: "Messages",
