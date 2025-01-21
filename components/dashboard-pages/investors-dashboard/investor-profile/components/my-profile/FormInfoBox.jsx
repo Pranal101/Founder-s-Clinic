@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Select from "react-select";
 import axios from "axios";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { toast } from "react-toastify";
 
 const FormInfoBox = () => {
   const [formData, setFormData] = useState({
@@ -10,7 +11,7 @@ const FormInfoBox = () => {
     entityName: "",
     investmentFirmName: "",
     position: "",
-    emailAddress: "",
+    email: "",
     contactNumber: "",
     websiteUrl: "",
     linkedinUrl: "",
@@ -77,7 +78,7 @@ const FormInfoBox = () => {
           entityName: profile.entityName || "",
           investmentFirmName: profile.investmentFirmName || "",
           position: profile.position || "",
-          emailAddress: profile.emailAddress || "",
+          email: profile.email || "",
           contactNumber: profile.contactNumber || "",
           websiteUrl: profile.websiteUrl || "",
           linkedinUrl: profile.linkedinUrl || "",
@@ -110,13 +111,58 @@ const FormInfoBox = () => {
 
     return () => unsubscribe(); // Clean up the observer on unmount
   }, []);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+  const handleSave = async (e) => {
+    e.preventDefault();
 
+    try {
+      const auth = getAuth();
+      const user = auth.currentUser;
+
+      if (!user) {
+        throw new Error("User not authenticated");
+      }
+
+      const userToken = await user.getIdToken();
+
+      if (!userToken) {
+        throw new Error("User not authenticated");
+      }
+
+      const response = await axios.patch(
+        "https://founders-clinic-backend.onrender.com/api/user/profile",
+        { profileData: formData },
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+
+      console.log("Profile updated successfully:", response.data);
+      toast.success("Profile updated successfully!");
+    } catch (error) {
+      console.error("Error saving profile:", error.response?.data || error);
+    }
+  };
+  const handleSelectChange = (selectedOptions) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      categories: selectedOptions.map((option) => option.value),
+    }));
+  };
   if (loading) {
     return <div>Loading...</div>; // Display a loader while fetching the profile
   }
 
   return (
-    <form className="default-form">
+    <form className="default-form" onSubmit={handleSave}>
       <div className="row">
         <div className="form-group col-lg-6 col-md-12">
           <label>Name</label>
@@ -124,8 +170,8 @@ const FormInfoBox = () => {
             type="text"
             name="name"
             value={formData.name}
+            onChange={handleChange}
             placeholder="Name"
-            readOnly
           />
         </div>
         <div className="form-group col-lg-6 col-md-12">
@@ -134,8 +180,8 @@ const FormInfoBox = () => {
             type="text"
             name="entityName"
             value={formData.entityName}
+            onChange={handleChange}
             placeholder="Invisionn"
-            readOnly
           />
         </div>
         <div className="form-group col-lg-6 col-md-12">
@@ -144,8 +190,8 @@ const FormInfoBox = () => {
             type="text"
             name="investmentFirmName"
             value={formData.investmentFirmName}
+            onChange={handleChange}
             placeholder="Invisionn"
-            readOnly
           />
         </div>
         <div className="form-group col-lg-6 col-md-12">
@@ -154,18 +200,18 @@ const FormInfoBox = () => {
             type="text"
             name="position"
             value={formData.position}
+            onChange={handleChange}
             placeholder="Invisionn"
-            readOnly
           />
         </div>
         <div className="form-group col-lg-6 col-md-12">
           <label>Email Address</label>
           <input
             type="text"
-            name="emailAddress"
-            value={formData.emailAddress}
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
             placeholder="Email Address"
-            readOnly
           />
         </div>
 
@@ -175,8 +221,8 @@ const FormInfoBox = () => {
             type="text"
             name="contactNumber"
             value={formData.contactNumber}
+            onChange={handleChange}
             placeholder="0 123 456 7890"
-            readOnly
           />
         </div>
 
@@ -186,8 +232,8 @@ const FormInfoBox = () => {
             type="text"
             name="websiteUrl"
             value={formData.websiteUrl}
+            onChange={handleChange}
             placeholder="www.invision.com"
-            readOnly
           />
         </div>
 
@@ -197,8 +243,8 @@ const FormInfoBox = () => {
             type="text"
             name="linkedinUrl"
             value={formData.linkedinUrl}
+            onChange={handleChange}
             placeholder="www.Linkedin.com"
-            readOnly
           />
         </div>
         <div className="form-group col-lg-6 col-md-12">
@@ -207,8 +253,8 @@ const FormInfoBox = () => {
             type="text"
             name="country"
             value={formData.country}
+            onChange={handleChange}
             placeholder="06.04.2020"
-            readOnly
           />
         </div>
         <div className="form-group col-lg-6 col-md-12">
@@ -217,8 +263,8 @@ const FormInfoBox = () => {
             type="text"
             name="city"
             value={formData.city}
+            onChange={handleChange}
             placeholder="06.04.2020"
-            readOnly
           />
         </div>
         <div className="form-group col-lg-6 col-md-12">
@@ -227,6 +273,7 @@ const FormInfoBox = () => {
             type="text"
             name="completeAddress"
             value={formData.completeAddress}
+            onChange={handleChange}
             placeholder="06.04.2020"
           />
         </div>
@@ -236,8 +283,8 @@ const FormInfoBox = () => {
             type="text"
             name="investorType"
             value={formData.investorType}
+            onChange={handleChange}
             placeholder="Investor Type"
-            readOnly
           />
         </div>
         <div className="form-group col-lg-6 col-md-12">
@@ -246,8 +293,8 @@ const FormInfoBox = () => {
             type="text"
             name="otherInvestorType"
             value={formData.otherInvestorType}
+            onChange={handleChange}
             placeholder="Other Investor Type"
-            readOnly
           />
         </div>
         <div className="form-group col-lg-6 col-md-12">
@@ -256,8 +303,8 @@ const FormInfoBox = () => {
             type="text"
             name="investmentYears"
             value={formData.investmentYears}
+            onChange={handleChange}
             placeholder="Investement Years"
-            readOnly
           />
         </div>
         <div className="form-group col-lg-6 col-md-12">
@@ -266,8 +313,8 @@ const FormInfoBox = () => {
             type="text"
             name="investmentExperience"
             value={formData.investmentExperience}
+            onChange={handleChange}
             placeholder="Investement Exp"
-            readOnly
           />
         </div>
         <div className="form-group col-lg-6 col-md-12">
@@ -276,8 +323,8 @@ const FormInfoBox = () => {
             type="text"
             name="otherInvestmentExperience"
             value={formData.otherInvestmentExperience}
+            onChange={handleChange}
             placeholder="Investement Exp"
-            readOnly
           />
         </div>
         <div className="form-group col-lg-6 col-md-12">
@@ -286,8 +333,8 @@ const FormInfoBox = () => {
             type="text"
             name="notableInvestments"
             value={formData.notableInvestments}
+            onChange={handleChange}
             placeholder="Notable Investments"
-            readOnly
           />
         </div>
 

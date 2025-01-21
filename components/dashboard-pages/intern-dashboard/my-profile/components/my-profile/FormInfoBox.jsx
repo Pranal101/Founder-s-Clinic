@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import Select from "react-select";
 import axios from "axios";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { toast } from "react-toastify";
+
 const FormInfoBox = () => {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -10,7 +12,7 @@ const FormInfoBox = () => {
     entityName: "",
     organizationRole: "",
     contactNumber: "",
-    emailAddress: "",
+    email: "",
     websiteLink: "",
     experienceYears: "",
     foundedYear: "",
@@ -54,12 +56,10 @@ const FormInfoBox = () => {
         setFormData({
           firstName: profile.firstName || "",
           lastName: profile.lastName || "",
-          entityName: profile.entityName || "",
-          emailAddress: profile.emailAddress || "",
+          email: profile.email || "",
           contactNumber: profile.contactNumber || "",
           organizationRole: profile.organizationRole || "",
           websiteLink: profile.websiteLink || "",
-          experienceYears: profile.experienceYears || "",
           foundedYear: profile.foundedYear || "",
           teamSize: profile.teamSize || "",
           categories: profile.categories || [],
@@ -89,12 +89,57 @@ const FormInfoBox = () => {
 
     return () => unsubscribe(); // Clean up the observer on unmount
   }, []);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+  const handleSave = async (e) => {
+    e.preventDefault();
 
+    try {
+      const auth = getAuth();
+      const user = auth.currentUser;
+
+      if (!user) {
+        throw new Error("User not authenticated");
+      }
+
+      const userToken = await user.getIdToken();
+
+      if (!userToken) {
+        throw new Error("User not authenticated");
+      }
+
+      const response = await axios.patch(
+        "https://founders-clinic-backend.onrender.com/api/user/profile",
+        { profileData: formData },
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+
+      console.log("Profile updated successfully:", response.data);
+      toast.success("Profile updated successfully!");
+    } catch (error) {
+      console.error("Error saving profile:", error.response?.data || error);
+    }
+  };
+  const handleSelectChange = (selectedOptions) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      categories: selectedOptions.map((option) => option.value),
+    }));
+  };
   if (loading) {
     return <div>Loading...</div>; // Display a loader while fetching the profile
   }
   return (
-    <form action="#" className="default-form">
+    <form className="default-form" onSubmit={handleSave}>
       <div className="row">
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
@@ -104,7 +149,7 @@ const FormInfoBox = () => {
             name="firstName"
             placeholder=""
             value={formData.firstName}
-            readOnly
+            onChange={handleChange}
           />
         </div>
 
@@ -115,34 +160,34 @@ const FormInfoBox = () => {
             type="text"
             name="lastName"
             placeholder=""
-            readOnly
             value={formData.lastName}
+            onChange={handleChange}
           />
         </div>
 
         {/* <!-- Input --> */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>Entity Name</label>
           <input
             type="text"
             name="entityName"
             value={formData.entityName}
+            onChange={handleChange}
             placeholder=""
-            readOnly
           />
-        </div>
+        </div> */}
 
         {/* <!-- Input --> */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>Organization Role</label>
           <input
             type="text"
             name="organizationRole"
             value={formData.organizationRole}
+            onChange={handleChange}
             placeholder=""
-            readOnly
           />
-        </div>
+        </div> */}
 
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
@@ -152,7 +197,7 @@ const FormInfoBox = () => {
             name="contactNumber"
             placeholder="0 123 456 7890"
             value={formData.contactNumber}
-            readOnly
+            onChange={handleChange}
           />
         </div>
 
@@ -161,87 +206,65 @@ const FormInfoBox = () => {
           <label>Email address</label>
           <input
             type="text"
-            name="name"
-            value={formData.emailAddress}
-            placeholder="creativelayers"
-            readOnly
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
           />
         </div>
 
         {/* <!-- Input --> */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>Website</label>
           <input
             type="text"
-            name="name"
+            name="websiteLink"
             value={formData.websiteLink}
+            onChange={handleChange}
             placeholder="www.jerome.com"
-            readOnly
           />
-        </div>
+        </div> */}
 
         {/* <!-- Input --> */}
-        <div className="form-group col-lg-3 col-md-12">
-          <label>Current Salary($)</label>
-          <select className="chosen-single form-select" readOnly>
-            <option>40-70 K</option>
-            <option>50-80 K</option>
-            <option>60-90 K</option>
-            <option>70-100 K</option>
-            <option>100-150 K</option>
-          </select>
-        </div>
-
-        {/* <!-- Input --> */}
-        <div className="form-group col-lg-3 col-md-12">
-          <label>Expected Salary($)</label>
-          <select className="chosen-single form-select" readOnly>
-            <option>120-350 K</option>
-            <option>40-70 K</option>
-            <option>50-80 K</option>
-            <option>60-90 K</option>
-            <option>70-100 K</option>
-            <option>100-150 K</option>
-          </select>
-        </div>
-
-        {/* <!-- Input --> */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>Experience</label>
           <input
             type="text"
             name="experienceYears"
             value={formData.experienceYears}
+            onChange={handleChange}
             placeholder="Experience(in years)"
-            readOnly
           />
-        </div>
+        </div> */}
 
         {/* <!-- Input --> */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>Education Levels</label>
-          <input type="text" name="name" placeholder="Certificate" readOnly />
-        </div>
+          <input
+            type="text"
+            name="name"
+            placeholder="Certificate"
+            onChange={handleChange}
+          />
+        </div> */}
 
         {/* <!-- Search Select --> */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>Categories </label>
           <Select
             defaultValue={[catOptions[1]]}
             isMulti
             name="colors"
-            options={catOptions}
+            options={catOptions}onChange={handleSelectChange}
             className="basic-multi-select"
             classNamePrefix="select"
-            readOnly
           />
-        </div>
+        </div> */}
 
         {/* <!-- About Company --> */}
-        <div className="form-group col-lg-12 col-md-12">
+        {/* <div className="form-group col-lg-12 col-md-12">
           <label>Description</label>
           <textarea placeholder="Spent several years working on sheep on Wall Street. Had moderate success investing in Yugo's on Wall Street. Managed a small team buying and selling Pogo sticks for farmers. Spent several years licensing licorice in West Palm Beach, FL. Developed several new methods for working it banjos in the aftermarket. Spent a weekend importing banjos in West Palm Beach, FL.In this position, the Software Engineer collaborates with Evention's Development team to continuously enhance our current software solutions as well as create new solutions to eliminate the back-office operations and management challenges present"></textarea>
-        </div>
+        </div> */}
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Country</label>
@@ -250,7 +273,7 @@ const FormInfoBox = () => {
             name="country"
             placeholder="Country"
             value={formData.country}
-            readOnly
+            onChange={handleChange}
           />
         </div>
         {/* <!-- Input --> */}
@@ -261,7 +284,7 @@ const FormInfoBox = () => {
             name="city"
             placeholder="City"
             value={formData.city}
-            readOnly
+            onChange={handleChange}
           />
         </div>
         {/* <!-- Input --> */}
@@ -272,7 +295,7 @@ const FormInfoBox = () => {
             name="completeAddress"
             placeholder="Complete Address"
             value={formData.completeAddress}
-            readOnly
+            onChange={handleChange}
           />
         </div>
 

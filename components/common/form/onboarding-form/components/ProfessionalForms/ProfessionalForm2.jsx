@@ -95,7 +95,9 @@ const PostBoxForm = () => {
   const handleSelectChange = (selectedOptions, action) => {
     setFormData({
       ...formData,
-      [action.name]: selectedOptions.map((option) => option.value),
+      [action.name]: Array.isArray(selectedOptions)
+        ? selectedOptions.map((option) => option.value)
+        : selectedOptions.value,
     });
   };
   const handleFileChange = (e) => {
@@ -252,12 +254,14 @@ const PostBoxForm = () => {
         <div className="form-group col-lg-6 col-md-12">
           <label>What types of business support services do you offer?</label>
           <Select
-            // defaultValue={[servicesProvided[0]]}
             name="servicesOffered"
             isMulti
             options={servicesProvided}
             className="basic-multi-select"
             classNamePrefix="select"
+            value={servicesProvided.filter((option) =>
+              formData.servicesOffered.includes(option.value)
+            )}
             onChange={handleSelectChange}
           />
         </div>

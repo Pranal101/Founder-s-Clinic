@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Select from "react-select";
 import axios from "axios";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { toast } from "react-toastify";
 const FormInfoBox = () => {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -89,12 +90,59 @@ const FormInfoBox = () => {
 
     return () => unsubscribe(); // Clean up the observer on unmount
   }, []);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSelectChange = (selectedOptions) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      categories: selectedOptions.map((option) => option.value),
+    }));
+  };
 
   if (loading) {
     return <div>Loading...</div>; // Display a loader while fetching the profile
   }
+  const handleSave = async (e) => {
+    e.preventDefault();
+
+    try {
+      const auth = getAuth();
+      const user = auth.currentUser;
+
+      if (!user) {
+        throw new Error("User not authenticated");
+      }
+
+      const userToken = await user.getIdToken();
+
+      if (!userToken) {
+        throw new Error("User not authenticated");
+      }
+
+      const response = await axios.patch(
+        "https://founders-clinic-backend.onrender.com/api/user/profile",
+        { profileData: formData },
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+
+      console.log("Profile updated successfully:", response.data);
+      toast.success("Profile updated successfully!");
+    } catch (error) {
+      console.error("Error saving profile:", error.response?.data || error);
+    }
+  };
   return (
-    <form action="#" className="default-form">
+    <form className="default-form" onSubmit={handleSave}>
       <div className="row">
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
@@ -103,8 +151,8 @@ const FormInfoBox = () => {
             type="text"
             name="firstName"
             placeholder=""
+            onChange={handleChange}
             value={formData.firstName}
-            readOnly
           />
         </div>
 
@@ -115,8 +163,8 @@ const FormInfoBox = () => {
             type="text"
             name="lastName"
             placeholder=""
-            readOnly
             value={formData.lastName}
+            onChange={handleChange}
           />
         </div>
 
@@ -128,7 +176,7 @@ const FormInfoBox = () => {
             name="entityName"
             value={formData.entityName}
             placeholder=""
-            readOnly
+            onChange={handleChange}
           />
         </div>
 
@@ -140,7 +188,7 @@ const FormInfoBox = () => {
             name="organizationRole"
             value={formData.organizationRole}
             placeholder=""
-            readOnly
+            onChange={handleChange}
           />
         </div>
 
@@ -152,7 +200,7 @@ const FormInfoBox = () => {
             name="contactNumber"
             placeholder="0 123 456 7890"
             value={formData.contactNumber}
-            readOnly
+            onChange={handleChange}
           />
         </div>
 
@@ -163,8 +211,8 @@ const FormInfoBox = () => {
             type="text"
             name="name"
             value={formData.emailAddress}
+            onChange={handleChange}
             placeholder="creativelayers"
-            readOnly
           />
         </div>
 
@@ -175,34 +223,9 @@ const FormInfoBox = () => {
             type="text"
             name="name"
             value={formData.websiteLink}
+            onChange={handleChange}
             placeholder="www.jerome.com"
-            readOnly
           />
-        </div>
-
-        {/* <!-- Input --> */}
-        <div className="form-group col-lg-3 col-md-12">
-          <label>Current Salary($)</label>
-          <select className="chosen-single form-select" readOnly>
-            <option>40-70 K</option>
-            <option>50-80 K</option>
-            <option>60-90 K</option>
-            <option>70-100 K</option>
-            <option>100-150 K</option>
-          </select>
-        </div>
-
-        {/* <!-- Input --> */}
-        <div className="form-group col-lg-3 col-md-12">
-          <label>Expected Salary($)</label>
-          <select className="chosen-single form-select" readOnly>
-            <option>120-350 K</option>
-            <option>40-70 K</option>
-            <option>50-80 K</option>
-            <option>60-90 K</option>
-            <option>70-100 K</option>
-            <option>100-150 K</option>
-          </select>
         </div>
 
         {/* <!-- Input --> */}
@@ -213,14 +236,19 @@ const FormInfoBox = () => {
             name="experienceYears"
             value={formData.experienceYears}
             placeholder="Experience(in years)"
-            readOnly
+            onChange={handleChange}
           />
         </div>
 
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Education Levels</label>
-          <input type="text" name="name" placeholder="Certificate" readOnly />
+          <input
+            type="text"
+            name="name"
+            placeholder="Certificate"
+            onChange={handleChange}
+          />
         </div>
 
         {/* <!-- Search Select --> */}
@@ -233,7 +261,7 @@ const FormInfoBox = () => {
             options={catOptions}
             className="basic-multi-select"
             classNamePrefix="select"
-            readOnly
+            onChange={handleSelectChange}
           />
         </div>
 
@@ -250,7 +278,7 @@ const FormInfoBox = () => {
             name="country"
             placeholder="Country"
             value={formData.country}
-            readOnly
+            onChange={handleChange}
           />
         </div>
         {/* <!-- Input --> */}
@@ -261,7 +289,7 @@ const FormInfoBox = () => {
             name="city"
             placeholder="City"
             value={formData.city}
-            readOnly
+            onChange={handleChange}
           />
         </div>
         {/* <!-- Input --> */}
@@ -272,7 +300,7 @@ const FormInfoBox = () => {
             name="completeAddress"
             placeholder="Complete Address"
             value={formData.completeAddress}
-            readOnly
+            onChange={handleChange}
           />
         </div>
 

@@ -43,12 +43,12 @@ const PostBoxForm = ({ pricingContent }) => {
       }
 
       // Call the addRole API to ensure the role is already set
-      const role = localStorage.getItem("userRole"); // Assume role is already selected
-      if (!role) {
-        throw new Error("User role is not set. Please select a role first.");
-      }
+      // const role = localStorage.getItem("userRole");
+      // if (!role) {
+      //   throw new Error("User role is not set. Please select a role first.");
+      // }
 
-      console.log("Role already set in backend:", role);
+      // console.log("Role already set in backend:", role);
 
       // Send form data to the backend to update the profile
       const response = await axios.patch(
