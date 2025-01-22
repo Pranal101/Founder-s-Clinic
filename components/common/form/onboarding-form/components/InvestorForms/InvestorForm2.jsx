@@ -1,17 +1,27 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import axios from "axios";
 import { getAuth } from "firebase/auth";
+import countryData from "@/data/countries.json";
 
 const PostBoxForm = () => {
   const [file, setFile] = useState(null);
   const [formData, setFormData] = useState({
+    fullName: "",
+    investmentFirmName: "",
+    position: "",
+    email2: "",
+    contactNumber2: "",
+    websiteUrl: "",
+    linkedinUrl: "",
+    country2: "",
+    city2: "",
     investorType: [],
     otherInvestorType: "",
     investmentYears: "",
-    investmentExperience: "",
-    otherInvestmentExperience: "",
+    // investmentExperience: "",
+    // otherInvestmentExperience: "",
     notableInvestments: "",
     preferredIndustries: [],
     otherPreferredIndustries: "",
@@ -26,15 +36,57 @@ const PostBoxForm = () => {
     currentInvestmentNetworks: "",
     specificInvestmentNetworks: "",
     interestedInMentoring: "",
-    requiredServices: "",
-    otherRequiredServices: "",
-    keyExpectations: "",
-    otherKeyExpectations: "",
+    // requiredServices: "",
+    // otherRequiredServices: "",
+    // keyExpectations: "",
+    // otherKeyExpectations: "",
     notableAchievements: "",
-    successStories: "",
     acceptTerms: false,
   });
 
+  const [countryOptions, setCountryOptions] = useState([]);
+  const [cityOptions, setCityOptions] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState(null);
+  useEffect(() => {
+    if (Array.isArray(countryData)) {
+      const countries = countryData.map((country) => ({
+        value: country.name,
+        label: country.name,
+        cities: country.states
+          ? country.states.flatMap((state) =>
+              state.cities.map((city) => city.name)
+            )
+          : [],
+      }));
+      setCountryOptions(countries);
+    } else {
+      console.error("Invalid JSON structure:", countryData);
+    }
+  }, []);
+
+  const handleCountryChange = (selectedOption) => {
+    setSelectedCountry(selectedOption);
+    setFormData((prev) => ({
+      ...prev,
+      country2: selectedOption ? selectedOption.value : "",
+    }));
+
+    if (selectedOption && selectedOption.cities.length > 0) {
+      const cities = selectedOption.cities.map((city) => ({
+        value: city,
+        label: city,
+      }));
+      setCityOptions(cities);
+    } else {
+      setCityOptions([]);
+    }
+  };
+  const handleCityChange = (selectedOption) => {
+    setFormData((prev) => ({
+      ...prev,
+      city2: selectedOption ? selectedOption.value : "",
+    }));
+  };
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
@@ -170,6 +222,97 @@ const PostBoxForm = () => {
   return (
     <form className="default-form" onSubmit={handleSubmit}>
       <div className="row">
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Full Name</label>
+          <input
+            type="text"
+            name="fullName"
+            className="form-control"
+            value={formData.fullName}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Investment Firm Name (if applicable)</label>
+          <input
+            type="text"
+            name="investmentFirmName"
+            className="form-control"
+            value={formData.investmentFirmName}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Position/Title</label>
+          <input
+            type="text"
+            name="position"
+            className="form-control"
+            value={formData.position}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Email</label>
+          <input
+            type="text"
+            name="email2"
+            className="form-control"
+            value={formData.email2}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Contact Number</label>
+          <input
+            type="text"
+            name="contactNumber2"
+            className="form-control"
+            value={formData.contactNumber2}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Website Url</label>
+          <input
+            type="text"
+            name="websiteUrl"
+            className="form-control"
+            value={formData.websiteUrl}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>LinkedIn Url</label>
+          <input
+            type="text"
+            name="linkedinUrl"
+            className="form-control"
+            value={formData.linkedinUrl}
+            onChange={handleChange}
+          />
+        </div>
+        {/* <!-- Input --> */}
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Country</label>
+          <Select
+            name="country"
+            options={countryOptions}
+            onChange={handleCountryChange}
+            placeholder="Select a country"
+          />
+        </div>
+        {/* <!-- Input --> */}
+        <div className="form-group col-lg-6 col-md-12">
+          <label>City</label>
+          <Select
+            name="city"
+            options={cityOptions}
+            onChange={handleCityChange}
+            placeholder="Select a city"
+            isDisabled={!selectedCountry || cityOptions.length === 0}
+          />
+        </div>
         {/* Investor Type */}
         <div className="form-group col-lg-6 col-md-12">
           <label>What type of investor are you?</label>
@@ -217,7 +360,7 @@ const PostBoxForm = () => {
         </div>
 
         {/* Investment Experience */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>Investment Experience</label>
           <Select
             name="investmentExperience"
@@ -241,7 +384,7 @@ const PostBoxForm = () => {
               onChange={handleChange}
             />
           </div>
-        )}
+        )} */}
 
         {/* Notable Investments */}
         <div className="form-group col-lg-6 col-md-12">
@@ -453,7 +596,7 @@ const PostBoxForm = () => {
           </select>
         </div>
 
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>
             What types of services or resources are you looking for on this
             platform? (Select all that apply):
@@ -513,7 +656,7 @@ const PostBoxForm = () => {
               onChange={handleChange}
             />
           </div>
-        )}
+        )} */}
 
         <div className="form-group col-lg-6 col-md-12">
           <label>
@@ -529,7 +672,7 @@ const PostBoxForm = () => {
           />
         </div>
 
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>
             Do you have any investment success stories or case studies you'd
             like to showcase?
@@ -541,7 +684,7 @@ const PostBoxForm = () => {
             value={formData.successStories}
             onChange={handleChange}
           />
-        </div>
+        </div> */}
         {/* Accept Terms */}
         <div className="form-group col-lg-12 col-md-12">
           <div className="field-outer">

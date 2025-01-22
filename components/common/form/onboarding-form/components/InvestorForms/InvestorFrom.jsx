@@ -2,22 +2,66 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { getAuth } from "firebase/auth";
+import Select from "react-select";
+import countryData from "@/data/countries.json";
+
 const PostBoxForm = () => {
   const [formData, setFormData] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
     entityName: "",
-    investmentFirmName: "",
     position: "",
     email: "",
     contactNumber: "",
-    websiteUrl: "",
-    linkedinUrl: "",
     country: "",
     city: "",
     completeAddress: "",
     acceptTerms: false,
   });
+  const [countryOptions, setCountryOptions] = useState([]);
+  const [cityOptions, setCityOptions] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState(null);
 
+  useEffect(() => {
+    if (Array.isArray(countryData)) {
+      const countries = countryData.map((country) => ({
+        value: country.name,
+        label: country.name,
+        cities: country.states
+          ? country.states.flatMap((state) =>
+              state.cities.map((city) => city.name)
+            )
+          : [],
+      }));
+      setCountryOptions(countries);
+    } else {
+      console.error("Invalid JSON structure:", countryData);
+    }
+  }, []);
+
+  const handleCountryChange = (selectedOption) => {
+    setSelectedCountry(selectedOption);
+    setFormData((prev) => ({
+      ...prev,
+      country: selectedOption ? selectedOption.value : "",
+    }));
+
+    if (selectedOption && selectedOption.cities.length > 0) {
+      const cities = selectedOption.cities.map((city) => ({
+        value: city,
+        label: city,
+      }));
+      setCityOptions(cities);
+    } else {
+      setCityOptions([]);
+    }
+  };
+  const handleCityChange = (selectedOption) => {
+    setFormData((prev) => ({
+      ...prev,
+      city: selectedOption ? selectedOption.value : "",
+    }));
+  };
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
@@ -66,12 +110,24 @@ const PostBoxForm = () => {
       <div className="row">
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
-          <label>Name</label>
+          <label>First Name</label>
           <input
             type="text"
-            name="name"
-            placeholder="Name"
-            value={formData.name}
+            name="firstName"
+            placeholder="First Name"
+            value={formData.firstName}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        {/* <!-- Input --> */}
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Last Name</label>
+          <input
+            type="text"
+            name="lastName"
+            placeholder="Last Name"
+            value={formData.lastName}
             onChange={handleChange}
             required
           />
@@ -85,31 +141,6 @@ const PostBoxForm = () => {
             name="entityName"
             placeholder="Name of the entity"
             value={formData.entityName}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        {/* <!-- Input --> */}
-        <div className="form-group col-lg-6 col-md-12">
-          <label>Investment Firm Name</label>
-          <input
-            type="text"
-            name="investmentFirmName"
-            placeholder="Investment Firm Name"
-            value={formData.investmentFirmName}
-            onChange={handleChange}
-          />
-        </div>
-
-        {/* <!-- Input --> */}
-        <div className="form-group col-lg-6 col-md-12">
-          <label>Position/Title</label>
-          <input
-            type="text"
-            name="position"
-            placeholder="Position"
-            value={formData.position}
             onChange={handleChange}
             required
           />
@@ -142,62 +173,24 @@ const PostBoxForm = () => {
 
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
-          <label>Website Url</label>
-          <input
-            type="text"
-            name="websiteUrl"
-            placeholder="Website Link"
-            value={formData.websiteUrl}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        {/* <!-- Input --> */}
-        <div className="form-group col-lg-6 col-md-12">
-          <label>linkedin Url</label>
-          <input
-            type="text"
-            name="linkedinUrl"
-            placeholder="Linkedin Url"
-            value={formData.linkedinUrl}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        {/* <!-- Input --> */}
-        <div className="form-group col-lg-6 col-md-12">
           <label>Country</label>
-          <select
-            className="chosen-single form-select"
+          <Select
             name="country"
-            value={formData.country}
-            onChange={handleChange}
-          >
-            <option>Australia</option>
-            <option>Pakistan</option>
-            <option>Chaina</option>
-            <option>Japan</option>
-            <option>India</option>
-          </select>
+            options={countryOptions}
+            onChange={handleCountryChange}
+            placeholder="Select a country"
+          />
         </div>
-
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>City</label>
-          <select
-            className="chosen-single form-select"
+          <Select
             name="city"
-            value={formData.city}
-            onChange={handleChange}
-          >
-            <option>Melbourne</option>
-            <option>Pakistan</option>
-            <option>Chaina</option>
-            <option>Japan</option>
-            <option>India</option>
-          </select>
+            options={cityOptions}
+            onChange={handleCityChange}
+            placeholder="Select a city"
+            isDisabled={!selectedCountry || cityOptions.length === 0}
+          />
         </div>
 
         {/* <!-- Input --> */}

@@ -1,19 +1,26 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
+import countryData from "@/data/countries.json";
 import axios from "axios";
 import { getAuth } from "firebase/auth";
 
 const PostBoxForm = () => {
   const [file, setFile] = useState(null);
   const [formData, setFormData] = useState({
+    fullName: "",
+    email2: "",
+    contactNumber2: "",
+    currentCountry: "",
+    currentCity: "",
+    nationality: "",
     linkedInProfile: "",
     educationStatus: "",
+    otherEducation: "",
     institutionName: "",
     major: "",
-    graduationDate: "",
     certifications: "",
     internshipPreferences: [],
     preferredDuration: "",
@@ -21,6 +28,7 @@ const PostBoxForm = () => {
     preferredIndustries: "",
     preferredLocation: "",
     skills: [],
+    otherSkills: [],
     softwareProficiency: "",
     workExperienceBoolean: "",
     workExperience: [
@@ -31,21 +39,19 @@ const PostBoxForm = () => {
         responsibilities: String,
       },
     ],
-    workingEnvironment: "",
-    portfolioBoolean: "",
-    portfolioLink: "",
-    previousProjects: "",
     references: "",
     additionalInfo: "",
-    specificExpectations: "",
     acceptTerms: false,
   });
+  const [countryOptions, setCountryOptions] = useState([]);
+  const [cityOptions, setCityOptions] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState(null);
+
   const preferences = [
     { value: "Full-time", label: "Full-time" },
     { value: "Part-time", label: "Part-time" },
-    { value: "Retail", label: "Retail" },
     { value: "Remote", label: "Remote" },
-    { value: "Onsite", label: "Onsite" },
+    { value: "In-person", label: "In-person" },
     { value: "Hybrid", label: "Hybrid" },
   ];
   const skills = [
@@ -62,7 +68,48 @@ const PostBoxForm = () => {
     { value: "Financial Analysis", label: "Financial Analysis" },
     { value: "Administrative Support", label: "Administrative Support" },
     { value: "Project Management", label: "Project Management" },
+    { value: "Other", label: "Other" },
   ];
+  useEffect(() => {
+    if (Array.isArray(countryData)) {
+      const countries = countryData.map((country) => ({
+        value: country.name,
+        label: country.name,
+        cities: country.states
+          ? country.states.flatMap((state) =>
+              state.cities.map((city) => city.name)
+            )
+          : [],
+      }));
+      setCountryOptions(countries);
+    } else {
+      console.error("Invalid JSON structure:", countryData);
+    }
+  }, []);
+
+  const handleCountryChange = (selectedOption) => {
+    setSelectedCountry(selectedOption);
+    setFormData((prev) => ({
+      ...prev,
+      country: selectedOption ? selectedOption.value : "",
+    }));
+
+    if (selectedOption && selectedOption.cities.length > 0) {
+      const cities = selectedOption.cities.map((city) => ({
+        value: city,
+        label: city,
+      }));
+      setCityOptions(cities);
+    } else {
+      setCityOptions([]);
+    }
+  };
+  const handleCityChange = (selectedOption) => {
+    setFormData((prev) => ({
+      ...prev,
+      city: selectedOption ? selectedOption.value : "",
+    }));
+  };
   const handleDateChange = (date, fieldName) => {
     setFormData((prev) => ({
       ...prev,
@@ -173,6 +220,17 @@ const PostBoxForm = () => {
       <div className="row">
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
+          <label>Full Name</label>
+          <input
+            type="text"
+            name="fullName"
+            value={formData.fullName}
+            onChange={handleChange}
+            placeholder="Full name"
+          />
+        </div>
+        {/* <!-- Input --> */}
+        <div className="form-group col-lg-6 col-md-12">
           <label>LinkedIn Profile Link</label>
           <input
             type="text"
@@ -180,6 +238,39 @@ const PostBoxForm = () => {
             value={formData.linkedInProfile}
             onChange={handleChange}
             placeholder="Linkedin Profile Url"
+          />
+        </div>
+        {/* <!-- Input --> */}
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Email</label>
+          <input
+            type="text"
+            name="email2"
+            value={formData.email2}
+            onChange={handleChange}
+            placeholder="Email"
+          />
+        </div>
+        {/* <!-- Input --> */}
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Contact Number</label>
+          <input
+            type="text"
+            name="contactNumber2"
+            value={formData.contactNumber2}
+            onChange={handleChange}
+            placeholder="Contact Number"
+          />
+        </div>
+        {/* <!-- Input --> */}
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Nationality</label>
+          <input
+            type="text"
+            name="nationality"
+            value={formData.nationality}
+            onChange={handleChange}
+            placeholder="Nationality"
           />
         </div>
         {/* Education */}
@@ -190,13 +281,28 @@ const PostBoxForm = () => {
             name="educationStatus"
             value={formData.educationStatus}
             onChange={handleChange}
+            required
           >
             <option>Select</option>
             <option>Undergraduate Student</option>
             <option>Graduate Student</option>
             <option>Recent Graduate</option>
+            <option>Other</option>
           </select>
         </div>
+        {/* Conditionally render input field for "Other" */}
+        {formData.educationStatus === "Other" && (
+          <div className="form-group col-lg-6 col-md-12">
+            <label>Please Specify</label>
+            <input
+              type="text"
+              name="otherEducation"
+              value={formData.otherEducation || ""}
+              onChange={handleChange} // Existing handleChange to update state
+              placeholder="Please specify your educational status"
+            />
+          </div>
+        )}
         {/* <!-- Education --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Institution Name</label>
@@ -219,17 +325,7 @@ const PostBoxForm = () => {
             placeholder="Major"
           />
         </div>
-        {/* <!-- Education --> */}
-        <div className="form-group col-lg-6 col-md-12">
-          <label>Expected Graduation Date (or Graduation Year)</label>
-          <input
-            type="text"
-            name="graduationDate"
-            value={formData.graduationDate}
-            onChange={handleChange}
-            placeholder="Graduation Date"
-          />
-        </div>
+
         {/* <!-- Education --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Relevant Coursework or Certifications</label>
@@ -273,15 +369,45 @@ const PostBoxForm = () => {
         </div>
         {/* <!-- Internship Interests and Preferences --> */}
         <div className="custom-form-group form-group col-lg-6 col-md-12">
-          <label className="custom-form-label">Prefered Start Date</label>
-          <DatePicker
+          <label>Preferred Start Date</label>
+          <input
+            type="text"
+            name="preferredStartDate"
+            value={formData.preferredStartDate}
+            onChange={(e) => {
+              const { name, value } = e.target;
+
+              // Allow input as long as it's a valid partial date or empty
+              const partialDateRegex = /^(\d{0,2}(\/\d{0,2}(\/\d{0,2})?)?)?$/;
+
+              if (partialDateRegex.test(value)) {
+                setFormData((prev) => ({
+                  ...prev,
+                  [name]: value,
+                }));
+              }
+            }}
+            onBlur={(e) => {
+              const { name, value } = e.target;
+
+              // Validate full date format on blur
+              const fullDateRegex =
+                /^([0-2]?[0-9]|3[01])\/(0?[1-9]|1[0-2])\/(\d{2})$/;
+
+              if (!fullDateRegex.test(value) && value !== "") {
+                alert("Please enter a valid date in DD/MM/YY format.");
+              }
+            }}
+            placeholder="DD/MM/YY"
+          />
+        </div>
+        {/* <DatePicker
             selected={formData.preferredStartDate}
             onChange={(date) => handleDateChange(date, "preferredStartDate")}
             dateFormat="dd/MM/yyyy"
             placeholderText="Select a start date"
             className="custom-margin"
-          />
-        </div>
+          /> */}
         {/* <!-- Internship Interests and Preferences --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Preferred Industries</label>
@@ -318,6 +444,20 @@ const PostBoxForm = () => {
             onChange={(selected) => handleMultiSelectChange(selected, "skills")}
           />
         </div>
+        {/* Conditionally render input field for "Other" */}
+        {formData.skills.includes("Other") && (
+          <div className="form-group col-lg-6 col-md-12">
+            <label>Please Specify</label>
+            <input
+              type="text"
+              name="otherSkills"
+              value={formData.otherSkills || ""}
+              onChange={handleChange} // Using the existing handleChange
+              placeholder="Please specify your skills"
+              required
+            />
+          </div>
+        )}
         {/* <!-- Skills and Qualifications --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>
@@ -454,7 +594,7 @@ const PostBoxForm = () => {
           />
         </div>
         {/* Availability and Work Preferences */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>
             Are you open to working in a team environment or independently?
           </label>
@@ -469,9 +609,9 @@ const PostBoxForm = () => {
             <option>Independent</option>
             <option>Both</option>
           </select>
-        </div>
+        </div> */}
         {/* Projects and Portfolio */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>
             Do you have a portfolio or examples of work that you would like to
             showcase?
@@ -486,9 +626,9 @@ const PostBoxForm = () => {
             <option>Yes</option>
             <option>No</option>
           </select>
-        </div>
+        </div> */}
         {/* Projects and Portfolio */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>If yes, please provide link for the portfolio</label>
           <input
             type="text"
@@ -497,9 +637,9 @@ const PostBoxForm = () => {
             onChange={handleChange}
             placeholder="Portolio Link"
           />
-        </div>
+        </div> */}
         {/* Projects and Portfolio */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>
             Please list any relevant projects you have worked on that
             demonstrate your skills
@@ -511,7 +651,7 @@ const PostBoxForm = () => {
             onChange={handleChange}
             placeholder="Previous Projects"
           />
-        </div>
+        </div> */}
         {/* References */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Provide any references if availabile</label>
@@ -520,7 +660,7 @@ const PostBoxForm = () => {
             name="references"
             value={formData.references}
             onChange={handleChange}
-            placeholder="References"
+            placeholder="Provide contact details of the reference"
           />
         </div>
         {/* Additional Info */}
@@ -538,7 +678,7 @@ const PostBoxForm = () => {
           />
         </div>
         {/* Additional Info */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>
             Do you have any specific questions or expectations from the
             internship provider?
@@ -550,7 +690,7 @@ const PostBoxForm = () => {
             onChange={handleChange}
             placeholder="Specific Expectations"
           />
-        </div>
+        </div> */}
         <div className="form-group col-lg-12 col-md-12">
           <label>Upload Document</label>
           <input type="file" onChange={handleFileChange} />

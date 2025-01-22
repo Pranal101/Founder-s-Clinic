@@ -7,56 +7,52 @@ import Select from "react-select";
 const PostBoxForm = () => {
   const [file, setFile] = useState(null);
   const [formData, setFormData] = useState({
+    fullName: "",
     entityName: "",
     organizationRole: "",
-    portfolio: "",
+    email2: "",
+    contactNumber2: "",
     position: "",
     websiteLink: "",
     socialMediaLinks: "",
     experienceYears: "",
+    qualification: "",
     certifications: "",
     associations: "",
     servicesOffered: [],
-    primaryClients: "",
-    serviceDelivery: [],
-    processDescription: "",
-    customizedSolutions: "",
-    pricingModel: [],
-    differentiators: "",
+    otherServiceOffered: "",
     painPoints: "",
     industryExpertise: "",
-    contribution: "",
-    availability: "",
-    freeConsultation: "",
-    contactPreference: "",
+    clientTestimonials: "",
     acceptTerms: false,
   });
   const servicesProvided = [
     {
-      value: "Business Consulting",
-      label: "Business Consulting",
+      value: "Registration/ Compliance/ Certification",
+      label: "Registration/ Compliance/ Certification",
     },
     {
-      value: "Financial Planning and Advisory",
-      label: "Financial Planning and Advisory",
+      value: "Finance & Government Assistance",
+      label: "Finance & Government Assistance",
     },
     { value: "Marketing and Branding", label: "Marketing and Branding" },
     {
       value: "Human Resources and Recruitment",
       label: "Human Resources and Recruitment",
     },
+    { value: "IT and tech support", label: "IT and tech support" },
     {
       value: "Operations and Process Optimization",
       label: "Operations and Process Optimization",
     },
-    { value: "Legal Services", label: "Legal Services" },
-    { value: "Project Management", label: "Project Management" },
+    { value: "Business Wellness", label: "Business Wellness" },
     {
       value: "Coaching and Mentoring",
       label: "Coaching and Mentoring",
     },
-    { value: "IT and tech support", label: "IT and tech support" },
+
     { value: "Administrative Support", label: "Administrative Support" },
+    { value: "Other", label: "Other" },
   ];
   const MultiPricingModel = [
     {
@@ -164,7 +160,18 @@ const PostBoxForm = () => {
       <div className="row">
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
-          <label>Current Business/Company Name</label>
+          <label>Full Name</label>
+          <input
+            type="text"
+            name="fullName"
+            placeholder="Enter Full Name"
+            value={formData.fullName}
+            onChange={handleChange}
+          />
+        </div>
+        {/* <!-- Input --> */}
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Current Business/Company Name(if applicable)</label>
           <input
             type="text"
             name="entityName"
@@ -175,7 +182,7 @@ const PostBoxForm = () => {
         </div>
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
-          <label>Organizarion Role</label>
+          <label>Position/Title</label>
           <input
             name="organizationRole"
             type="text"
@@ -186,6 +193,28 @@ const PostBoxForm = () => {
         </div>
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
+          <label>Email</label>
+          <input
+            name="email2"
+            type="text"
+            placeholder="Email"
+            value={formData.email2}
+            onChange={handleChange}
+          />
+        </div>
+        {/* <!-- Input --> */}
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Contact Number</label>
+          <input
+            name="contactNumber2"
+            type="text"
+            placeholder="Contact Number"
+            value={formData.contactNumber2}
+            onChange={handleChange}
+          />
+        </div>
+        {/* <!-- Input --> */}
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>Portfolio (if any)</label>
           <input
             name="portfolio"
@@ -194,7 +223,7 @@ const PostBoxForm = () => {
             value={formData.portfolio}
             onChange={handleChange}
           />
-        </div>
+        </div> */}
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Website Link</label>
@@ -219,12 +248,23 @@ const PostBoxForm = () => {
         </div>
         {/* <!-- Professional Background --> */}
         <div className="form-group col-lg-6 col-md-12">
-          <label>Years of Experience</label>
+          <label>Years of Experience in Business Support Services</label>
           <input
             type="text"
             name="experienceYears"
             placeholder="Experience"
             value={formData.experienceYears}
+            onChange={handleChange}
+          />
+        </div>
+        {/* <!-- Professional Background --> */}
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Qualification</label>
+          <input
+            type="text"
+            name="qualification"
+            placeholder="Qualification"
+            value={formData.qualification}
             onChange={handleChange}
           />
         </div>
@@ -265,13 +305,27 @@ const PostBoxForm = () => {
             onChange={handleSelectChange}
           />
         </div>
+        {/* Conditionally render input field for "Other" */}
+        {formData.servicesOffered.includes("Other") && (
+          <div className="form-group col-lg-6 col-md-12">
+            <label>Please Specify</label>
+            <input
+              type="text"
+              name="otherServiceOffered"
+              value={formData.otherServiceOffered || ""}
+              onChange={handleChange} // Using the existing handleChange
+              placeholder="Please specify your services"
+              required
+            />
+          </div>
+        )}
         {/* <!-- Services Offerred --> */}
         {/* <div className="form-group col-lg-6 col-md-12">
           <label>Provide description of each service you offer</label>
           <input type="text" name="name" placeholder="description" />
         </div> */}
         {/* <!-- Services Offerred --> */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>Who are your primary clients?</label>
           <input
             type="text"
@@ -280,9 +334,9 @@ const PostBoxForm = () => {
             onChange={handleChange}
             placeholder="e.g., startups, small businesses, corporations, specific industries"
           />
-        </div>
+        </div> */}
         {/* <!-- Service Delivery and Approach --> */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>How do you deliver your services?</label>
           <Select
             // defaultValue={[servicesProvided[0]]}
@@ -293,9 +347,9 @@ const PostBoxForm = () => {
             classNamePrefix="select"
             onChange={handleSelectChange}
           />
-        </div>
+        </div> */}
         {/* <!-- Service Delivery and Approach --> */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>What is your typical process when working with clients?</label>
           <input
             type="text"
@@ -304,10 +358,10 @@ const PostBoxForm = () => {
             onChange={handleChange}
             placeholder="Briefly describe how you engage with clients, from consultation to execution."
           />
-        </div>
+        </div> */}
 
         {/* <!-- Service Delivery and Approach --> */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>Do you offer customized solutions for businesses?</label>
           <select
             name="customizedSolutions"
@@ -319,10 +373,10 @@ const PostBoxForm = () => {
             <option>Yes</option>
             <option>No</option>
           </select>
-        </div>
+        </div> */}
 
         {/* <!-- Pricing and Packages --> */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>What is your pricing model?</label>
           <Select
             // defaultValue={[servicesProvided[0]]}
@@ -333,9 +387,9 @@ const PostBoxForm = () => {
             classNamePrefix="select"
             onChange={handleSelectChange}
           />
-        </div>
+        </div> */}
         {/* <!-- Value Proposition --> */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>
             What differentiates you from other professionals offering similar
             services?
@@ -347,7 +401,7 @@ const PostBoxForm = () => {
             value={formData.differentiators}
             onChange={handleChange}
           />
-        </div>
+        </div> */}
         {/* <!-- Value Proposition --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>What are the key pain points you help businesses solve?</label>
@@ -371,7 +425,7 @@ const PostBoxForm = () => {
           />
         </div>
         {/* <!-- Value Proposition --> */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>
             How do your services contribute to business growth or operational
             efficiency?
@@ -383,9 +437,9 @@ const PostBoxForm = () => {
             value={formData.contribution}
             onChange={handleChange}
           />
-        </div>
+        </div> */}
         {/* <!-- Availability --> */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>What is your typical availability for new clients?</label>
           <input
             type="text"
@@ -394,9 +448,9 @@ const PostBoxForm = () => {
             value={formData.availability}
             onChange={handleChange}
           />
-        </div>
+        </div> */}
         {/* <!-- Availability --> */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>Do you offer free consultations?</label>
           <select
             name="freeConsultation"
@@ -408,17 +462,17 @@ const PostBoxForm = () => {
             <option>Yes</option>
             <option>No</option>
           </select>
-        </div>
+        </div> */}
         {/* <!-- Availability --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>
-            What is the best way for potential clients to reach you?
+            Do you have client testimonials you would like to feature?
           </label>
           <input
             type="text"
-            name="contactPreference"
-            placeholder=""
-            value={formData.contactPreference}
+            name="clientTestimonials"
+            placeholder="Please provide quotes or links if available."
+            value={formData.clientTestimonials}
             onChange={handleChange}
           />
         </div>

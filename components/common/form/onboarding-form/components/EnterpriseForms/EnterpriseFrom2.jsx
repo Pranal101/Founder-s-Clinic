@@ -1,33 +1,80 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Select from "react-select";
 import axios from "axios";
+import countryData from "@/data/countries.json";
 import { getAuth } from "firebase/auth";
 
 const PostBoxForm = () => {
   const [file, setFile] = useState(null);
   const [formData, setFormData] = useState({
+    businessName: "",
     businessType: "",
     foundedYear: "",
+    businessCity: "",
+    businessCountry: "",
     websiteLink: "",
     socialMediaLinks: "",
     coFounderName: "",
     industryType: "",
     businessDescription: "",
     currentBusninessStage: "",
+    otherBusinessStage: "",
     servicesOffered: "",
-    targetMarket: "",
-    teamSize: "",
     hasRaisedFunding: "",
     fundingAmount: "",
     fundingStage: "",
     seekingFunding: "",
     seekingFundingAmount: "",
     platformServices: [],
-    platformExpectations: "",
+    additionalInfo: "",
     acceptTerms: false,
   });
+  const [countryOptions, setCountryOptions] = useState([]);
+  const [cityOptions, setCityOptions] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState(null);
+  useEffect(() => {
+    if (Array.isArray(countryData)) {
+      const countries = countryData.map((country) => ({
+        value: country.name,
+        label: country.name,
+        cities: country.states
+          ? country.states.flatMap((state) =>
+              state.cities.map((city) => city.name)
+            )
+          : [],
+      }));
+      setCountryOptions(countries);
+    } else {
+      console.error("Invalid JSON structure:", countryData);
+    }
+  }, []);
+
+  const handleCountryChange = (selectedOption) => {
+    setSelectedCountry(selectedOption);
+    setFormData((prev) => ({
+      ...prev,
+      businessCountry: selectedOption ? selectedOption.value : "",
+      businessCity: "", // Reset city
+    }));
+
+    if (selectedOption && selectedOption.cities.length > 0) {
+      const cities = selectedOption.cities.map((city) => ({
+        value: city,
+        label: city,
+      }));
+      setCityOptions(cities);
+    } else {
+      setCityOptions([]);
+    }
+  };
+  const handleCityChange = (selectedOption) => {
+    setFormData((prev) => ({
+      ...prev,
+      businessCity: selectedOption ? selectedOption.value : "",
+    }));
+  };
   const businessRegistration = [
     { value: "Sole Proprietorship", label: "Sole Proprietorship" },
     {
@@ -130,6 +177,18 @@ const PostBoxForm = () => {
   return (
     <form className="default-form" onSubmit={handleSubmit}>
       <div className="row">
+        {/* <!-- Bussiness info --> */}
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Business Name (or Entrepreneur/Founder Name)</label>
+          <input
+            type="text"
+            placeholder="Business Name"
+            name="businessName"
+            value={formData.businessName}
+            onChange={handleChange}
+            required
+          />
+        </div>
         {/* <!-- Basic info --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Form of organisation</label>
@@ -139,6 +198,7 @@ const PostBoxForm = () => {
               handleSelectChange("businessType", selected)
             }
             placeholder="Select Organization Form"
+            required
           />
         </div>
         <div className="form-group col-lg-6 col-md-12">
@@ -149,6 +209,28 @@ const PostBoxForm = () => {
             name="foundedYear"
             value={formData.foundedYear}
             onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Business Location(Country)</label>
+          <Select
+            name="businessCountry"
+            options={countryOptions}
+            onChange={handleCountryChange}
+            placeholder="Select a country"
+            required
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Business Location(City)</label>
+          <Select
+            name="city"
+            options={cityOptions}
+            onChange={handleCityChange}
+            placeholder="Select a city"
+            isDisabled={!selectedCountry || cityOptions.length === 0}
+            required
           />
         </div>
         {/* <!-- Basic info --> */}
@@ -195,16 +277,7 @@ const PostBoxForm = () => {
             placeholder="e.g., Technology, Finance, Retail, Manufacturing, etc."
           />
         </div>
-        {/* <!-- Bussiness info --> */}
-        <div className="form-group col-lg-12 col-md-12">
-          <label>Business Description</label>
-          <textarea
-            placeholder="Spent several years working on sheep on Wall Street. Had moderate success investing in Yugo's on Wall Street. Managed a small team buying and selling Pogo sticks for farmers. Spent several years licensing licorice in West Palm Beach, FL. Developed several new methods for working it banjos in the aftermarket. Spent a weekend importing banjos in West Palm Beach, FL.In this position, the Software Engineer collaborates with Evention's Development team to continuously enhance our current software solutions as well as create new solutions to eliminate the back-office operations and management challenges present"
-            name="businessDescription"
-            value={formData.businessDescription}
-            onChange={handleChange}
-          ></textarea>
-        </div>
+
         {/* <!-- Bussiness info --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Current Business Stage</label>
@@ -213,13 +286,29 @@ const PostBoxForm = () => {
             name="currentBusninessStage"
             value={formData.currentBusninessStage}
             onChange={handleChange}
+            required
           >
-            <option></option>
-            <option>Early-stage startup</option>
-            <option>Growth-stage</option>
-            <option>Established business</option>
+            <option value="">Select a stage</option>
+            <option value="Early-stage startup">Early-stage startup</option>
+            <option value="Growth-stage">Growth-stage</option>
+            <option value="Established business">Established business</option>
+            <option value="Other">Other</option>
           </select>
         </div>
+        {/* Conditionally render input field for "Other" option */}
+        {formData.currentBusninessStage === "Other" && (
+          <div className="form-group col-lg-6 col-md-12">
+            <label>Please specify your business stage</label>
+            <input
+              type="text"
+              name="otherBusinessStage" // Matches the name used in handleChange
+              value={formData.otherBusinessStage || ""}
+              onChange={handleChange} // Using the existing generic handleChange
+              placeholder="Specify your business stage"
+              required
+            />
+          </div>
+        )}
         {/* <!-- Bussiness offerings --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Mention products or services your business offers</label>
@@ -232,7 +321,7 @@ const PostBoxForm = () => {
           />
         </div>
         {/* <!-- Bussiness offerings --> */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>Target Market</label>
           <input
             type="text"
@@ -241,9 +330,9 @@ const PostBoxForm = () => {
             onChange={handleChange}
             placeholder="e.g., B2B, B2C, specific demographics, industries"
           />
-        </div>
+        </div> */}
         {/* <!-- Team Details --> */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>Team Size</label>
           <select
             className="chosen-single form-select"
@@ -257,7 +346,7 @@ const PostBoxForm = () => {
             <option>51-200 employees</option>
             <option>More than 200 employees</option>
           </select>
-        </div>
+        </div> */}
         {/* <!-- Funding --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Have you raised any funding?</label>
@@ -342,8 +431,20 @@ const PostBoxForm = () => {
             }
           />
         </div>
-        {/* <!-- Business Needs and Platform Expectations--> */}
         <div className="form-group col-lg-6 col-md-12">
+          <label>
+            Is there anything else you would like to add about your business?
+          </label>
+          <input
+            type="text"
+            placeholder="Funding amount"
+            name="fundingAmount"
+            value={formData.fundingAmount}
+            onChange={handleChange}
+          />
+        </div>
+        {/* <!-- Business Needs and Platform Expectations--> */}
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>What are your key expectations from the platform?</label>
           <select
             className="chosen-single form-select"
@@ -358,7 +459,7 @@ const PostBoxForm = () => {
             <option>Access to funding</option>
             <option>Mentorship</option>
           </select>
-        </div>
+        </div> */}
         <div className="form-group col-lg-12 col-md-12">
           <label>Upload Document</label>
           <input type="file" onChange={handleFileChange} />

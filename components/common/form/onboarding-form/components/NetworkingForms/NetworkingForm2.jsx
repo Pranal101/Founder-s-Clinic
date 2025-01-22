@@ -21,14 +21,14 @@ const PostBoxForm = () => {
     membersEngagement: "",
     membersEngagementOnline: "",
     membersEngagementOther: "",
-    collaborationBool: "",
-    collaboration: "",
-    featuresRequirement: "",
-    uniquePoint: "",
-    painPoints: "",
+    // collaborationBool: "",
+    // collaboration: "",
+    // featuresRequirement: "",
+    // uniquePoint: "",
+    // painPoints: "",
     futureGoals: "",
-    upcomingPrograms: "",
-    successStories: "",
+    // upcomingPrograms: "",
+    // successStories: "",
     featureTestimonials: "",
     additionalInfo: "",
     acceptTerms: false,
@@ -310,7 +310,7 @@ const PostBoxForm = () => {
         )}
 
         {/* Input */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>
             Do you collaborate with other communities or businesses?
           </label>
@@ -337,9 +337,9 @@ const PostBoxForm = () => {
               onChange={handleChange}
             />
           </div>
-        )}
+        )} */}
         {/* <!-- Input --> */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>
             What features do you look for in Founders’ Clinic to enhance
             networking?
@@ -352,9 +352,9 @@ const PostBoxForm = () => {
             onChange={handleChange}
             placeholder="e.g., matchmaking, event management, payment processing"
           />
-        </div>
+        </div> */}
         {/* <!-- Input --> */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>
             What makes your community unique in comparison to others?
           </label>
@@ -366,10 +366,10 @@ const PostBoxForm = () => {
             onChange={handleChange}
             placeholder="Differentiators from others"
           />
-        </div>
+        </div> */}
 
         {/* <!-- Input --> */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>
             What are the key pain points your community helps businesses
             address?
@@ -381,7 +381,7 @@ const PostBoxForm = () => {
             value={formData.painPoints}
             onChange={handleChange}
           />
-        </div>
+        </div> */}
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>What are your future goals for the community?</label>
@@ -394,7 +394,7 @@ const PostBoxForm = () => {
           />
         </div>
         {/* <!-- Input --> */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>
             Do you have any upcoming programs, partnerships, or initiatives?
           </label>
@@ -405,9 +405,9 @@ const PostBoxForm = () => {
             value={formData.upcomingPrograms}
             onChange={handleChange}
           />
-        </div>
+        </div> */}
         {/* <!-- Input --> */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>
             Please share a few success stories or case studies from members of
             your community.
@@ -419,7 +419,7 @@ const PostBoxForm = () => {
             value={formData.successStories}
             onChange={handleChange}
           />
-        </div>
+        </div> */}
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>

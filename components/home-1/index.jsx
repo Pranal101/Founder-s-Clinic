@@ -36,28 +36,7 @@ const index = () => {
       {/* End Hero Section */}
 
       {/* <!-- End Features Section --> */}
-      <section className="layout-pt-120 layout-pb-120 border-bottom-none">
-        <div className="auto-container">
-          <div className="row grid-base justify-content-between align-items-end">
-            <div className="col-lg-6">
-              <div className="sec-title mb-0">
-                <h2>Featured Services</h2>
-              </div>
-            </div>
-            <div className="col-auto">
-              <Link href="/job-list-v9" className="button -arrow">
-                Browse
-                <span className="fa fa-angle-right"></span>
-              </Link>
-            </div>
-          </div>
-
-          <div className="row grid-base pt-50" data-aos="fade-up">
-            <JobCategorie8 />
-          </div>
-        </div>
-      </section>
-      <section className="layout-pt-60 layout-pb-60">
+      {/* <section className="layout-pt-60 layout-pb-60">
         <div className="auto-container">
           <div className="row justify-content-center">
             <div className="col-lg-6">
@@ -71,14 +50,36 @@ const index = () => {
               </div>
             </div>
           </div>
-          {/* End .row */}
+
 
           <div className="row grid-base pricing3_hover" data-aos="fade-up">
             <Pricing3 />
           </div>
-          {/* End .row */}
+
+        </div>
+      </section> */}
+      <section className="layout-pt-120 layout-pb-120 border-bottom-none">
+        <div className="auto-container">
+          <div className="row grid-base justify-content-between align-items-end">
+            <div className="col-lg-6">
+              <div className="sec-title mb-0">
+                <h2>Find the best services for your enterprise</h2>
+              </div>
+            </div>
+            {/* <div className="col-auto">
+              <Link href="/job-list-v9" className="button -arrow">
+                Browse
+                <span className="fa fa-angle-right"></span>
+              </Link>
+            </div> */}
+          </div>
+
+          <div className="row grid-base pt-50" data-aos="fade-up">
+            <JobCategorie8 />
+          </div>
         </div>
       </section>
+
       <section className="features-section">
         <div className="auto-container">
           <div className="sec-title text-center">

@@ -181,7 +181,7 @@ const FeaturedBlock = () => {
       id: 1,
       block: [
         {
-          img: "/images/enterprise.jpeg",
+          img: "/images/5.jpeg",
           city: "Enterprises",
           width: "411",
           height: "511",
@@ -193,14 +193,14 @@ const FeaturedBlock = () => {
       id: 2,
       block: [
         {
-          img: "/images/user-2.jpg",
+          img: "/images/1.jpg",
           city: "Professionals",
           width: "411",
           height: "240",
           link: "/candidates-dashboard/overview",
         },
         {
-          img: "/images/user-3.jpg",
+          img: "/images/2.jpg",
           city: "Interns",
           width: "411",
           height: "240",
@@ -212,14 +212,14 @@ const FeaturedBlock = () => {
       id: 3,
       block: [
         {
-          img: "/images/user-4.jpg",
+          img: "/images/3.jpg",
           city: "Investors",
           width: "411",
           height: "240",
           link: "/investors-dashboard/overview",
         },
         {
-          img: "/images/user-5.jpg",
+          img: "/images/4.jpg",
           city: "Networking Communities",
           width: "411",
           height: "240",
@@ -251,7 +251,7 @@ const FeaturedBlock = () => {
                 </figure>
                 <div className="overlay-box">
                   <div className="content">
-                    <h5>{value.city}</h5>
+                    {/* <h5>{value.city}</h5> */}
                     {/* Add the link inside the modal logic */}
                     <Link href={value.link} className="overlay-link"></Link>
                   </div>

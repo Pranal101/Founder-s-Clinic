@@ -1,13 +1,17 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getAuth } from "firebase/auth";
+import Select from "react-select";
 import axios from "axios";
+import countryData from "@/data/countries.json";
 import Education from "@/components/dashboard-pages/candidates-dashboard/my-resume/components/Education";
 
 const PostBoxForm = ({ pricingContent }) => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
+    entityName: "",
+    role: "",
     organizarionRole: "",
     emailAddress: "",
     contactNumber: "",
@@ -16,6 +20,9 @@ const PostBoxForm = ({ pricingContent }) => {
     completeAddress: "",
     acceptTerms: false,
   });
+  const [countryOptions, setCountryOptions] = useState([]);
+  const [cityOptions, setCityOptions] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState(null);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -69,7 +76,46 @@ const PostBoxForm = ({ pricingContent }) => {
       console.error("Error updating profile:", error.response?.data || error);
     }
   };
+  useEffect(() => {
+    if (Array.isArray(countryData)) {
+      const countries = countryData.map((country) => ({
+        value: country.name,
+        label: country.name,
+        cities: country.states
+          ? country.states.flatMap((state) =>
+              state.cities.map((city) => city.name)
+            )
+          : [],
+      }));
+      setCountryOptions(countries);
+    } else {
+      console.error("Invalid JSON structure:", countryData);
+    }
+  }, []);
 
+  const handleCountryChange = (selectedOption) => {
+    setSelectedCountry(selectedOption);
+    setFormData((prev) => ({
+      ...prev,
+      country: selectedOption ? selectedOption.value : "",
+    }));
+
+    if (selectedOption && selectedOption.cities.length > 0) {
+      const cities = selectedOption.cities.map((city) => ({
+        value: city,
+        label: city,
+      }));
+      setCityOptions(cities);
+    } else {
+      setCityOptions([]);
+    }
+  };
+  const handleCityChange = (selectedOption) => {
+    setFormData((prev) => ({
+      ...prev,
+      city: selectedOption ? selectedOption.value : "",
+    }));
+  };
   return (
     <form className="default-form" onSubmit={handleSubmit}>
       <div className="row">
@@ -82,6 +128,7 @@ const PostBoxForm = ({ pricingContent }) => {
             placeholder="First name"
             value={formData.firstName}
             onChange={handleChange}
+            required
           />
         </div>
         <div className="form-group col-lg-6 col-md-12">
@@ -92,9 +139,33 @@ const PostBoxForm = ({ pricingContent }) => {
             placeholder="Last name"
             value={formData.lastName}
             onChange={handleChange}
+            required
           />
         </div>
-        <Education />
+        {/* Input Fields */}
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Entity Name</label>
+          <input
+            type="text"
+            name="entityName"
+            placeholder="Entity name"
+            value={formData.entityName}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Role</label>
+          <input
+            type="text"
+            name="role"
+            placeholder="Role"
+            value={formData.role}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        {/* <Education /> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Email Address</label>
           <input
@@ -117,27 +188,22 @@ const PostBoxForm = ({ pricingContent }) => {
         </div>
         <div className="form-group col-lg-6 col-md-12">
           <label>Country</label>
-          <select
+          <Select
             name="country"
-            value={formData.country}
-            onChange={handleChange}
-          >
-            <option>Australia</option>
-            <option>Pakistan</option>
-            <option>China</option>
-            <option>Japan</option>
-            <option>India</option>
-          </select>
+            options={countryOptions}
+            onChange={handleCountryChange}
+            placeholder="Select a country"
+          />
         </div>
         <div className="form-group col-lg-6 col-md-12">
           <label>City</label>
-          <select name="city" value={formData.city} onChange={handleChange}>
-            <option>Melbourne</option>
-            <option>Karachi</option>
-            <option>Beijing</option>
-            <option>Tokyo</option>
-            <option>Mumbai</option>
-          </select>
+          <Select
+            name="city"
+            options={cityOptions}
+            onChange={handleCityChange}
+            placeholder="Select a city"
+            isDisabled={!selectedCountry || cityOptions.length === 0}
+          />
         </div>
         <div className="form-group col-lg-12 col-md-12">
           <label>Complete Address</label>
