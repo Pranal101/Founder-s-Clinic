@@ -50,7 +50,7 @@ const Pricing = () => {
             <div className="inner-box">
               <div className="title">{item.type}</div>
               <div className="price">
-                ${item.price}{" "}
+                ₹{item.price}{" "}
                 <span className="duration">/ {item.duration}</span>
               </div>
               <div className="table-content">
