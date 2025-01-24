@@ -5,6 +5,7 @@ import Select from "react-select";
 import axios from "axios";
 import countryData from "@/data/countries.json";
 import { getAuth } from "firebase/auth";
+import LogoCoverUploader from "./LogoCoverUploader";
 
 const PostBoxForm = () => {
   const [file, setFile] = useState(null);
@@ -121,6 +122,7 @@ const PostBoxForm = () => {
         : "",
     }));
   };
+
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
   };
@@ -460,10 +462,11 @@ const PostBoxForm = () => {
             <option>Mentorship</option>
           </select>
         </div> */}
-        <div className="form-group col-lg-12 col-md-12">
+        <LogoCoverUploader />
+        {/* <div className="form-group col-lg-12 col-md-12">
           <label>Upload Document</label>
           <input type="file" onChange={handleFileChange} />
-        </div>
+        </div> */}
 
         {/* <!-- Accept to terms --> */}
         <div className="form-group col-lg-12 col-md-12 ">

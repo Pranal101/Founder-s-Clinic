@@ -44,18 +44,6 @@ const CompanyInfo = ({ job }) => {
       <li>
         Founded in: <span>{job.founded || "Not specified"}</span>
       </li>
-      <li>
-        Phone: <span>{job.contactNumber || "Not specified"}</span>
-      </li>
-      <li>
-        Email: <span>{job.emailAddress || "Not specified"}</span>
-      </li>
-      <li>
-        Location: <span>{job.jobLocation || "Not specified"}</span>
-      </li>
-      <li>
-        Social media: <Social socialLinks={job.socialLinks || []} />
-      </li>
     </ul>
   );
 };

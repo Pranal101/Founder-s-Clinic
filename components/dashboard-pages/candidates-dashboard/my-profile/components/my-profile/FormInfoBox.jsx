@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Select from "react-select";
 import axios from "axios";
+import countryData from "@/data/countries.json";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { toast } from "react-toastify";
 const FormInfoBox = () => {
@@ -13,28 +14,49 @@ const FormInfoBox = () => {
     contactNumber: "",
     emailAddress: "",
     websiteLink: "",
-    experienceYears: "",
-    foundedYear: "",
-    teamSize: "",
-    categories: [],
-    allowSearchListing: "",
-    businessDescription: "",
     socialMediaLinks: "",
+    experienceYears: "",
+    qualification: "",
+    certifications: "",
+    associations: "",
+    servicesOffered: [],
+    otherServiceOffered: "",
+    painPoints: "",
+    industryExpertise: "",
+    clientTestimonials: "",
     country: "",
     city: "",
     completeAddress: "",
   });
 
   const [loading, setLoading] = useState(true);
-  const catOptions = [
-    { value: "Banking", label: "Banking" },
-    { value: "Digital & Creative", label: "Digital & Creative" },
-    { value: "Retail", label: "Retail" },
-    { value: "Human Resources", label: "Human Resources" },
-    { value: "Managemnet", label: "Managemnet" },
-    { value: "Accounting & Finance", label: "Accounting & Finance" },
-    { value: "Digital", label: "Digital" },
-    { value: "Creative Art", label: "Creative Art" },
+  const [countryOptions, setCountryOptions] = useState([]);
+  const [cityOptions, setCityOptions] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState(null);
+
+  const servicesProvided = [
+    {
+      value: "Registration/ Compliance/ Certification",
+      label: "Registration/ Compliance/ Certification",
+    },
+    {
+      value: "Finance & Government Assistance",
+      label: "Finance & Government Assistance",
+    },
+    { value: "Marketing and Branding", label: "Marketing and Branding" },
+    {
+      value: "Human Resources and Recruitment",
+      label: "Human Resources and Recruitment",
+    },
+    { value: "IT and tech support", label: "IT and tech support" },
+    {
+      value: "Operations and Process Optimization",
+      label: "Operations and Process Optimization",
+    },
+    { value: "Business Wellness", label: "Business Wellness" },
+    { value: "Coaching and Mentoring", label: "Coaching and Mentoring" },
+    { value: "Administrative Support", label: "Administrative Support" },
+    { value: "Other", label: "Other" },
   ];
   useEffect(() => {
     const fetchProfile = async (user) => {
@@ -56,17 +78,25 @@ const FormInfoBox = () => {
           firstName: profile.firstName || "",
           lastName: profile.lastName || "",
           entityName: profile.entityName || "",
-          emailAddress: profile.emailAddress || "",
-          contactNumber: profile.contactNumber || "",
           organizationRole: profile.organizationRole || "",
+          contactNumber: profile.contactNumber || "",
+          emailAddress: profile.emailAddress || "",
           websiteLink: profile.websiteLink || "",
-          experienceYears: profile.experienceYears || "",
-          foundedYear: profile.foundedYear || "",
-          teamSize: profile.teamSize || "",
-          categories: profile.categories || [],
-          allowSearchListing: profile.allowSearchListing ? "Yes" : "No",
-          businessDescription: profile.businessDescription || "",
           socialMediaLinks: profile.socialMediaLinks || "",
+          experienceYears: profile.experienceYears || "",
+          qualification: profile.qualification || "",
+          certifications: profile.certifications || "",
+          associations: profile.associations || "",
+          servicesOffered: profile.servicesOffered
+            ? profile.servicesOffered.map((service) => ({
+                value: service,
+                label: service,
+              }))
+            : [],
+          otherServiceOffered: profile.otherServiceOffered || "",
+          painPoints: profile.painPoints || "",
+          industryExpertise: profile.industryExpertise || "",
+          clientTestimonials: profile.clientTestimonials || "",
           country: profile.country || "",
           city: profile.city || "",
           completeAddress: profile.completeAddress || "",
@@ -90,6 +120,46 @@ const FormInfoBox = () => {
 
     return () => unsubscribe(); // Clean up the observer on unmount
   }, []);
+  useEffect(() => {
+    if (Array.isArray(countryData)) {
+      const countries = countryData.map((country) => ({
+        value: country.name,
+        label: country.name,
+        cities: country.states
+          ? country.states.flatMap((state) =>
+              state.cities.map((city) => city.name)
+            )
+          : [],
+      }));
+      setCountryOptions(countries);
+    } else {
+      console.error("Invalid JSON structure:", countryData);
+    }
+  }, []);
+
+  const handleCountryChange = (selectedOption) => {
+    setSelectedCountry(selectedOption);
+    setFormData((prev) => ({
+      ...prev,
+      country: selectedOption ? selectedOption.value : "",
+    }));
+
+    if (selectedOption && selectedOption.cities.length > 0) {
+      const cities = selectedOption.cities.map((city) => ({
+        value: city,
+        label: city,
+      }));
+      setCityOptions(cities);
+    } else {
+      setCityOptions([]);
+    }
+  };
+  const handleCityChange = (selectedOption) => {
+    setFormData((prev) => ({
+      ...prev,
+      city: selectedOption ? selectedOption.value : "",
+    }));
+  };
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -98,10 +168,12 @@ const FormInfoBox = () => {
     }));
   };
 
-  const handleSelectChange = (selectedOptions) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      categories: selectedOptions.map((option) => option.value),
+  const handleSelectChange = (field, selectedOption) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: selectedOption
+        ? selectedOption.map((option) => option.value) // Extract only the `value` property
+        : [],
     }));
   };
 
@@ -239,57 +311,118 @@ const FormInfoBox = () => {
             onChange={handleChange}
           />
         </div>
-
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
-          <label>Education Levels</label>
+          <label>Qualification</label>
           <input
             type="text"
-            name="name"
-            placeholder="Certificate"
+            name="qualification"
+            value={formData.qualification}
+            placeholder="Qualification"
             onChange={handleChange}
           />
         </div>
-
-        {/* <!-- Search Select --> */}
+        {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
-          <label>Categories </label>
-          <Select
-            defaultValue={[catOptions[1]]}
-            isMulti
-            name="colors"
-            options={catOptions}
-            className="basic-multi-select"
-            classNamePrefix="select"
-            onChange={handleSelectChange}
+          <label>Certifications</label>
+          <input
+            type="text"
+            name="certifications"
+            value={formData.certifications}
+            placeholder="Certifications"
+            onChange={handleChange}
           />
         </div>
-
-        {/* <!-- About Company --> */}
-        <div className="form-group col-lg-12 col-md-12">
-          <label>Description</label>
-          <textarea placeholder="Spent several years working on sheep on Wall Street. Had moderate success investing in Yugo's on Wall Street. Managed a small team buying and selling Pogo sticks for farmers. Spent several years licensing licorice in West Palm Beach, FL. Developed several new methods for working it banjos in the aftermarket. Spent a weekend importing banjos in West Palm Beach, FL.In this position, the Software Engineer collaborates with Evention's Development team to continuously enhance our current software solutions as well as create new solutions to eliminate the back-office operations and management challenges present"></textarea>
+        {/* <!-- Input --> */}
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Associations</label>
+          <input
+            type="text"
+            name="associations"
+            value={formData.associations}
+            placeholder="Associations"
+            onChange={handleChange}
+          />
+        </div>
+        {/* <!-- Input --> */}
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Business Support Services</label>
+          <Select
+            defaultValue={formData.servicesOffered}
+            name="servicesOffered"
+            isMulti
+            options={servicesProvided}
+            className="basic-multi-select"
+            classNamePrefix="select"
+            onChange={(selected) =>
+              handleSelectChange("servicesOffered", selected)
+            }
+          />
+        </div>
+        {/* <!-- Input --> */}
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Other Services</label>
+          <input
+            type="text"
+            name="otherServiceOffered"
+            value={formData.otherServiceOffered}
+            placeholder="Other Services Offered"
+            onChange={handleChange}
+          />
+        </div>
+        {/* <!-- Input --> */}
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Pain Points</label>
+          <input
+            type="text"
+            name="painPoints"
+            value={formData.painPoints}
+            placeholder="Pain Points"
+            onChange={handleChange}
+          />
+        </div>
+        {/* <!-- Input --> */}
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Industry Expertise</label>
+          <input
+            type="text"
+            name="industryExpertise"
+            value={formData.industryExpertise}
+            placeholder="Industry Expertise"
+            onChange={handleChange}
+          />
+        </div>
+        {/* <!-- Input --> */}
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Client Testimonials</label>
+          <input
+            type="text"
+            name="clientTestimonials"
+            value={formData.clientTestimonials}
+            placeholder="Client Testimonials"
+            onChange={handleChange}
+          />
         </div>
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Country</label>
-          <input
-            type="text"
+          <Select
             name="country"
-            placeholder="Country"
-            value={formData.country}
-            onChange={handleChange}
+            options={countryOptions}
+            onChange={handleCountryChange}
+            placeholder={formData.country}
           />
         </div>
+
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>City</label>
-          <input
-            type="text"
+          <Select
             name="city"
-            placeholder="City"
-            value={formData.city}
-            onChange={handleChange}
+            options={cityOptions}
+            onChange={handleCityChange}
+            placeholder={formData.city}
+            isDisabled={!selectedCountry || cityOptions.length === 0}
           />
         </div>
         {/* <!-- Input --> */}

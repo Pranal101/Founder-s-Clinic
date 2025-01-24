@@ -53,13 +53,13 @@ const JobAlertsTable = () => {
       {jobs.length === 0 ? (
         // Display message if jobs array is empty
         <div className="widget-title">
-          <h4>Projects for you</h4>
+          <h4>Inquiries for you</h4>
         </div>
       ) : (
         // Display table when jobs are available
         <div>
           <div className="widget-title">
-            <h4>Projects for you</h4>
+            <h4>Inquiries for you</h4>
           </div>
           <div className="widget-content">
             <div className="table-outer">

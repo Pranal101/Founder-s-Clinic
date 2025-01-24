@@ -507,6 +507,161 @@
 // };
 
 // export default HeaderNavContent;
+// "use client";
+
+// import { useEffect, useState } from "react";
+// import Link from "next/link";
+// import { usePathname } from "next/navigation";
+// import { auth } from "../../firebase"; // Firebase instance
+// import axios from "axios";
+
+// const HeaderNavContent = () => {
+//   const pathname = usePathname();
+//   const [user, setUser] = useState(null);
+//   const [role, setRole] = useState(null);
+//   const [isAdmin, setIsAdmin] = useState(false); // New state for admin check
+
+//   useEffect(() => {
+//     // Listen for Firebase auth state changes
+//     const unsubscribe = auth.onAuthStateChanged(async (currentUser) => {
+//       if (currentUser) {
+//         setUser(currentUser);
+
+//         // Fetch role from the backend if the user is not admin
+//         try {
+//           const token = await currentUser.getIdToken();
+//           const response = await axios.get(
+//             "https://founders-clinic-backend.onrender.com/api/user/getRole",
+//             {
+//               headers: {
+//                 Authorization: `Bearer ${token}`,
+//               },
+//             }
+//           );
+//           const fetchedRole = response.data.role;
+//           setRole(fetchedRole);
+
+//           // Check if the fetched role is Admin
+//           setIsAdmin(fetchedRole === "Admin");
+//         } catch (error) {
+//           console.error("Error fetching role:", error);
+//         }
+//       } else {
+//         setUser(null);
+//         setRole(null);
+//         setIsAdmin(false); // Reset admin state
+//       }
+//     });
+
+//     return () => unsubscribe();
+//   }, []);
+
+//   const navItems = [
+//     {
+//       role: "Enterprise",
+//       label: "Enterprises",
+//       loggedInLink: "/employers-dashboard/dashboard",
+//       guestLink: "/employers-dashboard/overview",
+//     },
+//     {
+//       role: "Professional",
+//       label: "Professionals",
+//       loggedInLink: "/candidates-dashboard/dashboard",
+//       guestLink: "/candidates-dashboard/overview",
+//     },
+//     {
+//       role: "Intern",
+//       label: "Interns",
+//       loggedInLink: "/intern-dashboard/dashboard",
+//       guestLink: "/intern-dashboard/overview",
+//     },
+//     {
+//       role: "Investor",
+//       label: "Investors",
+//       loggedInLink: "/investors-dashboard/dashboard",
+//       guestLink: "/investors-dashboard/overview",
+//     },
+//     {
+//       role: "Networking Community",
+//       label: "Networking Communities",
+//       loggedInLink: "/networking-dashboard/dashboard",
+//       guestLink: "/networking-dashboard/overview",
+//     },
+//   ];
+
+//   const pagesMenu = [
+//     { id: 1, name: "Events", routePath: "/events" },
+//     { id: 2, name: "Contact Us", routePath: "/contact" },
+//   ];
+
+//   return (
+//     <nav className="nav main-menu">
+//       <ul className="navigation" id="navbar">
+//         {user ? (
+//           <>
+//             {isAdmin ? (
+//               // Add Admin link if user is admin
+//               <li
+//                 className={
+//                   pathname?.includes("/admin-dashboard") ? "current" : ""
+//                 }
+//               >
+//                 <Link href="/admin-dashboard/dashboard">Admin</Link>
+//               </li>
+//             ) : (
+//               // Render items based on user role for logged-in users
+//               navItems
+//                 .filter((item) => item.role === role)
+//                 .map((item) => (
+//                   <li
+//                     key={item.role}
+//                     className={
+//                       pathname?.includes(item.loggedInLink) ? "current" : ""
+//                     }
+//                   >
+//                     <Link href={item.loggedInLink}>{item.label}</Link>
+//                   </li>
+//                 ))
+//             )}
+//           </>
+//         ) : (
+//           // Render all items with guest links for unauthenticated users
+//           navItems.map((item) => (
+//             <li
+//               key={item.role}
+//               className={pathname?.includes(item.guestLink) ? "current" : ""}
+//             >
+//               <Link href={item.guestLink}>{item.label}</Link>
+//             </li>
+//           ))
+//         )}
+
+//         {/* Always visible Pages menu */}
+//         <li
+//           className={`dropdown ${
+//             pagesMenu.some((item) => pathname?.includes(item.routePath))
+//               ? "current"
+//               : ""
+//           }`}
+//         >
+//           <span>More</span>
+//           <ul>
+//             {pagesMenu.map((page) => (
+//               <li
+//                 key={page.id}
+//                 className={pathname?.includes(page.routePath) ? "current" : ""}
+//               >
+//                 <Link href={page.routePath}>{page.name}</Link>
+//               </li>
+//             ))}
+//           </ul>
+//         </li>
+//       </ul>
+//     </nav>
+//   );
+// };
+
+// export default HeaderNavContent;
 "use client";
 
 import { useEffect, useState } from "react";
@@ -608,8 +763,32 @@ const HeaderNavContent = () => {
               >
                 <Link href="/admin-dashboard/dashboard">Admin</Link>
               </li>
+            ) : pathname === "/" ? (
+              // Render all items for authenticated users on homepage
+              navItems.map((item) => (
+                <li
+                  key={item.role}
+                  className={
+                    pathname?.includes(
+                      item.role === role ? item.loggedInLink : item.guestLink
+                    )
+                      ? "current"
+                      : ""
+                  }
+                >
+                  <Link
+                    href={
+                      item.role === role
+                        ? item.loggedInLink // Show loggedInLink for the current user's role
+                        : item.guestLink // Show guestLink for other roles
+                    }
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))
             ) : (
-              // Render items based on user role for logged-in users
+              // Render items based on user role for logged-in users (not on homepage)
               navItems
                 .filter((item) => item.role === role)
                 .map((item) => (
@@ -644,7 +823,7 @@ const HeaderNavContent = () => {
               : ""
           }`}
         >
-          <span>Pages</span>
+          <span>More</span>
           <ul>
             {pagesMenu.map((page) => (
               <li

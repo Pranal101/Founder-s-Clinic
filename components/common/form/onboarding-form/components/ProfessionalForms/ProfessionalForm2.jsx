@@ -3,6 +3,7 @@ import { useState } from "react";
 import { getAuth } from "firebase/auth";
 import axios from "axios";
 import Select from "react-select";
+import LogoCoverUploader from "./LogoCoverUploader";
 
 const PostBoxForm = () => {
   const [file, setFile] = useState(null);
@@ -476,10 +477,11 @@ const PostBoxForm = () => {
             onChange={handleChange}
           />
         </div>
-        <div className="form-group col-lg-12 col-md-12">
+        <LogoCoverUploader />
+        {/* <div className="form-group col-lg-12 col-md-12">
           <label>Upload Document</label>
           <input type="file" onChange={handleFileChange} />
-        </div>
+        </div> */}
         {/* <!-- Conditions checkbox --> */}
         <div className="form-group col-lg-12 col-md-12">
           <div className="field-outer">

@@ -15,10 +15,9 @@ const index = () => {
             >
               <div className="title-box">
                 <h3>
-                  Founders’ Clinic helps you connect with the best service
-                  providers and resources for your business,{" "}
+                  Unlock the right business resources-{" "}
                   <span className="colored">
-                    smartly matched by AI to accelerate your success.
+                    smartly matched by AI.
                     <br />
                   </span>
                 </h3>

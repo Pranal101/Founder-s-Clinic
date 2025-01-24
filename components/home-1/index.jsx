@@ -58,23 +58,38 @@ const index = () => {
 
         </div>
       </section> */}
-      <section className="layout-pt-120 layout-pb-120 border-bottom-none">
+      {/* <section className="layout-pt-120 layout-pb-120 border-bottom-none">
         <div className="auto-container">
           <div className="row grid-base justify-content-between align-items-end">
             <div className="col-lg-6">
-              <div className="sec-title mb-0">
+              <div className="sec-title text-center">
                 <h2>Find the best services for your enterprise</h2>
               </div>
             </div>
-            {/* <div className="col-auto">
+            <div className="col-auto">
               <Link href="/job-list-v9" className="button -arrow">
                 Browse
                 <span className="fa fa-angle-right"></span>
               </Link>
-            </div> */}
+            </div>
           </div>
 
           <div className="row grid-base pt-50" data-aos="fade-up">
+            <JobCategorie8 />
+          </div>
+        </div>
+      </section> */}
+      <section className="features-section">
+        <div className="auto-container">
+          <div className="sec-title text-center">
+            <h2>Find the best services for your enterprise</h2>
+            <div className="text">
+              We connect you with the best service providers specialized in each
+              sector, who will help you improve and solve internal needs.
+            </div>
+          </div>
+
+          <div className="row" data-aos="fade-up">
             <JobCategorie8 />
           </div>
         </div>
@@ -106,7 +121,7 @@ const index = () => {
             </div>
           </div>
 
-          <div className="row grid-base">
+          <div className="row" data-aos="fade-up">
             <Block9 />
           </div>
         </div>
@@ -121,7 +136,7 @@ const index = () => {
 
       <section className="candidates-section-two">
         <div className="auto-container">
-          <div className="sec-title">
+          <div className="sec-title text-center">
             <h2>Featured Founders</h2>
             <div className="text">
               Get inspired by the success of our spotlighted founder

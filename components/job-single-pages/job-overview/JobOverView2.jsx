@@ -69,7 +69,7 @@ const JobOverView2 = ({ job }) => {
       </li>
       <li>
         <i className="icon icon-user-2"></i>
-        <h5>Proje Title:</h5>
+        <h5>Project Title:</h5>
         <span>{job.title || "Not specified"}</span>
       </li>
       <li>

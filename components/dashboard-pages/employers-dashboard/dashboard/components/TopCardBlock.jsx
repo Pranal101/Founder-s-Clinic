@@ -61,7 +61,7 @@ const TopCardBlock = () => {
       id: 1,
       icon: "flaticon-briefcase",
       countNumber: "22",
-      metaName: "Manage Inquiries",
+      metaName: "Inquiries",
       uiClass: "ui-blue",
       route: "/employers-dashboard/manage-jobs",
     },

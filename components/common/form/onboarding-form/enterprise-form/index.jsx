@@ -36,8 +36,8 @@ const index = () => {
               {/* <!-- Ls widget --> */}
               <div className="ls-widget">
                 <div className="tabs-box">
-                  <div className="widget-title">
-                    <h4>Create Profile</h4>
+                  <div className="sec-title text-center">
+                    <h2>Create Profile</h2>
                   </div>
 
                   <div className="widget-content">

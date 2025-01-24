@@ -8,8 +8,8 @@ const JobCategorie8 = () => {
       icon: "flaticon-money-1",
       catName: (
         <>
-          Accounting
-          <br /> Finance Inqueries
+          Registration / Compliance/
+          <br /> Certification
         </>
       ),
       logo: "/images/index-14/jobs/logos.png",
@@ -19,7 +19,7 @@ const JobCategorie8 = () => {
     {
       id: 2,
       icon: "flaticon-promotion",
-      catName: "Marketing",
+      catName: "Accounting / Book Keeping / Taxation",
       logo: "/images/index-14/jobs/logos.png",
       jobNumber: "221",
       text: `Achieve virtually any design and layout from within the one template.`,
@@ -27,7 +27,7 @@ const JobCategorie8 = () => {
     {
       id: 3,
       icon: "flaticon-web-programming",
-      catName: "Development",
+      catName: "Business Setup / Scale",
       logo: "/images/index-14/jobs/logos.png",
       jobNumber: "234",
       text: `Achieve virtually any design and layout from within the one template.`,
@@ -37,8 +37,8 @@ const JobCategorie8 = () => {
       icon: "flaticon-money-1",
       catName: (
         <>
-          Accounting
-          <br /> Finance Inqueries
+          Finance & Government
+          <br /> Assistance
         </>
       ),
       logo: "/images/index-14/jobs/logos.png",
@@ -56,7 +56,31 @@ const JobCategorie8 = () => {
     {
       id: 6,
       icon: "flaticon-web-programming",
-      catName: "Development",
+      catName: "Business Wellness",
+      logo: "/images/index-14/jobs/logos.png",
+      jobNumber: "267",
+      text: `Achieve virtually any design and layout from within the one template.`,
+    },
+    {
+      id: 7,
+      icon: "flaticon-web-programming",
+      catName: "Mentoring / Training / Coaching",
+      logo: "/images/index-14/jobs/logos.png",
+      jobNumber: "267",
+      text: `Achieve virtually any design and layout from within the one template.`,
+    },
+    {
+      id: 8,
+      icon: "flaticon-web-programming",
+      catName: "Recruitment Consultancy",
+      logo: "/images/index-14/jobs/logos.png",
+      jobNumber: "267",
+      text: `Achieve virtually any design and layout from within the one template.`,
+    },
+    {
+      id: 9,
+      icon: "flaticon-web-programming",
+      catName: "Services to Medium & Large Enterprises",
       logo: "/images/index-14/jobs/logos.png",
       jobNumber: "267",
       text: `Achieve virtually any design and layout from within the one template.`,
@@ -74,21 +98,21 @@ const JobCategorie8 = () => {
                     <span className={`icon ${item.icon}`}></span>
                   </div>
                   <h4>
-                    <Link href="/job-list-v9">{item.catName}</Link>
+                    <Link href="/">{item.catName}</Link>
                   </h4>
                 </div>
 
-                <div className="right">
+                {/* <div className="right">
                   <Image width={105} height={44} src={item.logo} alt="image" />
-                </div>
+                </div> */}
               </div>
 
-              <div className="cat-content">
+              {/* <div className="cat-content">
                 <Link href="/job-list-v9" className="title">
                   {item.jobNumber} Inqueries
                 </Link>
                 <p>{item.text}</p>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

@@ -101,6 +101,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Link from "next/link";
 import Pagination from "./Pagination";
 
 const FilterTopBox = () => {
@@ -160,13 +161,9 @@ const FilterTopBox = () => {
                 </a>
               </figure> */}
               <h4>
-                <a
-                  href={item.websiteLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <Link href={`/company-details/${item._id}`}>
                   {item.entityName}
-                </a>
+                </Link>
               </h4>
               <ul className="job-info flex-column">
                 <li>

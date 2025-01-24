@@ -157,7 +157,7 @@ const JobAlertsTable = () => {
   return (
     <div className="tabs-box">
       <div className="widget-title">
-        <h4>Projects for you</h4>
+        <h4>Inquiries for you</h4>
         {/* <div className="chosen-outer">
           <select className="chosen-single form-select">
             <option>Last 6 Months</option>
@@ -208,11 +208,11 @@ const JobAlertsTable = () => {
                             <ul className="job-info">
                               <li>
                                 <span className="icon flaticon-briefcase"></span>
-                                {item.entityName || "Company Name"}
+                                *******
                               </li>
                               <li>
                                 <span className="icon flaticon-map-locator"></span>
-                                {item.jobLocation || "Location"}
+                                *******
                               </li>
                             </ul>
                           </div>

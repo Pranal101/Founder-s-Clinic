@@ -339,12 +339,12 @@ const JobSingleDynamicV3 = ({ params }) => {
                         <ul className="job-info">
                           <li>
                             <span className="icon flaticon-briefcase"></span>
-                            {job?.entityName}
+                            *******
                           </li>
                           {/* compnay info */}
                           <li>
                             <span className="icon flaticon-map-locator"></span>
-                            {job?.jobLocation}
+                            *******
                           </li>
                           {/* location info */}
                           <li>
@@ -377,7 +377,7 @@ const JobSingleDynamicV3 = ({ params }) => {
                 {/* <!-- job block outer --> */}
 
                 <div className="job-overview-two">
-                  <h4>Job Description</h4>
+                  <h4>Inquiry Description</h4>
                   <JobOverView2 job={job} />
                 </div>
                 {/* <!-- job-overview-two --> */}
@@ -387,7 +387,7 @@ const JobSingleDynamicV3 = ({ params }) => {
 
                 <div className="other-options">
                   <div className="social-share">
-                    <h5>Share this job</h5>
+                    <h5>Share this inquiry</h5>
                     <SocialTwo />
                   </div>
                 </div>
@@ -404,7 +404,7 @@ const JobSingleDynamicV3 = ({ params }) => {
                       data-bs-toggle="modal"
                       data-bs-target="#applyJobModal"
                     >
-                      Apply For Job
+                      Apply For Inquiry
                     </a>
                     <button className="bookmark-btn">
                       <i className="flaticon-bookmark"></i>
@@ -422,7 +422,7 @@ const JobSingleDynamicV3 = ({ params }) => {
                     <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                       <div className="apply-modal-content modal-content">
                         <div className="text-center">
-                          <h3 className="title">Apply for this job</h3>
+                          <h3 className="title">Apply for this inquiry</h3>
                           <button
                             type="button"
                             className="closed-modal"
@@ -492,18 +492,18 @@ const JobSingleDynamicV3 = ({ params }) => {
             </div>
             {/* End .row  */}
 
-            <div className="related-jobs">
+            {/* <div className="related-jobs">
               <div className="title-box">
                 <h3>Related Jobs</h3>
                 <div className="text">2020 jobs live - 293 added today.</div>
               </div>
-              {/* End title box */}
+ 
 
               <div className="row">
                 <RelatedJobs2 />
               </div>
-              {/* End .row */}
-            </div>
+
+            </div> */}
             {/* <!-- Related Jobs --> */}
           </div>
           {/* End auto-container */}

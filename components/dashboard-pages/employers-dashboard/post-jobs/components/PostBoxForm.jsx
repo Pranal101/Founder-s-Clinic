@@ -167,7 +167,7 @@ const PostBoxForm = () => {
       <div className="row">
         {/* <!-- Input --> */}
         <div className="form-group col-lg-12 col-md-12">
-          <label>Project Title</label>
+          <label>Inquiry Title</label>
           <input
             type="text"
             name="title"
@@ -179,10 +179,10 @@ const PostBoxForm = () => {
         </div>
         {/* <!-- About Company --> */}
         <div className="form-group col-lg-12 col-md-12">
-          <label>Project Description</label>
+          <label>Inquiry Description</label>
           <textarea
             name="description"
-            placeholder="Project Description"
+            placeholder="Inquiry Description"
             value={formData.description}
             onChange={handleChange}
             required
@@ -287,7 +287,7 @@ const PostBoxForm = () => {
         </div>
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
-          <label>Project Location</label>
+          <label>Inquiry Location</label>
           <input
             type="text"
             name="jobLocation"
@@ -350,7 +350,7 @@ const PostBoxForm = () => {
         </div>
         {/* Input for Start Date */}
         <div className="custom-form-group form-group col-lg-6 col-md-12">
-          <label className="custom-form-label">Project Start Date</label>
+          <label className="custom-form-label">Inquiry Start Date</label>
           <DatePicker
             selected={formData.expectedStartDate}
             onChange={(date) => handleDateChange(date, "expectedStartDate")}
@@ -361,7 +361,7 @@ const PostBoxForm = () => {
         </div>
         {/* Input for Completion Timeline */}
         <div className="custom-form-group form-group col-lg-6 col-md-12">
-          <label className="custom-form-label">Project Deadline</label>
+          <label className="custom-form-label">Inquiry Deadline</label>
           <DatePicker
             selected={formData.completionTimeline}
             onChange={(date) => handleDateChange(date, "completionTimeline")}

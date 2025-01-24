@@ -87,6 +87,7 @@ const CouponListing = () => {
               <tr>
                 <th>Coupon Code</th>
                 <th>Discount</th>
+                <th>Description</th>
                 <th>Type</th>
                 <th>Expiration Date</th>
                 <th>Actions</th>
@@ -97,6 +98,7 @@ const CouponListing = () => {
                 <tr key={coupon._id}>
                   <td>{coupon.code}</td>
                   <td>{coupon.discount}</td>
+                  <td>{coupon.description}</td>
                   <td>{coupon.type}</td>
                   <td>
                     {new Date(coupon.expirationDate).toLocaleDateString()}

@@ -9,6 +9,8 @@ import "react-datepicker/dist/react-datepicker.css"; // Import Datepicker CSS
 const CreateCoupon = () => {
   const [formData, setFormData] = useState({
     code: "",
+    description: "",
+    userType: "",
     discount: "",
     type: "fixed", // Default type
     expirationDate: null, // Initialize as null
@@ -83,6 +85,32 @@ const CreateCoupon = () => {
             onChange={handleChange}
             required
           />
+        </div>
+        <div className="form-group col-lg-12 col-md-12">
+          <label>Description:</label>
+          <input
+            type="text"
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group col-lg-12 col-md-12">
+          <label>User Type</label>
+          <select
+            className="chosen-single form-select"
+            name="userType"
+            value={formData.userType}
+            onChange={handleChange}
+          >
+            <option>Select</option>
+            <option>Enterprise</option>
+            <option>Professional</option>
+            <option>Intern</option>
+            <option>Investor</option>
+            <option>Networking Community</option>
+          </select>
         </div>
 
         <div className="form-group col-lg-12 col-md-12">

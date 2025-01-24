@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Select from "react-select";
+import countryData from "@/data/countries.json";
 import axios from "axios";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { toast } from "react-toastify";
@@ -9,33 +10,37 @@ const FormInfoBox = () => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    entityName: "",
-    organizationRole: "",
     contactNumber: "",
     email: "",
-    websiteLink: "",
-    experienceYears: "",
-    foundedYear: "",
-    teamSize: "",
-    categories: [],
-    allowSearchListing: "",
-    businessDescription: "",
+    linkedinUrl: "",
     socialMediaLinks: "",
+    nationality: "",
     country: "",
     city: "",
     completeAddress: "",
+    educationStatus: "",
+    institutionName: "",
+    major: "",
+    certifications: "",
+    internshipPreferences: [],
+    preferredDuration: "",
+    preferredStartDate: "",
+    preferredIndustries: [],
+    preferredLocation: "",
+    softwareProficiency: "",
+    additionalInfo: "",
   });
 
   const [loading, setLoading] = useState(true);
-  const catOptions = [
-    { value: "Banking", label: "Banking" },
-    { value: "Digital & Creative", label: "Digital & Creative" },
-    { value: "Retail", label: "Retail" },
-    { value: "Human Resources", label: "Human Resources" },
-    { value: "Managemnet", label: "Managemnet" },
-    { value: "Accounting & Finance", label: "Accounting & Finance" },
-    { value: "Digital", label: "Digital" },
-    { value: "Creative Art", label: "Creative Art" },
+  const [countryOptions, setCountryOptions] = useState([]);
+  const [cityOptions, setCityOptions] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState(null);
+  const preferences = [
+    { value: "Full-time", label: "Full-time" },
+    { value: "Part-time", label: "Part-time" },
+    { value: "Remote", label: "Remote" },
+    { value: "In-person", label: "In-person" },
+    { value: "Hybrid", label: "Hybrid" },
   ];
   useEffect(() => {
     const fetchProfile = async (user) => {
@@ -56,19 +61,32 @@ const FormInfoBox = () => {
         setFormData({
           firstName: profile.firstName || "",
           lastName: profile.lastName || "",
-          email: profile.email || "",
           contactNumber: profile.contactNumber || "",
-          organizationRole: profile.organizationRole || "",
-          websiteLink: profile.websiteLink || "",
-          foundedYear: profile.foundedYear || "",
-          teamSize: profile.teamSize || "",
-          categories: profile.categories || [],
-          allowSearchListing: profile.allowSearchListing ? "Yes" : "No",
-          businessDescription: profile.businessDescription || "",
+          email: profile.email || "",
+          linkedinUrl: profile.linkedinUrl || "",
           socialMediaLinks: profile.socialMediaLinks || "",
+          nationality: profile.nationality || "",
           country: profile.country || "",
           city: profile.city || "",
           completeAddress: profile.completeAddress || "",
+          educationStatus: profile.educationStatus || "",
+          institutionName: profile.institutionName || "",
+          major: profile.major || "",
+          certifications: profile.certifications || "",
+          internshipPreferences: profile.internshipPreferences
+            ? profile.internshipPreferences.map((service) => ({
+                value: service,
+                label: service,
+              }))
+            : [],
+          preferredDuration: profile.preferredDuration || "",
+          preferredStartDate: profile.preferredStartDate
+            ? new Date(profile.preferredStartDate).toLocaleDateString("en-GB") // Formats to dd/mm/yyyy
+            : "",
+          preferredIndustries: profile.preferredIndustries || [],
+          preferredLocation: profile.preferredLocation || "",
+          softwareProficiency: profile.softwareProficiency || "",
+          additionalInfo: profile.additionalInfo || "",
         });
       } catch (error) {
         console.error("Error fetching profile:", error.response?.data || error);
@@ -89,6 +107,46 @@ const FormInfoBox = () => {
 
     return () => unsubscribe(); // Clean up the observer on unmount
   }, []);
+  useEffect(() => {
+    if (Array.isArray(countryData)) {
+      const countries = countryData.map((country) => ({
+        value: country.name,
+        label: country.name,
+        cities: country.states
+          ? country.states.flatMap((state) =>
+              state.cities.map((city) => city.name)
+            )
+          : [],
+      }));
+      setCountryOptions(countries);
+    } else {
+      console.error("Invalid JSON structure:", countryData);
+    }
+  }, []);
+
+  const handleCountryChange = (selectedOption) => {
+    setSelectedCountry(selectedOption);
+    setFormData((prev) => ({
+      ...prev,
+      country: selectedOption ? selectedOption.value : "",
+    }));
+
+    if (selectedOption && selectedOption.cities.length > 0) {
+      const cities = selectedOption.cities.map((city) => ({
+        value: city,
+        label: city,
+      }));
+      setCityOptions(cities);
+    } else {
+      setCityOptions([]);
+    }
+  };
+  const handleCityChange = (selectedOption) => {
+    setFormData((prev) => ({
+      ...prev,
+      city: selectedOption ? selectedOption.value : "",
+    }));
+  };
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -108,14 +166,32 @@ const FormInfoBox = () => {
       }
 
       const userToken = await user.getIdToken();
-
       if (!userToken) {
         throw new Error("User not authenticated");
       }
 
+      // Sanitize and format the preferredStartDate to "YYYY-MM-DD"
+      const formatDate = (dateString) => {
+        const [day, month, year] = dateString.split("/").map(Number);
+
+        // Create the Date object in UTC using Date.UTC() to prevent local time zone issues
+        const date = new Date(Date.UTC(year, month - 1, day));
+
+        return date.toISOString().split("T")[0]; // Return in "YYYY-MM-DD" format
+      };
+      const sanitizedData = {
+        ...formData,
+        preferredStartDate: formData.preferredStartDate
+          ? formatDate(formData.preferredStartDate)
+          : "", // If a preferredStartDate exists, format it
+        internshipPreferences: formData.internshipPreferences
+          .map((preference) => preference.value) // Extract only `value` from objects
+          .filter((preference) => preference !== null),
+      };
+
       const response = await axios.patch(
         "https://founders-clinic-backend.onrender.com/api/user/profile",
-        { profileData: formData },
+        { profileData: sanitizedData },
         {
           headers: {
             Authorization: `Bearer ${userToken}`,
@@ -123,16 +199,19 @@ const FormInfoBox = () => {
         }
       );
 
-      console.log("Profile updated successfully:", response.data);
       toast.success("Profile updated successfully!");
     } catch (error) {
       console.error("Error saving profile:", error.response?.data || error);
     }
   };
-  const handleSelectChange = (selectedOptions) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      categories: selectedOptions.map((option) => option.value),
+  const handleSelectChange = (field, selectedOption) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: selectedOption
+        ? selectedOption
+            .filter((option) => option && option.value !== null) // Remove nulls
+            .map((option) => option.value) // Extract only the `value`
+        : [],
     }));
   };
   if (loading) {
@@ -141,166 +220,227 @@ const FormInfoBox = () => {
   return (
     <form className="default-form" onSubmit={handleSave}>
       <div className="row">
-        {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>First Name</label>
           <input
             type="text"
             name="firstName"
-            placeholder=""
             value={formData.firstName}
             onChange={handleChange}
           />
         </div>
-
-        {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Last Name</label>
           <input
             type="text"
             name="lastName"
-            placeholder=""
             value={formData.lastName}
             onChange={handleChange}
           />
         </div>
-
-        {/* <!-- Input --> */}
-        {/* <div className="form-group col-lg-6 col-md-12">
-          <label>Entity Name</label>
-          <input
-            type="text"
-            name="entityName"
-            value={formData.entityName}
-            onChange={handleChange}
-            placeholder=""
-          />
-        </div> */}
-
-        {/* <!-- Input --> */}
-        {/* <div className="form-group col-lg-6 col-md-12">
-          <label>Organization Role</label>
-          <input
-            type="text"
-            name="organizationRole"
-            value={formData.organizationRole}
-            onChange={handleChange}
-            placeholder=""
-          />
-        </div> */}
-
-        {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Contact Number</label>
           <input
             type="text"
             name="contactNumber"
-            placeholder="0 123 456 7890"
             value={formData.contactNumber}
             onChange={handleChange}
           />
         </div>
-
-        {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
-          <label>Email address</label>
+          <label>Email</label>
           <input
-            type="text"
+            type="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
           />
         </div>
-
-        {/* <!-- Input --> */}
-        {/* <div className="form-group col-lg-6 col-md-12">
-          <label>Website</label>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>LinkedIn URL</label>
           <input
             type="text"
-            name="websiteLink"
-            value={formData.websiteLink}
+            name="linkedinUrl"
+            value={formData.linkedinUrl}
             onChange={handleChange}
-            placeholder="www.jerome.com"
           />
-        </div> */}
-
-        {/* <!-- Input --> */}
-        {/* <div className="form-group col-lg-6 col-md-12">
-          <label>Experience</label>
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Social Media Links</label>
           <input
             type="text"
-            name="experienceYears"
-            value={formData.experienceYears}
+            name="socialMediaLinks"
+            value={formData.socialMediaLinks}
             onChange={handleChange}
-            placeholder="Experience(in years)"
           />
-        </div> */}
-
-        {/* <!-- Input --> */}
-        {/* <div className="form-group col-lg-6 col-md-12">
-          <label>Education Levels</label>
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Nationality</label>
           <input
             type="text"
-            name="name"
-            placeholder="Certificate"
+            name="nationality"
+            value={formData.nationality}
             onChange={handleChange}
           />
-        </div> */}
-
-        {/* <!-- Search Select --> */}
-        {/* <div className="form-group col-lg-6 col-md-12">
-          <label>Categories </label>
-          <Select
-            defaultValue={[catOptions[1]]}
-            isMulti
-            name="colors"
-            options={catOptions}onChange={handleSelectChange}
-            className="basic-multi-select"
-            classNamePrefix="select"
-          />
-        </div> */}
-
-        {/* <!-- About Company --> */}
-        {/* <div className="form-group col-lg-12 col-md-12">
-          <label>Description</label>
-          <textarea placeholder="Spent several years working on sheep on Wall Street. Had moderate success investing in Yugo's on Wall Street. Managed a small team buying and selling Pogo sticks for farmers. Spent several years licensing licorice in West Palm Beach, FL. Developed several new methods for working it banjos in the aftermarket. Spent a weekend importing banjos in West Palm Beach, FL.In this position, the Software Engineer collaborates with Evention's Development team to continuously enhance our current software solutions as well as create new solutions to eliminate the back-office operations and management challenges present"></textarea>
-        </div> */}
-        {/* <!-- Input --> */}
+        </div>
         <div className="form-group col-lg-6 col-md-12">
           <label>Country</label>
-          <input
-            type="text"
+          <Select
             name="country"
-            placeholder="Country"
-            value={formData.country}
-            onChange={handleChange}
+            options={countryOptions}
+            onChange={handleCountryChange}
+            placeholder={formData.country}
           />
         </div>
-        {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>City</label>
-          <input
-            type="text"
+          <Select
             name="city"
-            placeholder="City"
-            value={formData.city}
-            onChange={handleChange}
+            options={cityOptions}
+            onChange={handleCityChange}
+            placeholder={formData.city}
+            isDisabled={!selectedCountry || cityOptions.length === 0}
           />
         </div>
-        {/* <!-- Input --> */}
-        <div className="form-group col-lg-12 col-md-12">
+        <div className="form-group col-lg-6 col-md-12">
           <label>Complete Address</label>
           <input
             type="text"
             name="completeAddress"
-            placeholder="Complete Address"
             value={formData.completeAddress}
             onChange={handleChange}
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Education Status</label>
+          <input
+            type="text"
+            name="educationStatus"
+            value={formData.educationStatus}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Institution Name</label>
+          <input
+            type="text"
+            name="institutionName"
+            value={formData.institutionName}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Major</label>
+          <input
+            type="text"
+            name="major"
+            value={formData.major}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Certifications</label>
+          <input
+            type="text"
+            name="certifications"
+            value={formData.certifications}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>What type of internship are you seeking? </label>
+          <Select
+            defaultValue={formData.internshipPreferences}
+            isMulti
+            name="internshipPreferences"
+            options={preferences}
+            className="basic-multi-select"
+            classNamePrefix="select"
+            onChange={(selected) =>
+              handleSelectChange("internshipPreferences", selected)
+            }
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Preferred Duration</label>
+          <input
+            type="text"
+            name="preferredDuration"
+            value={formData.preferredDuration}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Preferred Start Date</label>
+          <input
+            type="text"
+            name="preferredStartDate"
+            placeholder="dd/mm/yyyy"
+            value={formData.preferredStartDate}
+            onChange={(e) => {
+              const { value } = e.target;
+              // Allow typing but only keep valid characters (numbers and slashes)
+              const sanitizedValue = value.replace(/[^0-9/]/g, "");
+              setFormData((prevData) => ({
+                ...prevData,
+                preferredStartDate: sanitizedValue,
+              }));
+            }}
+            onBlur={(e) => {
+              const { value } = e.target;
+              // Validate on blur (when the field loses focus)
+              const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+              if (value && !dateRegex.test(value)) {
+                toast.error("Date must be in dd/mm/yyyy format");
+              }
+            }}
           />
         </div>
 
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
+          <label>Preferred Industries</label>
+          <input
+            type="text"
+            name="preferredIndustries"
+            placeholder={formData.preferredIndustries}
+            value={formData.preferredIndustries}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Preferred Location</label>
+          <input
+            type="text"
+            name="preferredLocation"
+            placeholder={formData.preferredLocation}
+            value={formData.preferredLocation}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Software Proficiency</label>
+          <input
+            type="text"
+            name="softwareProficiency"
+            placeholder={formData.softwareProficiency}
+            value={formData.softwareProficiency}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Additional Information</label>
+          <input
+            type="text"
+            name="additionalInfo"
+            placeholder={formData.additionalInfo}
+            value={formData.additionalInfo}
+            onChange={handleChange}
+          />
+        </div>
+
+        {/* <!-- Input --> */}
+        <div className="form-group col-lg-12 col-md-12">
           <button type="submit" className="theme-btn btn-style-one">
             Save
           </button>

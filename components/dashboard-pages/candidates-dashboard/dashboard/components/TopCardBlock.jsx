@@ -53,14 +53,68 @@
 // };
 
 // export default TopCardBlock;
+"use client";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import axios from "axios";
+import { getAuth, onAuthStateChanged } from "firebase/auth"; // Import Firebase auth
 
 const TopCardBlock = () => {
+  const [jobCount, setJobCount] = useState(0);
+  const [inquiriesCount, setInquiriesCount] = useState(0);
+
+  // Fetch job count
+  const fetchJobCount = async () => {
+    try {
+      const response = await axios.get(
+        "https://founders-clinic-backend.onrender.com/api/jobs/jobs-count"
+      ); // Adjust API route if necessary
+      setJobCount(response.data.count);
+    } catch (error) {
+      console.error("Error fetching job count:", error);
+    }
+  };
+
+  // Fetch inquiries count for the logged-in user
+  const fetchInquiriesCount = async (user) => {
+    try {
+      const userToken = await user.getIdToken();
+      const response = await axios.get(
+        "https://founders-clinic-backend.onrender.com/api/user/inquiries-count", // Adjust API route if necessary
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(response);
+      setInquiriesCount(response.data.count);
+    } catch (error) {
+      console.error("Error fetching inquiries count:", error);
+    }
+  };
+
+  useEffect(() => {
+    // Firebase authentication state change listener
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        fetchJobCount(); // Fetch job count once
+        fetchInquiriesCount(user); // Fetch inquiries count for logged-in user
+      } else {
+        console.error("User not authenticated");
+      }
+    });
+
+    return () => unsubscribe(); // Cleanup on unmount
+  }, []);
+
   const cardContent = [
     {
       id: 1,
       icon: "flaticon-briefcase",
-      countNumber: "22",
+      countNumber: inquiriesCount, // Dynamically display inquiries count
       metaName: "Inqueries Responded",
       uiClass: "ui-blue",
       route: "/candidates-dashboard/applied-jobs",
@@ -68,8 +122,8 @@ const TopCardBlock = () => {
     {
       id: 2,
       icon: "la-file-invoice",
-      countNumber: "9382",
-      metaName: "Proposal Alerts",
+      countNumber: jobCount, // Dynamically display job count
+      metaName: "All Proposals",
       uiClass: "ui-red",
       route: "/candidates-dashboard/job-alerts",
     },
@@ -97,7 +151,7 @@ const TopCardBlock = () => {
         <div
           className="ui-block col-xl-3 col-lg-6 col-md-6 col-sm-12"
           key={item.id}
-          style={{ cursor: "pointer" }} // You can remove the onClick handler
+          style={{ cursor: "pointer" }}
         >
           <Link href={item.route}>
             <div className={`ui-item ${item.uiClass}`}>

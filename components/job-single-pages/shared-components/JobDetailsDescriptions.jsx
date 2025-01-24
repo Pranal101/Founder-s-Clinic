@@ -66,9 +66,9 @@
 const JobDetailsDescriptions = ({ job }) => {
   return (
     <div className="job-detail">
-      <h4>Job Description</h4>
+      <h4>Inquiry Description</h4>
       <p>{job.description || "Job Description"} </p>
-      <h4>Key Responsibilities</h4>
+      <h4>Required Skills</h4>
       <ul className="list-style-three">
         <li>
           Be involved in every step of the product design cycle from discovery
@@ -102,18 +102,6 @@ const JobDetailsDescriptions = ({ job }) => {
         <li>
           Present your work to the wider business at Show & Tell sessions.
         </li>
-      </ul>
-      <h4>Skill & Experience</h4>
-      <ul className="list-style-three">
-        <li>
-          You have at least 3 years’ experience working as a Product Designer.
-        </li>
-        <li>You have experience using Sketch and InVision or Framer X</li>
-        <li>
-          You have some previous experience working in an agile environment –
-          Think two-week sprints.
-        </li>
-        <li>You are familiar using Jira and Confluence in your workflow</li>
       </ul>
     </div>
   );

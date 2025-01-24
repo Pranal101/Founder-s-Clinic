@@ -8,7 +8,6 @@ import { getAuth } from "firebase/auth";
 const EnterprisePostBoxForm = () => {
   const [formData, setFormData] = useState({
     entityName: "",
-    entitySize: "",
     emailAddress: "",
     contactNumber: "",
     country: "",
@@ -132,7 +131,7 @@ const EnterprisePostBoxForm = () => {
             onChange={handleChange}
           />
         </div>
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>Size </label>
           <Select
             name="entitySize"
@@ -145,7 +144,7 @@ const EnterprisePostBoxForm = () => {
             }
             placeholder="Select size"
           />
-        </div>
+        </div> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Email Address</label>
           <input
@@ -196,7 +195,7 @@ const EnterprisePostBoxForm = () => {
           />
         </div>
         <div className="sec-title text-center">
-          <h3>About yourself</h3>
+          <h3>About Yourself</h3>
         </div>
         <div className="form-group col-lg-6 col-md-12">
           <label>First Name</label>

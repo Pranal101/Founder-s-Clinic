@@ -467,7 +467,7 @@ const ApplyJobModalContent = ({ jobId }) => {
         </div>
         <div className="col-lg-12 col-md-12 col-sm-12 form-group">
           <button className="theme-btn btn-style-one w-100" type="submit">
-            Apply Job
+            Apply Inquiry
           </button>
         </div>
       </div>
