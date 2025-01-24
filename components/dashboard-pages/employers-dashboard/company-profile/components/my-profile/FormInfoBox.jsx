@@ -201,7 +201,9 @@ const FormInfoBox = () => {
 
       const payload = {
         ...formData,
-        platformServices: formData.platformServices, // Ensure platformServices is sent as an array of strings
+        platformServices: formData.platformServices.map(
+          (service) => service.value
+        ), // Ensure platformServices is sent as an array of strings
       };
 
       const response = await axios.patch(

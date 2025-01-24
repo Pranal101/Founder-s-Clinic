@@ -187,30 +187,29 @@ const FormInfoBox = () => {
       const auth = getAuth();
       const user = auth.currentUser;
 
-      if (!user) {
-        throw new Error("User not authenticated");
-      }
+      if (!user) throw new Error("User not authenticated");
 
       const userToken = await user.getIdToken();
 
-      if (!userToken) {
-        throw new Error("User not authenticated");
-      }
+      // Transform servicesOffered to an array of strings
+      const payload = {
+        ...formData,
+        servicesOffered: formData.servicesOffered.map(
+          (service) => service.value
+        ),
+      };
 
       const response = await axios.patch(
         "https://founders-clinic-backend.onrender.com/api/user/profile",
-        { profileData: formData },
-        {
-          headers: {
-            Authorization: `Bearer ${userToken}`,
-          },
-        }
+        { profileData: payload },
+        { headers: { Authorization: `Bearer ${userToken}` } }
       );
 
       console.log("Profile updated successfully:", response.data);
       toast.success("Profile updated successfully!");
     } catch (error) {
       console.error("Error saving profile:", error.response?.data || error);
+      toast.error("Failed to save profile. Please try again.");
     }
   };
   return (
