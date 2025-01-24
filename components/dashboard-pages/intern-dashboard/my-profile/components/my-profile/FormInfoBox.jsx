@@ -166,28 +166,16 @@ const FormInfoBox = () => {
       }
 
       const userToken = await user.getIdToken();
-      if (!userToken) {
-        throw new Error("User not authenticated");
-      }
 
-      // Sanitize and format the preferredStartDate to "YYYY-MM-DD"
-      const formatDate = (dateString) => {
-        const [day, month, year] = dateString.split("/").map(Number);
-
-        // Create the Date object in UTC using Date.UTC() to prevent local time zone issues
-        const date = new Date(Date.UTC(year, month - 1, day));
-
-        return date.toISOString().split("T")[0]; // Return in "YYYY-MM-DD" format
-      };
+      // Transform internshipPreferences into an array of strings
       const sanitizedData = {
         ...formData,
-        preferredStartDate: formData.preferredStartDate
-          ? formatDate(formData.preferredStartDate)
-          : "", // If a preferredStartDate exists, format it
-        internshipPreferences: formData.internshipPreferences
-          .map((preference) => preference.value) // Extract only `value` from objects
-          .filter((preference) => preference !== null),
+        internshipPreferences: formData.internshipPreferences.map(
+          (preference) => preference.value
+        ),
       };
+
+      console.log("Payload being sent:", sanitizedData);
 
       const response = await axios.patch(
         "https://founders-clinic-backend.onrender.com/api/user/profile",
@@ -202,16 +190,13 @@ const FormInfoBox = () => {
       toast.success("Profile updated successfully!");
     } catch (error) {
       console.error("Error saving profile:", error.response?.data || error);
+      toast.error("Failed to save profile. Please try again.");
     }
   };
   const handleSelectChange = (field, selectedOption) => {
     setFormData((prev) => ({
       ...prev,
-      [field]: selectedOption
-        ? selectedOption
-            .filter((option) => option && option.value !== null) // Remove nulls
-            .map((option) => option.value) // Extract only the `value`
-        : [],
+      [field]: selectedOption || [], // Store selected options directly
     }));
   };
   if (loading) {

@@ -171,9 +171,7 @@ const FormInfoBox = () => {
   const handleSelectChange = (field, selectedOption) => {
     setFormData((prev) => ({
       ...prev,
-      [field]: selectedOption
-        ? selectedOption.map((option) => option.value) // Extract only the `value` property
-        : [],
+      [field]: selectedOption || [], // Set as an array of objects (value and label)
     }));
   };
 
@@ -191,13 +189,15 @@ const FormInfoBox = () => {
 
       const userToken = await user.getIdToken();
 
-      // Transform servicesOffered to an array of strings
+      // Transform servicesOffered into an array of strings
       const payload = {
         ...formData,
         servicesOffered: formData.servicesOffered.map(
           (service) => service.value
-        ),
+        ), // Extract only values
       };
+
+      console.log("Payload being sent:", payload); // Debugging
 
       const response = await axios.patch(
         "https://founders-clinic-backend.onrender.com/api/user/profile",

@@ -182,9 +182,7 @@ const FormInfoBox = () => {
   const handleSelectChange = (field, selectedOption) => {
     setFormData((prev) => ({
       ...prev,
-      [field]: selectedOption
-        ? selectedOption.map((option) => option.value) // Extract only the `value` property
-        : [],
+      [field]: selectedOption || [], // Update as an array of objects
     }));
   };
 
