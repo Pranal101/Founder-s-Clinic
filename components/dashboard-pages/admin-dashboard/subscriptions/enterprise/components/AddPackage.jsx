@@ -108,7 +108,6 @@ const PostBoxForm = () => {
             name="image"
             value={formData.image}
             onChange={handleChange}
-            required
           />
         </div>
         {/* <!-- Input --> */}

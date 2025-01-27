@@ -70,38 +70,11 @@ const JobDetailsDescriptions = ({ job }) => {
       <p>{job.description || "Job Description"} </p>
       <h4>Required Skills</h4>
       <ul className="list-style-three">
-        <li>
-          Be involved in every step of the product design cycle from discovery
-          to developer handoff and user acceptance testing.
-        </li>
-        <li>
-          Work with BAs, product managers and tech teams to lead the Product
-          Design
-        </li>
-        <li>
-          Maintain quality of the design process and ensure that when designs
-          are translated into code they accurately reflect the design
-          specifications.
-        </li>
-        <li>Accurately estimate design tickets during planning sessions.</li>
-        <li>
-          Contribute to sketching sessions involving non-designersCreate,
-          iterate and maintain UI deliverables including sketch files, style
-          guides, high fidelity prototypes, micro interaction specifications and
-          pattern libraries.
-        </li>
-        <li>
-          Ensure design choices are data led by identifying assumptions to test
-          each sprint, and work with the analysts in your team to plan moderated
-          usability test sessions.
-        </li>
-        <li>
-          Design pixel perfect responsive UI’s and understand that adopting
-          common interface patterns is better for UX than reinventing the wheel
-        </li>
-        <li>
-          Present your work to the wider business at Show & Tell sessions.
-        </li>
+        {job.skillsRequired && job.skillsRequired.length > 0 ? (
+          job.skillsRequired.map((skill, index) => <li key={index}>{skill}</li>)
+        ) : (
+          <li>No skills required listed.</li>
+        )}
       </ul>
     </div>
   );

@@ -6,6 +6,7 @@ import axios from "axios";
 import countryData from "@/data/countries.json";
 import { getAuth } from "firebase/auth";
 import LogoCoverUploader from "./LogoCoverUploader";
+import { toast } from "react-toastify";
 
 const PostBoxForm = () => {
   const [file, setFile] = useState(null);
@@ -128,7 +129,10 @@ const PostBoxForm = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    if (!formData.acceptTerms) {
+      toast.error("You must accept the terms and conditions!");
+      return;
+    }
     try {
       const auth = getAuth();
       const user = auth.currentUser;
@@ -279,7 +283,16 @@ const PostBoxForm = () => {
             placeholder="e.g., Technology, Finance, Retail, Manufacturing, etc."
           />
         </div>
-
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Business Description</label>
+          <input
+            type="text"
+            name="businessDescription"
+            value={formData.businessDescription}
+            onChange={handleChange}
+            placeholder="Business Description"
+          />
+        </div>
         {/* <!-- Bussiness info --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Current Business Stage</label>
@@ -422,7 +435,6 @@ const PostBoxForm = () => {
             platform?
           </label>
           <Select
-            defaultValue={[servicesProvided[0]]}
             name="platformServices"
             isMulti
             options={servicesProvided}
@@ -439,9 +451,9 @@ const PostBoxForm = () => {
           </label>
           <input
             type="text"
-            placeholder="Funding amount"
-            name="fundingAmount"
-            value={formData.fundingAmount}
+            placeholder="Additional Information"
+            name="additionalInfo"
+            value={formData.additionalInfo}
             onChange={handleChange}
           />
         </div>

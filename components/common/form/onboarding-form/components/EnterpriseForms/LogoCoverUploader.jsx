@@ -69,7 +69,6 @@ const LogoCoverUploader = () => {
             name="attachments[]"
             accept="image/*"
             id="upload"
-            required
             onChange={logoHandler}
           />
           <label className="uploadButton-button ripple-effect" htmlFor="upload">

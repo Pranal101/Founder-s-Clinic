@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
+import { toast } from "react-toastify";
 import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
 import countryData from "@/data/countries.json";
@@ -17,7 +18,7 @@ const PostBoxForm = () => {
     currentCountry: "",
     currentCity: "",
     nationality: "",
-    linkedInProfile: "",
+    linkedinUrl: "",
     educationStatus: "",
     otherEducation: "",
     institutionName: "",
@@ -54,6 +55,14 @@ const PostBoxForm = () => {
     { value: "Remote", label: "Remote" },
     { value: "In-person", label: "In-person" },
     { value: "Hybrid", label: "Hybrid" },
+  ];
+  const majorOptions = [
+    { value: "Science", label: "Science" },
+    { value: "Commerce", label: "Commerce" },
+    { value: "Arts", label: "Arts" },
+    { value: "Management", label: "Management" },
+    { value: "Engineering", label: "Engineering" },
+    { value: "IT", label: "IT" },
   ];
   const skills = [
     { value: "Communication Skills", label: "Communication Skills" },
@@ -105,6 +114,15 @@ const PostBoxForm = () => {
       setCityOptions([]);
     }
   };
+  const handleSelectChange = (field, selectedOption) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: selectedOption
+        ? selectedOption.value || selectedOption.map((option) => option.value)
+        : "",
+    }));
+  };
+
   const handleCityChange = (selectedOption) => {
     setFormData((prev) => ({
       ...prev,
@@ -163,6 +181,10 @@ const PostBoxForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!formData.acceptTerms) {
+      toast.error("You must accept the terms and conditions!");
+      return;
+    }
 
     try {
       const auth = getAuth();
@@ -235,8 +257,8 @@ const PostBoxForm = () => {
           <label>LinkedIn Profile Link</label>
           <input
             type="text"
-            name="linkedInProfile"
-            value={formData.linkedInProfile}
+            name="linkedinUrl"
+            value={formData.linkedinUrl}
             onChange={handleChange}
             placeholder="Linkedin Profile Url"
           />
@@ -317,13 +339,11 @@ const PostBoxForm = () => {
         </div>
         {/* <!-- Education --> */}
         <div className="form-group col-lg-6 col-md-12">
-          <label>Field of Study/Major</label>
-          <input
-            type="text"
-            name="major"
-            value={formData.major}
-            onChange={handleChange}
-            placeholder="Major"
+          <label>Major</label>
+          <Select
+            options={majorOptions}
+            onChange={(selected) => handleSelectChange("major", selected)}
+            required
           />
         </div>
 
@@ -363,13 +383,14 @@ const PostBoxForm = () => {
             onChange={handleChange}
           >
             <option>Select</option>
+            <option>Less than 3 Months</option>
             <option>1-3 Months</option>
             <option>3-6 Months</option>
             <option>6-12 Months</option>
           </select>
         </div>
         {/* <!-- Internship Interests and Preferences --> */}
-        <div className="custom-form-group form-group col-lg-6 col-md-12">
+        <div className="form-group col-lg-6 col-md-12">
           <label>Preferred Start Date</label>
           <input
             type="text"
@@ -381,7 +402,7 @@ const PostBoxForm = () => {
               // Allow input as long as it's a valid partial date or empty
               const partialDateRegex = /^(\d{0,2}(\/\d{0,2}(\/\d{0,2})?)?)?$/;
 
-              if (partialDateRegex.test(value)) {
+              if (partialDateRegex.test(value) || value === "") {
                 setFormData((prev) => ({
                   ...prev,
                   [name]: value,
@@ -678,36 +699,20 @@ const PostBoxForm = () => {
             placeholder="Additional Info"
           />
         </div>
-        {/* Additional Info */}
-        {/* <div className="form-group col-lg-6 col-md-12">
-          <label>
-            Do you have any specific questions or expectations from the
-            internship provider?
-          </label>
-          <input
-            type="text"
-            name="specificExpectations"
-            value={formData.specificExpectations}
-            onChange={handleChange}
-            placeholder="Specific Expectations"
-          />
-        </div> */}
         <LogoCoverUploader />
-        {/* <div className="form-group col-lg-12 col-md-12">
-          <label>Upload Document</label>
-          <input type="file" onChange={handleFileChange} />
-        </div> */}
         {/* <!-- Conditions checkbox --> */}
         <div className="form-group col-lg-12 col-md-12">
           <div className="field-outer">
             <div className="input-group checkboxes square">
-              <input type="checkbox" name="accept-terms" id="accept-terms" />
-              <label
-                htmlFor="accept-terms"
-                className="accept-terms"
-                checked={formData.acceptTerms}
+              {/* Correctly attach onChange and checked to the input */}
+              <input
+                type="checkbox"
+                name="acceptTerms" // Match the state key
+                id="accept-terms"
+                checked={formData.acceptTerms} // Correctly bind to state
                 onChange={handleChange}
-              >
+              />
+              <label htmlFor="accept-terms" className="accept-terms">
                 <span className="custom-checkbox"></span> I agree to the terms &
                 conditions and authorize Founders Clinic to contact me on the
                 number provided. This will override the registry with DNC/NDNC.

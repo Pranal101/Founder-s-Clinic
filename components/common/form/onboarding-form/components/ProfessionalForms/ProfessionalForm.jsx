@@ -4,6 +4,7 @@ import { getAuth } from "firebase/auth";
 import Select from "react-select";
 import axios from "axios";
 import countryData from "@/data/countries.json";
+import { toast } from "react-toastify";
 import Education from "@/components/dashboard-pages/candidates-dashboard/my-resume/components/Education";
 
 const PostBoxForm = ({ pricingContent }) => {
@@ -34,7 +35,34 @@ const PostBoxForm = ({ pricingContent }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Form validation
+    if (
+      !formData.firstName ||
+      !formData.lastName ||
+      !formData.entityName ||
+      !formData.role ||
+      !formData.emailAddress ||
+      !formData.contactNumber ||
+      !formData.country ||
+      !formData.city ||
+      !formData.completeAddress ||
+      !formData.acceptTerms
+    ) {
+      if (!formData.firstName) toast.error("First name is required!");
+      if (!formData.lastName) toast.error("Last name is required!");
+      if (!formData.entityName) toast.error("Entity name is required!");
+      if (!formData.role) toast.error("Role is required!");
+      if (!formData.emailAddress) toast.error("Email address is required!");
+      if (!formData.contactNumber) toast.error("Contact number is required!");
+      if (!formData.country) toast.error("Country is required!");
+      if (!formData.city) toast.error("City is required!");
+      if (!formData.completeAddress)
+        toast.error("Complete address is required!");
+      if (!formData.acceptTerms)
+        toast.error("You must accept the terms and conditions!");
 
+      return; // Stop the form submission
+    }
     try {
       const auth = getAuth();
       const user = auth.currentUser;

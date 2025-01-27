@@ -4,6 +4,7 @@ import { getAuth } from "firebase/auth";
 import axios from "axios";
 import Select from "react-select";
 import LogoCoverUploader from "./LogoCoverUploader";
+import { toast } from "react-toastify";
 
 const PostBoxForm = () => {
   const [file, setFile] = useState(null);
@@ -18,6 +19,7 @@ const PostBoxForm = () => {
     socialMediaLinks: "",
     experienceYears: "",
     qualification: "",
+    otherQualification: "",
     certifications: "",
     associations: "",
     servicesOffered: [],
@@ -81,6 +83,18 @@ const PostBoxForm = () => {
     },
     { value: "Hybrid", label: "Hybrid" },
   ];
+  const qualificationOptions = [
+    { value: "MBA", label: "MBA" },
+    { value: "BE", label: "BE" },
+    { value: "BTech", label: "BTech" },
+    { value: "MTech", label: "MTech" },
+    { value: "BCom", label: "BCom" },
+    { value: "MCom", label: "MCom" },
+    { value: "BA", label: "BA" },
+    { value: "MA", label: "MA" },
+    { value: "PhD", label: "PhD" },
+    { value: "Other", label: "Other" },
+  ];
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({
@@ -102,7 +116,10 @@ const PostBoxForm = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    if (!formData.acceptTerms) {
+      toast.error("You must accept the terms and conditions!");
+      return;
+    }
     try {
       const auth = getAuth();
       const user = auth.currentUser;
@@ -259,7 +276,7 @@ const PostBoxForm = () => {
           />
         </div>
         {/* <!-- Professional Background --> */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>Qualification</label>
           <input
             type="text"
@@ -268,7 +285,34 @@ const PostBoxForm = () => {
             value={formData.qualification}
             onChange={handleChange}
           />
+        </div> */}
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Qualification</label>
+          <Select
+            name="qualification"
+            options={qualificationOptions}
+            className="basic-multi-select"
+            classNamePrefix="select"
+            value={qualificationOptions.filter((option) =>
+              formData.qualification.includes(option.value)
+            )}
+            onChange={handleSelectChange}
+          />
         </div>
+        {/* Conditionally render input field for "Other" */}
+        {formData.qualification.includes("Other") && (
+          <div className="form-group col-lg-6 col-md-12">
+            <label>Please Specify</label>
+            <input
+              type="text"
+              name="otherQualification"
+              value={formData.otherQualification || ""}
+              onChange={handleChange} // Using the existing handleChange
+              placeholder="Please specify your qualification"
+              required
+            />
+          </div>
+        )}
         {/* <!-- Professional Background --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Certifications, Licenses, or Accreditations</label>
@@ -320,89 +364,6 @@ const PostBoxForm = () => {
             />
           </div>
         )}
-        {/* <!-- Services Offerred --> */}
-        {/* <div className="form-group col-lg-6 col-md-12">
-          <label>Provide description of each service you offer</label>
-          <input type="text" name="name" placeholder="description" />
-        </div> */}
-        {/* <!-- Services Offerred --> */}
-        {/* <div className="form-group col-lg-6 col-md-12">
-          <label>Who are your primary clients?</label>
-          <input
-            type="text"
-            name="primaryClients"
-            value={formData.primaryClients}
-            onChange={handleChange}
-            placeholder="e.g., startups, small businesses, corporations, specific industries"
-          />
-        </div> */}
-        {/* <!-- Service Delivery and Approach --> */}
-        {/* <div className="form-group col-lg-6 col-md-12">
-          <label>How do you deliver your services?</label>
-          <Select
-            // defaultValue={[servicesProvided[0]]}
-            name="serviceDelivery"
-            isMulti
-            options={serviceDelivery}
-            className="basic-multi-select"
-            classNamePrefix="select"
-            onChange={handleSelectChange}
-          />
-        </div> */}
-        {/* <!-- Service Delivery and Approach --> */}
-        {/* <div className="form-group col-lg-6 col-md-12">
-          <label>What is your typical process when working with clients?</label>
-          <input
-            type="text"
-            name="processDescription"
-            value={formData.processDescription}
-            onChange={handleChange}
-            placeholder="Briefly describe how you engage with clients, from consultation to execution."
-          />
-        </div> */}
-
-        {/* <!-- Service Delivery and Approach --> */}
-        {/* <div className="form-group col-lg-6 col-md-12">
-          <label>Do you offer customized solutions for businesses?</label>
-          <select
-            name="customizedSolutions"
-            className="chosen-single form-select"
-            value={formData.customizedSolutions}
-            onChange={handleChange}
-          >
-            <option></option>
-            <option>Yes</option>
-            <option>No</option>
-          </select>
-        </div> */}
-
-        {/* <!-- Pricing and Packages --> */}
-        {/* <div className="form-group col-lg-6 col-md-12">
-          <label>What is your pricing model?</label>
-          <Select
-            // defaultValue={[servicesProvided[0]]}
-            name="pricingModel"
-            isMulti
-            options={MultiPricingModel}
-            className="basic-multi-select"
-            classNamePrefix="select"
-            onChange={handleSelectChange}
-          />
-        </div> */}
-        {/* <!-- Value Proposition --> */}
-        {/* <div className="form-group col-lg-6 col-md-12">
-          <label>
-            What differentiates you from other professionals offering similar
-            services?
-          </label>
-          <input
-            type="text"
-            name="differentiators"
-            placeholder=""
-            value={formData.differentiators}
-            onChange={handleChange}
-          />
-        </div> */}
         {/* <!-- Value Proposition --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>What are the key pain points you help businesses solve?</label>
@@ -440,30 +401,6 @@ const PostBoxForm = () => {
           />
         </div> */}
         {/* <!-- Availability --> */}
-        {/* <div className="form-group col-lg-6 col-md-12">
-          <label>What is your typical availability for new clients?</label>
-          <input
-            type="text"
-            name="availability"
-            placeholder=""
-            value={formData.availability}
-            onChange={handleChange}
-          />
-        </div> */}
-        {/* <!-- Availability --> */}
-        {/* <div className="form-group col-lg-6 col-md-12">
-          <label>Do you offer free consultations?</label>
-          <select
-            name="freeConsultation"
-            className="chosen-single form-select"
-            value={formData.freeConsultation}
-            onChange={handleChange}
-          >
-            <option></option>
-            <option>Yes</option>
-            <option>No</option>
-          </select>
-        </div> */}
         {/* <!-- Availability --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>
@@ -478,10 +415,7 @@ const PostBoxForm = () => {
           />
         </div>
         <LogoCoverUploader />
-        {/* <div className="form-group col-lg-12 col-md-12">
-          <label>Upload Document</label>
-          <input type="file" onChange={handleFileChange} />
-        </div> */}
+
         {/* <!-- Conditions checkbox --> */}
         <div className="form-group col-lg-12 col-md-12">
           <div className="field-outer">

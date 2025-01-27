@@ -385,12 +385,12 @@ const JobSingleDynamicV3 = ({ params }) => {
                 <JobDetailsDescriptions job={job} />
                 {/* End job-details */}
 
-                <div className="other-options">
+                {/* <div className="other-options">
                   <div className="social-share">
                     <h5>Share this inquiry</h5>
                     <SocialTwo />
                   </div>
-                </div>
+                </div> */}
                 {/* <!-- Other Options --> */}
               </div>
               {/* End .content-column */}

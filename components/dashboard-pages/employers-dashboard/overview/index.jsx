@@ -21,6 +21,9 @@ const index = () => {
 
       <section className="ls-section">
         <div className="auto-container">
+          <div className="sec-title text-center">
+            <h2>Listed Enterprises</h2>
+          </div>
           <div className="row">
             <div className="content-column col-lg-12">
               <div className="ls-outer">

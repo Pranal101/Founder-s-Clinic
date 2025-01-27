@@ -4,6 +4,7 @@ import axios from "axios";
 import { getAuth } from "firebase/auth";
 import Select from "react-select";
 import countryData from "@/data/countries.json";
+import { toast } from "react-toastify";
 
 const PostBoxForm = () => {
   const [formData, setFormData] = useState({
@@ -30,7 +31,10 @@ const PostBoxForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    if (!formData.acceptTerms) {
+      toast.error("You must accept the terms and conditions!");
+      return;
+    }
     try {
       const auth = getAuth();
       const user = auth.currentUser;

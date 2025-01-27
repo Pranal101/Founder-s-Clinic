@@ -763,7 +763,8 @@ const HeaderNavContent = () => {
               >
                 <Link href="/admin-dashboard/dashboard">Admin</Link>
               </li>
-            ) : pathname === "/" ? (
+            ) : pathname === "/" ||
+              navItems.some((item) => pathname?.includes(item.guestLink)) ? (
               // Render all items for authenticated users on homepage
               navItems.map((item) => (
                 <li

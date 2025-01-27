@@ -56,14 +56,19 @@ import { fetchChats, fetchMessages } from "@/data/firebaseChat";
 import ContactList from "./ContactList";
 import ContentField from "./ContentField";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { chatSidebarToggle } from "../../../../../features/toggle/toggleSlice";
 
 const ChatBox = () => {
   const [contacts, setContacts] = useState([]);
   const [messages, setMessages] = useState([]);
   const [activeChatId, setActiveChatId] = useState(null);
   const [userId, setUserId] = useState(null);
+  const dispatch = useDispatch();
   // const userId = "B6TZjGHefyNug7IumD0jmKWSUi43";
-
+  const chatToggle = () => {
+    dispatch(chatSidebarToggle());
+  };
   useEffect(() => {
     const fetchUserId = async (user) => {
       if (user) {
@@ -112,9 +117,19 @@ const ChatBox = () => {
     <div className="row">
       <div className="contacts_column col-xl-4 col-lg-5 col-md-12 col-sm-12 chat">
         <div className="card contacts_card">
-          {/* <div className="card-header">
-            <SearchBox />
-          </div> */}
+          <div className="card-header">
+            {/* Startclose chatbox in mobile menu */}
+            <div
+              className="fix-icon position-absolute top-0 end-0 show-1023"
+              onClick={chatToggle}
+            >
+              <span className="flaticon-close"></span>
+            </div>
+            {/* close chatbox in mobile menu */}
+            {/* <div className="search-box-one">
+              <SearchBox />
+            </div> */}
+          </div>
           <div className="card-body contacts_body">
             <ContactList contacts={contacts} onSelectChat={setActiveChatId} />
           </div>

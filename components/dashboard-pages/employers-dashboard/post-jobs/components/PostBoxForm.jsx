@@ -7,6 +7,7 @@ import Select from "react-select";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Creatable from "react-select/creatable";
+import { toast } from "react-toastify";
 
 const PostBoxForm = () => {
   const [formData, setFormData] = useState({
@@ -134,10 +135,12 @@ const PostBoxForm = () => {
         }
       );
 
-      console.log("Job posted successfully:", response.data);
+      console.log("Inquiry posted successfully:", response.data);
+      toast.success("Inquiry Posted Successfully!");
       resetForm();
     } catch (error) {
-      console.error("Error posting job:", error.response?.data || error);
+      console.error("Error posting inquiry:", error.response?.data || error);
+      toast.error("Error posting inquiry,please try again.");
     }
   };
   // Reset form function
@@ -329,7 +332,7 @@ const PostBoxForm = () => {
             name="budget"
             value={formData.budget}
             onChange={handleChange}
-            placeholder="Specify Gender Preference"
+            placeholder="Specify Budget"
           />
         </div>
 
@@ -350,7 +353,7 @@ const PostBoxForm = () => {
         </div>
         {/* Input for Start Date */}
         <div className="custom-form-group form-group col-lg-6 col-md-12">
-          <label className="custom-form-label">Inquiry Start Date</label>
+          <label className="custom-form-label">Assignment Start Date</label>
           <DatePicker
             selected={formData.expectedStartDate}
             onChange={(date) => handleDateChange(date, "expectedStartDate")}
@@ -361,7 +364,7 @@ const PostBoxForm = () => {
         </div>
         {/* Input for Completion Timeline */}
         <div className="custom-form-group form-group col-lg-6 col-md-12">
-          <label className="custom-form-label">Inquiry Deadline</label>
+          <label className="custom-form-label">Assignment Deadline</label>
           <DatePicker
             selected={formData.completionTimeline}
             onChange={(date) => handleDateChange(date, "completionTimeline")}
@@ -373,7 +376,7 @@ const PostBoxForm = () => {
 
         {/* <!-- Input --> */}
         <div className="form-group col-lg-12 col-md-12 text-right">
-          <button className="theme-btn btn-style-one">Post Job</button>
+          <button className="theme-btn btn-style-one">Post Inquiry</button>
         </div>
       </div>
     </form>

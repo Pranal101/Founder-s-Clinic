@@ -4,6 +4,7 @@ import Select from "react-select";
 import axios from "axios";
 import countryData from "@/data/countries.json";
 import { getAuth } from "firebase/auth";
+import { toast } from "react-toastify";
 
 const EnterprisePostBoxForm = () => {
   const [formData, setFormData] = useState({
@@ -82,7 +83,10 @@ const EnterprisePostBoxForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    if (!formData.acceptTerms) {
+      toast.error("You must accept the terms and conditions!");
+      return;
+    }
     try {
       const auth = getAuth();
       const user = auth.currentUser;
@@ -184,7 +188,7 @@ const EnterprisePostBoxForm = () => {
             isDisabled={!selectedCountry || cityOptions.length === 0}
           />
         </div>
-        <div className="form-group col-lg-12 col-md-12">
+        <div className="form-group col-lg-6 col-md-12">
           <label>Complete Address</label>
           <input
             type="text"

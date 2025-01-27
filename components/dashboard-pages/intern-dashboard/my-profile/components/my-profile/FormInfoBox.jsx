@@ -13,7 +13,6 @@ const FormInfoBox = () => {
     contactNumber: "",
     email: "",
     linkedinUrl: "",
-    socialMediaLinks: "",
     nationality: "",
     country: "",
     city: "",
@@ -64,7 +63,6 @@ const FormInfoBox = () => {
           contactNumber: profile.contactNumber || "",
           email: profile.email || "",
           linkedinUrl: profile.linkedinUrl || "",
-          socialMediaLinks: profile.socialMediaLinks || "",
           nationality: profile.nationality || "",
           country: profile.country || "",
           city: profile.city || "",
@@ -250,7 +248,7 @@ const FormInfoBox = () => {
             onChange={handleChange}
           />
         </div>
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>Social Media Links</label>
           <input
             type="text"
@@ -258,7 +256,7 @@ const FormInfoBox = () => {
             value={formData.socialMediaLinks}
             onChange={handleChange}
           />
-        </div>
+        </div> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Nationality</label>
           <input

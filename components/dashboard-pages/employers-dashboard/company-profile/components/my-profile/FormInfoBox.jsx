@@ -257,10 +257,10 @@ const FormInfoBox = () => {
 
         {/* Co-Founder Name */}
         <div className="form-group col-lg-6 col-md-12">
-          <label>Co-Founder Name</label>
+          <label>Founder's name</label>
           <input
             type="text"
-            name="coFounderName"
+            name="Founder's name"
             value={formData.coFounderName}
             onChange={handleChange}
             placeholder="Co-Founder Name"
@@ -483,13 +483,13 @@ const FormInfoBox = () => {
 
         {/* Services Offered */}
         <div className="form-group col-lg-6 col-md-12">
-          <label>Services Offered</label>
+          <label> Products/ Services offered</label>
           <input
             type="text"
             name="servicesOffered"
             value={formData.servicesOffered}
             onChange={handleChange}
-            placeholder="Services Offered"
+            placeholder=" Products/ Services offered"
           />
         </div>
 
