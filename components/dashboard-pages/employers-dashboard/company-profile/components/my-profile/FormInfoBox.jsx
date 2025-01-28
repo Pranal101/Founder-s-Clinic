@@ -470,7 +470,7 @@ const FormInfoBox = () => {
         </div>
 
         {/* Other Business Stage */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>Other Business Stage</label>
           <input
             type="text"
@@ -479,7 +479,7 @@ const FormInfoBox = () => {
             onChange={handleChange}
             placeholder="Other Business Stage (if applicable)"
           />
-        </div>
+        </div> */}
 
         {/* Services Offered */}
         <div className="form-group col-lg-6 col-md-12">

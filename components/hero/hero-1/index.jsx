@@ -26,7 +26,15 @@ const index = () => {
                   we will do the rest.
                 </div>
               </div>
-
+              <div className="form-group col-lg-12 col-md-12 text-right">
+                <button
+                  className="theme-btn btn-style-one"
+                  data-bs-toggle="modal"
+                  data-bs-target="#registerModal"
+                >
+                  Register Now
+                </button>
+              </div>
               {/* <!-- Job Search Form --> */}
               {/* <div className="job-search-form">
                 <SearchForm />
