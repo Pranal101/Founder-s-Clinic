@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import countryData from "@/data/countries.json";
+import Select from "react-select";
 import { getAuth } from "firebase/auth";
 const PostBoxForm = () => {
   const [formData, setFormData] = useState({
