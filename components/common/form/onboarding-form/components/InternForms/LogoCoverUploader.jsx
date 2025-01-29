@@ -77,15 +77,16 @@ const LogoCoverUploader = () => {
           <span className="uploadButton-file-name"></span>
         </div>
         <div className="text">
-          Upload <strong>Proof of Highest Qualification</strong> and{" "}
-          <strong>
-            Letter from Institute/College Allowing Internship/Permission
-          </strong>
-        </div>
-        {/* <div className="text">
           Max file size is 1MB, Minimum dimension: 330x300, and suitable files
           are .jpg & .png
-        </div> */}
+          <ul>
+            <li>
+              <strong>Suggested uploads:</strong>
+            </li>
+            <li>Certificate of highest qualification/</li>
+            <li> Approval from institution for internship</li>
+          </ul>
+        </div>
       </div>
     </>
   );

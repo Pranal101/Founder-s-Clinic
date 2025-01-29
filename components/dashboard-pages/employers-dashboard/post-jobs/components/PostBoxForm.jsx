@@ -14,16 +14,19 @@ const PostBoxForm = () => {
     title: "",
     description: "",
     entityName: "",
+    industry: "",
+    foundedYear: "",
     emailAddress: "",
     contactNumber: "",
     bussinessSupport: [],
     otherbussinessSupport: "",
     supportDescription: "",
     supportDuration: "",
+    skills: [],
     skillsRequired: [],
-    jobLocation: "",
     experience: "",
     genderPreference: "",
+    currency: "",
     budget: "",
     budgetFlexibility: "",
     expectedStartDate: null,
@@ -31,56 +34,195 @@ const PostBoxForm = () => {
   });
   const bussinessSupport = [
     {
-      value: "Financial Support",
-      label:
-        "Financial Support (bookkeeping, accounting, auditing, certification, funding, grant/subsidies, Tax advisory)",
-    },
-    { value: "Investment assistance", label: "Investment assistance" },
-    {
-      value: "Compliance support",
-      label:
-        "Compliance support (Registrations, corporate compliance, trademark/copyright/patent, contracts)",
-    },
-    {
-      value: "Marketing & Social Media",
-      label:
-        "Marketing & Social Media (content creation, graphic designing, branding, social media strategy and management, influencer marketing)",
+      label: "Accounting / Book Keeping",
+      options: [
+        { value: "bookkeeping_domestic", label: "Bookkeeping - Domestic" },
+        { value: "bookkeeping_overseas", label: "Bookkeeping - Overseas" },
+        {
+          value: "financial_planning_reporting",
+          label: "Financial Planning & Reporting",
+        },
+      ],
     },
     {
-      value: "Reports",
-      label:
-        "Reports (Business plan, pitch deck, project report, financial projections and analysis)",
+      label: "Taxation",
+      options: [
+        {
+          value: "income_tax",
+          label: "Income Tax - Compliance, ITR Filing and Assessment",
+        },
+        {
+          value: "gst_compliance",
+          label: "GST Compliance, Return Filing and Assessment",
+        },
+        { value: "nri_taxation", label: "NRI Taxation" },
+      ],
     },
     {
-      value: "IT/Technology Support",
-      label:
-        "IT/Technology Support (software development, network management, cybersecurity, web development, App development)",
+      label: "Registration / Compliance/ Certification",
+      options: [
+        { value: "msme", label: "MSME (Udyam)" },
+        { value: "gst", label: "GST" },
+        { value: "fssai", label: "FSSAI" },
+        { value: "iso_gmp", label: "ISO/ GMP Quality assurance Certification" },
+        { value: "startup_india", label: "Startup India / DPIIT registration" },
+        {
+          value: "business_registration",
+          label: "Partnership / LLP / OPC / Pvt. Ltd. registration",
+        },
+        {
+          value: "intellectual_property",
+          label: "Intellectual properties (Trademark/ Copyright)",
+        },
+        { value: "contracts", label: "Contracts" },
+      ],
     },
     {
-      value: "HR & Recruitment",
-      label:
-        "HR & Recruitment (hiring, employee management, performance reviews)",
+      label: "Reports",
+      options: [
+        { value: "business_plan", label: "Business Plan" },
+        { value: "project_report", label: "Project Report" },
+        { value: "financial_projections", label: "Financial projections" },
+        { value: "pitch_deck", label: "Pitch Deck" },
+      ],
     },
     {
-      value: "Consulting or Strategic Advice",
-      label:
-        "Consulting or Strategic Advice (business growth, market analysis, strategic planning, mentoring and handholding, business automation)",
-    },
-    { value: "Training/coaching", label: "Training/coaching" },
-    { value: "Business Wellness", label: "Business Wellness" },
-    {
-      value: "Goal Setting/Success motivation sessions",
-      label: "Goal Setting/Success motivation sessions",
-    },
-    {
-      value: "Corporate astrology/numerology/Industrial Vastu consultancy",
-      label: "Corporate astrology/numerology/Industrial Vastu consultancy",
+      label: "Finance & Government Assistance",
+      options: [
+        {
+          value: "govt_schemes",
+          label:
+            "Guidance of Relevant Govt. Schemes (Grant, Subsidies and Debt)",
+        },
+        { value: "msme_assistance", label: "MSME Assistance" },
+        { value: "bank_nbf_loan", label: "Bank and NBFC business loans" },
+        { value: "private_equity", label: "Private Equity / Venture capital" },
+      ],
     },
     {
-      value: "Business wellness retreats/curated programs",
-      label: "Business wellness retreats/curated programs",
+      label: "Marketing & Social Media",
+      options: [
+        { value: "content_creation", label: "Content creation" },
+        {
+          value: "graphic_designing",
+          label: "Graphic designing (Logo, Brochure, Poster, PPT, etc.)",
+        },
+        {
+          value: "social_media_strategy",
+          label: "Social Media Strategy / Management",
+        },
+        {
+          value: "branding_strategy",
+          label: "Branding (Strategy / Consultancy)",
+        },
+        {
+          value: "ecommerce_management",
+          label: "E-commerce account management",
+        },
+        { value: "influencer_marketing", label: "Influencer Marketing" },
+        { value: "lead_generation", label: "Lead Generation" },
+        { value: "video_presentation", label: "Video presentation" },
+        { value: "product_photography", label: "Product photography" },
+      ],
     },
-    { value: "Other", label: "Other (Please specify)" },
+    {
+      label: "IT/ Technology Support",
+      options: [
+        {
+          value: "website_app_development",
+          label: "Website / Application development",
+        },
+        { value: "business_softwares", label: "Business Softwares" },
+        { value: "software_development", label: "Software development" },
+        { value: "cyber_security", label: "Cyber security" },
+      ],
+    },
+    {
+      label: "Training / Coaching",
+      options: [
+        { value: "soft_skill_training", label: "Soft skill training" },
+        { value: "business_coaching", label: "Business coaching" },
+      ],
+    },
+    {
+      label: "Consultancy & strategic advice",
+      options: [
+        { value: "mentoring_handholding", label: "Mentoring & handholding" },
+        { value: "business_growth", label: "Business growth" },
+        { value: "market_analysis", label: "Market analysis" },
+        { value: "strategic_planning", label: "Strategic planning" },
+        { value: "business_automation", label: "Business automation" },
+      ],
+    },
+    {
+      label: "Human Resource",
+      options: [
+        { value: "hiring", label: "Hiring" },
+        { value: "employee_management", label: "Employee management" },
+        { value: "performance_review", label: "Performance review" },
+      ],
+    },
+    {
+      label: "Interns",
+      options: [{ value: "interns", label: "Interns" }],
+    },
+    {
+      label: "Business Wellness",
+      options: [
+        {
+          value: "goal_setting",
+          label: "Goal Setting / Success motivation sessions",
+        },
+        {
+          value: "corporate_astrology",
+          label:
+            "Corporate Astrology / Numerology / Industrial Vastu consultancy",
+        },
+        {
+          value: "business_wellness_retreats",
+          label: "Business wellness retreats",
+        },
+      ],
+    },
+    {
+      label: "Services to Medium & Large Enterprises",
+      options: [
+        { value: "transaction_structuring", label: "Transaction Structuring" },
+        { value: "merger_acquisition", label: "Merger & Acquisition" },
+        {
+          value: "cross_border_consultancy",
+          label: "Consultancy for Cross Border Transactions",
+        },
+        { value: "virtual_cfo", label: "Virtual CFO" },
+        {
+          value: "high_ticket_debt_syndication",
+          label: "Debt syndication in high ticket size",
+        },
+        { value: "investor_connect", label: "Investor connect" },
+        { value: "external_directorship", label: "External directorship" },
+        {
+          value: "system_development_audit",
+          label: "System Development & Audit",
+        },
+      ],
+    },
+  ];
+  const skills = [
+    { value: "accounting", label: "Accounting" },
+    { value: "auditing", label: "Auditing" },
+    { value: "compliance", label: "Compliance" },
+    { value: "taxation", label: "Taxation" },
+    { value: "finance", label: "Finance" },
+    { value: "hr", label: "HR" },
+    { value: "marketing", label: "Marketing" },
+    { value: "it", label: "IT" },
+    { value: "mentoring", label: "Mentoring" },
+    { value: "graphic_designing", label: "Graphic Designing" },
+    { value: "training", label: "Training" },
+    {
+      value: "astrology",
+      label: "Astrology / Numerology / Vastu",
+    },
   ];
 
   const handleChange = (e) => {
@@ -106,6 +248,14 @@ const PostBoxForm = () => {
     setFormData((prev) => ({
       ...prev,
       [fieldName]: date ? date.toISOString() : null,
+    }));
+  };
+  const handleMultiSelectChange = (selectedOptions, fieldName) => {
+    setFormData((prev) => ({
+      ...prev,
+      [fieldName]: selectedOptions
+        ? selectedOptions.map((option) => option.value)
+        : [],
     }));
   };
   const handleSubmit = async (e) => {
@@ -149,16 +299,19 @@ const PostBoxForm = () => {
       title: "",
       description: "",
       entityName: "",
+      industry: "",
+      foundedYear: "",
       emailAddress: "",
       contactNumber: "",
       bussinessSupport: [],
       otherbussinessSupport: "",
       supportDescription: "",
       supportDuration: "",
+      skills: "",
       skillsRequired: [],
-      jobLocation: "",
       experience: "",
       genderPreference: "",
+      currency: "",
       budget: "",
       budgetFlexibility: "",
       expectedStartDate: null,
@@ -202,6 +355,26 @@ const PostBoxForm = () => {
             required
           />
         </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Industry Type</label>
+          <input
+            type="text"
+            name="industry"
+            value={formData.industry}
+            onChange={handleChange}
+            placeholder="Specify Industry"
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Founded In</label>
+          <input
+            type="text"
+            name="foundedYear"
+            value={formData.foundedYear}
+            onChange={handleChange}
+            placeholder="Organization Founding Year"
+          />
+        </div>
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Email Address</label>
@@ -224,7 +397,7 @@ const PostBoxForm = () => {
           />
         </div>
         {/* <!-- Search Select --> */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>Type of Business Support Needed </label>
           <Select
             isMulti
@@ -232,6 +405,22 @@ const PostBoxForm = () => {
             options={bussinessSupport}
             className="basic-multi-select"
             classNamePrefix="select"
+            onChange={handleSelectChange}
+          />
+        </div> */}
+        <div className="form-group col-lg-6 col-md-12">
+          <label>What types of business support services do you offer?</label>
+          <Select
+            name="bussinessSupport"
+            isMulti
+            options={bussinessSupport} // Grouped options
+            className="basic-multi-select"
+            classNamePrefix="select"
+            value={bussinessSupport
+              .flatMap((group) => group.options)
+              .filter((option) =>
+                formData.bussinessSupport.includes(option.value)
+              )}
             onChange={handleSelectChange}
           />
         </div>
@@ -275,7 +464,18 @@ const PostBoxForm = () => {
             <option>Long-term support</option>
           </select>
         </div>
-
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Skills</label>
+          <Select
+            // defaultValue={[preferences[2]]}
+            isMulti
+            name="skills"
+            options={skills}
+            className="basic-multi-select"
+            classNamePrefix="select"
+            onChange={(selected) => handleMultiSelectChange(selected, "skills")}
+          />
+        </div>
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Skills Required</label>
@@ -289,7 +489,7 @@ const PostBoxForm = () => {
           />
         </div>
         {/* <!-- Input --> */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>Inquiry Location</label>
           <input
             type="text"
@@ -297,7 +497,7 @@ const PostBoxForm = () => {
             value={formData.jobLocation}
             onChange={handleChange}
           />
-        </div>
+        </div> */}
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Experience</label>
@@ -326,9 +526,23 @@ const PostBoxForm = () => {
         </div>
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
+          <label>Currency</label>
+          <select
+            className="chosen-single form-select"
+            name="currency"
+            value={formData.currency}
+            onChange={handleChange}
+          >
+            <option>Select</option>
+            <option>USD</option>
+            <option>INR</option>
+          </select>
+        </div>
+        {/* <!-- Input --> */}
+        <div className="form-group col-lg-6 col-md-12">
           <label>Budget</label>
           <input
-            type="text"
+            type="number"
             name="budget"
             value={formData.budget}
             onChange={handleChange}

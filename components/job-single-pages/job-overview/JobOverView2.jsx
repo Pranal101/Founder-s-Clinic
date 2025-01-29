@@ -72,7 +72,7 @@ const JobOverView2 = ({ job }) => {
         <h5>Project Title:</h5>
         <span>{job.title || "Not specified"}</span>
       </li>
-      <li>
+      {/* <li>
         <i className="icon icon-clock"></i>
         <h5>Hours:</h5>
         <span>{job.hours || "Not specified"}</span>
@@ -81,11 +81,14 @@ const JobOverView2 = ({ job }) => {
         <i className="icon icon-rate"></i>
         <h5>Rate:</h5>
         <span>{job.rate || "Not specified"}</span>
-      </li>
+      </li> */}
       <li>
         <i className="icon icon-salary"></i>
         <h5>Salary:</h5>
-        <span>{job.budget || "Not specified"}</span>
+        <span>
+          {job.budget || "Not specified"}
+          {job.currency}
+        </span>
       </li>
     </ul>
   );

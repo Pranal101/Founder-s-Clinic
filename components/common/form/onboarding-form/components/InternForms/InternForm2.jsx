@@ -339,7 +339,7 @@ const PostBoxForm = () => {
         </div>
         {/* <!-- Education --> */}
         <div className="form-group col-lg-6 col-md-12">
-          <label>Major</label>
+          <label>Stream</label>
           <Select
             options={majorOptions}
             onChange={(selected) => handleSelectChange("major", selected)}

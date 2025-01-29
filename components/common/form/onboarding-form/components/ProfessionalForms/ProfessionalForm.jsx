@@ -13,7 +13,6 @@ const PostBoxForm = ({ pricingContent }) => {
     lastName: "",
     entityName: "",
     role: "",
-    organizarionRole: "",
     emailAddress: "",
     contactNumber: "",
     country: "",
@@ -24,6 +23,7 @@ const PostBoxForm = ({ pricingContent }) => {
   const [countryOptions, setCountryOptions] = useState([]);
   const [cityOptions, setCityOptions] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState(null);
+  const [baseAddress, setBaseAddress] = useState("");
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -126,6 +126,9 @@ const PostBoxForm = ({ pricingContent }) => {
     setFormData((prev) => ({
       ...prev,
       country: selectedOption ? selectedOption.value : "",
+      completeAddress: `${baseAddress}${baseAddress ? ", " : ""}${
+        prev.city ? prev.city + ", " : ""
+      }${selectedOption ? selectedOption.value : ""}`,
     }));
 
     if (selectedOption && selectedOption.cities.length > 0) {
@@ -142,6 +145,20 @@ const PostBoxForm = ({ pricingContent }) => {
     setFormData((prev) => ({
       ...prev,
       city: selectedOption ? selectedOption.value : "",
+      completeAddress: `${baseAddress}${baseAddress ? ", " : ""}${
+        selectedOption ? selectedOption.value + ", " : ""
+      }${prev.country ? prev.country : ""}`,
+    }));
+  };
+  const handleAddressChange = (e) => {
+    const newBaseAddress = e.target.value;
+    setBaseAddress(newBaseAddress);
+
+    setFormData((prev) => ({
+      ...prev,
+      completeAddress: `${newBaseAddress}${newBaseAddress ? ", " : ""}${
+        prev.city ? prev.city + ", " : ""
+      }${prev.country ? prev.country : ""}`,
     }));
   };
   return (
@@ -215,6 +232,16 @@ const PostBoxForm = ({ pricingContent }) => {
           />
         </div>
         <div className="form-group col-lg-6 col-md-12">
+          <label>Street Address</label>
+          <input
+            type="text"
+            name="streetAddress"
+            placeholder="Enter street address"
+            value={baseAddress}
+            onChange={handleAddressChange}
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
           <label>Country</label>
           <Select
             name="country"
@@ -233,14 +260,15 @@ const PostBoxForm = ({ pricingContent }) => {
             isDisabled={!selectedCountry || cityOptions.length === 0}
           />
         </div>
-        <div className="form-group col-lg-12 col-md-12">
+        <div className="form-group col-lg-6 col-md-12">
           <label>Complete Address</label>
           <input
             type="text"
             name="completeAddress"
-            placeholder="329 Queensberry Street, North Melbourne VIC 3051, Australia."
+            placeholder="Complete Address"
             value={formData.completeAddress}
             onChange={handleChange}
+            readOnly
           />
         </div>
         <div className="form-group col-lg-12 col-md-12">

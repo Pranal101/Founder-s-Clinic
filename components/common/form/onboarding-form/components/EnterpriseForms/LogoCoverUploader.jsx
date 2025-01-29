@@ -79,6 +79,15 @@ const LogoCoverUploader = () => {
         <div className="text">
           Max file size is 1MB, Minimum dimension: 330x300, and suitable files
           are .jpg & .png
+          <ul>
+            <li>
+              <strong>Suggested uploads:</strong>
+            </li>
+            <li>Brochure</li>
+            <li>Product Pictures</li>
+            <li>Poster/ Flyer</li>
+            <li>Certificate/ Accreditation</li>
+          </ul>
         </div>
       </div>
     </>

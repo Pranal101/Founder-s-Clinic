@@ -50,7 +50,7 @@ module.exports = [
   // },
   {
     id: 8,
-    name: "Packages",
+    name: "Pricing",
     icon: "la-box",
     routePath: "/candidates-dashboard/packages",
     active: "",

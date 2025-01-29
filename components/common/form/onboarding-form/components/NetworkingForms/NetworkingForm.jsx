@@ -21,6 +21,7 @@ const PostBoxForm = () => {
   const [countryOptions, setCountryOptions] = useState([]);
   const [cityOptions, setCityOptions] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState(null);
+  const [baseAddress, setBaseAddress] = useState("");
 
   useEffect(() => {
     if (Array.isArray(countryData)) {
@@ -44,6 +45,9 @@ const PostBoxForm = () => {
     setFormData((prev) => ({
       ...prev,
       country: selectedOption ? selectedOption.value : "",
+      completeAddress: `${baseAddress}${baseAddress ? ", " : ""}${
+        prev.city ? prev.city + ", " : ""
+      }${selectedOption ? selectedOption.value : ""}`,
     }));
 
     if (selectedOption && selectedOption.cities.length > 0) {
@@ -60,6 +64,20 @@ const PostBoxForm = () => {
     setFormData((prev) => ({
       ...prev,
       city: selectedOption ? selectedOption.value : "",
+      completeAddress: `${baseAddress}${baseAddress ? ", " : ""}${
+        selectedOption ? selectedOption.value + ", " : ""
+      }${prev.country ? prev.country : ""}`,
+    }));
+  };
+  const handleAddressChange = (e) => {
+    const newBaseAddress = e.target.value;
+    setBaseAddress(newBaseAddress);
+
+    setFormData((prev) => ({
+      ...prev,
+      completeAddress: `${newBaseAddress}${newBaseAddress ? ", " : ""}${
+        prev.city ? prev.city + ", " : ""
+      }${prev.country ? prev.country : ""}`,
     }));
   };
   const handleChange = (e) => {
@@ -137,7 +155,7 @@ const PostBoxForm = () => {
 
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
-          <label>Year Established</label>
+          <label>Established in</label>
           <input
             type="text"
             name="yearFounded"
@@ -184,7 +202,16 @@ const PostBoxForm = () => {
             onChange={handleChange}
           />
         </div>
-
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Street Address</label>
+          <input
+            type="text"
+            name="streetAddress"
+            placeholder="Enter street address"
+            value={baseAddress}
+            onChange={handleAddressChange}
+          />
+        </div>
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Country</label>
@@ -212,10 +239,11 @@ const PostBoxForm = () => {
           <label>Complete Address</label>
           <input
             type="text"
-            placeholder="329 Queensberry Street, North Melbourne VIC 3051, Australia."
+            placeholder="Complete Address"
             name="completeAddress"
             value={formData.completeAddress}
             onChange={handleChange}
+            readOnly
             required
           />
         </div>

@@ -43,7 +43,7 @@ module.exports = [
   },
   // {
   //   id: 7,
-  //   name: "Packages",
+  //   name: "Pricing",
   //   icon: "la-box",
   //   routePath: "/employers-dashboard/packages",
   //   active: "",

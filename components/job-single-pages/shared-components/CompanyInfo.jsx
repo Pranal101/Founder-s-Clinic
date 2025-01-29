@@ -30,7 +30,6 @@
 // };
 
 // export default CompanyInfo;
-import Social from "../social/Social";
 
 const CompanyInfo = ({ job }) => {
   return (
@@ -39,10 +38,7 @@ const CompanyInfo = ({ job }) => {
         Primary industry: <span>{job.industry || "Not specified"}</span>
       </li>
       <li>
-        Company size: <span>{job.companySize || "Not specified"}</span>
-      </li>
-      <li>
-        Founded in: <span>{job.founded || "Not specified"}</span>
+        Founded in: <span>{job.foundedYear || "Not specified"}</span>
       </li>
     </ul>
   );

@@ -23,7 +23,8 @@ const PostBoxForm = () => {
     certifications: "",
     associations: "",
     servicesOffered: [],
-    otherServiceOffered: "",
+    skills: [],
+    // otherServiceOffered: "",
     painPoints: "",
     industryExpertise: "",
     clientTestimonials: "",
@@ -31,45 +32,194 @@ const PostBoxForm = () => {
   });
   const servicesProvided = [
     {
-      value: "Registration/ Compliance/ Certification",
-      label: "Registration/ Compliance/ Certification",
+      label: "Accounting / Book Keeping",
+      options: [
+        { value: "bookkeeping_domestic", label: "Bookkeeping - Domestic" },
+        { value: "bookkeeping_overseas", label: "Bookkeeping - Overseas" },
+        {
+          value: "financial_planning_reporting",
+          label: "Financial Planning & Reporting",
+        },
+      ],
     },
     {
-      value: "Finance & Government Assistance",
+      label: "Taxation",
+      options: [
+        {
+          value: "income_tax",
+          label: "Income Tax - Compliance, ITR Filing and Assessment",
+        },
+        {
+          value: "gst_compliance",
+          label: "GST Compliance, Return Filing and Assessment",
+        },
+        { value: "nri_taxation", label: "NRI Taxation" },
+      ],
+    },
+    {
+      label: "Registration / Compliance/ Certification",
+      options: [
+        { value: "msme", label: "MSME (Udyam)" },
+        { value: "gst", label: "GST" },
+        { value: "fssai", label: "FSSAI" },
+        { value: "iso_gmp", label: "ISO/ GMP Quality assurance Certification" },
+        { value: "startup_india", label: "Startup India / DPIIT registration" },
+        {
+          value: "business_registration",
+          label: "Partnership / LLP / OPC / Pvt. Ltd. registration",
+        },
+        {
+          value: "intellectual_property",
+          label: "Intellectual properties (Trademark/ Copyright)",
+        },
+        { value: "contracts", label: "Contracts" },
+      ],
+    },
+    {
+      label: "Reports",
+      options: [
+        { value: "business_plan", label: "Business Plan" },
+        { value: "project_report", label: "Project Report" },
+        { value: "financial_projections", label: "Financial projections" },
+        { value: "pitch_deck", label: "Pitch Deck" },
+      ],
+    },
+    {
       label: "Finance & Government Assistance",
+      options: [
+        {
+          value: "govt_schemes",
+          label:
+            "Guidance of Relevant Govt. Schemes (Grant, Subsidies and Debt)",
+        },
+        { value: "msme_assistance", label: "MSME Assistance" },
+        { value: "bank_nbf_loan", label: "Bank and NBFC business loans" },
+        { value: "private_equity", label: "Private Equity / Venture capital" },
+      ],
     },
-    { value: "Marketing and Branding", label: "Marketing and Branding" },
     {
-      value: "Human Resources and Recruitment",
-      label: "Human Resources and Recruitment",
+      label: "Marketing & Social Media",
+      options: [
+        { value: "content_creation", label: "Content creation" },
+        {
+          value: "graphic_designing",
+          label: "Graphic designing (Logo, Brochure, Poster, PPT, etc.)",
+        },
+        {
+          value: "social_media_strategy",
+          label: "Social Media Strategy / Management",
+        },
+        {
+          value: "branding_strategy",
+          label: "Branding (Strategy / Consultancy)",
+        },
+        {
+          value: "ecommerce_management",
+          label: "E-commerce account management",
+        },
+        { value: "influencer_marketing", label: "Influencer Marketing" },
+        { value: "lead_generation", label: "Lead Generation" },
+        { value: "video_presentation", label: "Video presentation" },
+        { value: "product_photography", label: "Product photography" },
+      ],
     },
-    { value: "IT and tech support", label: "IT and tech support" },
     {
-      value: "Operations and Process Optimization",
-      label: "Operations and Process Optimization",
+      label: "IT/ Technology Support",
+      options: [
+        {
+          value: "website_app_development",
+          label: "Website / Application development",
+        },
+        { value: "business_softwares", label: "Business Softwares" },
+        { value: "software_development", label: "Software development" },
+        { value: "cyber_security", label: "Cyber security" },
+      ],
     },
-    { value: "Business Wellness", label: "Business Wellness" },
     {
-      value: "Coaching and Mentoring",
-      label: "Coaching and Mentoring",
+      label: "Training / Coaching",
+      options: [
+        { value: "soft_skill_training", label: "Soft skill training" },
+        { value: "business_coaching", label: "Business coaching" },
+      ],
     },
-
-    { value: "Administrative Support", label: "Administrative Support" },
-    { value: "Other", label: "Other" },
+    {
+      label: "Consultancy & strategic advice",
+      options: [
+        { value: "mentoring_handholding", label: "Mentoring & handholding" },
+        { value: "business_growth", label: "Business growth" },
+        { value: "market_analysis", label: "Market analysis" },
+        { value: "strategic_planning", label: "Strategic planning" },
+        { value: "business_automation", label: "Business automation" },
+      ],
+    },
+    {
+      label: "Human Resource",
+      options: [
+        { value: "hiring", label: "Hiring" },
+        { value: "employee_management", label: "Employee management" },
+        { value: "performance_review", label: "Performance review" },
+      ],
+    },
+    {
+      label: "Interns",
+      options: [{ value: "interns", label: "Interns" }],
+    },
+    {
+      label: "Business Wellness",
+      options: [
+        {
+          value: "goal_setting",
+          label: "Goal Setting / Success motivation sessions",
+        },
+        {
+          value: "corporate_astrology",
+          label:
+            "Corporate Astrology / Numerology / Industrial Vastu consultancy",
+        },
+        {
+          value: "business_wellness_retreats",
+          label: "Business wellness retreats",
+        },
+      ],
+    },
+    {
+      label: "Services to Medium & Large Enterprises",
+      options: [
+        { value: "transaction_structuring", label: "Transaction Structuring" },
+        { value: "merger_acquisition", label: "Merger & Acquisition" },
+        {
+          value: "cross_border_consultancy",
+          label: "Consultancy for Cross Border Transactions",
+        },
+        { value: "virtual_cfo", label: "Virtual CFO" },
+        {
+          value: "high_ticket_debt_syndication",
+          label: "Debt syndication in high ticket size",
+        },
+        { value: "investor_connect", label: "Investor connect" },
+        { value: "external_directorship", label: "External directorship" },
+        {
+          value: "system_development_audit",
+          label: "System Development & Audit",
+        },
+      ],
+    },
   ];
-  const MultiPricingModel = [
+  const skills = [
+    { value: "accounting", label: "Accounting" },
+    { value: "auditing", label: "Auditing" },
+    { value: "compliance", label: "Compliance" },
+    { value: "taxation", label: "Taxation" },
+    { value: "finance", label: "Finance" },
+    { value: "hr", label: "HR" },
+    { value: "marketing", label: "Marketing" },
+    { value: "it", label: "IT" },
+    { value: "mentoring", label: "Mentoring" },
+    { value: "graphic_designing", label: "Graphic Designing" },
+    { value: "training", label: "Training" },
     {
-      value: "Hourly Rate",
-      label: "Hourly Rate",
-    },
-    {
-      value: "Fixed project fee",
-      label: "Fixed project fee",
-    },
-    { value: "Retainer", label: "Retainer" },
-    {
-      value: "Subscription-based",
-      label: "Subscription-based",
+      value: "astrology",
+      label: "Astrology / Numerology / Vastu",
     },
   ];
   const serviceDelivery = [
@@ -110,6 +260,14 @@ const PostBoxForm = () => {
         ? selectedOptions.map((option) => option.value)
         : selectedOptions.value,
     });
+  };
+  const handleMultiSelectChange = (selectedOptions, fieldName) => {
+    setFormData((prev) => ({
+      ...prev,
+      [fieldName]: selectedOptions
+        ? selectedOptions.map((option) => option.value)
+        : [],
+    }));
   };
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -341,17 +499,19 @@ const PostBoxForm = () => {
           <Select
             name="servicesOffered"
             isMulti
-            options={servicesProvided}
+            options={servicesProvided} // Grouped options
             className="basic-multi-select"
             classNamePrefix="select"
-            value={servicesProvided.filter((option) =>
-              formData.servicesOffered.includes(option.value)
-            )}
+            value={servicesProvided
+              .flatMap((group) => group.options)
+              .filter((option) =>
+                formData.servicesOffered.includes(option.value)
+              )}
             onChange={handleSelectChange}
           />
         </div>
         {/* Conditionally render input field for "Other" */}
-        {formData.servicesOffered.includes("Other") && (
+        {/* {formData.servicesOffered.includes("Other") && (
           <div className="form-group col-lg-6 col-md-12">
             <label>Please Specify</label>
             <input
@@ -363,7 +523,19 @@ const PostBoxForm = () => {
               required
             />
           </div>
-        )}
+        )} */}
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Skills</label>
+          <Select
+            // defaultValue={[preferences[2]]}
+            isMulti
+            name="skills"
+            options={skills}
+            className="basic-multi-select"
+            classNamePrefix="select"
+            onChange={(selected) => handleMultiSelectChange(selected, "skills")}
+          />
+        </div>
         {/* <!-- Value Proposition --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>What are the key pain points you help businesses solve?</label>

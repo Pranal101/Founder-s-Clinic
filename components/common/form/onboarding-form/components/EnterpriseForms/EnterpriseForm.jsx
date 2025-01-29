@@ -24,6 +24,7 @@ const EnterprisePostBoxForm = () => {
   const [countryOptions, setCountryOptions] = useState([]);
   const [cityOptions, setCityOptions] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState(null);
+  const [baseAddress, setBaseAddress] = useState("");
 
   const entitySizeOptions = [
     { value: "Micro/Home grown", label: "Micro/Home grown" },
@@ -53,6 +54,9 @@ const EnterprisePostBoxForm = () => {
     setFormData((prev) => ({
       ...prev,
       country: selectedOption ? selectedOption.value : "",
+      completeAddress: `${baseAddress}${baseAddress ? ", " : ""}${
+        prev.city ? prev.city + ", " : ""
+      }${selectedOption ? selectedOption.value : ""}`,
     }));
 
     if (selectedOption && selectedOption.cities.length > 0) {
@@ -78,9 +82,22 @@ const EnterprisePostBoxForm = () => {
     setFormData((prev) => ({
       ...prev,
       city: selectedOption ? selectedOption.value : "",
+      completeAddress: `${baseAddress}${baseAddress ? ", " : ""}${
+        selectedOption ? selectedOption.value + ", " : ""
+      }${prev.country ? prev.country : ""}`,
     }));
   };
+  const handleAddressChange = (e) => {
+    const newBaseAddress = e.target.value;
+    setBaseAddress(newBaseAddress);
 
+    setFormData((prev) => ({
+      ...prev,
+      completeAddress: `${newBaseAddress}${newBaseAddress ? ", " : ""}${
+        prev.city ? prev.city + ", " : ""
+      }${prev.country ? prev.country : ""}`,
+    }));
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.acceptTerms) {
@@ -170,6 +187,16 @@ const EnterprisePostBoxForm = () => {
           />
         </div>
         <div className="form-group col-lg-6 col-md-12">
+          <label>Street Address</label>
+          <input
+            type="text"
+            name="streetAddress"
+            placeholder="Enter street address"
+            value={baseAddress}
+            onChange={handleAddressChange}
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
           <label>Country</label>
           <Select
             name="country"
@@ -188,16 +215,37 @@ const EnterprisePostBoxForm = () => {
             isDisabled={!selectedCountry || cityOptions.length === 0}
           />
         </div>
-        <div className="form-group col-lg-6 col-md-12">
+        <div className="form-group col-lg-12 col-md-12">
           <label>Complete Address</label>
           <input
             type="text"
             name="completeAddress"
             placeholder="Complete Address"
             value={formData.completeAddress}
-            onChange={handleChange}
+            onChange={handleAddressChange}
+            readOnly
+            required
           />
         </div>
+        {/* <div className="form-group col-lg-3 col-md-12">
+          <label>City</label>
+          <input
+            type="text"
+            placeholder="City"
+            value={formData.city}
+            readOnly
+          />
+        </div>
+        <div className="form-group col-lg-2 col-md-12">
+          <label>Country</label>
+          <input
+            type="text"
+            name="completeAddress"
+            placeholder="Country"
+            value={formData.country}
+            readOnly
+          />
+        </div> */}
         <div className="sec-title text-center">
           <h3>About Yourself</h3>
         </div>

@@ -9,6 +9,7 @@ import { getAuth } from "firebase/auth";
 const PostBoxForm = () => {
   const [file, setFile] = useState(null);
   const [formData, setFormData] = useState({
+    gst: "",
     primaryFocus: [],
     primaryFocusOther: "",
     numberOfMembers: "",
@@ -145,6 +146,18 @@ const PostBoxForm = () => {
   return (
     <form className="default-form" onSubmit={handleSubmit}>
       <div className="row">
+        {/* Input */}
+        <div className="form-group col-lg-6 col-md-12">
+          <label>GST no. (if registered under GST)</label>
+          <input
+            type="gst"
+            name="numberOfMembers"
+            value={formData.gst}
+            onChange={handleChange}
+            placeholder="GST number"
+            required
+          />
+        </div>
         {/* Input */}
         <div className="form-group col-lg-6 col-md-12">
           <label>What is your primary focus?</label>

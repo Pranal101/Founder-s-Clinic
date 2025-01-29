@@ -157,10 +157,12 @@ const FormContent = () => {
         } else {
           setError("Invalid role. Please contact support.");
         }
+        toast.success("Logged in!");
       } else {
         setError(
           data.message || "An error occurred during login. Please try again."
         );
+        toast.error("Error logging in, please try again.");
       }
     } catch (err) {
       // Handle Firebase errors

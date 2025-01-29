@@ -7,12 +7,8 @@ const CopyrightFooter = () => {
         <div className="outer-box">
           <div className="copyright-text">
             © {new Date().getFullYear()} Founder's Clinic{" "}
-            <a
-              href="https://themeforest.net/user/ib-themes"
-              target="_blank"
-              rel="noopener noreferrer"
-            ></a>
-            . All Right Reserved.
+            <a href="/" target="_blank" rel="noopener noreferrer"></a>. All
+            Right Reserved.
           </div>
           <div className="social-links">
             <Social />

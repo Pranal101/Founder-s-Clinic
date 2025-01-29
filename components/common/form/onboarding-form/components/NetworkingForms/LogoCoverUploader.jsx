@@ -69,7 +69,6 @@ const LogoCoverUploader = () => {
             name="attachments[]"
             accept="image/*"
             id="upload"
-            required
             onChange={logoHandler}
           />
           <label className="uploadButton-button ripple-effect" htmlFor="upload">
@@ -80,6 +79,15 @@ const LogoCoverUploader = () => {
         <div className="text">
           Max file size is 1MB, Minimum dimension: 330x300, and suitable files
           are .jpg & .png
+          <ul>
+            <li>
+              <strong>Suggested uploads:</strong>
+            </li>
+            <li>Brochure</li>
+            <li>Presentation</li>
+            <li>Poster/ Flyer</li>
+            <li>Certificate/ Accreditation</li>
+          </ul>
         </div>
       </div>
     </>
