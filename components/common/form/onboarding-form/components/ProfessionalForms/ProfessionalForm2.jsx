@@ -502,6 +502,18 @@ const PostBoxForm = () => {
             options={servicesProvided} // Grouped options
             className="basic-multi-select"
             classNamePrefix="select"
+            formatGroupLabel={(data) => (
+              <div
+                style={{
+                  fontSize: "16px",
+                  fontWeight: "bold",
+                  color: "#007bff",
+                  borderRadius: "5px",
+                }}
+              >
+                {data.label}
+              </div>
+            )}
             value={servicesProvided
               .flatMap((group) => group.options)
               .filter((option) =>

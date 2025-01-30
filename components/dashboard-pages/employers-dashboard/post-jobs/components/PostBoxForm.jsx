@@ -23,7 +23,6 @@ const PostBoxForm = () => {
     supportDescription: "",
     supportDuration: "",
     skills: [],
-    skillsRequired: [],
     experience: "",
     genderPreference: "",
     currency: "",
@@ -232,18 +231,18 @@ const PostBoxForm = () => {
       [name]: type === "checkbox" ? checked : value,
     }));
   };
-  const handleSelectChange = (selectedOptions) => {
+  const handleSelectChange = (selectedOption) => {
     setFormData((prev) => ({
       ...prev,
-      bussinessSupport: selectedOptions.map((option) => option.value),
+      bussinessSupport: selectedOption ? [selectedOption.value] : [],
     }));
   };
-  const handleSkillsChange = (selectedOptions) => {
-    setFormData((prev) => ({
-      ...prev,
-      skillsRequired: selectedOptions.map((option) => option.value),
-    }));
-  };
+  // const handleSkillsChange = (selectedOptions) => {
+  //   setFormData((prev) => ({
+  //     ...prev,
+  //     skillsRequired: selectedOptions.map((option) => option.value),
+  //   }));
+  // };
   const handleDateChange = (date, fieldName) => {
     setFormData((prev) => ({
       ...prev,
@@ -308,7 +307,6 @@ const PostBoxForm = () => {
       supportDescription: "",
       supportDuration: "",
       skills: "",
-      skillsRequired: [],
       experience: "",
       genderPreference: "",
       currency: "",
@@ -409,23 +407,37 @@ const PostBoxForm = () => {
           />
         </div> */}
         <div className="form-group col-lg-6 col-md-12">
-          <label>What types of business support services do you offer?</label>
+          <label>What support/ services are you looking for?</label>
           <Select
             name="bussinessSupport"
-            isMulti
-            options={bussinessSupport} // Grouped options
-            className="basic-multi-select"
+            options={bussinessSupport}
+            className="basic-single-select"
             classNamePrefix="select"
-            value={bussinessSupport
-              .flatMap((group) => group.options)
-              .filter((option) =>
-                formData.bussinessSupport.includes(option.value)
-              )}
+            isMulti={false}
+            formatGroupLabel={(data) => (
+              <div
+                style={{
+                  fontSize: "16px",
+                  fontWeight: "bold",
+                  color: "#007bff",
+                  borderRadius: "5px",
+                }}
+              >
+                {data.label}
+              </div>
+            )}
+            value={
+              bussinessSupport
+                .flatMap((group) => group.options)
+                .find((option) =>
+                  formData.bussinessSupport.includes(option.value)
+                ) || null
+            }
             onChange={handleSelectChange}
           />
         </div>
         {/* Conditionally render input field for "Other" */}
-        {formData.bussinessSupport.includes("Other") && (
+        {/* {formData.bussinessSupport.includes("Other") && (
           <div className="form-group col-lg-6 col-md-12">
             <label>Please specify other business support needed</label>
             <input
@@ -437,7 +449,7 @@ const PostBoxForm = () => {
               required
             />
           </div>
-        )}
+        )} */}
 
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
@@ -477,7 +489,7 @@ const PostBoxForm = () => {
           />
         </div>
         {/* <!-- Input --> */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>Skills Required</label>
           <Creatable
             isMulti
@@ -487,7 +499,7 @@ const PostBoxForm = () => {
             placeholder="List all requried skills"
             onChange={handleSkillsChange}
           />
-        </div>
+        </div> */}
         {/* <!-- Input --> */}
         {/* <div className="form-group col-lg-6 col-md-12">
           <label>Inquiry Location</label>

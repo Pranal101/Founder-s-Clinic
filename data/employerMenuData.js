@@ -22,7 +22,7 @@ module.exports = [
   },
   {
     id: 4,
-    name: "Manage Inquries",
+    name: "Manage Inquiries",
     icon: "la-briefcase",
     routePath: "/employers-dashboard/manage-jobs",
     active: "",

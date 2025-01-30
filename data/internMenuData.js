@@ -22,7 +22,7 @@ module.exports = [
   },
   {
     id: 4,
-    name: "Inquries Responded",
+    name: "Inquiries Responded",
     icon: "la-briefcase",
     routePath: "/intern-dashboard/applied-jobs",
     active: "",
@@ -36,7 +36,7 @@ module.exports = [
   },
   {
     id: 6,
-    name: "Shortlisted Inquries",
+    name: "Shortlisted Inquiries",
     icon: "la-bookmark-o",
     routePath: "/intern-dashboard/short-listed-jobs",
     active: "",

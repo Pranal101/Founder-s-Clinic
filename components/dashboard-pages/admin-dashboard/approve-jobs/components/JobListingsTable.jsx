@@ -115,7 +115,7 @@ const JobListingsTable = () => {
   return (
     <div className="tabs-box">
       <div className="widget-title">
-        <h4>All Inqueries</h4>
+        <h4>All Inquiries</h4>
       </div>
 
       <div className="widget-content">

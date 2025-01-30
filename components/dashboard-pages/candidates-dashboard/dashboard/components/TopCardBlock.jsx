@@ -115,7 +115,7 @@ const TopCardBlock = () => {
       id: 1,
       icon: "flaticon-briefcase",
       countNumber: inquiriesCount, // Dynamically display inquiries count
-      metaName: "Inqueries Responded",
+      metaName: "Inquiries Responded",
       uiClass: "ui-blue",
       route: "/candidates-dashboard/applied-jobs",
     },
@@ -139,7 +139,7 @@ const TopCardBlock = () => {
       id: 4,
       icon: "la-bookmark-o",
       countNumber: "32",
-      metaName: "Shortlisted Inqueries",
+      metaName: "Shortlisted Inquiries",
       uiClass: "ui-green",
       route: "/candidates-dashboard/short-listed-jobs",
     },

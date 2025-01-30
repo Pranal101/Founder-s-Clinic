@@ -133,7 +133,7 @@ const JobAlertsTable = () => {
       );
       setJobs(data.jobs);
     } catch (error) {
-      console.error("Error fetching jobs:", error.response?.data || error);
+      console.error("Error fetching inquiries:", error.response?.data || error);
     } finally {
       setLoading(false);
     }

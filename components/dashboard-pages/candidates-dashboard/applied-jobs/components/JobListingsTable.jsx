@@ -149,13 +149,13 @@ const JobListingsTable = () => {
   }
 
   if (!applications.length) {
-    return <div>No inqueries found.</div>;
+    return <div>No inquiries found.</div>;
   }
 
   return (
     <div className="tabs-box">
       <div className="widget-title">
-        <h4>My Applied Jobs</h4>
+        <h4>My Applied Inquiries</h4>
         <div className="chosen-outer">
           <select className="chosen-single form-select">
             <option>Last 6 Months</option>
@@ -172,7 +172,7 @@ const JobListingsTable = () => {
           <table className="default-table manage-job-table">
             <thead>
               <tr>
-                <th>Job Title</th>
+                <th>Inquiry Title</th>
                 <th>Date Applied</th>
                 <th>Status</th>
                 <th>Action</th>

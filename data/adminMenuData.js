@@ -8,7 +8,7 @@ module.exports = [
   },
   {
     id: 2,
-    name: "Approve Inqueries",
+    name: "Approve Inquiries",
     icon: "la-user-tie",
     routePath: "/admin-dashboard/approve-jobs",
     active: "",
