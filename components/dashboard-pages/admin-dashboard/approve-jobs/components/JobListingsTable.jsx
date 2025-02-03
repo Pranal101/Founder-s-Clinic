@@ -125,7 +125,6 @@ const JobListingsTable = () => {
               <tr>
                 <th>Job Title</th>
                 <th>Company</th>
-                <th>Location</th>
                 <th>Experience</th>
                 <th>Budget</th>
                 <th>Status</th>
@@ -159,7 +158,6 @@ const JobListingsTable = () => {
                     </div>
                   </td>
                   <td>{job.entityName}</td>
-                  <td>{job.jobLocation || "Not specified"}</td>
                   <td>{job.experience}</td>
                   <td>{job.budget || "Not specified"}</td>
                   <td className="status">

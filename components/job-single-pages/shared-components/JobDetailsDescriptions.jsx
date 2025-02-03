@@ -70,8 +70,10 @@ const JobDetailsDescriptions = ({ job }) => {
       <p>{job.description || "Job Description"} </p>
       <h4>Required Skills</h4>
       <ul className="list-style-three">
-        {job.skillsRequired && job.skillsRequired.length > 0 ? (
-          job.skillsRequired.map((skill, index) => <li key={index}>{skill}</li>)
+        {job.bussinessSupport && job.bussinessSupport.length > 0 ? (
+          job.bussinessSupport.map((skill, index) => (
+            <li key={index}>{skill}</li>
+          ))
         ) : (
           <li>No skills required listed.</li>
         )}

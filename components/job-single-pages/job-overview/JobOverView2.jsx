@@ -62,11 +62,11 @@ const JobOverView2 = ({ job }) => {
         <h5>Expiration Date:</h5>
         <span>{new Date(job.expectedStartDate).toLocaleDateString()}</span>
       </li>
-      <li>
+      {/* <li>
         <i className="icon icon-location"></i>
         <h5>Location:</h5>
         <span>{job.jobLocation || "Not specified"}</span>
-      </li>
+      </li> */}
       <li>
         <i className="icon icon-user-2"></i>
         <h5>Project Title:</h5>
@@ -86,8 +86,7 @@ const JobOverView2 = ({ job }) => {
         <i className="icon icon-salary"></i>
         <h5>Salary:</h5>
         <span>
-          {job.budget || "Not specified"}
-          {job.currency}
+          {job.budget || "Not specified"} {job.currency}
         </span>
       </li>
     </ul>

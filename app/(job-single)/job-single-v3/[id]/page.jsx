@@ -354,7 +354,7 @@ const JobSingleDynamicV3 = ({ params }) => {
                           {/* time info */}
                           <li>
                             <span className="icon flaticon-money"></span>{" "}
-                            {job?.budget}.{job?.currency}
+                            {job?.budget} {job?.currency}
                           </li>
                           {/* salary info */}
                         </ul>
@@ -460,7 +460,7 @@ const JobSingleDynamicV3 = ({ params }) => {
 
                       <CompnayInfo job={job} />
 
-                      <div className="btn-box">
+                      {/* <div className="btn-box">
                         <a
                           href="#"
                           target="_blank"
@@ -469,7 +469,7 @@ const JobSingleDynamicV3 = ({ params }) => {
                         >
                           {job?.title}
                         </a>
-                      </div>
+                      </div> */}
                       {/* End btn-box */}
                     </div>
                   </div>

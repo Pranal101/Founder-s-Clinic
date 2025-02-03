@@ -572,7 +572,7 @@ const JobListingsTable = () => {
             },
           }
         );
-
+        console.log("Fetched Jobs:", response.data.jobs);
         setJobs(response.data.jobs);
       } catch (error) {
         console.error("Error fetching jobs:", error);
@@ -705,10 +705,10 @@ const JobListingsTable = () => {
                                   <span className="icon flaticon-briefcase"></span>
                                   {job.entityName}
                                 </li>
-                                <li>
+                                {/* <li>
                                   <span className="icon flaticon-map-locator"></span>
                                   {job.jobLocation}
-                                </li>
+                                </li> */}
                               </ul>
                             </div>
                           </div>
@@ -735,7 +735,9 @@ const JobListingsTable = () => {
                       <td className="job-status">
                         {job.isClosed ? "Closed" : "Open"}
                       </td>
-                      <td className="status">{job.status || "Active"}</td>
+                      <td className="status">
+                        {job.isApproved ? "Approved" : "Pending"}
+                      </td>
                       <td>
                         <div className="option-box">
                           <ul className="option-list">
