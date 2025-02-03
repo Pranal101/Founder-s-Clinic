@@ -148,7 +148,7 @@ const JobAlertsTable = () => {
     try {
       const userToken = await user.getIdToken();
       const { data } = await axios.get(
-        "http://localhost:4000/api/jobs/match-jobs",
+        "https://founders-clinic-backend.onrender.com/api/jobs/match-jobs",
         {
           headers: {
             Authorization: `Bearer ${userToken}`,
