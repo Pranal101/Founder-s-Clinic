@@ -98,8 +98,8 @@ const index = () => {
       <section className="features-section">
         <div className="auto-container">
           <div className="sec-title text-center">
-            {/* <h2>User Types</h2>
-            <div className="text">
+            <h2>User Types</h2>
+            {/* <div className="text">
               Lorem ipsum dolor sit amet elit, sed do eiusmod tempor
             </div> */}
           </div>

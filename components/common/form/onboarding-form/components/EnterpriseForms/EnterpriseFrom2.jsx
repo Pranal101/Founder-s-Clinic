@@ -200,12 +200,11 @@ const PostBoxForm = () => {
         <div className="form-group col-lg-6 col-md-12">
           <label>GST no. (if registered under GST)</label>
           <input
-            type="gst"
-            name="numberOfMembers"
+            type="text"
+            placeholder="Gst Number"
+            name="gst"
             value={formData.gst}
             onChange={handleChange}
-            placeholder="GST number"
-            required
           />
         </div>
         {/* <!-- Basic info --> */}

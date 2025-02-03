@@ -655,13 +655,13 @@ const JobListingsTable = () => {
   return (
     <div className="tabs-box">
       <div className="widget-title">
-        <h4>My Inqueries</h4>
+        <h4>My Inquiries</h4>
       </div>
 
       <div className="widget-content">
         <div className="table-outer">
           {loading ? (
-            <p>Loading inqueries...</p>
+            <p>Loading inquiries...</p>
           ) : error ? (
             <p>{error}</p>
           ) : (
@@ -671,7 +671,7 @@ const JobListingsTable = () => {
                   <th>Title</th>
                   <th>Applications</th>
                   <th>Created & Expired</th>
-                  <th>Job Status</th>
+                  <th>Inquiry Status</th>
                   <th>Status</th>
                   <th>Action</th>
                 </tr>
@@ -775,7 +775,7 @@ const JobListingsTable = () => {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="6">No inqueries found</td>
+                    <td colSpan="6">No inquiries found</td>
                   </tr>
                 )}
               </tbody>

@@ -316,16 +316,23 @@ import Link from "next/link";
 import Image from "next/image";
 import axios from "axios";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import Pagination from "@/components/employers-listing-pages/components/Pagination";
+import { useDispatch, useSelector } from "react-redux";
+import { addPerPage } from "@/features/filter/employerFilterSlice";
 
 const JobAlertsTable = () => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const { perPage = { start: 0, end: 12 } } = useSelector(
+    (state) => state.employerFilter
+  );
 
   const fetchJobs = async (user) => {
     try {
       const userToken = await user.getIdToken();
       const { data } = await axios.get(
-        "https://founders-clinic-backend.onrender.com/api/jobs/match-skills",
+        "http://localhost:4000/api/jobs/match-jobs",
         {
           headers: {
             Authorization: `Bearer ${userToken}`,
@@ -333,7 +340,7 @@ const JobAlertsTable = () => {
           },
         }
       );
-      setJobs(data.jobs || []); // Default to an empty array if no jobs are returned
+      setJobs(Array.isArray(data) ? data : []); // Ensure data is an array
     } catch (error) {
       console.error("Error fetching jobs:", error.response?.data || error);
     } finally {
@@ -354,9 +361,7 @@ const JobAlertsTable = () => {
     return () => unsubscribe();
   }, []);
 
-  if (loading) {
-    return <div>Loading...</div>; // Display a loading state while fetching data
-  }
+  const displayedJobs = jobs.slice(perPage.start, perPage.end);
 
   return (
     <div className="tabs-box">
@@ -364,12 +369,10 @@ const JobAlertsTable = () => {
         <h4>Inquiries for you</h4>
       </div>
 
-      {jobs.length === 0 ? (
-        // When no jobs are available, display only the heading
-        <div className="no-jobs-message"></div>
-      ) : (
-        // When jobs are available, display the table
-        <div className="widget-content">
+      <div className="widget-content">
+        {loading ? (
+          <div>Loading...</div>
+        ) : (
           <div className="table-outer">
             <table className="default-table manage-job-table">
               <thead>
@@ -381,7 +384,7 @@ const JobAlertsTable = () => {
                 </tr>
               </thead>
               <tbody>
-                {jobs.map((item) => (
+                {displayedJobs.map((item) => (
                   <tr key={item._id}>
                     <td>
                       <div className="job-block">
@@ -400,34 +403,25 @@ const JobAlertsTable = () => {
                                 {item.title}
                               </Link>
                             </h4>
-                            <ul className="job-info">
-                              <li>
-                                <span className="icon flaticon-briefcase"></span>
-                                *******
-                              </li>
-                              <li>
-                                <span className="icon flaticon-map-locator"></span>
-                                *******
-                              </li>
-                            </ul>
                           </div>
                         </div>
                       </div>
                     </td>
                     <td>{new Date(item.postedDate).toLocaleDateString()}</td>
                     <td>
-                      {item.skillsRequired.length > 0
-                        ? item.skillsRequired.join(", ")
-                        : "Required Skills"}
+                      {item.skills?.length > 0
+                        ? item.skills.join(", ")
+                        : "No skills listed"}
                     </td>
-                    <td>{item.experience || "Experience"}</td>
+                    <td>{item.experience || "Not specified"}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-        </div>
-      )}
+        )}
+        <Pagination totalJobs={jobs.length} />
+      </div>
     </div>
   );
 };

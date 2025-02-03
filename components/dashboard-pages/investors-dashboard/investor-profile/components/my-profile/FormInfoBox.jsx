@@ -19,30 +19,24 @@ const FormInfoBox = () => {
     city: "",
     completeAddress: "",
     investorType: "",
-    otherInvestorType: "",
+    // otherInvestorType: "",
     investmentYears: "",
     investmentExperience: "",
-    otherInvestmentExperience: "",
+    // otherInvestmentExperience: "",
     notableInvestments: "",
     preferredIndustries: "",
-    otherPreferredIndustries: "",
+    // otherPreferredIndustries: "",
     preferredBusinessStage: "",
     preferredGeography: "",
     investmentThesis: "",
     investmentTimeline: "",
     involvementType: "",
     exitStrategy: "",
-    otherExitStrategy: "",
     successfulExits: "",
     currentInvestmentNetworks: "",
     specificInvestmentNetworks: "",
     interestedInMentoring: "",
-    requiredServices: "",
-    otherRequiredServices: "",
-    keyExpectations: "",
-    otherKeyExpectations: "",
     notableAchievements: "",
-    successStories: "",
   });
 
   const [loading, setLoading] = useState(true);
@@ -86,11 +80,23 @@ const FormInfoBox = () => {
           city: profile.city || "",
           completeAddress: profile.completeAddress || "",
           investorType: profile.investorType || "",
-          otherInvestorType: profile.otherInvestorType || "",
+          // otherInvestorType: profile.otherInvestorType || "",
           investmentYears: profile.investmentYears || [],
           investmentExperience: profile.investmentExperience || "",
-          otherInvestmentExperience: profile.otherInvestmentExperience || "",
+          // otherInvestmentExperience: profile.otherInvestmentExperience || "",
           notableInvestments: profile.notableInvestments || "",
+          preferredIndustries: profile.preferredIndustries || "",
+          preferredBusinessStage: profile.preferredBusinessStage || "",
+          preferredGeography: profile.preferredGeography || "",
+          investmentThesis: profile.investmentThesis || "",
+          investmentTimeline: profile.investmentTimeline || "",
+          involvementType: profile.involvementType || "",
+          exitStrategy: profile.exitStrategy || "",
+          successfulExits: profile.successfulExits || "",
+          currentInvestmentNetworks: profile.currentInvestmentNetworks || "",
+          specificInvestmentNetworks: profile.specificInvestmentNetworks || "",
+          interestedInMentoring: profile.interestedInMentoring || "",
+          notableAchievements: profile.notableAchievements || "",
         });
       } catch (error) {
         console.error("Error fetching profile:", error.response?.data || error);
@@ -214,7 +220,6 @@ const FormInfoBox = () => {
             placeholder="Email Address"
           />
         </div>
-
         <div className="form-group col-lg-6 col-md-12">
           <label>Phone</label>
           <input
@@ -225,7 +230,6 @@ const FormInfoBox = () => {
             placeholder="0 123 456 7890"
           />
         </div>
-
         <div className="form-group col-lg-6 col-md-12">
           <label>Website</label>
           <input
@@ -236,7 +240,6 @@ const FormInfoBox = () => {
             placeholder="www.invision.com"
           />
         </div>
-
         <div className="form-group col-lg-6 col-md-12">
           <label>Linkedin Url</label>
           <input
@@ -287,7 +290,7 @@ const FormInfoBox = () => {
             placeholder="Investor Type"
           />
         </div>
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>Other Investor Type</label>
           <input
             type="text"
@@ -296,7 +299,7 @@ const FormInfoBox = () => {
             onChange={handleChange}
             placeholder="Other Investor Type"
           />
-        </div>
+        </div> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Investement Years</label>
           <input
@@ -317,7 +320,7 @@ const FormInfoBox = () => {
             placeholder="Investement Exp"
           />
         </div>
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>Investement Experience</label>
           <input
             type="text"
@@ -326,7 +329,7 @@ const FormInfoBox = () => {
             onChange={handleChange}
             placeholder="Investement Exp"
           />
-        </div>
+        </div> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Notable Investments</label>
           <input
@@ -337,8 +340,127 @@ const FormInfoBox = () => {
             placeholder="Notable Investments"
           />
         </div>
-
         <div className="form-group col-lg-6 col-md-12">
+          <label>Preferred Industries</label>
+          <input
+            type="text"
+            name="preferredIndustries"
+            value={formData.preferredIndustries}
+            onChange={handleChange}
+            placeholder="Preferred Industries"
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Preferred Business Stage</label>
+          <input
+            type="text"
+            name="preferredBusinessStage"
+            value={formData.preferredBusinessStage}
+            onChange={handleChange}
+            placeholder="Preferred Business Stage"
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Preferred Geography</label>
+          <input
+            type="text"
+            name="preferredGeography"
+            value={formData.preferredGeography}
+            onChange={handleChange}
+            placeholder="Preferred Geography"
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Investement Thesis</label>
+          <input
+            type="text"
+            name="investmentThesis"
+            value={formData.investmentThesis}
+            onChange={handleChange}
+            placeholder="Investement Thesis"
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Investement Timeline</label>
+          <input
+            type="text"
+            name="investmentTimeline"
+            value={formData.investmentTimeline}
+            onChange={handleChange}
+            placeholder="Investement Timeline"
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Involvement Type</label>
+          <input
+            type="text"
+            name="involvementType"
+            value={formData.involvementType}
+            onChange={handleChange}
+            placeholder="Involvement Type"
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Exit Strategy</label>
+          <input
+            type="text"
+            name="exitStrategy"
+            value={formData.exitStrategy}
+            onChange={handleChange}
+            placeholder="Exit Strategy"
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Successful Exits</label>
+          <input
+            type="text"
+            name="successfulExits"
+            value={formData.successfulExits}
+            onChange={handleChange}
+            placeholder="Successful Exits"
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Current Investment Networks</label>
+          <input
+            type="text"
+            name="currentInvestmentNetworks"
+            value={formData.currentInvestmentNetworks}
+            onChange={handleChange}
+            placeholder="Current Investment Networks"
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Specific Investment Networks</label>
+          <input
+            type="text"
+            name="specificInvestmentNetworks"
+            value={formData.specificInvestmentNetworks}
+            onChange={handleChange}
+            placeholder="Specific Investment Networks"
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Interested In Mentoring</label>
+          <input
+            type="text"
+            name="interestedInMentoring"
+            value={formData.interestedInMentoring}
+            onChange={handleChange}
+            placeholder="Interested In Mentoring"
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Notable Achievements</label>
+          <input
+            type="text"
+            name="notableAchievements"
+            value={formData.notableAchievements}
+            onChange={handleChange}
+            placeholder="Notable Achievements"
+          />
+        </div>
+        <div className="form-group col-lg-12 col-md-12">
           <button type="submit" className="theme-btn btn-style-one">
             Save
           </button>

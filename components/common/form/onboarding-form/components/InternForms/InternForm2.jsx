@@ -65,20 +65,21 @@ const PostBoxForm = () => {
     { value: "IT", label: "IT" },
   ];
   const skills = [
-    { value: "Communication Skills", label: "Communication Skills" },
-    { value: "Research and Analysis", label: "Research and Analysis" },
-    { value: "Data Entry", label: "Data Entry" },
+    { value: "Accounting", label: "Accounting" },
+    { value: "Auditing", label: "Auditing" },
+    { value: "Compliance", label: "Compliance" },
+    { value: "Taxation", label: "Taxation" },
+    { value: "Finance", label: "Finance" },
+    { value: "Hr", label: "HR" },
+    { value: "Marketing", label: "Marketing" },
+    { value: "It", label: "IT" },
+    { value: "Mentoring", label: "Mentoring" },
+    { value: "Graphic Designing", label: "Graphic Designing" },
+    { value: "Training", label: "Training" },
     {
-      value: "Marketing and Social Media",
-      label: "Marketing and Social Media",
+      value: "Astrology / Numerology / Vastu",
+      label: "Astrology / Numerology / Vastu",
     },
-    { value: "Graphic Design", label: "Graphic Design" },
-    { value: "Web Development", label: "Web Development" },
-    { value: "Content Writing", label: "Content Writing" },
-    { value: "Financial Analysis", label: "Financial Analysis" },
-    { value: "Administrative Support", label: "Administrative Support" },
-    { value: "Project Management", label: "Project Management" },
-    { value: "Other", label: "Other" },
   ];
   useEffect(() => {
     if (Array.isArray(countryData)) {

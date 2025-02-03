@@ -22,14 +22,7 @@ const PostBoxForm = () => {
     membersEngagement: "",
     membersEngagementOnline: "",
     membersEngagementOther: "",
-    // collaborationBool: "",
-    // collaboration: "",
-    // featuresRequirement: "",
-    // uniquePoint: "",
-    // painPoints: "",
     futureGoals: "",
-    // upcomingPrograms: "",
-    // successStories: "",
     featureTestimonials: "",
     additionalInfo: "",
     acceptTerms: false,
@@ -150,12 +143,11 @@ const PostBoxForm = () => {
         <div className="form-group col-lg-6 col-md-12">
           <label>GST no. (if registered under GST)</label>
           <input
-            type="gst"
-            name="numberOfMembers"
+            type="text"
+            name="gst"
             value={formData.gst}
             onChange={handleChange}
-            placeholder="GST number"
-            required
+            placeholder="Gst Number"
           />
         </div>
         {/* Input */}

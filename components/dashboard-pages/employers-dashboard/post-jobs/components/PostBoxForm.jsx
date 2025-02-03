@@ -35,10 +35,10 @@ const PostBoxForm = () => {
     {
       label: "Accounting / Book Keeping",
       options: [
-        { value: "bookkeeping_domestic", label: "Bookkeeping - Domestic" },
-        { value: "bookkeeping_overseas", label: "Bookkeeping - Overseas" },
+        { value: "Bookkeeping - Domestic", label: "Bookkeeping - Domestic" },
+        { value: "Bookkeeping - Overseas", label: "Bookkeeping - Overseas" },
         {
-          value: "financial_planning_reporting",
+          value: "Financial Planning & Reporting",
           label: "Financial Planning & Reporting",
         },
       ],
@@ -47,138 +47,152 @@ const PostBoxForm = () => {
       label: "Taxation",
       options: [
         {
-          value: "income_tax",
+          value: "Income Tax - Compliance, ITR Filing and Assessment",
           label: "Income Tax - Compliance, ITR Filing and Assessment",
         },
         {
-          value: "gst_compliance",
+          value: "GST Compliance, Return Filing and Assessment",
           label: "GST Compliance, Return Filing and Assessment",
         },
-        { value: "nri_taxation", label: "NRI Taxation" },
+        { value: "NRI Taxation", label: "NRI Taxation" },
       ],
     },
     {
       label: "Registration / Compliance/ Certification",
       options: [
-        { value: "msme", label: "MSME (Udyam)" },
-        { value: "gst", label: "GST" },
-        { value: "fssai", label: "FSSAI" },
-        { value: "iso_gmp", label: "ISO/ GMP Quality assurance Certification" },
-        { value: "startup_india", label: "Startup India / DPIIT registration" },
+        { value: "MSME (Udyam)", label: "MSME (Udyam)" },
+        { value: "GST", label: "GST" },
+        { value: "FSSAI", label: "FSSAI" },
         {
-          value: "business_registration",
+          value: "ISO/ GMP Quality assurance Certification",
+          label: "ISO/ GMP Quality assurance Certification",
+        },
+        {
+          value: "Startup India / DPIIT registration",
+          label: "Startup India / DPIIT registration",
+        },
+        {
+          value: "Partnership / LLP / OPC / Pvt. Ltd. registration",
           label: "Partnership / LLP / OPC / Pvt. Ltd. registration",
         },
         {
-          value: "intellectual_property",
+          value: "Intellectual properties (Trademark/ Copyright)",
           label: "Intellectual properties (Trademark/ Copyright)",
         },
-        { value: "contracts", label: "Contracts" },
+        { value: "Contracts", label: "Contracts" },
       ],
     },
     {
       label: "Reports",
       options: [
-        { value: "business_plan", label: "Business Plan" },
-        { value: "project_report", label: "Project Report" },
-        { value: "financial_projections", label: "Financial projections" },
-        { value: "pitch_deck", label: "Pitch Deck" },
+        { value: "Business Plan", label: "Business Plan" },
+        { value: "Project Report", label: "Project Report" },
+        { value: "Financial projections", label: "Financial projections" },
+        { value: "Pitch Deck", label: "Pitch Deck" },
       ],
     },
     {
       label: "Finance & Government Assistance",
       options: [
         {
-          value: "govt_schemes",
+          value:
+            "Guidance of Relevant Govt. Schemes (Grant, Subsidies and Debt)",
           label:
             "Guidance of Relevant Govt. Schemes (Grant, Subsidies and Debt)",
         },
-        { value: "msme_assistance", label: "MSME Assistance" },
-        { value: "bank_nbf_loan", label: "Bank and NBFC business loans" },
-        { value: "private_equity", label: "Private Equity / Venture capital" },
+        { value: "MSME Assistance", label: "MSME Assistance" },
+        {
+          value: "Bank and NBFC business loans",
+          label: "Bank and NBFC business loans",
+        },
+        {
+          value: "Private Equity / Venture capital",
+          label: "Private Equity / Venture capital",
+        },
       ],
     },
     {
       label: "Marketing & Social Media",
       options: [
-        { value: "content_creation", label: "Content creation" },
+        { value: "Content creation", label: "Content creation" },
         {
-          value: "graphic_designing",
+          value: "Graphic designing (Logo, Brochure, Poster, PPT, etc.)",
           label: "Graphic designing (Logo, Brochure, Poster, PPT, etc.)",
         },
         {
-          value: "social_media_strategy",
+          value: "Social Media Strategy / Management",
           label: "Social Media Strategy / Management",
         },
         {
-          value: "branding_strategy",
+          value: "Branding (Strategy / Consultancy)",
           label: "Branding (Strategy / Consultancy)",
         },
         {
-          value: "ecommerce_management",
+          value: "E-commerce account management",
           label: "E-commerce account management",
         },
-        { value: "influencer_marketing", label: "Influencer Marketing" },
-        { value: "lead_generation", label: "Lead Generation" },
-        { value: "video_presentation", label: "Video presentation" },
-        { value: "product_photography", label: "Product photography" },
+        { value: "Influencer Marketing", label: "Influencer Marketing" },
+        { value: "Lead Generation", label: "Lead Generation" },
+        { value: "Video presentation", label: "Video presentation" },
+        { value: "Product photography", label: "Product photography" },
       ],
     },
     {
       label: "IT/ Technology Support",
       options: [
         {
-          value: "website_app_development",
+          value: "Website / Application development",
           label: "Website / Application development",
         },
-        { value: "business_softwares", label: "Business Softwares" },
-        { value: "software_development", label: "Software development" },
-        { value: "cyber_security", label: "Cyber security" },
+        { value: "Business Softwares", label: "Business Softwares" },
+        { value: "Software development", label: "Software development" },
+        { value: "Cyber security", label: "Cyber security" },
       ],
     },
     {
       label: "Training / Coaching",
       options: [
-        { value: "soft_skill_training", label: "Soft skill training" },
-        { value: "business_coaching", label: "Business coaching" },
+        { value: "Soft skill training", label: "Soft skill training" },
+        { value: "Business coaching", label: "Business coaching" },
       ],
     },
     {
       label: "Consultancy & strategic advice",
       options: [
-        { value: "mentoring_handholding", label: "Mentoring & handholding" },
-        { value: "business_growth", label: "Business growth" },
-        { value: "market_analysis", label: "Market analysis" },
-        { value: "strategic_planning", label: "Strategic planning" },
-        { value: "business_automation", label: "Business automation" },
+        { value: "Mentoring & handholding", label: "Mentoring & handholding" },
+        { value: "Business growth", label: "Business growth" },
+        { value: "Market analysis", label: "Market analysis" },
+        { value: "Strategic planning", label: "Strategic planning" },
+        { value: "Business automation", label: "Business automation" },
       ],
     },
     {
       label: "Human Resource",
       options: [
-        { value: "hiring", label: "Hiring" },
-        { value: "employee_management", label: "Employee management" },
-        { value: "performance_review", label: "Performance review" },
+        { value: "Hiring", label: "Hiring" },
+        { value: "Employee management", label: "Employee management" },
+        { value: "Performance review", label: "Performance review" },
       ],
     },
     {
       label: "Interns",
-      options: [{ value: "interns", label: "Interns" }],
+      options: [{ value: "Interns", label: "Interns" }],
     },
     {
       label: "Business Wellness",
       options: [
         {
-          value: "goal_setting",
+          value: "Goal Setting / Success motivation sessions",
           label: "Goal Setting / Success motivation sessions",
         },
         {
-          value: "corporate_astrology",
+          value:
+            "Corporate Astrology / Numerology / Industrial Vastu consultancy",
           label:
             "Corporate Astrology / Numerology / Industrial Vastu consultancy",
         },
         {
-          value: "business_wellness_retreats",
+          value: "Business wellness retreats",
           label: "Business wellness retreats",
         },
       ],
@@ -186,40 +200,41 @@ const PostBoxForm = () => {
     {
       label: "Services to Medium & Large Enterprises",
       options: [
-        { value: "transaction_structuring", label: "Transaction Structuring" },
-        { value: "merger_acquisition", label: "Merger & Acquisition" },
+        { value: "Transaction Structuring", label: "Transaction Structuring" },
+        { value: "Merger & Acquisition", label: "Merger & Acquisition" },
         {
-          value: "cross_border_consultancy",
+          value: "Consultancy for Cross Border Transactions",
           label: "Consultancy for Cross Border Transactions",
         },
-        { value: "virtual_cfo", label: "Virtual CFO" },
+        { value: "Virtual CFO", label: "Virtual CFO" },
         {
-          value: "high_ticket_debt_syndication",
+          value: "Debt syndication in high ticket size",
           label: "Debt syndication in high ticket size",
         },
-        { value: "investor_connect", label: "Investor connect" },
-        { value: "external_directorship", label: "External directorship" },
+        { value: "Investor connect", label: "Investor connect" },
+        { value: "External directorship", label: "External directorship" },
         {
-          value: "system_development_audit",
+          value: "System Development & Audit",
           label: "System Development & Audit",
         },
       ],
     },
   ];
+
   const skills = [
-    { value: "accounting", label: "Accounting" },
-    { value: "auditing", label: "Auditing" },
-    { value: "compliance", label: "Compliance" },
-    { value: "taxation", label: "Taxation" },
-    { value: "finance", label: "Finance" },
-    { value: "hr", label: "HR" },
-    { value: "marketing", label: "Marketing" },
-    { value: "it", label: "IT" },
-    { value: "mentoring", label: "Mentoring" },
-    { value: "graphic_designing", label: "Graphic Designing" },
-    { value: "training", label: "Training" },
+    { value: "Accounting", label: "Accounting" },
+    { value: "Auditing", label: "Auditing" },
+    { value: "Compliance", label: "Compliance" },
+    { value: "Taxation", label: "Taxation" },
+    { value: "Finance", label: "Finance" },
+    { value: "Hr", label: "HR" },
+    { value: "Marketing", label: "Marketing" },
+    { value: "It", label: "IT" },
+    { value: "Mentoring", label: "Mentoring" },
+    { value: "Graphic Designing", label: "Graphic Designing" },
+    { value: "Training", label: "Training" },
     {
-      value: "astrology",
+      value: "Astrology / Numerology / Vastu",
       label: "Astrology / Numerology / Vastu",
     },
   ];
