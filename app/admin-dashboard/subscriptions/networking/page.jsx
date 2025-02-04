@@ -1,14 +1,14 @@
 import dynamic from "next/dynamic";
-import Packages from "@/components/dashboard-pages/employers-dashboard/packages";
+import Subscriptions from "@/components/dashboard-pages/admin-dashboard/subscriptions/networking";
 
 export const metadata = {
-  title: "Pricing",
+  title: "Networking Subscriptions",
 };
 
 const index = () => {
   return (
     <>
-      <Packages />
+      <Subscriptions />
     </>
   );
 };

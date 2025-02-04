@@ -251,7 +251,7 @@ const SubscriptionListingTable = () => {
                     </div>
                   </td>
                   <td>{subscription.type}</td>
-                  <td>₹{subscription.price.toFixed(2)}</td>
+                  <td>₹{subscription.priceINR.toFixed(2)}</td>
                   <td>{subscription.duration}</td>
                   <td>
                     <div className="option-box">

@@ -41,13 +41,13 @@ module.exports = [
   //   routePath: "/employers-dashboard/shortlisted-resumes",
   //   active: "",
   // },
-  // {
-  //   id: 7,
-  //   name: "Pricing",
-  //   icon: "la-box",
-  //   routePath: "/employers-dashboard/packages",
-  //   active: "",
-  // },
+  {
+    id: 7,
+    name: "Pricing",
+    icon: "la-box",
+    routePath: "/networking-dashboard/packages",
+    active: "",
+  },
   // {
   //   id: 8,
   //   name: "Messages",

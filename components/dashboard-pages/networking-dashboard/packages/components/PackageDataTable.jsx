@@ -12,7 +12,7 @@ const Pricing = () => {
     const fetchSubscriptions = async () => {
       try {
         const response = await fetch(
-          "https://founders-clinic-backend.onrender.com/api/admin/subscriptions/intern"
+          "https://founders-clinic-backend.onrender.com/api/admin/subscriptions/networking"
         ); // Adjust the API path if necessary
         const data = await response.json();
 

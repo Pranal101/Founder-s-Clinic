@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 
 const PostBoxForm = () => {
   const [formData, setFormData] = useState({
-    userType: "enterprise",
+    userType: "networking",
     type: "",
     image: "",
     priceINR: "",

@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import Packages from "@/components/dashboard-pages/employers-dashboard/packages";
+import Packages from "@/components/dashboard-pages/networking-dashboard/packages";
 
 export const metadata = {
   title: "Pricing",

@@ -10,7 +10,8 @@ const PostBoxForm = () => {
     userType: "intern",
     type: "",
     image: "",
-    price: "",
+    priceINR: "",
+    priceUSD: "",
     duration: "",
     features: [],
   });
@@ -81,7 +82,8 @@ const PostBoxForm = () => {
     setFormData({
       type: "",
       image: "",
-      price: "",
+      priceINR: "",
+      priceUSD: "",
       duration: "",
       features: [],
     });
@@ -112,11 +114,22 @@ const PostBoxForm = () => {
         </div>
         {/* <!-- Input --> */}
         <div className="form-group col-lg-12 col-md-12">
-          <label>Price:</label>
+          <label>Price in INR:</label>
           <input
             type="text"
-            name="price"
-            value={formData.price}
+            name="priceINR"
+            value={formData.priceINR}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        {/* <!-- Input --> */}
+        <div className="form-group col-lg-12 col-md-12">
+          <label>Price in USD:</label>
+          <input
+            type="text"
+            name="priceUSD"
+            value={formData.priceUSD}
             onChange={handleChange}
             required
           />
