@@ -86,7 +86,7 @@
 //     const fetchEvents = async () => {
 //       try {
 //         const response = await fetch(
-//           "http://localhost:4000/api/user/events/all-events"
+//           "https://founders-clinic-backend.onrender.com/api/user/events/all-events"
 //         ); // API Call
 //         const data = await response.json();
 //         setEvents(data);
@@ -191,7 +191,7 @@ const Blog3 = () => {
     const fetchEvents = async () => {
       try {
         const response = await fetch(
-          "http://localhost:4000/api/user/events/all-events"
+          "https://founders-clinic-backend.onrender.com/api/user/events/all-events"
         ); // API Call
         const data = await response.json();
         setEvents(data);
