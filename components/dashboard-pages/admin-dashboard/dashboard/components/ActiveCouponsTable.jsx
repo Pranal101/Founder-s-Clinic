@@ -22,8 +22,9 @@ const CouponListing = () => {
         );
 
         // Filter out only active coupons
-        const activeCoupons = data.coupons.filter((coupon) => coupon.isActive);
-        setCoupons(activeCoupons);
+        // const activeCoupons = data.coupons.filter((coupon) => coupon.isActive);
+        // setCoupons(activeCoupons);
+        setCoupons(data.coupons);
       } catch (error) {
         console.error("Error fetching coupons:", error.response || error);
         toast.error("Failed to fetch coupons.");

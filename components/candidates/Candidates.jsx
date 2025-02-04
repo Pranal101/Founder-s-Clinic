@@ -1,11 +1,8 @@
-
-
-'use client'
-
+"use client";
 
 import Link from "next/link";
 import Slider from "react-slick";
-import candidates from "../../data/candidates";
+import candidates from "../../data/offers";
 import Image from "next/image";
 
 const Candidates = () => {
@@ -46,7 +43,7 @@ const Candidates = () => {
   return (
     <>
       <Slider {...settings} arrows={false}>
-        {candidates.slice(0, 12).map((candidate) => (
+        {candidates.slice(0, 5).map((candidate) => (
           <div className="candidate-block" key={candidate.id}>
             <div className="inner-box">
               <figure className="image">
@@ -59,15 +56,15 @@ const Candidates = () => {
               </figure>
               <h4 className="name">{candidate.name}</h4>
               <span className="designation">{candidate.designation}</span>
-              <div className="location">
+              {/* <div className="location">
                 <i className="flaticon-map-locator"></i> {candidate.location}
-              </div>
-              <Link
+              </div> */}
+              {/* <Link
                 href={`/candidates-single-v1/${candidate.id}`}
                 className="theme-btn btn-style-three"
               >
                 <span className="btn-title">View Profile</span>
-              </Link>
+              </Link> */}
             </div>
           </div>
         ))}

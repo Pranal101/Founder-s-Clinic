@@ -6,6 +6,7 @@ import CopyrightFooter from "../../CopyrightFooter";
 import PackageDataTable from "./components/PackageDataTable";
 import DashboardCandidatesHeader from "../../../header/DashboardCandidatesHeader";
 import MenuToggler from "../../MenuToggler";
+import Candidates from "@/components/candidates/Candidates";
 
 const index = () => {
   return (
@@ -40,6 +41,13 @@ const index = () => {
                 <div className="tabs-box">
                   <div className="widget-title">
                     <h4>Offers</h4>
+                  </div>
+                  <div className="auto-container">
+                    <div className="carousel-outer" data-aos="fade-up">
+                      <div className="candidates-carousel default-dots">
+                        <Candidates />
+                      </div>
+                    </div>
                   </div>
                   {/* End widget-title */}
 

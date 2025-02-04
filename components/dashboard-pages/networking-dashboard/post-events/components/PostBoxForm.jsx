@@ -664,6 +664,25 @@ const PostBoxForm = () => {
 
               if (!fullDateRegex.test(value) && value !== "") {
                 toast.error("Please enter a valid date in DD/MM/YY format.");
+                return;
+              }
+
+              if (value !== "") {
+                // Convert input date to a valid JavaScript Date object
+                const [day, month, year] = value.split("/").map(Number);
+                const inputDate = new Date(`20${year}`, month - 1, day); // Assume 20YY format
+
+                // Get today's date (only date part, without time)
+                const today = new Date();
+                today.setHours(0, 0, 0, 0); // Remove time portion
+
+                if (inputDate < today) {
+                  toast.error("You cannot select a past date.");
+                  setFormData((prev) => ({
+                    ...prev,
+                    [name]: "", // Reset the field
+                  }));
+                }
               }
             }}
             placeholder="DD/MM/YY"
@@ -708,6 +727,25 @@ const PostBoxForm = () => {
 
               if (!fullDateRegex.test(value) && value !== "") {
                 toast.error("Please enter a valid date in DD/MM/YY format.");
+                return;
+              }
+
+              if (value !== "") {
+                // Convert input date to a valid JavaScript Date object
+                const [day, month, year] = value.split("/").map(Number);
+                const inputDate = new Date(`20${year}`, month - 1, day); // Assume 20YY format
+
+                // Get today's date (only date part, without time)
+                const today = new Date();
+                today.setHours(0, 0, 0, 0); // Remove time portion
+
+                if (inputDate < today) {
+                  toast.error("You cannot select a past date.");
+                  setFormData((prev) => ({
+                    ...prev,
+                    [name]: "", // Reset the field
+                  }));
+                }
               }
             }}
             placeholder="DD/MM/YY"

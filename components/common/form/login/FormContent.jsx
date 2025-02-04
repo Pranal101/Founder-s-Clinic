@@ -165,16 +165,34 @@ const FormContent = () => {
         toast.error("Error logging in, please try again.");
       }
     } catch (err) {
-      // Handle Firebase errors
+      // catch (err) {
+      //   // Handle Firebase errors
+      //   if (err.code === "auth/user-not-found") {
+      //     setError("User not found. Please sign up first.");
+      //   } else if (err.code === "auth/wrong-password") {
+      //     setError("Incorrect password. Please try again.");
+      //   } else if (err.code === "auth/too-many-requests") {
+      //     setError("Too many failed attempts. Please try again later.");
+      //   } else {
+      //     setError("An unexpected error occurred. Please try again.");
+      //   }
+      // }
+      console.error("Error signing in:", err);
+
       if (err.code === "auth/user-not-found") {
         setError("User not found. Please sign up first.");
-      } else if (err.code === "auth/wrong-password") {
-        setError("Incorrect password. Please try again.");
+      } else if (
+        err.code === "auth/wrong-password" ||
+        err.code === "auth/invalid-credential"
+      ) {
+        setError("Wrong credentials, please try again.");
       } else if (err.code === "auth/too-many-requests") {
         setError("Too many failed attempts. Please try again later.");
       } else {
         setError("An unexpected error occurred. Please try again.");
       }
+
+      // toast.error(error);
     }
   };
 
@@ -264,3 +282,170 @@ const FormContent = () => {
 };
 
 export default FormContent;
+// "use client";
+// import React, { useState } from "react";
+// import Link from "next/link";
+// import LoginWithSocial from "./LoginWithSocial";
+// import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+// import { toast } from "react-toastify";
+
+// const FormContent = () => {
+//   const [email, setEmail] = useState("");
+//   const [password, setPassword] = useState("");
+//   const [error, setError] = useState("");
+
+//   const handleEmailLogin = async (e) => {
+//     e.preventDefault();
+//     setError(""); // Reset any previous error messages
+
+//     // Input validation
+//     if (!email || !password) {
+//       setError("Email and password are required.");
+//       toast.error("Email and password are required.");
+//       return;
+//     }
+
+//     if (!email.includes("@") || !email.includes(".")) {
+//       setError("Please enter a valid email address.");
+//       toast.error("Please enter a valid email address.");
+//       return;
+//     }
+
+//     try {
+//       const auth = getAuth();
+//       const userCredential = await signInWithEmailAndPassword(
+//         auth,
+//         email,
+//         password
+//       );
+//       const user = userCredential.user;
+//       const token = await user.getIdToken();
+
+//       // Send user details to the backend
+//       const response = await fetch("http://localhost:4000/api/user/login", {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//           Authorization: `Bearer ${token}`,
+//         },
+//         body: JSON.stringify({
+//           uid: user.uid,
+//           email: user.email,
+//         }),
+//       });
+
+//       const data = await response.json();
+
+//       if (!response.ok) {
+//         throw new Error(data.message || "Error logging in.");
+//       }
+
+//       const { role } = data.user;
+//       toast.success("Logged in successfully!");
+
+//       // Role-based redirection
+//       const roleRoutes = {
+//         Enterprise: "/employers-dashboard/dashboard",
+//         Professional: "/candidates-dashboard/dashboard",
+//         Intern: "/intern-dashboard/dashboard",
+//         Investor: "/investors-dashboard/dashboard",
+//         "Networking Community": "/networking-dashboard/dashboard",
+//         Admin: "/admin-dashboard/dashboard",
+//       };
+
+//       window.location.href = roleRoutes[role] || "/dashboard";
+//     } catch (err) {
+//       console.error("Error signing in:", err);
+
+//       if (err.code === "auth/user-not-found") {
+//         setError("User not found. Please sign up first.");
+//       } else if (
+//         err.code === "auth/wrong-password" ||
+//         err.code === "auth/invalid-credential"
+//       ) {
+//         setError("Wrong credentials, please try again.");
+//       } else if (err.code === "auth/too-many-requests") {
+//         setError("Too many failed attempts. Please try again later.");
+//       } else {
+//         setError("An unexpected error occurred. Please try again.");
+//       }
+
+//       // toast.error(error);
+//     }
+//   };
+
+//   return (
+//     <div className="form-inner">
+//       <h3>Login to Founders' Clinic</h3>
+
+//       <form method="post" onSubmit={handleEmailLogin}>
+//         <div className="form-group">
+//           <label>Email</label>
+//           <input
+//             type="text"
+//             name="email"
+//             placeholder="Email"
+//             value={email}
+//             onChange={(e) => setEmail(e.target.value)}
+//             required
+//           />
+//         </div>
+
+//         <div className="form-group">
+//           <label>Password</label>
+//           <input
+//             type="password"
+//             name="password"
+//             placeholder="Password"
+//             value={password}
+//             onChange={(e) => setPassword(e.target.value)}
+//             required
+//           />
+//         </div>
+
+//         <div className="form-group">
+//           <div className="field-outer">
+//             <div className="input-group checkboxes square">
+//               <input type="checkbox" name="remember-me" id="remember" />
+//               <label htmlFor="remember" className="remember">
+//                 <span className="custom-checkbox"></span> Remember me
+//               </label>
+//             </div>
+//             <a href="#" className="pwd">
+//               Forgot password?
+//             </a>
+//           </div>
+//         </div>
+
+//         {error && <p style={{ color: "red" }}>{error}</p>}
+
+//         <div className="form-group">
+//           <button
+//             className="theme-btn btn-style-one"
+//             type="submit"
+//             name="log-in"
+//           >
+//             Log In
+//           </button>
+//         </div>
+//       </form>
+
+//       <div className="bottom-box">
+//         <div className="text">
+//           Don&apos;t have an account?{" "}
+//           <Link href="#" className="call-modal signup">
+//             Signup
+//           </Link>
+//         </div>
+
+//         <div className="divider">
+//           <span>or</span>
+//         </div>
+
+//         <LoginWithSocial />
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default FormContent;

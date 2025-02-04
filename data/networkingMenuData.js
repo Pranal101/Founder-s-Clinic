@@ -27,13 +27,13 @@ module.exports = [
     routePath: "/networking-dashboard/manage-events",
     active: "",
   },
-  {
-    id: 5,
-    name: "Applicants",
-    icon: "la-file-invoice",
-    routePath: "/networking-dashboard/applicants",
-    active: "",
-  },
+  // {
+  //   id: 5,
+  //   name: "Applicants",
+  //   icon: "la-file-invoice",
+  //   routePath: "/networking-dashboard/applicants",
+  //   active: "",
+  // },
   // {
   //   id: 6,
   //   name: "Shortlisted Resumes",
