@@ -5,19 +5,16 @@ import Pagination from "./Pagination";
 import SocialShare from "./SocialShare";
 import Tag from "./Tag";
 
-const index = () => {
+const index = ({ event }) => {
+  if (!event) {
+    return <p>No event details available.</p>;
+  }
   return (
     <div className="auto-container">
-      <h4>Course Description</h4>
+      <h4>Event Description</h4>
 
-      <p>
-        Aliquam hendrerit sollicitudin purus, quis rutrum mi accumsan nec.
-        Quisque bibendum orci ac nibh facilisis, at malesuada orci congue.
-        Nullam tempus sollicitudin cursus. Ut et adipiscing erat. Curabitur this
-        is a text link libero tempus congue.
-      </p>
-
-      <p>
+      <p>{event.description || "No description available."}</p>
+      {/* <p>
         Duis mattis laoreet neque, et ornare neque sollicitudin at. Proin
         sagittis dolor sed mi elementum pretium. Donec et justo ante. Vivamus
         egestas sodales est, eu rhoncus urna semper eu. Cum sociis natoque
@@ -26,29 +23,54 @@ const index = () => {
         mattis. Phasellus posuere felis sed eros porttitor mattis. Curabitur
         massa magna, tempor in blandit id, porta in ligula. Aliquam laoreet nisl
         massa, at interdum mauris sollicitudin et.
-      </p>
+      </p> */}
 
       <blockquote className="blockquote-style-one mb-5 mt-5">
         <p>
           Aliquam hendrerit sollicitudin purus, quis rutrum mi accumsan nec.
           Quisque bibendum orci ac nibh facilisis, at malesuada orci congue.{" "}
         </p>
-        <cite>Luis Pickford</cite>
+        <cite>{event.hostName || "Unknown Host"}</cite>
       </blockquote>
       {/* End BlogQuote */}
 
-      <h4>What you&apos;ll learn</h4>
+      <h4>Event Details</h4>
       <ul className="list-style-four">
-        <li>Become a UI/UX designer.</li>
-        <li>Build a UI project from beginning to end.</li>
-        <li>You will be able to start earning money Figma skills.</li>
-        <li>Work with colors & fonts.</li>
-        <li>You will create your own UI Kit.</li>
-        <li>Become a UI/UX designer.</li>
-        <li>Build a UI project from beginning to end.</li>
-        <li>You will be able to start earning money Figma skills.</li>
-        <li>Work with colors & fonts.</li>
-        <li>You will create your own UI Kit.</li>
+        <li>
+          <strong>Event Type:</strong> {event.eventType?.join(", ") || "N/A"}
+        </li>
+        <li>
+          <strong>Start Date:</strong>{" "}
+          {event.eventStartDate
+            ? new Date(event.eventStartDate).toLocaleDateString()
+            : "N/A"}
+        </li>
+        <li>
+          <strong>End Date:</strong>{" "}
+          {event.eventEndDate
+            ? new Date(event.eventEndDate).toLocaleDateString()
+            : "N/A"}
+        </li>
+        <li>
+          <strong>Location:</strong>{" "}
+          {event.eventLocation || "No location provided"}
+        </li>
+        <li>
+          <strong>Target Audience:</strong>{" "}
+          {event.targetAudience?.join(", ") || "N/A"}
+        </li>
+        {event.registrationLink && (
+          <li>
+            <strong>Registration Link:</strong>{" "}
+            <a
+              href={event.registrationLink}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Register Here
+            </a>
+          </li>
+        )}
       </ul>
       {/* List */}
 
@@ -61,15 +83,25 @@ const index = () => {
         />
       </figure>
 
-      <h4>Requirements</h4>
+      <h4>Sponsors & Promotions</h4>
       <ul className="list-style-three">
-        <li>
-          We do not require any previous experience or pre-defined skills to
-          take this course. A great orientation would be enough to master UI/UX
-          design.
-        </li>
-        <li>A computer with a good internet connection.</li>
-        <li>Adobe Photoshop (OPTIONAL)</li>
+        {event.sponsorsList?.length > 0 && (
+          <li>
+            <strong>Sponsors:</strong> {event.sponsorsList.join(", ")}
+          </li>
+        )}
+        {event.promotionalVideo && (
+          <li>
+            <strong>Promotional Video:</strong>{" "}
+            <a
+              href={event.promotionalVideo}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Watch Video
+            </a>
+          </li>
+        )}
       </ul>
       {/* <!-- list --> */}
 
@@ -80,18 +112,18 @@ const index = () => {
         </div>
         {/* End social-share */}
 
-        <Tag />
+        {/* <Tag /> */}
       </div>
       {/* End other share */}
 
-      <div className="post-control">
+      {/* <div className="post-control">
         <Pagination />
-      </div>
+      </div> */}
       {/* <!-- Post Control --> */}
 
-      <div className="comments-area">
+      {/* <div className="comments-area">
         <CommentBox />
-      </div>
+      </div> */}
 
       {/* <!-- Comments area --> */}
 

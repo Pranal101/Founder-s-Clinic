@@ -1,7 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getAuth } from "firebase/auth";
 import axios from "axios";
+import countryData from "@/data/countries.json";
 import Select from "react-select";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -55,6 +56,11 @@ const PostBoxForm = () => {
     promotionalVideoBool: "",
     promotionalVideo: "",
   });
+  const [countryOptions, setCountryOptions] = useState([]);
+  const [cityOptions, setCityOptions] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState(null);
+  const [baseAddress, setBaseAddress] = useState("");
+  const [phoneCode, setPhoneCode] = useState("");
   const promotionOptions = [
     { value: "Social Media", label: "Social Media" },
     { value: "Email Marketing", label: "Email Marketing" },
@@ -87,7 +93,107 @@ const PostBoxForm = () => {
     { value: "General Public", label: "General Public" },
     { value: "Other", label: "Other" },
   ];
+  useEffect(() => {
+    if (Array.isArray(countryData)) {
+      const countries = countryData.map((country) => ({
+        value: country.name,
+        label: country.name,
+        phoneCode: `+${country.phone_code}`,
+        cities: country.states
+          ? country.states.flatMap((state) =>
+              state.cities.map((city) => city.name)
+            )
+          : [],
+      }));
+      setCountryOptions(countries);
+    } else {
+      console.error("Invalid JSON structure:", countryData);
+    }
+  }, []);
 
+  const handleCountryChange = (selectedOption) => {
+    if (!selectedOption) return;
+
+    const newPhoneCode = selectedOption.phoneCode; // Get new phone code
+    setSelectedCountry(selectedOption);
+    setPhoneCode(newPhoneCode);
+
+    // Update fields only if they don't already start with the new phone code
+    setFormData((prev) => ({
+      ...prev,
+      country: selectedOption.value,
+      completeAddress: `${prev.city ? prev.city + ", " : ""}${
+        selectedOption.value
+      }`,
+    }));
+
+    if (selectedOption.cities.length > 0) {
+      const cities = selectedOption.cities.map((city) => ({
+        value: city,
+        label: city,
+      }));
+      setCityOptions(cities);
+    } else {
+      setCityOptions([]);
+    }
+  };
+
+  const isValidPhoneNumber = (number) => {
+    const numericPart = number.replace(/\D/g, "").slice(phoneCode.length - 1); // Remove non-numeric characters & exclude country code
+    return numericPart.length >= 8 && numericPart.length <= 15;
+  };
+
+  const handlePhoneChange = (e) => {
+    if (!selectedCountry) {
+      toast.error("Please select a country first.");
+      setFormData((prev) => ({
+        ...prev,
+        contactNumber: "", // Clear input if no country is selected
+      }));
+      return;
+    }
+
+    let { value } = e.target;
+    let numericValue = value.replace(/\D/g, ""); // Remove non-numeric characters
+    const countryCode = phoneCode.replace("+", ""); // Extract only numbers from country code
+
+    // Ensure the number starts with the country code
+    if (!numericValue.startsWith(countryCode)) {
+      numericValue = countryCode;
+    }
+
+    // Extract numeric part excluding country code
+    const numericPart = numericValue.slice(countryCode.length);
+
+    // Ensure backspace doesn't introduce unwanted characters
+    if (value.length < formData.contactNumber.length) {
+      setFormData((prev) => ({
+        ...prev,
+        contactNumber: `+${numericValue}`,
+      }));
+      return;
+    }
+
+    // Prevent exceeding max phone number length
+    if (numericPart.length > 15) {
+      toast.error("Phone number cannot exceed 15 digits.");
+      return;
+    }
+
+    setFormData((prev) => ({
+      ...prev,
+      contactNumber: `+${numericValue}`,
+    }));
+  };
+  const handleCityChange = (selectedOption) => {
+    setFormData((prev) => ({
+      ...prev,
+      city: selectedOption ? selectedOption.value : "",
+      completeAddress: `${baseAddress}${baseAddress ? ", " : ""}${
+        selectedOption ? selectedOption.value + ", " : ""
+      }${prev.country ? prev.country : ""}`,
+    }));
+  };
   const handleMultiSelectChange = (selectedOptions, fieldName) => {
     setFormData((prev) => ({
       ...prev,
@@ -257,38 +363,24 @@ const PostBoxForm = () => {
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Country</label>
-          <select
-            className="chosen-single form-select"
+          <Select
             name="country"
-            value={formData.country}
-            onChange={handleChange}
-            required
-          >
-            <option>Australia</option>
-            <option>Pakistan</option>
-            <option>Chaina</option>
-            <option>Japan</option>
-            <option>India</option>
-          </select>
+            options={countryOptions}
+            onChange={handleCountryChange}
+            placeholder="Select a country"
+          />
         </div>
 
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>City</label>
-          <select
-            className="chosen-single form-select"
+          <Select
             name="city"
-            value={formData.city}
-            onChange={handleChange}
-            r
-            required
-          >
-            <option>Melbourne</option>
-            <option>Pakistan</option>
-            <option>Chaina</option>
-            <option>Japan</option>
-            <option>India</option>
-          </select>
+            options={cityOptions}
+            onChange={handleCityChange}
+            placeholder="Select a city"
+            isDisabled={!selectedCountry || cityOptions.length === 0}
+          />
         </div>
 
         {/* <!-- Input --> */}
@@ -362,7 +454,7 @@ const PostBoxForm = () => {
             <div className="form-group col-lg-6 col-md-12">
               <label>Event Link</label>
               <input
-                type="url"
+                type="text"
                 name="eventLink"
                 value={formData.eventLink}
                 onChange={handleChange}
@@ -533,7 +625,7 @@ const PostBoxForm = () => {
         </div>
 
         {/* Event Dates */}
-        <div className="custom-form-group form-group col-lg-6 col-md-12">
+        {/* <div className="custom-form-group form-group col-lg-6 col-md-12">
           <label className="custom-form-label">Event Start Date</label>
           <DatePicker
             selected={formData.eventStartDate}
@@ -543,8 +635,41 @@ const PostBoxForm = () => {
             className="custom-margin"
             required
           />
+        </div> */}
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Event Start Date</label>
+          <input
+            type="text"
+            name="eventStartDate"
+            value={formData.eventStartDate}
+            onChange={(e) => {
+              const { name, value } = e.target;
+
+              // Allow input as long as it's a valid partial date or empty
+              const partialDateRegex = /^(\d{0,2}(\/\d{0,2}(\/\d{0,2})?)?)?$/;
+
+              if (partialDateRegex.test(value) || value === "") {
+                setFormData((prev) => ({
+                  ...prev,
+                  [name]: value,
+                }));
+              }
+            }}
+            onBlur={(e) => {
+              const { name, value } = e.target;
+
+              // Validate full date format on blur
+              const fullDateRegex =
+                /^([0-2]?[0-9]|3[01])\/(0?[1-9]|1[0-2])\/(\d{2})$/;
+
+              if (!fullDateRegex.test(value) && value !== "") {
+                toast.error("Please enter a valid date in DD/MM/YY format.");
+              }
+            }}
+            placeholder="DD/MM/YY"
+          />
         </div>
-        <div className="custom-form-group form-group col-lg-6 col-md-12">
+        {/* <div className="custom-form-group form-group col-lg-6 col-md-12">
           <label className="custom-form-label">Event End Date</label>
           <DatePicker
             selected={formData.eventEndDate}
@@ -553,6 +678,39 @@ const PostBoxForm = () => {
             placeholderText="Select an end date"
             className="custom-margin"
             required
+          />
+        </div> */}
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Event End Date</label>
+          <input
+            type="text"
+            name="eventEndDate"
+            value={formData.eventEndDate}
+            onChange={(e) => {
+              const { name, value } = e.target;
+
+              // Allow input as long as it's a valid partial date or empty
+              const partialDateRegex = /^(\d{0,2}(\/\d{0,2}(\/\d{0,2})?)?)?$/;
+
+              if (partialDateRegex.test(value) || value === "") {
+                setFormData((prev) => ({
+                  ...prev,
+                  [name]: value,
+                }));
+              }
+            }}
+            onBlur={(e) => {
+              const { name, value } = e.target;
+
+              // Validate full date format on blur
+              const fullDateRegex =
+                /^([0-2]?[0-9]|3[01])\/(0?[1-9]|1[0-2])\/(\d{2})$/;
+
+              if (!fullDateRegex.test(value) && value !== "") {
+                toast.error("Please enter a valid date in DD/MM/YY format.");
+              }
+            }}
+            placeholder="DD/MM/YY"
           />
         </div>
 
@@ -638,7 +796,7 @@ const PostBoxForm = () => {
           </select>
         </div>
         {/* "Other" Specification */}
-        {formData.registrationRequired.includes("Yes") && (
+        {formData.registrationRequired === "Yes" && (
           <div className="form-group col-lg-6 col-md-12">
             <label>Registration Link</label>
             <input
@@ -647,6 +805,7 @@ const PostBoxForm = () => {
               value={formData.registrationLink}
               onChange={handleChange}
               placeholder="Registration Link"
+              required
             />
           </div>
         )}
@@ -677,7 +836,7 @@ const PostBoxForm = () => {
           </select>
         </div>
         {/* "Other" Specification */}
-        {formData.eventFeeBool.includes("Yes") && (
+        {formData.eventFeeBool === "Yes" && (
           <div className="form-group col-lg-6 col-md-12">
             <label>Provide fee details or ticket options</label>
             <input
@@ -705,7 +864,7 @@ const PostBoxForm = () => {
           </select>
         </div>
         {/* "Other" Specification */}
-        {formData.discountsBool.includes("Yes") && (
+        {formData.discountsBool === "Yes" && (
           <div className="form-group col-lg-6 col-md-12">
             <label>Please specify</label>
             <input
@@ -733,7 +892,7 @@ const PostBoxForm = () => {
           </select>
         </div>
         {/* "Other" Specification */}
-        {formData.sponsorsBool.includes("Yes") && (
+        {formData.sponsorsBool === "Yes" && (
           <div className="form-group col-lg-6 col-md-12">
             <label>Please list the sponsors</label>
             <input
@@ -776,18 +935,19 @@ const PostBoxForm = () => {
           />
         </div>
         {/* "Other" Target Audience Specification */}
-        {formData.eventPromotion.includes("Other") && (
-          <div className="form-group col-lg-6 col-md-12">
-            <label>Please Specify</label>
-            <input
-              type="text"
-              name="eventPromotionOther"
-              value={formData.eventPromotionOther}
-              onChange={handleChange}
-              placeholder="Please specify"
-            />
-          </div>
-        )}
+        {formData.eventPromotion &&
+          formData.eventPromotion.includes("Other") && (
+            <div className="form-group col-lg-6 col-md-12">
+              <label>Please Specify</label>
+              <input
+                type="text"
+                name="eventPromotionOther"
+                value={formData.eventPromotionOther}
+                onChange={handleChange}
+                placeholder="Please specify"
+              />
+            </div>
+          )}
 
         <div className="form-group col-lg-6 col-md-12">
           <label>
@@ -806,7 +966,7 @@ const PostBoxForm = () => {
           </select>
         </div>
         {/* "Other" Specification */}
-        {formData.promotionalVideoBool.includes("Yes") && (
+        {formData.promotionalVideoBool === "Yes" && (
           <div className="form-group col-lg-6 col-md-12">
             <label>Please provide links</label>
             <input

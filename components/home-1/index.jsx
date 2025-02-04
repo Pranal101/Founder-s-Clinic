@@ -79,7 +79,32 @@ const index = () => {
           </div>
         </div>
       </section> */}
-      <section className="features-section">
+      <section className="job-section-two">
+        <div className="auto-container">
+          <div className="sec-title text-center">
+            <h2>Find the best services for your enterprise</h2>
+            <div className="text">
+              We connect you with the best service providers specialized in each
+              sector, who will help you improve and solve internal needs.
+            </div>
+          </div>
+
+          <div className="row" data-aos="fade-up">
+            <JobCategorie8 />
+          </div>
+
+          <div className="btn-box">
+            <button
+              className="theme-btn btn-style-one"
+              data-bs-toggle="modal"
+              data-bs-target="#registerModal"
+            >
+              Join Now
+            </button>
+          </div>
+        </div>
+      </section>
+      {/* <section className="features-section">
         <div className="auto-container">
           <div className="sec-title text-center">
             <h2>Find the best services for your enterprise</h2>
@@ -93,12 +118,12 @@ const index = () => {
             <JobCategorie8 />
           </div>
         </div>
-      </section>
+      </section> */}
 
       <section className="features-section">
         <div className="auto-container">
           <div className="sec-title text-center">
-            <h2>User Types</h2>
+            <h2>User Segment</h2>
             {/* <div className="text">
               Lorem ipsum dolor sit amet elit, sed do eiusmod tempor
             </div> */}

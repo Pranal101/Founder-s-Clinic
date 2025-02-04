@@ -227,8 +227,8 @@ const FormContent = () => {
         <label>Email Address</label>
         <input
           type="email"
-          name="username"
-          placeholder="Username"
+          name="email"
+          placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
