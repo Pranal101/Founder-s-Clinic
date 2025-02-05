@@ -106,6 +106,7 @@
 // export default PackageDataTable;
 "use client";
 import { useEffect, useState } from "react";
+import loadRazorpay from "@/components/razorpay/RazorpayPayment";
 import Link from "next/link";
 
 const Pricing = () => {
@@ -170,7 +171,14 @@ const Pricing = () => {
                 </ul>
               </div>
               <div className="table-footer">
-                <Link href="" className="theme-btn btn-style-three">
+                <Link
+                  href="#"
+                  className="theme-btn btn-style-three"
+                  onClick={(e) => {
+                    e.preventDefault(); // Prevent default Link behavior
+                    loadRazorpay(item.priceINR); // Trigger Razorpay
+                  }}
+                >
                   Buy Now
                 </Link>
               </div>
