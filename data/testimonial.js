@@ -65,7 +65,7 @@ module.exports = [
     feedbackText: `Without JobHunt i’d be homeless, they found me a job and got me
     sorted out quickly with everything! Can’t quite… The Mitech team
     works really hard to ensure high level of quality`,
-    avatar: "/images/resource/testimonial-image.jpg",
+    avatar: "/images/b1.jpg",
     name: "Brooklyn Simmons",
     designation: "Web Developer",
   },
@@ -75,7 +75,7 @@ module.exports = [
     feedbackText: `Without JobHunt i’d be homeless, they found me a job and got me
     sorted out quickly with everything! Can’t quite… The Mitech team
     works really hard to ensure high level of quality`,
-    avatar: "/images/resource/testimonial-image.jpg",
+    avatar: "/images/b2.jpg",
     name: "Ashley Jenkins",
     designation: "Designer",
   },
@@ -85,7 +85,7 @@ module.exports = [
     feedbackText: `Without JobHunt i’d be homeless, they found me a job and got me
     sorted out quickly with everything! Can’t quite… The Mitech team
     works really hard to ensure high level of quality`,
-    avatar: "/images/resource/testimonial-image.jpg",
+    avatar: "/images/b3.jpg",
     name: "Brooklyn Simmons",
     designation: "Web Developer",
   },

@@ -240,6 +240,15 @@ const EnterprisePostBoxForm = () => {
           />
         </div>
         <div className="form-group col-lg-6 col-md-12">
+          <label>Country</label>
+          <Select
+            name="country"
+            options={countryOptions}
+            onChange={handleCountryChange}
+            placeholder="Select a country"
+          />
+        </div>
+        <div className="form-group col-lg-6 col-md-12">
           <label>Street Address</label>
           <input
             type="text"
@@ -247,15 +256,6 @@ const EnterprisePostBoxForm = () => {
             placeholder="Enter street address"
             value={baseAddress}
             onChange={handleAddressChange}
-          />
-        </div>
-        <div className="form-group col-lg-6 col-md-12">
-          <label>Country</label>
-          <Select
-            name="country"
-            options={countryOptions}
-            onChange={handleCountryChange}
-            placeholder="Select a country"
           />
         </div>
         <div className="form-group col-lg-6 col-md-12">

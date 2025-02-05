@@ -235,17 +235,6 @@ const PostBoxForm = () => {
             required
           />
         </div>
-
-        <div className="form-group col-lg-6 col-md-12">
-          <label>Street Address</label>
-          <input
-            type="text"
-            name="streetAddress"
-            placeholder="Enter street address"
-            value={baseAddress}
-            onChange={handleAddressChange}
-          />
-        </div>
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Country</label>
@@ -256,6 +245,17 @@ const PostBoxForm = () => {
             placeholder="Select a country"
           />
         </div>
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Street Address</label>
+          <input
+            type="text"
+            name="streetAddress"
+            placeholder="Enter street address"
+            value={baseAddress}
+            onChange={handleAddressChange}
+          />
+        </div>
+
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Contact Number(WhatsApp)</label>

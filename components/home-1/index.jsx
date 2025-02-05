@@ -19,6 +19,9 @@ import Pricing3 from "../pricing/Pricing3";
 import Pricing from "../pricing/Pricing";
 import FaqChildHome from "@/components/pages-menu/faq/FaqChildHome";
 import RegBanner from "../block/RegBanner";
+import CallToAction from "../call-to-action/CallToAction";
+import CallToAction2 from "../call-to-action/CallToAction2";
+import CallToAction3 from "../call-to-action/CallToAction3";
 
 const index = () => {
   return (
@@ -79,10 +82,11 @@ const index = () => {
           </div>
         </div>
       </section> */}
+
       <section className="job-section-two">
         <div className="auto-container">
           <div className="sec-title text-center">
-            <h2>Find the best services for your enterprise</h2>
+            <h2>Find the Best Services for Your Enterprise</h2>
             <div className="text">
               We connect you with the best service providers specialized in each
               sector, who will help you improve and solve internal needs.
@@ -104,6 +108,10 @@ const index = () => {
           </div>
         </div>
       </section>
+      <br></br>
+      <br></br>
+      <br></br>
+      <CallToAction />
       {/* <section className="features-section">
         <div className="auto-container">
           <div className="sec-title text-center">
@@ -134,6 +142,11 @@ const index = () => {
           </div>
         </div>
       </section>
+
+      <CallToAction2 />
+      <br></br>
+      <br></br>
+      <br></br>
       <section className="layout-pt-120 layout-pb-60 testimonial-section style-two">
         <div className="auto-container">
           {/* <!-- Sec Title --> */}
@@ -158,7 +171,10 @@ const index = () => {
 
       {/* End .row */}
       {/* End Job Categorie Section */}
-
+      <CallToAction3 />
+      <br></br>
+      <br></br>
+      <br></br>
       <section className="candidates-section-two">
         <div className="auto-container">
           <div className="sec-title text-center">

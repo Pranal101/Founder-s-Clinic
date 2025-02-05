@@ -22,7 +22,7 @@ const index = ({ footerStyle = "" }) => {
                   </a>
                 </div>
                 <p className="phone-num">
-                  <span>Contact Us </span>
+                  {/* <span>Contact Us </span> */}
                   <a href="tel:+919106526820">+919106526820</a>
                 </p>
                 <p className="address">

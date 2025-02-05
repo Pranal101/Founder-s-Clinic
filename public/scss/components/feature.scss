@@ -35,11 +35,11 @@ Features Section
   transition: all 400ms ease;
 }
 
-.feature-block .inner-box:hover .image img {
-  -webkit-transform: scale(1.2);
-  -ms-transform: scale(1.2);
-  transform: scale(1.2);
-}
+// .feature-block .inner-box:hover .image img {
+//   -webkit-transform: scale(1.2);
+//   -ms-transform: scale(1.2);
+//   transform: scale(1.2);
+// }
 
 .feature-block .overlay-box {
   position: absolute;

@@ -261,12 +261,12 @@ const Blog3 = () => {
                   <div className="lower-content">
                     <ul className="post-meta">
                       <li>
-                        <a href="#">
+                        <span>
                           {new Date(event.eventStartDate).toDateString()}
-                        </a>
+                        </span>
                       </li>
                       <li>
-                        <a href="#">Hosted by {event.hostName}</a>
+                        <span>Hosted by {event.hostName}</span>
                       </li>
                     </ul>
                     <h3>{event.eventTitle}</h3>

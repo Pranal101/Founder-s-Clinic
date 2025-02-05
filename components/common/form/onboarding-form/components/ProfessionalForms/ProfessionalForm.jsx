@@ -279,7 +279,15 @@ const PostBoxForm = ({ pricingContent }) => {
             onChange={handleChange}
           />
         </div>
-
+        <div className="form-group col-lg-6 col-md-12">
+          <label>Country</label>
+          <Select
+            name="country"
+            options={countryOptions}
+            onChange={handleCountryChange}
+            placeholder="Select a country"
+          />
+        </div>
         <div className="form-group col-lg-6 col-md-12">
           <label>Street Address</label>
           <input
@@ -290,15 +298,7 @@ const PostBoxForm = ({ pricingContent }) => {
             onChange={handleAddressChange}
           />
         </div>
-        <div className="form-group col-lg-6 col-md-12">
-          <label>Country</label>
-          <Select
-            name="country"
-            options={countryOptions}
-            onChange={handleCountryChange}
-            placeholder="Select a country"
-          />
-        </div>
+
         <div className="form-group col-lg-6 col-md-12">
           <label>Contact Number</label>
           <input
