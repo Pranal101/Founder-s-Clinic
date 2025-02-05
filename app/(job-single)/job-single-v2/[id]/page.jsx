@@ -21,7 +21,7 @@
 //     const fetchInvestment = async () => {
 //       try {
 //         const res = await fetch(
-//           `https://founders-clinic-backend.onrender.com/api/user/investement/${params.id}`
+//           `http://13.126.254.235:4000/api/user/investement/${params.id}`
 //         );
 //         const data = await res.json();
 //         setInvestment(data);
@@ -211,7 +211,7 @@
 //       const userToken = await user.getIdToken();
 //       try {
 //         const res = await fetch(
-//           `https://founders-clinic-backend.onrender.com/api/user/investement/${params.id}`
+//           `http://13.126.254.235:4000/api/user/investement/${params.id}`
 //         );
 //         const data = await res.json();
 //         console.log(data);
@@ -478,7 +478,7 @@ const JobSingleDynamicV2 = ({ params }) => {
 
       // Make authenticated API request
       const response = await axios.get(
-        `https://founders-clinic-backend.onrender.com/api/user/investement/${params.id}`,
+        `http://13.126.254.235:4000/api/user/investement/${params.id}`,
         {
           headers: {
             Authorization: `Bearer ${userToken}`,

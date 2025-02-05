@@ -285,7 +285,7 @@
 //       try {
 //         const userToken = await user.getIdToken();
 //         const response = await axios.get(
-//           "https://founders-clinic-backend.onrender.com/api/user/company-profile",
+//           "http://13.126.254.235:4000/api/user/company-profile",
 //           {
 //             headers: {
 //               Authorization: `Bearer ${userToken}`,
@@ -343,7 +343,7 @@
 //       const userToken = await user.getIdToken();
 
 //       await axios.patch(
-//         "https://founders-clinic-backend.onrender.com/api/user/profile",
+//         "http://13.126.254.235:4000/api/user/profile",
 //         {
 //           profileData: {
 //             educationBackground: [...educationList, newEdu],
@@ -376,7 +376,7 @@
 
 //       // Make the API call to delete the specific education entry
 //       await axios.patch(
-//         "https://founders-clinic-backend.onrender.com/api/user/profile/education",
+//         "http://13.126.254.235:4000/api/user/profile/education",
 //         {
 //           userId: user.uid, // Provide the user ID
 //           educationId, // Pass the education ID directly
@@ -419,7 +419,7 @@
 //       const userToken = await user.getIdToken();
 
 //       await axios.patch(
-//         "https://founders-clinic-backend.onrender.com/api/user/profile",
+//         "http://13.126.254.235:4000/api/user/profile",
 //         {
 //           profileData: {
 //             educationBackground: updatedList,
@@ -589,7 +589,7 @@ const Education = () => {
       try {
         const userToken = await user.getIdToken();
         const response = await axios.get(
-          "https://founders-clinic-backend.onrender.com/api/user/company-profile",
+          "http://13.126.254.235:4000/api/user/company-profile",
           {
             headers: {
               Authorization: `Bearer ${userToken}`,
@@ -648,7 +648,7 @@ const Education = () => {
       const userToken = await user.getIdToken();
 
       await axios.patch(
-        "https://founders-clinic-backend.onrender.com/api/user/profile",
+        "http://13.126.254.235:4000/api/user/profile",
         {
           profileData: {
             educationBackground: [...educationList, newEdu],
@@ -681,7 +681,7 @@ const Education = () => {
 
       // Make the API call to delete the specific education entry
       await axios.patch(
-        "https://founders-clinic-backend.onrender.com/api/user/profile/education",
+        "http://13.126.254.235:4000/api/user/profile/education",
         {
           userId: user.uid, // Provide the user ID
           educationId, // Pass the education ID directly
@@ -724,7 +724,7 @@ const Education = () => {
       const userToken = await user.getIdToken();
 
       await axios.patch(
-        "https://founders-clinic-backend.onrender.com/api/user/profile",
+        "http://13.126.254.235:4000/api/user/profile",
         {
           profileData: {
             educationBackground: updatedList,

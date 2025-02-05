@@ -99,9 +99,7 @@ const BlogDetailsDynamic = () => {
   useEffect(() => {
     if (id) {
       axios
-        .get(
-          `https://founders-clinic-backend.onrender.com/api/user/events/${id}`
-        )
+        .get(`http://13.126.254.235:4000/api/user/events/${id}`)
         .then((response) => {
           if (response.data.event) {
             setEvent(response.data.event);

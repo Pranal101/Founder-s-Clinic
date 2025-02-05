@@ -23,7 +23,7 @@ const EventListingsTable = () => {
 
         const userToken = await user.getIdToken();
         const response = await axios.get(
-          "https://founders-clinic-backend.onrender.com/api/user/get-events",
+          "http://13.126.254.235:4000/api/user/get-events",
           {
             headers: {
               Authorization: `Bearer ${userToken}`, // Secure API call
@@ -61,7 +61,7 @@ const EventListingsTable = () => {
         const userToken = await user.getIdToken();
 
         await axios.delete(
-          `https://founders-clinic-backend.onrender.com/api/user/events/${eventId}`,
+          `http://13.126.254.235:4000/api/user/events/${eventId}`,
           {
             headers: {
               Authorization: `Bearer ${userToken}`,
@@ -91,7 +91,7 @@ const EventListingsTable = () => {
       const userToken = await user.getIdToken();
 
       const response = await axios.patch(
-        `https://founders-clinic-backend.onrender.com/api/events/${editingEvent._id}`,
+        `http://13.126.254.235:4000/api/events/${editingEvent._id}`,
         updatedData,
         {
           headers: {

@@ -17,7 +17,7 @@ const JobListingsTable = () => {
         const userToken = await user.getIdToken();
 
         const { data } = await axios.get(
-          "https://founders-clinic-backend.onrender.com/api/admin/jobs",
+          "http://13.126.254.235:4000/api/admin/jobs",
           {
             headers: { Authorization: `Bearer ${userToken}` },
           }
@@ -53,7 +53,7 @@ const JobListingsTable = () => {
       const userToken = await user.getIdToken();
 
       const { data } = await axios.patch(
-        `https://founders-clinic-backend.onrender.com/api/admin/jobs/${jobId}/approve`,
+        `http://13.126.254.235:4000/api/admin/jobs/${jobId}/approve`,
         {},
         {
           headers: { Authorization: `Bearer ${userToken}` },
@@ -83,7 +83,7 @@ const JobListingsTable = () => {
       const userToken = await user.getIdToken();
 
       const { data } = await axios.patch(
-        `https://founders-clinic-backend.onrender.com/api/admin/jobs/${jobId}/reject`,
+        `http://13.126.254.235:4000/api/admin/jobs/${jobId}/reject`,
         {},
         {
           headers: { Authorization: `Bearer ${userToken}` },

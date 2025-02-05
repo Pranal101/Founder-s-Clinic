@@ -17,7 +17,7 @@ const FilterTopBox = () => {
     const fetchProfessionals = async () => {
       try {
         const response = await axios.get(
-          "https://founders-clinic-backend.onrender.com/api/user/view-interns"
+          "http://13.126.254.235:4000/api/user/view-interns"
         );
         const fetchedProfessionals = response.data.data;
         setProfessionals(fetchedProfessionals);

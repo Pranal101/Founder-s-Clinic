@@ -19,7 +19,7 @@ const EventDetailsDynamic = ({ params }) => {
     const fetchEventDetails = async () => {
       try {
         const response = await axios.get(
-          `https://founders-clinic-backend.onrender.com/api/user/events/${id}`
+          `http://13.126.254.235:4000/api/user/events/${id}`
         );
         setEvent(response.data.event); // Assuming API returns event in `event` field
       } catch (error) {

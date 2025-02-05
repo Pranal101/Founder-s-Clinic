@@ -15,7 +15,7 @@ const UserListingsPage = () => {
         const userToken = await user.getIdToken();
 
         const { data } = await axios.get(
-          "https://founders-clinic-backend.onrender.com/api/admin/users",
+          "http://13.126.254.235:4000/api/admin/users",
           {
             headers: { Authorization: `Bearer ${userToken}` },
           }
@@ -51,7 +51,7 @@ const UserListingsPage = () => {
       const userToken = await user.getIdToken();
 
       const { data } = await axios.patch(
-        `https://founders-clinic-backend.onrender.com/api/admin/users/approve`,
+        `http://13.126.254.235:4000/api/admin/users/approve`,
         { userId, isApproved },
         {
           headers: { Authorization: `Bearer ${userToken}` },

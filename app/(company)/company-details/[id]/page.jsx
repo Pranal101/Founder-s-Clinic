@@ -20,7 +20,7 @@ const EmployersSingleV3 = ({ params }) => {
     const fetchEmployer = async () => {
       try {
         const { data } = await axios.get(
-          `https://founders-clinic-backend.onrender.com/api/user/enterprise-details/${params.id}`
+          `http://13.126.254.235:4000/api/user/enterprise-details/${params.id}`
         );
         setEmployer(data.data);
       } catch (error) {

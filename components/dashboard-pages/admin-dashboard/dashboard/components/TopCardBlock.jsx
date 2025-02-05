@@ -17,15 +17,9 @@ const TopCardBlock = () => {
           closedJobCountResponse,
           totalJobCountResponse,
         ] = await Promise.all([
-          axios.get(
-            "https://founders-clinic-backend.onrender.com/api/admin/user-counts"
-          ), // Existing endpoint
-          axios.get(
-            "https://founders-clinic-backend.onrender.com/api/admin/closed-jobs"
-          ), // Closed jobs endpoint
-          axios.get(
-            "https://founders-clinic-backend.onrender.com/api/admin/total-job-count"
-          ), // Total jobs endpoint
+          axios.get("http://13.126.254.235:4000/api/admin/user-counts"), // Existing endpoint
+          axios.get("http://13.126.254.235:4000/api/admin/closed-jobs"), // Closed jobs endpoint
+          axios.get("http://13.126.254.235:4000/api/admin/total-job-count"), // Total jobs endpoint
         ]);
 
         setUserCounts({

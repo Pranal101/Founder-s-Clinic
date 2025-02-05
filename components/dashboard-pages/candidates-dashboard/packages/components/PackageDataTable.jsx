@@ -100,7 +100,7 @@ const Pricing = () => {
     const fetchSubscriptions = async () => {
       try {
         const response = await fetch(
-          "https://founders-clinic-backend.onrender.com/api/admin/subscriptions/professional"
+          "http://13.126.254.235:4000/api/admin/subscriptions/professional"
         ); // Adjust the API path if necessary
         const data = await response.json();
 

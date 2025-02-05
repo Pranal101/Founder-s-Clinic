@@ -13,7 +13,7 @@
 //     try {
 //       const userToken = await user.getIdToken();
 //       const { data } = await axios.get(
-//         "https://founders-clinic-backend.onrender.com/api/jobs/match-skills",
+//         "http://13.126.254.235:4000/api/jobs/match-skills",
 //         {
 //           headers: {
 //             Authorization: `Bearer ${userToken}`,
@@ -148,7 +148,7 @@ const JobAlertsTable = () => {
     try {
       const userToken = await user.getIdToken();
       const { data } = await axios.get(
-        "https://founders-clinic-backend.onrender.com/api/jobs/match-jobs",
+        "http://13.126.254.235:4000/api/jobs/match-jobs",
         {
           headers: {
             Authorization: `Bearer ${userToken}`,

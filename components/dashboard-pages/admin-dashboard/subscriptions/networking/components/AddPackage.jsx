@@ -59,7 +59,7 @@ const PostBoxForm = () => {
       }
 
       const response = await axios.post(
-        "https://founders-clinic-backend.onrender.com/api/admin/create-package",
+        "http://13.126.254.235:4000/api/admin/create-package",
         { ...formData },
         {
           headers: {

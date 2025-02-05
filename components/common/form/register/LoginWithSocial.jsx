@@ -36,7 +36,7 @@ const LoginWithSocial = () => {
       if (!idToken) {
         // If no `id_token`, redirect to LinkedIn authorization URL
         const authorizationURL =
-          "https://founders-clinic-backend.onrender.com/api/linkedin/authorize";
+          "http://13.126.254.235:4000/api/linkedin/authorize";
         window.location.href = authorizationURL;
         return;
       }
@@ -60,7 +60,7 @@ const LoginWithSocial = () => {
 
       // Send user info to your backend for registration or login
       const response = await fetch(
-        "https://founders-clinic-backend.onrender.com/api/user/register",
+        "http://13.126.254.235:4000/api/user/register",
         {
           method: "POST",
           headers: {
@@ -114,7 +114,7 @@ const LoginWithSocial = () => {
   //     console.log("Google Sign-In successful. User:", user);
 
   //     // Send user info to your backend via the /register API
-  //     const response = await fetch("https://founders-clinic-backend.onrender.com/api/user/register", {
+  //     const response = await fetch("http://13.126.254.235:4000/api/user/register", {
   //       method: "POST",
   //       headers: {
   //         "Content-Type": "application/json",
@@ -189,7 +189,7 @@ const LoginWithSocial = () => {
 
       // Send user info to the backend for registration
       const response = await fetch(
-        "https://founders-clinic-backend.onrender.com/api/user/register",
+        "http://13.126.254.235:4000/api/user/register",
         {
           method: "POST",
           headers: {

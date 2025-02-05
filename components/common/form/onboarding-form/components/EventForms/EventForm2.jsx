@@ -121,7 +121,7 @@ const PostBoxForm = () => {
       }
 
       const response = await axios.patch(
-        "https://founders-clinic-backend.onrender.com/api/user/profile",
+        "http://13.126.254.235:4000/api/user/profile",
         { profileData: formData },
         {
           headers: {
@@ -140,7 +140,7 @@ const PostBoxForm = () => {
         formDataObj.append("file", file); // The uploaded file
 
         const fileUploadResponse = await axios.post(
-          "https://founders-clinic-backend.onrender.com/api/user/upload",
+          "http://13.126.254.235:4000/api/user/upload",
           formDataObj,
           {
             headers: {

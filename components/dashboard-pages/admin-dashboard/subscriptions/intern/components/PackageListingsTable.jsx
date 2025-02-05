@@ -15,7 +15,7 @@
 //         const userToken = await user.getIdToken();
 
 //         const { data } = await axios.get(
-//           "https://founders-clinic-backend.onrender.com/api/admin/all-package",
+//           "http://13.126.254.235:4000/api/admin/all-package",
 //           {
 //             headers: { Authorization: `Bearer ${userToken}` },
 //           }
@@ -142,7 +142,7 @@ const SubscriptionListingTable = () => {
         const userToken = await user.getIdToken();
 
         const { data } = await axios.get(
-          "https://founders-clinic-backend.onrender.com/api/admin/subscriptions/intern",
+          "http://13.126.254.235:4000/api/admin/subscriptions/intern",
           {
             headers: { Authorization: `Bearer ${userToken}` },
           }
@@ -178,7 +178,7 @@ const SubscriptionListingTable = () => {
       const userToken = await user.getIdToken();
 
       const { data } = await axios.delete(
-        `https://founders-clinic-backend.onrender.com/api/admin/package/${subscriptionId}`,
+        `http://13.126.254.235:4000/api/admin/package/${subscriptionId}`,
         {
           headers: { Authorization: `Bearer ${userToken}` },
         }

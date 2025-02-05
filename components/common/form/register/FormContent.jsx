@@ -44,7 +44,7 @@
 //       };
 //       console.log("Sending user data to server:", userData);
 
-//       const response = await fetch("https://founders-clinic-backend.onrender.com/api/user/register", {
+//       const response = await fetch("http://13.126.254.235:4000/api/user/register", {
 //         method: "POST",
 //         headers: {
 //           "Content-Type": "application/json",
@@ -182,7 +182,7 @@ const FormContent = () => {
       console.log("Sending user data to backend:", userData);
       // Send the token to the backend
       const response = await fetch(
-        "https://founders-clinic-backend.onrender.com/api/user/register",
+        "http://13.126.254.235:4000/api/user/register",
         {
           method: "POST",
           headers: {

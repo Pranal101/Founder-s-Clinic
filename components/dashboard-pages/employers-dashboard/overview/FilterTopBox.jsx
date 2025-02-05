@@ -12,7 +12,7 @@
 //     const fetchItems = async () => {
 //       try {
 //         const response = await axios.get(
-//           "https://founders-clinic-backend.onrender.com/api/user/view-enterprises"
+//           "http://13.126.254.235:4000/api/user/view-enterprises"
 //         );
 //         console.log("Fetched Data:", response.data.data); // Debugging
 //         setItems(response.data.data); // Correctly access the `data` field
@@ -114,7 +114,7 @@ const FilterTopBox = () => {
     const fetchItems = async () => {
       try {
         const response = await axios.get(
-          "https://founders-clinic-backend.onrender.com/api/user/view-enterprises"
+          "http://13.126.254.235:4000/api/user/view-enterprises"
         );
         setItems(response.data.data || []);
       } catch (error) {

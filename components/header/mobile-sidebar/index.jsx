@@ -130,7 +130,7 @@ const Index = () => {
         try {
           const token = await currentUser.getIdToken();
           const response = await axios.get(
-            "https://founders-clinic-backend.onrender.com/api/user/getRole",
+            "http://13.126.254.235:4000/api/user/getRole",
             {
               headers: {
                 Authorization: `Bearer ${token}`,
