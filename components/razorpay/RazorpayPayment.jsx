@@ -68,11 +68,14 @@ const loadRazorpay = async (amount) => {
     });
   }
 
-  const res = await fetch("http://localhost:4000/api/razorpay/create-order", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ amount, currency: "INR" }),
-  });
+  const res = await fetch(
+    "https://founders-clinic-backend.onrender.com/api/razorpay/create-order",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ amount, currency: "INR" }),
+    }
+  );
 
   const order = await res.json();
 
@@ -85,7 +88,7 @@ const loadRazorpay = async (amount) => {
     order_id: order.id,
     handler: async (response) => {
       const verifyRes = await fetch(
-        "http://localhost:4000/api/razorpay/verify-payment",
+        "https://founders-clinic-backend.onrender.com/api/razorpay/verify-payment",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
