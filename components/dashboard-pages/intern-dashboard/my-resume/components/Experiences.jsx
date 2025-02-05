@@ -207,7 +207,7 @@
 //       try {
 //         const userToken = await user.getIdToken();
 //         const response = await axios.get(
-//           "http://13.126.254.235:4000/api/user/company-profile",
+//           "https://founders-clinic-backend.onrender.com/api/user/company-profile",
 //           {
 //             headers: {
 //               Authorization: `Bearer ${userToken}`,
@@ -264,7 +264,7 @@
 //       const userToken = await user.getIdToken();
 
 //       await axios.patch(
-//         "http://13.126.254.235:4000/api/user/profile",
+//         "https://founders-clinic-backend.onrender.com/api/user/profile",
 //         {
 //           profileData: {
 //             workExperience: [...experienceList, newExp],
@@ -290,7 +290,7 @@
 //       const userToken = await user.getIdToken();
 
 //       await axios.patch(
-//         "http://13.126.254.235:4000/api/user/profile/experience",
+//         "https://founders-clinic-backend.onrender.com/api/user/profile/experience",
 //         {
 //           userId: user.uid,
 //           experienceId,
@@ -338,7 +338,7 @@
 //       const userToken = await user.getIdToken();
 
 //       await axios.patch(
-//         "http://13.126.254.235:4000/api/user/profile",
+//         "https://founders-clinic-backend.onrender.com/api/user/profile",
 //         {
 //           profileData: {
 //             workExperience: updatedList,
@@ -517,7 +517,7 @@ const Experiences = () => {
       try {
         const userToken = await user.getIdToken();
         const response = await axios.get(
-          "http://13.126.254.235:4000/api/user/company-profile",
+          "https://founders-clinic-backend.onrender.com/api/user/company-profile",
           {
             headers: {
               Authorization: `Bearer ${userToken}`,
@@ -583,7 +583,7 @@ const Experiences = () => {
       console.log("Data being sent to backend:", payload);
 
       await axios.patch(
-        "http://13.126.254.235:4000/api/user/profile",
+        "https://founders-clinic-backend.onrender.com/api/user/profile",
         payload,
         {
           headers: {
@@ -605,7 +605,7 @@ const Experiences = () => {
       const userToken = await user.getIdToken();
 
       await axios.patch(
-        "http://13.126.254.235:4000/api/user/profile/intern-experience",
+        "https://founders-clinic-backend.onrender.com/api/user/profile/intern-experience",
         {
           userId: user.uid,
           experienceId,
@@ -653,7 +653,7 @@ const Experiences = () => {
       const userToken = await user.getIdToken();
 
       await axios.patch(
-        "http://13.126.254.235:4000/api/user/profile",
+        "https://founders-clinic-backend.onrender.com/api/user/profile",
         {
           profileData: {
             workExperience: updatedList,

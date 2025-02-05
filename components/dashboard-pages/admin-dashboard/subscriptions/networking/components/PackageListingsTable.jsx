@@ -15,7 +15,7 @@ const SubscriptionListingTable = () => {
         const userToken = await user.getIdToken();
 
         const { data } = await axios.get(
-          "http://13.126.254.235:4000/api/admin/subscriptions/networking",
+          "https://founders-clinic-backend.onrender.com/api/admin/subscriptions/networking",
           {
             headers: { Authorization: `Bearer ${userToken}` },
           }
@@ -51,7 +51,7 @@ const SubscriptionListingTable = () => {
       const userToken = await user.getIdToken();
 
       const { data } = await axios.delete(
-        `http://13.126.254.235:4000/api/admin/package/${subscriptionId}`,
+        `https://founders-clinic-backend.onrender.com/api/admin/package/${subscriptionId}`,
         {
           headers: { Authorization: `Bearer ${userToken}` },
         }

@@ -165,14 +165,17 @@ const LoginRegBanner = () => {
       }
 
       // Update role in backend
-      const response = await fetch("http://13.126.254.235:4000/api/user/role", {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${userToken}`, // Authentication header
-        },
-        body: JSON.stringify({ role }),
-      });
+      const response = await fetch(
+        "https://founders-clinic-backend.onrender.com/api/user/role",
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${userToken}`, // Authentication header
+          },
+          body: JSON.stringify({ role }),
+        }
+      );
 
       const data = await response.json();
 

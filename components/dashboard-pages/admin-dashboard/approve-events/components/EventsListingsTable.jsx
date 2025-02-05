@@ -16,7 +16,7 @@ const EventListingsTable = () => {
         const userToken = await user.getIdToken();
 
         const { data } = await axios.get(
-          "http://13.126.254.235:4000/api/admin/events",
+          "https://founders-clinic-backend.onrender.com/api/admin/events",
           {
             headers: { Authorization: `Bearer ${userToken}` },
           }
@@ -51,7 +51,7 @@ const EventListingsTable = () => {
       const userToken = await user.getIdToken();
 
       const { data } = await axios.patch(
-        `http://13.126.254.235:4000/api/admin/events/${eventId}/approve`,
+        `https://founders-clinic-backend.onrender.com/api/admin/events/${eventId}/approve`,
         {},
         {
           headers: { Authorization: `Bearer ${userToken}` },
@@ -83,7 +83,7 @@ const EventListingsTable = () => {
       const userToken = await user.getIdToken();
 
       const { data } = await axios.patch(
-        `http://13.126.254.235:4000/api/admin/events/${eventId}/reject`,
+        `https://founders-clinic-backend.onrender.com/api/admin/events/${eventId}/reject`,
         {},
         {
           headers: { Authorization: `Bearer ${userToken}` },

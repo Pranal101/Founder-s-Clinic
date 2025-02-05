@@ -37,7 +37,7 @@ const FormInfoBox = () => {
       try {
         const userToken = await user.getIdToken();
         const response = await axios.get(
-          "http://13.126.254.235:4000/api/user/company-profile",
+          "https://founders-clinic-backend.onrender.com/api/user/company-profile",
           {
             headers: {
               Authorization: `Bearer ${userToken}`,
@@ -125,7 +125,7 @@ const FormInfoBox = () => {
       }
 
       const response = await axios.patch(
-        "http://13.126.254.235:4000/api/user/profile",
+        "https://founders-clinic-backend.onrender.com/api/user/profile",
         { profileData: formData },
         {
           headers: {

@@ -244,7 +244,7 @@ const PostBoxForm = () => {
       }
 
       const response = await axios.post(
-        "http://13.126.254.235:4000/api/user/new-events", // Backend job posting endpoint
+        "https://founders-clinic-backend.onrender.com/api/user/new-events", // Backend job posting endpoint
         { ...formData },
         {
           headers: {

@@ -15,7 +15,7 @@ const InternListingsTable = () => {
         const userToken = await user.getIdToken();
 
         const { data } = await axios.get(
-          "http://13.126.254.235:4000/api/admin/intern",
+          "https://founders-clinic-backend.onrender.com/api/admin/intern",
           {
             headers: { Authorization: `Bearer ${userToken}` },
           }

@@ -15,7 +15,7 @@ const EnterpriseListingsTable = () => {
         const userToken = await user.getIdToken();
 
         const { data } = await axios.get(
-          "http://13.126.254.235:4000/api/admin/enterprise",
+          "https://founders-clinic-backend.onrender.com/api/admin/enterprise",
           {
             headers: { Authorization: `Bearer ${userToken}` },
           }

@@ -60,7 +60,7 @@ const FormContent = () => {
   //     const token = await user.getIdToken();
 
   //     // Send user info to the backend for registration
-  //     const response = await fetch("http://13.126.254.235:4000/api/user/register", {
+  //     const response = await fetch("https://founders-clinic-backend.onrender.com/api/user/register", {
   //       method: "POST",
   //       headers: {
   //         "Content-Type": "application/json",
@@ -121,7 +121,7 @@ const FormContent = () => {
       // }
       // Send user details to the backend
       const response = await fetch(
-        "http://13.126.254.235:4000/api/user/login",
+        "https://founders-clinic-backend.onrender.com/api/user/login",
         {
           method: "POST",
           headers: {
@@ -322,7 +322,7 @@ export default FormContent;
 //       const token = await user.getIdToken();
 
 //       // Send user details to the backend
-//       const response = await fetch("http://13.126.254.235:4000/api/user/login", {
+//       const response = await fetch("https://founders-clinic-backend.onrender.com/api/user/login", {
 //         method: "POST",
 //         headers: {
 //           "Content-Type": "application/json",

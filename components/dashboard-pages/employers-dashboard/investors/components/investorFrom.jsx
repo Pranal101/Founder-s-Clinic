@@ -70,7 +70,7 @@ const FormInfoBox = () => {
   const fetchUserInvestmentData = async (token) => {
     try {
       const response = await axios.get(
-        "http://13.126.254.235:4000/api/user/all-investments", // Replace with your endpoint
+        "https://founders-clinic-backend.onrender.com/api/user/all-investments", // Replace with your endpoint
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -198,7 +198,7 @@ const FormInfoBox = () => {
 
     try {
       const response = await axios.post(
-        "http://13.126.254.235:4000/api/user/investments",
+        "https://founders-clinic-backend.onrender.com/api/user/investments",
         formData,
         {
           headers: {

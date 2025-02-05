@@ -47,7 +47,7 @@ const CreateCoupon = () => {
       }
 
       const response = await axios.post(
-        "http://13.126.254.235:4000/api/admin/create-coupon",
+        "https://founders-clinic-backend.onrender.com/api/admin/create-coupon",
         { ...formData },
         {
           headers: {

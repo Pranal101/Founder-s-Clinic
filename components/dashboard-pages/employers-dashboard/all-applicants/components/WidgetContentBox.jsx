@@ -287,7 +287,7 @@
 //         const userToken = await user.getIdToken();
 
 //         const { data } = await axios.get(
-//           "http://13.126.254.235:4000/api/user/applicants",
+//           "https://founders-clinic-backend.onrender.com/api/user/applicants",
 //           {
 //             headers: { Authorization: `Bearer ${userToken}` },
 //           }
@@ -441,7 +441,7 @@
 //         const userToken = await user.getIdToken();
 
 //         const { data } = await axios.get(
-//           "http://13.126.254.235:4000/api/user/applicants",
+//           "https://founders-clinic-backend.onrender.com/api/user/applicants",
 //           {
 //             headers: { Authorization: `Bearer ${userToken}` },
 //           }
@@ -675,7 +675,7 @@
 //         const userToken = await user.getIdToken();
 
 //         const { data } = await axios.get(
-//           "http://13.126.254.235:4000/api/user/applicants",
+//           "https://founders-clinic-backend.onrender.com/api/user/applicants",
 //           {
 //             headers: { Authorization: `Bearer ${userToken}` },
 //           }
@@ -710,7 +710,7 @@
 //         const userToken = await user.getIdToken();
 
 //         const response = await axios.put(
-//           `http://13.126.254.235:4000/api/user/${applicationId}/shortlisted`,
+//           `https://founders-clinic-backend.onrender.com/api/user/${applicationId}/shortlisted`,
 //           {},
 //           { headers: { Authorization: `Bearer ${userToken}` } }
 //         );
@@ -739,7 +739,7 @@
 //         const userToken = await user.getIdToken();
 
 //         const response = await axios.put(
-//           `http://13.126.254.235:4000/api/user/${applicationId}/status`,
+//           `https://founders-clinic-backend.onrender.com/api/user/${applicationId}/status`,
 //           { status },
 //           { headers: { Authorization: `Bearer ${userToken}` } }
 //         );
@@ -1103,7 +1103,7 @@ const WidgetContentBox = () => {
         const userToken = await user.getIdToken();
 
         const { data } = await axios.get(
-          `http://13.126.254.235:4000/api/user/applicants/${jobId}`,
+          `https://founders-clinic-backend.onrender.com/api/user/applicants/${jobId}`,
           {
             headers: { Authorization: `Bearer ${userToken}` },
           }
@@ -1139,7 +1139,7 @@ const WidgetContentBox = () => {
         const userToken = await user.getIdToken();
 
         const response = await axios.patch(
-          `http://13.126.254.235:4000/api/user/${applicationId}/shortlisted`,
+          `https://founders-clinic-backend.onrender.com/api/user/${applicationId}/shortlisted`,
           {},
           { headers: { Authorization: `Bearer ${userToken}` } }
         );
@@ -1169,7 +1169,7 @@ const WidgetContentBox = () => {
         const userToken = await user.getIdToken();
 
         const response = await axios.put(
-          `http://13.126.254.235:4000/api/user/${applicationId}/status`,
+          `https://founders-clinic-backend.onrender.com/api/user/${applicationId}/status`,
           { status },
           { headers: { Authorization: `Bearer ${userToken}` } }
         );

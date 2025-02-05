@@ -13,7 +13,7 @@
 //   }, []);
 
 //   const loadRazorpay = async () => {
-//     const res = await fetch("http://13.126.254.235:4000/api/razorpay/create-order", {
+//     const res = await fetch("https://founders-clinic-backend.onrender.com/api/razorpay/create-order", {
 //       method: "POST",
 //       headers: { "Content-Type": "application/json" },
 //       body: JSON.stringify({ amount, currency: "INR" }),
@@ -30,7 +30,7 @@
 //       order_id: order.id,
 //       handler: async (response) => {
 //         const verifyRes = await fetch(
-//           "http://13.126.254.235:4000/api/razorpay/verify-payment",
+//           "https://founders-clinic-backend.onrender.com/api/razorpay/verify-payment",
 //           {
 //             method: "POST",
 //             headers: { "Content-Type": "application/json" },
@@ -69,7 +69,7 @@ const loadRazorpay = async (amount) => {
   }
 
   const res = await fetch(
-    "http://13.126.254.235:4000/api/razorpay/create-order",
+    "https://founders-clinic-backend.onrender.com/api/razorpay/create-order",
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -88,7 +88,7 @@ const loadRazorpay = async (amount) => {
     order_id: order.id,
     handler: async (response) => {
       const verifyRes = await fetch(
-        "http://13.126.254.235:4000/api/razorpay/verify-payment",
+        "https://founders-clinic-backend.onrender.com/api/razorpay/verify-payment",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

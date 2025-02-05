@@ -396,7 +396,7 @@
 //         try {
 //           const token = await currentUser.getIdToken();
 //           const response = await axios.get(
-//             "http://13.126.254.235:4000/api/user/getRole",
+//             "https://founders-clinic-backend.onrender.com/api/user/getRole",
 //             {
 //               headers: {
 //                 Authorization: `Bearer ${token}`,
@@ -531,7 +531,7 @@
 //         try {
 //           const token = await currentUser.getIdToken();
 //           const response = await axios.get(
-//             "http://13.126.254.235:4000/api/user/getRole",
+//             "https://founders-clinic-backend.onrender.com/api/user/getRole",
 //             {
 //               headers: {
 //                 Authorization: `Bearer ${token}`,
@@ -686,7 +686,7 @@ const HeaderNavContent = () => {
         try {
           const token = await currentUser.getIdToken();
           const response = await axios.get(
-            "http://13.126.254.235:4000/api/user/getRole",
+            "https://founders-clinic-backend.onrender.com/api/user/getRole",
             {
               headers: {
                 Authorization: `Bearer ${token}`,

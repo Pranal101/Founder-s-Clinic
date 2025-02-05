@@ -18,7 +18,7 @@ const LoginWithSocial = () => {
 
   //     if (!idToken) {
   //       // If no `id_token`, redirect to LinkedIn authorization URL
-  //       const authorizationURL = "http://13.126.254.235:4000/api/linkedin/authorize";
+  //       const authorizationURL = "https://founders-clinic-backend.onrender.com/api/linkedin/authorize";
   //       window.location.href = authorizationURL;
   //       return;
   //     }
@@ -41,7 +41,7 @@ const LoginWithSocial = () => {
   //     console.log("Firebase LinkedIn login successful. User:", user);
 
   //     // Send user info to your backend for registration or login
-  //     const response = await fetch("http://13.126.254.235:4000/api/user/register", {
+  //     const response = await fetch("https://founders-clinic-backend.onrender.com/api/user/register", {
   //       method: "POST",
   //       headers: {
   //         "Content-Type": "application/json",
@@ -76,7 +76,7 @@ const LoginWithSocial = () => {
       if (!idToken) {
         // If no `id_token`, redirect to LinkedIn authorization URL
         const authorizationURL =
-          "http://13.126.254.235:4000/api/linkedin/authorize";
+          "https://founders-clinic-backend.onrender.com/api/linkedin/authorize";
         window.location.href = authorizationURL;
         return;
       }
@@ -100,7 +100,7 @@ const LoginWithSocial = () => {
 
       // Send user info to your backend for registration or login
       const response = await fetch(
-        "http://13.126.254.235:4000/api/user/register",
+        "https://founders-clinic-backend.onrender.com/api/user/register",
         {
           method: "POST",
           headers: {
@@ -125,7 +125,7 @@ const LoginWithSocial = () => {
 
         // Fetch the role from the backend
         const roleResponse = await fetch(
-          "http://13.126.254.235:4000/api/user/getRole",
+          "https://founders-clinic-backend.onrender.com/api/user/getRole",
           {
             headers: {
               Authorization: `Bearer ${token}`, // Pass the token for authentication
@@ -185,7 +185,7 @@ const LoginWithSocial = () => {
 
       // Send user info to the backend for registration
       const registrationResponse = await fetch(
-        "http://13.126.254.235:4000/api/user/register",
+        "https://founders-clinic-backend.onrender.com/api/user/register",
         {
           method: "POST",
           headers: {
@@ -218,7 +218,7 @@ const LoginWithSocial = () => {
       toast.success("Logged in successfully via Google!");
       // Fetch the role from the backend
       const roleResponse = await fetch(
-        "http://13.126.254.235:4000/api/user/getRole",
+        "https://founders-clinic-backend.onrender.com/api/user/getRole",
         {
           headers: {
             Authorization: `Bearer ${token}`, // Pass the token for authentication

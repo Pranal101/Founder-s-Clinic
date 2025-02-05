@@ -266,7 +266,7 @@ const JobSingleDynamicV3 = ({ params }) => {
     try {
       const userToken = await user.getIdToken();
       const { data } = await axios.get(
-        `http://13.126.254.235:4000/api/jobs/${id}`,
+        `https://founders-clinic-backend.onrender.com/api/jobs/${id}`,
         {
           headers: {
             Authorization: `Bearer ${userToken}`,

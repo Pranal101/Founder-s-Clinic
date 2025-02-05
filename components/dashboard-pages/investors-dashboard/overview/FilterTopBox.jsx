@@ -17,7 +17,7 @@ const FilterTopBox = () => {
     const fetchInvestors = async () => {
       try {
         const response = await axios.get(
-          "http://13.126.254.235:4000/api/user/view-investors"
+          "https://founders-clinic-backend.onrender.com/api/user/view-investors"
         );
         setInvestors(response.data.data);
         handlePageChange(1, response.data.data); // Set initial display items based on fetched data

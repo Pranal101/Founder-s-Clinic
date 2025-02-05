@@ -42,7 +42,7 @@
 //     const fetchSkills = async () => {
 //       try {
 //         const response = await axios.get(
-//           "http://13.126.254.235:4000/api/user/skills" // Adjust the URL as per your API route
+//           "https://founders-clinic-backend.onrender.com/api/user/skills" // Adjust the URL as per your API route
 //         );
 //         const skills = response.data.map((skill) => ({
 //           value: skill,
@@ -73,7 +73,7 @@
 //     if (newSkills.length > 0) {
 //       try {
 //         const response = await axios.post(
-//           "http://13.126.254.235:4000/api/user/add-skills",
+//           "https://founders-clinic-backend.onrender.com/api/user/add-skills",
 //           {
 //             skills: newSkills.map((skill) => skill.value),
 //           }
@@ -140,7 +140,7 @@ const SkillsMultiple = () => {
       try {
         // Fetch global skills
         const globalResponse = await axios.get(
-          "http://13.126.254.235:4000/api/user/skills"
+          "https://founders-clinic-backend.onrender.com/api/user/skills"
         );
         const globalSkillOptions = globalResponse.data.map((skill) => ({
           value: skill,
@@ -151,7 +151,7 @@ const SkillsMultiple = () => {
         if (userToken) {
           // Fetch user-specific skills
           const userResponse = await axios.get(
-            "http://13.126.254.235:4000/api/user/user-skills",
+            "https://founders-clinic-backend.onrender.com/api/user/user-skills",
             {
               headers: {
                 Authorization: `Bearer ${userToken}`,
@@ -193,7 +193,7 @@ const SkillsMultiple = () => {
       if (selectedSkillValues.length > 0) {
         // Update the user's skill list with all selected skills
         await axios.post(
-          "http://13.126.254.235:4000/api/user/add-user-skills",
+          "https://founders-clinic-backend.onrender.com/api/user/add-user-skills",
           {
             skills: selectedSkillValues,
           },
@@ -208,7 +208,7 @@ const SkillsMultiple = () => {
       if (removedSkills.length > 0) {
         // Remove skills from the user's skill list
         await axios.post(
-          "http://13.126.254.235:4000/api/user/remove-user-skills",
+          "https://founders-clinic-backend.onrender.com/api/user/remove-user-skills",
           {
             skills: removedSkills,
           },

@@ -67,7 +67,7 @@ const TopCardBlock = () => {
   const fetchJobCount = async () => {
     try {
       const response = await axios.get(
-        "http://13.126.254.235:4000/api/jobs/jobs-count"
+        "https://founders-clinic-backend.onrender.com/api/jobs/jobs-count"
       ); // Adjust API route if necessary
       setJobCount(response.data.count);
     } catch (error) {
@@ -80,7 +80,7 @@ const TopCardBlock = () => {
     try {
       const userToken = await user.getIdToken();
       const response = await axios.get(
-        "http://13.126.254.235:4000/api/user/inquiries-count", // Adjust API route if necessary
+        "https://founders-clinic-backend.onrender.com/api/user/inquiries-count", // Adjust API route if necessary
         {
           headers: {
             Authorization: `Bearer ${userToken}`,

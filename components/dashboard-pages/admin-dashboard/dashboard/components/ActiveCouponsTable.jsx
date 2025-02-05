@@ -15,7 +15,7 @@ const CouponListing = () => {
         const userToken = await user.getIdToken();
 
         const { data } = await axios.get(
-          "http://13.126.254.235:4000/api/admin/all-coupons",
+          "https://founders-clinic-backend.onrender.com/api/admin/all-coupons",
           {
             headers: { Authorization: `Bearer ${userToken}` },
           }
@@ -56,7 +56,7 @@ const CouponListing = () => {
       const userToken = await user.getIdToken();
 
       const { data } = await axios.patch(
-        `http://13.126.254.235:4000/api/admin/coupon/${couponId}/toggle`, // Your toggle route
+        `https://founders-clinic-backend.onrender.com/api/admin/coupon/${couponId}/toggle`, // Your toggle route
         {},
         {
           headers: { Authorization: `Bearer ${userToken}` },
@@ -88,7 +88,7 @@ const CouponListing = () => {
       const userToken = await user.getIdToken();
 
       const { data } = await axios.delete(
-        `http://13.126.254.235:4000/api/admin/coupon/${couponId}`,
+        `https://founders-clinic-backend.onrender.com/api/admin/coupon/${couponId}`,
         {
           headers: { Authorization: `Bearer ${userToken}` },
         }

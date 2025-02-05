@@ -15,7 +15,7 @@ const InvestorListingsTable = () => {
         const userToken = await user.getIdToken();
 
         const { data } = await axios.get(
-          "http://13.126.254.235:4000/api/admin/investor",
+          "https://founders-clinic-backend.onrender.com/api/admin/investor",
           {
             headers: { Authorization: `Bearer ${userToken}` },
           }
