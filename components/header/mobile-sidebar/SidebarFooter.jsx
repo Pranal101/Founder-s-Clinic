@@ -16,11 +16,17 @@ const SidebarFooter = () => {
       <div className="mm-listitem__text">
         <div className="contact-info">
           <span className="phone-num">
-            <span>Call us</span>
-            <a href="tel:+919106526820">+919106526820</a>
+            <span>Contact us</span>
+            <a
+              href="https://wa.me/919106526820"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i className="fab fa-whatsapp"></i>
+            </a>
           </span>
           <span className="address">
-            201 Sears Tower, Gulbai Tekra, Ambawadi <br />
+            Ambawadi <br />
             Ahmedabad - 380006
           </span>
           <a href="mailto:info@foundersclinic.com" className="email">

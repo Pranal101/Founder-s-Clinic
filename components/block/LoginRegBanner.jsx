@@ -201,7 +201,7 @@ const LoginRegBanner = () => {
           <div className="text" style={{ color: "white" }}>
             We have created this space where you can discover, analyze and
             connect throughout the global business ecosystem and learn about the
-            best resources with our Matching algorithms.
+            best resources with our matching algorithms.
           </div>
         </div>
 

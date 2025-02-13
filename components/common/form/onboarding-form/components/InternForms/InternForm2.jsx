@@ -14,7 +14,7 @@ const PostBoxForm = () => {
   const [formData, setFormData] = useState({
     fullName: "",
     email2: "",
-    contactNumber2: "",
+    // contactNumber2: "",
     currentCountry: "",
     currentCity: "",
     nationality: "",
@@ -276,7 +276,7 @@ const PostBoxForm = () => {
           />
         </div>
         {/* <!-- Input --> */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>Contact Number</label>
           <input
             type="text"
@@ -285,7 +285,7 @@ const PostBoxForm = () => {
             onChange={handleChange}
             placeholder="Contact Number"
           />
-        </div>
+        </div> */}
         {/* <!-- Input --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Nationality</label>

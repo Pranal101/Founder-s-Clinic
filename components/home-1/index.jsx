@@ -22,6 +22,7 @@ import RegBanner from "../block/RegBanner";
 import CallToAction from "../call-to-action/CallToAction";
 import CallToAction2 from "../call-to-action/CallToAction2";
 import CallToAction3 from "../call-to-action/CallToAction3";
+import ImageSlider from "../ImageSlider/ImageSlider";
 
 const index = () => {
   return (
@@ -82,7 +83,15 @@ const index = () => {
           </div>
         </div>
       </section> */}
-
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <ImageSlider />
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
       <section className="job-section-two">
         <div className="auto-container">
           <div className="sec-title text-center">
@@ -171,6 +180,9 @@ const index = () => {
 
       {/* End .row */}
       {/* End Job Categorie Section */}
+      <br></br>
+      <br></br>
+      <br></br>
       <CallToAction3 />
       <br></br>
       <br></br>

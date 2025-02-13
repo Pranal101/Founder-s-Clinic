@@ -259,6 +259,17 @@ const PostBoxForm = () => {
             placeholder="Select a country"
           />
         </div>
+        {/* <!-- Input --> */}
+        <div className="form-group col-lg-6 col-md-12">
+          <label>City</label>
+          <Select
+            name="city"
+            options={cityOptions}
+            onChange={handleCityChange}
+            placeholder="Select a city"
+            isDisabled={!selectedCountry || cityOptions.length === 0}
+          />
+        </div>
         <div className="form-group col-lg-6 col-md-12">
           <label>Street Address</label>
           <input
@@ -280,17 +291,6 @@ const PostBoxForm = () => {
             value={formData.contactNumber}
             onChange={handlePhoneChange}
             required
-          />
-        </div>
-        {/* <!-- Input --> */}
-        <div className="form-group col-lg-6 col-md-12">
-          <label>City</label>
-          <Select
-            name="city"
-            options={cityOptions}
-            onChange={handleCityChange}
-            placeholder="Select a city"
-            isDisabled={!selectedCountry || cityOptions.length === 0}
           />
         </div>
 

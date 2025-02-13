@@ -1,0 +1,67 @@
+export const membershipPlan = [
+  {
+    name: "basic",
+    label: "Professionals",
+    subName: "Professionals",
+    description: [
+      "Build your clientele with ease",
+      "Offer your services to the enterprises/ companies worldwide",
+      "We'll connect you with companies searching specifically for your services",
+      "We'll improve the reach and visibility of your services",
+      "Networking & Collaboration opportunities",
+    ],
+    color: "#b2b7f6",
+  },
+  {
+    label: "Premium",
+    name: "premium",
+    subName: "Intern",
+    description: [
+      "Connect with Enterprises Seeking Talent",
+      "Personalized Job Matches",
+      "Streamlined Application Process",
+      "Skill Development Opportunities",
+      "Access a wide range of companies, from startups to established firms",
+    ],
+    color: "#F4DBFC",
+  },
+  {
+    label: "Standard",
+    name: "standard",
+    subName: "Investor",
+    description: [
+      "Choose from curated opportunities",
+      "Access to a carefully vetted enterprises that align with your investment goals",
+      "Explore a wide range of sectors and business models ",
+      "Streamlined search connecting you with businesses that meet the criteria",
+      "Detailed business information and due diligence",
+    ],
+    color: "#EBE7C3",
+  },
+  {
+    name: "basic",
+    label: "Basic",
+    subName: "BUSINESS NETWORKING COMMUNITY",
+    description: [
+      "Boost Visibility and Grow Your Membership",
+      "Attract members aligning with community's goals through personalized matchmaking",
+      "Get exposure to a wider audience of potential members and collaborators",
+      "Access a pool of entrepreneurs and professionals",
+      "Partner with other communities and organizations",
+    ],
+    color: "#b2b7f6",
+  },
+  {
+    name: "basic",
+    label: "Basic",
+    subName: "Enterprise",
+    description: [
+      "Grow your business within our platform",
+      "Find the best professionals, interns and other resources to grow your enterprise",
+      "Find suitable investor/ fund for your business",
+      "Discover the right business community",
+      "Position your company within the ecosystem",
+    ],
+    color: "#EBE7C3",
+  },
+];

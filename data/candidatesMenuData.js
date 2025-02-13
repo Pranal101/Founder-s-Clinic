@@ -22,16 +22,16 @@ module.exports = [
   },
   {
     id: 4,
-    name: "Inquiries Responded",
-    icon: "la-briefcase",
-    routePath: "/candidates-dashboard/applied-jobs",
+    name: "Proposal Alerts",
+    icon: "la la-bell",
+    routePath: "/candidates-dashboard/job-alerts",
     active: "",
   },
   {
     id: 5,
-    name: "Proposal Alerts",
-    icon: "la la-bell",
-    routePath: "/candidates-dashboard/job-alerts",
+    name: "Inquiries Responded",
+    icon: "la-briefcase",
+    routePath: "/candidates-dashboard/applied-jobs",
     active: "",
   },
   {

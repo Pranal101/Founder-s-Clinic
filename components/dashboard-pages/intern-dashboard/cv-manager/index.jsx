@@ -28,7 +28,7 @@ const index = () => {
       {/* <!-- Dashboard --> */}
       <section className="user-dashboard">
         <div className="dashboard-outer">
-          <BreadCrumb title="CV Manager!" />
+          <BreadCrumb title="Profile Manager!" />
           {/* breadCrumb */}
 
           <MenuToggler />
@@ -39,7 +39,7 @@ const index = () => {
               {/* <!-- Ls widget --> */}
               <div className="cv-manager-widget ls-widget">
                 <div className="widget-title">
-                  <h4>Cv Manager</h4>
+                  <h4>Profile Manager</h4>
                 </div>
                 {/* End widget-title */}
                 <div className="widget-content">

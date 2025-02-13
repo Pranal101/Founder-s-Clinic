@@ -12,11 +12,11 @@ const PostBoxForm = () => {
     investmentFirmName: "",
     position: "",
     email2: "",
-    contactNumber2: "",
+    // contactNumber2: "",
     websiteUrl: "",
     linkedinUrl: "",
-    country2: "",
-    city2: "",
+    // country2: "",
+    // city2: "",
     investorType: [],
     otherInvestorType: "",
     investmentYears: "",
@@ -262,7 +262,7 @@ const PostBoxForm = () => {
             onChange={handleChange}
           />
         </div>
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>Contact Number</label>
           <input
             type="text"
@@ -271,7 +271,7 @@ const PostBoxForm = () => {
             value={formData.contactNumber2}
             onChange={handleChange}
           />
-        </div>
+        </div> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Website Url</label>
           <input

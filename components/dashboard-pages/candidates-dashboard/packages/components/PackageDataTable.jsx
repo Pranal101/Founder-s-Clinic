@@ -140,7 +140,7 @@ const Pricing = () => {
               <div className="price">
                 ₹{item.priceINR} (
                 <span className="usd-price">${item.priceUSD}</span>)
-                <span className="duration">/ {item.duration}</span>
+                <span className="duration">/{item.duration}</span>
               </div>
               <div className="table-content">
                 <ul>

@@ -15,8 +15,8 @@ const PostBoxForm = () => {
     gst: "",
     businessType: "",
     foundedYear: "",
-    businessCity: "",
-    businessCountry: "",
+    // businessCity: "",
+    // businessCountry: "",
     websiteLink: "",
     socialMediaLinks: "",
     coFounderName: "",
@@ -92,6 +92,10 @@ const PostBoxForm = () => {
     {
       value: "Talent acquisition or recruitment",
       label: "Talent acquisition or recruitment",
+    },
+    {
+      value: "Business wellness",
+      label: "Business wellness",
     },
     {
       value: "Networking with other entrepreneurs",
@@ -230,7 +234,7 @@ const PostBoxForm = () => {
             required
           />
         </div>
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>Business Location(Country)</label>
           <Select
             name="businessCountry"
@@ -250,7 +254,7 @@ const PostBoxForm = () => {
             isDisabled={!selectedCountry || cityOptions.length === 0}
             required
           />
-        </div>
+        </div> */}
         {/* <!-- Basic info --> */}
         <div className="form-group col-lg-6 col-md-12">
           <label>Website Link</label>

@@ -76,6 +76,7 @@ module.exports = [
     menuList: [
       { name: "Privacy Policy", route: "/privacy" },
       { name: "Terms & Conditions", route: "/terms" },
+      { name: "Subscription Plans", route: "/subscription" },
     ],
   },
 ];

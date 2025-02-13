@@ -98,7 +98,9 @@ const JobCategorie8 = () => {
                     <span className={`icon ${item.icon}`}></span>
                   </div>
                   <h4>
-                    <Link href="/">{item.catName}</Link>
+                    <Link href="/">
+                      <strong>{item.catName}</strong>
+                    </Link>
                   </h4>
                 </div>
 

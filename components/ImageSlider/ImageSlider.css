@@ -1,0 +1,119 @@
+.carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+  
+  .carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .slide {
+    min-width: 100%;
+    box-sizing: border-box;
+    height: 500px;
+  }
+  
+  .arrow {
+    position: absolute;
+    top: 50%;
+    /* transform: translateY(-50%); */
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .left {
+    left: 100px;
+  }
+  
+  .right {
+    right: 100px;
+  }
+  
+  .dots {
+    position: absolute;
+    bottom: 42px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .dot {
+    width: 8px;
+    height: 8px;
+    margin: 0 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+  }
+  
+  .active {
+    background-color: #fff;
+  }
+  
+  .sliderInner {
+    position: absolute;
+    margin: 168px auto;
+    width: 100%;
+  }
+  
+  .textCommonSlider {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin: 0;
+  }
+  
+  .textOneSlider {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 400;
+  }
+  
+  .textTwoSlider {
+    color: #67daff;
+    font-size: 38px;
+  }
+  
+  .textThreeSlider {
+    color: #fff;
+    opacity: 60%;
+    font-size: 20px;
+    font-weight: 300;
+  }
+  
+  @media only screen and (max-width: 1536px) {
+    .textTwoSlider {
+      font-size: 36px;
+    }
+  }
+  
+  @media only screen and (max-width: 1200px) {
+    .textOneSlider {
+      font-size: 20px;
+    }
+    .textTwoSlider {
+      font-size: 32px;
+    }
+    .textThreeSlider {
+      font-size: 18px;
+    }
+  }
+  
+  @media only screen and (max-width: 768px) {
+    .textOneSlider {
+      font-size: 18px;
+    }
+    .textTwoSlider {
+      font-size: 24px;
+    }
+    .textThreeSlider {
+      font-size: 16px;
+    }
+    .arrow {
+      visibility: hidden;
+    }
+  }
+  

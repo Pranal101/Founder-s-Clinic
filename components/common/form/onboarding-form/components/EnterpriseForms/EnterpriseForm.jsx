@@ -88,7 +88,8 @@ const EnterprisePostBoxForm = () => {
       toast.error("Please select a country first.");
       setFormData((prev) => ({
         ...prev,
-        contactNumber: "", // Clear input if no country is selected
+        contactNumber: "",
+        whatsAppNumber: "",
       }));
       return;
     }
@@ -110,6 +111,7 @@ const EnterprisePostBoxForm = () => {
       setFormData((prev) => ({
         ...prev,
         contactNumber: `+${numericValue}`,
+        whatsAppNumber: `+${numericValue}`,
       }));
       return;
     }
@@ -123,6 +125,7 @@ const EnterprisePostBoxForm = () => {
     setFormData((prev) => ({
       ...prev,
       contactNumber: `+${numericValue}`,
+      whatsAppNumber: `+${numericValue}`,
     }));
   };
   const handleChange = (e) => {
