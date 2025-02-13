@@ -87,14 +87,14 @@ const index = () => {
       <br></br>
       <br></br>
       <br></br>
-      <br></br>
+      {/* <br></br> */}
       <div className="row" data-aos="fade-up">
         <ImageSlider />
       </div>
+      {/* <br></br>
       <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
+      <br></br> */}
+      {/* <br></br> */}
       <section className="job-section-two">
         <div className="auto-container">
           <div className="sec-title text-center">
@@ -122,26 +122,10 @@ const index = () => {
           </div>
         </div>
       </section>
+      {/* <br></br>
       <br></br>
-      <br></br>
-      <br></br>
+      <br></br> */}
       <CallToAction />
-      {/* <section className="features-section">
-        <div className="auto-container">
-          <div className="sec-title text-center">
-            <h2>Find the best services for your enterprise</h2>
-            <div className="text">
-              We connect you with the best service providers specialized in each
-              sector, who will help you improve and solve internal needs.
-            </div>
-          </div>
-
-          <div className="row" data-aos="fade-up">
-            <JobCategorie8 />
-          </div>
-        </div>
-      </section> */}
-
       <section className="features-section">
         <div className="auto-container">
           <div className="sec-title text-center">
@@ -158,9 +142,9 @@ const index = () => {
       </section>
 
       <CallToAction2 />
+      {/* <br></br>
       <br></br>
-      <br></br>
-      <br></br>
+      <br></br> */}
       <section className="layout-pt-120 layout-pb-60 testimonial-section style-two">
         <div className="auto-container">
           {/* <!-- Sec Title --> */}
@@ -185,13 +169,13 @@ const index = () => {
 
       {/* End .row */}
       {/* End Job Categorie Section */}
+      {/* <br></br>
       <br></br>
-      <br></br>
-      <br></br>
+      <br></br> */}
       <CallToAction3 />
+      {/* <br></br>
       <br></br>
-      <br></br>
-      <br></br>
+      <br></br> */}
       <section className="candidates-section-two">
         <div className="auto-container">
           <div className="sec-title text-center">

@@ -16,7 +16,7 @@ const index = ({ footerStyle = "" }) => {
                     <Image
                       width={154}
                       height={50}
-                      src="/images/logo.svg"
+                      src="/images/logoWhite.svg"
                       alt="brand"
                     />
                   </a>

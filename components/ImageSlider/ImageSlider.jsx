@@ -54,6 +54,9 @@ const ImageSlider = () => {
                 alt=""
                 width={"100%"}
                 height={"100%"}
+                data-bs-toggle="modal"
+                data-bs-target="#registerModal"
+                style={{ cursor: "pointer" }}
               />
             </div>
             {/* <div className="sliderInner">

@@ -601,6 +601,7 @@ const PostBoxForm = () => {
             dateFormat="dd/MM/yyyy"
             placeholderText="Select a start date"
             className="custom-margin"
+            minDate={new Date()}
           />
         </div>
         {/* Input for Completion Timeline */}
@@ -612,6 +613,7 @@ const PostBoxForm = () => {
             dateFormat="dd/MM/yyyy"
             placeholderText="Select timeline"
             className="custom-margin"
+            minDate={formData.expectedStartDate || new Date()}
           />
         </div>
 

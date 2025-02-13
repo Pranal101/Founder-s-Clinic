@@ -168,7 +168,7 @@ Main Footer
   font-size: 14px;
   line-height: 24px;
   font-weight: 400;
-  color: #696969;
+  color: white;
   padding: 0;
 }
 
@@ -207,6 +207,7 @@ Main Footer
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  // color:white
 }
 
 .main-footer .social-links a {
@@ -214,7 +215,7 @@ Main Footer
   margin-left: 35px;
   font-size: 14px;
   line-height: 24px;
-  color: #696969;
+  color: white;
   -webkit-transition: all 300ms ease;
   -o-transition: all 300ms ease;
   transition: all 300ms ease;

@@ -91,7 +91,7 @@ const ImageSlider = () => {
       <div className="carousel">
         <div className="slide active">
           <img
-            src="/images/b1.jpg"
+            src="/images/b1.jpeg"
             alt="Static Banner"
             width="100%"
             height="100%"

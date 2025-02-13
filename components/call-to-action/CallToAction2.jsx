@@ -78,7 +78,7 @@ const ImageSlider = () => {
       <div className="carousel">
         <div className="slide active">
           <img
-            src="/images/b2.jpg" // Display only the first image
+            src="/images/b2.jpeg" // Display only the first image
             alt="Static Banner"
             width="100%"
             height="100%"

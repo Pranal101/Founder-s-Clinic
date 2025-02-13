@@ -29,8 +29,8 @@ const index = () => {
             <div className="col-lg-12">
               <div className="ls-widget">
                 <div className="tabs-box">
-                  <div className="widget-title">
-                    <h4>Packages for Professionals</h4>
+                  <div className="sec-title text-center">
+                    <h2>Find the Best Services for Your Enterprise</h2>
                   </div>
                   {/* End widget-title */}
 
@@ -57,8 +57,8 @@ const index = () => {
             <div className="col-lg-12">
               <div className="ls-widget">
                 <div className="tabs-box">
-                  <div className="widget-title">
-                    <h4>Packages for Enterprise</h4>
+                  <div className="sec-title text-center">
+                    <h2>Find the Best Services for Your Enterprise</h2>
                   </div>
                   {/* End widget-title */}
 
@@ -77,15 +77,14 @@ const index = () => {
         </div>
         {/* End dashboard-outer */}
       </section>
-
       <section className="user-dashboard">
         <div className="dashboard-outer">
           <div className="row">
             <div className="col-lg-12">
               <div className="ls-widget">
                 <div className="tabs-box">
-                  <div className="widget-title">
-                    <h4>Packages for Networking Community</h4>
+                  <div className="sec-title text-center">
+                    <h2>Find the Best Services for Your Enterprise</h2>
                   </div>
                   {/* End widget-title */}
 
@@ -112,8 +111,8 @@ const index = () => {
             <div className="col-lg-12">
               <div className="ls-widget">
                 <div className="tabs-box">
-                  <div className="widget-title">
-                    <h4>Packages for Interns</h4>
+                  <div className="sec-title text-center">
+                    <h2>Find the Best Services for Your Enterprise</h2>
                   </div>
                   {/* End widget-title */}
 

@@ -293,7 +293,7 @@ const PostBoxForm = () => {
           />
         </div>
         {/* <!-- Input --> */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>Country</label>
           <Select
             name="country"
@@ -301,9 +301,9 @@ const PostBoxForm = () => {
             onChange={handleCountryChange}
             placeholder="Select a country"
           />
-        </div>
+        </div> */}
         {/* <!-- Input --> */}
-        <div className="form-group col-lg-6 col-md-12">
+        {/* <div className="form-group col-lg-6 col-md-12">
           <label>City</label>
           <Select
             name="city"
@@ -312,7 +312,7 @@ const PostBoxForm = () => {
             placeholder="Select a city"
             isDisabled={!selectedCountry || cityOptions.length === 0}
           />
-        </div>
+        </div> */}
         {/* Investor Type */}
         <div className="form-group col-lg-6 col-md-12">
           <label>What type of investor are you?</label>

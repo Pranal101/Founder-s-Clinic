@@ -371,23 +371,23 @@ const FormInfoBox = () => {
           />
         </div>
         <div className="form-group col-lg-6 col-md-12">
-          <label>Investement Thesis</label>
+          <label>Investment Thesis</label>
           <input
             type="text"
             name="investmentThesis"
             value={formData.investmentThesis}
             onChange={handleChange}
-            placeholder="Investement Thesis"
+            placeholder="Investment Thesis"
           />
         </div>
         <div className="form-group col-lg-6 col-md-12">
-          <label>Investement Timeline</label>
+          <label>Investment Timeline</label>
           <input
             type="text"
             name="investmentTimeline"
             value={formData.investmentTimeline}
             onChange={handleChange}
-            placeholder="Investement Timeline"
+            placeholder="Investment Timeline"
           />
         </div>
         <div className="form-group col-lg-6 col-md-12">

@@ -1,6 +1,19 @@
 export const membershipPlan = [
   {
     name: "basic",
+    label: "Basic",
+    subName: "Enterprise",
+    description: [
+      "Grow your business within our platform",
+      "Find the best professionals, interns and other resources to grow your enterprise",
+      "Find suitable investor/ fund for your business",
+      "Discover the right business community",
+      "Position your company within the ecosystem",
+    ],
+    color: "#EBE7C3",
+  },
+  {
+    name: "basic",
     label: "Professionals",
     subName: "Professionals",
     description: [
@@ -41,7 +54,7 @@ export const membershipPlan = [
   {
     name: "basic",
     label: "Basic",
-    subName: "BUSINESS NETWORKING COMMUNITY",
+    subName: "Business Networking Community",
     description: [
       "Boost Visibility and Grow Your Membership",
       "Attract members aligning with community's goals through personalized matchmaking",
@@ -50,18 +63,5 @@ export const membershipPlan = [
       "Partner with other communities and organizations",
     ],
     color: "#b2b7f6",
-  },
-  {
-    name: "basic",
-    label: "Basic",
-    subName: "Enterprise",
-    description: [
-      "Grow your business within our platform",
-      "Find the best professionals, interns and other resources to grow your enterprise",
-      "Find suitable investor/ fund for your business",
-      "Discover the right business community",
-      "Position your company within the ecosystem",
-    ],
-    color: "#EBE7C3",
   },
 ];
