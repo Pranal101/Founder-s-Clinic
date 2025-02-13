@@ -52,36 +52,6 @@ export const imageSliderText = [
     textThree:
       "Connect with skilled professionals tailored to meet the unique needs of your startup or MSME.",
   },
-  {
-    key: 6,
-    imageUrl: "/images/b1.jpg",
-    textOne: "Welcome to Founders' Clinic",
-    textTwo: `An Ecosystem For Startups & MSME`,
-    // textTwo:
-    //     "Founders' Clinic isn't just a platform it's a catalyst for sustainable success",
-    textThree:
-      "Connect with skilled professionals tailored to meet the unique needs of your startup or MSME.",
-  },
-  {
-    key: 7,
-    imageUrl: "/images/b2.jpg",
-    textOne: "Welcome to Founders' Clinic",
-    textTwo: `An Ecosystem For Startups & MSME`,
-    // textTwo:
-    //     "Founders' Clinic isn't just a platform it's a catalyst for sustainable success",
-    textThree:
-      "Connect with skilled professionals tailored to meet the unique needs of your startup or MSME.",
-  },
-  {
-    key: 8,
-    imageUrl: "/images/b3.jpg",
-    textOne: "Welcome to Founders' Clinic",
-    textTwo: `An Ecosystem For Startups & MSME`,
-    // textTwo:
-    //     "Founders' Clinic isn't just a platform it's a catalyst for sustainable success",
-    textThree:
-      "Connect with skilled professionals tailored to meet the unique needs of your startup or MSME.",
-  },
 ];
 
 // export const imageSliderAboutText = [
