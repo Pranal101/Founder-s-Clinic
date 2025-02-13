@@ -23,6 +23,7 @@ import CallToAction from "../call-to-action/CallToAction";
 import CallToAction2 from "../call-to-action/CallToAction2";
 import CallToAction3 from "../call-to-action/CallToAction3";
 import ImageSlider from "../ImageSlider/ImageSlider";
+import User from "@/components/userType";
 
 const index = () => {
   return (
@@ -36,7 +37,7 @@ const index = () => {
       <MobileMenu />
       {/* End MobileMenu */}
 
-      <Hero1 />
+      {/* <Hero1 /> */}
       {/* End Hero Section */}
 
       {/* <!-- End Features Section --> */}
@@ -87,7 +88,9 @@ const index = () => {
       <br></br>
       <br></br>
       <br></br>
-      <ImageSlider />
+      <div className="row" data-aos="fade-up">
+        <ImageSlider />
+      </div>
       <br></br>
       <br></br>
       <br></br>
@@ -95,7 +98,9 @@ const index = () => {
       <section className="job-section-two">
         <div className="auto-container">
           <div className="sec-title text-center">
-            <h2>Find the Best Services for Your Enterprise</h2>
+            <h2 className="fw-700">
+              Find the Best Services for Your Enterprise
+            </h2>
             <div className="text">
               We connect you with the best service providers specialized in each
               sector, who will help you improve and solve internal needs.
@@ -140,14 +145,14 @@ const index = () => {
       <section className="features-section">
         <div className="auto-container">
           <div className="sec-title text-center">
-            <h2>User Segments</h2>
+            <h2 className="fw-700">User Segments</h2>
             {/* <div className="text">
               Lorem ipsum dolor sit amet elit, sed do eiusmod tempor
             </div> */}
           </div>
 
           <div className="row" data-aos="fade-up">
-            <FeaturedBlock />
+            <User />
           </div>
         </div>
       </section>
@@ -190,7 +195,7 @@ const index = () => {
       <section className="candidates-section-two">
         <div className="auto-container">
           <div className="sec-title text-center">
-            <h2>Featured Founders</h2>
+            <h2 className="fw-700">Featured Founders</h2>
             <div className="text">
               Get inspired by the success of our spotlighted founder
             </div>
@@ -206,7 +211,7 @@ const index = () => {
       <section className="news-section style-three">
         <div className="auto-container">
           <div className="sec-title text-center">
-            <h2>Featured Events</h2>
+            <h2 className="fw-700">Featured Events</h2>
             <div className="text">
               Don't miss out on the latest events shaping the future of business
               and innovation
@@ -251,7 +256,7 @@ const index = () => {
         <div className="container-fluid">
           {/* <!-- Sec Title --> */}
           <div className="sec-title text-center">
-            <h2>Testimonials</h2>
+            <h2 className="fw-700">Testimonials</h2>
             <div className="text">
               Hear from those who’ve experienced our impact firsthand
             </div>
@@ -301,7 +306,7 @@ const index = () => {
       <section className="faqs-section">
         <div className="auto-container">
           <div className="sec-title text-center">
-            <h2>Frequently Asked Questions</h2>
+            <h2 className="fw-700">Frequently Asked Questions</h2>
           </div>
 
           {/* <!--Accordian Box--> */}

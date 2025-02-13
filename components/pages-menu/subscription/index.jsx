@@ -3,6 +3,9 @@ import FooterDefault from "../../footer/common-footer";
 import DefaulHeader from "../../header/DefaulHeader";
 import MobileMenu from "../../header/MobileMenu";
 import MemberPlan from "./membershipPlanSection";
+import InternPlan from "./internPlan";
+import EnterpirsePlan from "./enterprisePlan";
+import NetworkingPlan from "./networkingPlan";
 
 const index = () => {
   return (
@@ -18,9 +21,117 @@ const index = () => {
 
       <MobileMenu />
       {/* End MobileMenu */}
-      <MemberPlan />
 
+      {/* Professional Plans*/}
+      <section className="user-dashboard">
+        <div className="dashboard-outer">
+          <div className="row">
+            <div className="col-lg-12">
+              <div className="ls-widget">
+                <div className="tabs-box">
+                  <div className="widget-title">
+                    <h4>Packages for Professionals</h4>
+                  </div>
+                  {/* End widget-title */}
+
+                  <div className="widget-content">
+                    {/* <div className="table-outer"> */}
+                    <MemberPlan />
+                    {/* </div> */}
+                  </div>
+                  {/* End widget-content */}
+                </div>
+              </div>
+              {/* <!-- Ls widget --> */}
+            </div>
+          </div>
+          {/* End .row */}
+        </div>
+        {/* End dashboard-outer */}
+      </section>
+      {/* Professional Plans END*/}
+
+      <section className="user-dashboard">
+        <div className="dashboard-outer">
+          <div className="row">
+            <div className="col-lg-12">
+              <div className="ls-widget">
+                <div className="tabs-box">
+                  <div className="widget-title">
+                    <h4>Packages for Enterprise</h4>
+                  </div>
+                  {/* End widget-title */}
+
+                  <div className="widget-content">
+                    {/* <div className="table-outer"> */}
+                    <EnterpirsePlan />
+                    {/* </div> */}
+                  </div>
+                  {/* End widget-content */}
+                </div>
+              </div>
+              {/* <!-- Ls widget --> */}
+            </div>
+          </div>
+          {/* End .row */}
+        </div>
+        {/* End dashboard-outer */}
+      </section>
+
+      <section className="user-dashboard">
+        <div className="dashboard-outer">
+          <div className="row">
+            <div className="col-lg-12">
+              <div className="ls-widget">
+                <div className="tabs-box">
+                  <div className="widget-title">
+                    <h4>Packages for Networking Community</h4>
+                  </div>
+                  {/* End widget-title */}
+
+                  <div className="widget-content">
+                    {/* <div className="table-outer"> */}
+                    <NetworkingPlan />
+                    {/* </div> */}
+                  </div>
+                  {/* End widget-content */}
+                </div>
+              </div>
+              {/* <!-- Ls widget --> */}
+            </div>
+          </div>
+          {/* End .row */}
+        </div>
+        {/* End dashboard-outer */}
+      </section>
       {/* <!-- End TNC Section --> */}
+
+      <section className="user-dashboard">
+        <div className="dashboard-outer">
+          <div className="row">
+            <div className="col-lg-12">
+              <div className="ls-widget">
+                <div className="tabs-box">
+                  <div className="widget-title">
+                    <h4>Packages for Interns</h4>
+                  </div>
+                  {/* End widget-title */}
+
+                  <div className="widget-content">
+                    {/* <div className="table-outer"> */}
+                    <InternPlan />
+                    {/* </div> */}
+                  </div>
+                  {/* End widget-content */}
+                </div>
+              </div>
+              {/* <!-- Ls widget --> */}
+            </div>
+          </div>
+          {/* End .row */}
+        </div>
+        {/* End dashboard-outer */}
+      </section>
 
       <FooterDefault footerStyle="alternate5" />
       {/* <!-- End Main Footer --> */}
