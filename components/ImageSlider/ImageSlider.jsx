@@ -5,7 +5,7 @@ import RightSliderIcon from "@/data/rightSliderIcon";
 import LeftSliderIcon from "@/data/leftSliderIcon";
 
 // css
-import "./imageSlider.css";
+import "./ImageSlider.css";
 
 // constants
 import { imageSliderText } from "@/data/imageSliderSection";
