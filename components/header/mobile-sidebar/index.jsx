@@ -102,12 +102,460 @@
 // };
 
 // export default Index;
+// "use client";
+
+// import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
+// import { useEffect, useState } from "react";
+// import { usePathname, useRouter } from "next/navigation";
+// import Link from "next/link";
+// import { auth } from "../../../firebase"; // Firebase instance
+// import axios from "axios";
+// import SidebarFooter from "./SidebarFooter";
+// import SidebarHeader from "./SidebarHeader";
+
+// const Index = () => {
+//   const pathname = usePathname();
+//   const router = useRouter();
+//   const [user, setUser] = useState(null);
+//   const [role, setRole] = useState(null);
+//   const [isAdmin, setIsAdmin] = useState(false);
+
+//   useEffect(() => {
+//     // Listen for Firebase auth state changes
+//     const unsubscribe = auth.onAuthStateChanged(async (currentUser) => {
+//       if (currentUser) {
+//         setUser(currentUser);
+
+//         // Fetch role from the backend
+//         try {
+//           const token = await currentUser.getIdToken();
+//           const response = await axios.get(
+//             "https://founders-clinic-backend.onrender.com/api/user/getRole",
+//             {
+//               headers: {
+//                 Authorization: `Bearer ${token}`,
+//               },
+//             }
+//           );
+//           const fetchedRole = response.data.role;
+//           setRole(fetchedRole);
+
+//           // Check if the fetched role is Admin
+//           setIsAdmin(fetchedRole === "Admin");
+//         } catch (error) {
+//           console.error("Error fetching role:", error);
+//         }
+//       } else {
+//         setUser(null);
+//         setRole(null);
+//         setIsAdmin(false);
+//       }
+//     });
+
+//     return () => unsubscribe();
+//   }, []);
+
+//   const navItems = [
+//     {
+//       role: "Enterprise",
+//       label: "Enterprises",
+//       loggedInLink: "/employers-dashboard/dashboard",
+//       guestLink: "/employers-dashboard/overview",
+//     },
+//     {
+//       role: "Professional",
+//       label: "Professionals",
+//       loggedInLink: "/candidates-dashboard/dashboard",
+//       guestLink: "/candidates-dashboard/overview",
+//     },
+//     {
+//       role: "Intern",
+//       label: "Interns",
+//       loggedInLink: "/intern-dashboard/dashboard",
+//       guestLink: "/intern-dashboard/overview",
+//     },
+//     {
+//       role: "Investor",
+//       label: "Investors",
+//       loggedInLink: "/investors-dashboard/dashboard",
+//       guestLink: "/investors-dashboard/overview",
+//     },
+//     {
+//       role: "Networking Community",
+//       label: "Networking Communities",
+//       loggedInLink: "/networking-dashboard/dashboard",
+//       guestLink: "/networking-dashboard/overview",
+//     },
+//   ];
+
+//   const pagesMenu = [
+//     { id: 1, name: "Events", routePath: "/events" },
+//     { id: 2, name: "Contact Us", routePath: "/contact" },
+//   ];
+
+//   return (
+//     <div
+//       className="offcanvas offcanvas-start mobile_menu-contnet"
+//       tabIndex="-1"
+//       id="offcanvasMenu"
+//       data-bs-scroll="true"
+//     >
+//       <SidebarHeader />
+//       <Sidebar>
+//         <Menu>
+//           {user ? (
+//             <>
+//               {isAdmin && (
+//                 <MenuItem
+//                   onClick={() => router.push("/admin-dashboard/dashboard")}
+//                   className={
+//                     pathname?.includes("/admin-dashboard")
+//                       ? "menu-active-link"
+//                       : ""
+//                   }
+//                 >
+//                   Admin
+//                 </MenuItem>
+//               )}
+//               {navItems
+//                 .filter((item) => !isAdmin && item.role === role)
+//                 .map((item) => (
+//                   <MenuItem
+//                     key={item.role}
+//                     onClick={() => router.push(item.loggedInLink)}
+//                     className={
+//                       pathname?.includes(item.loggedInLink)
+//                         ? "menu-active-link"
+//                         : ""
+//                     }
+//                   >
+//                     {item.label}
+//                   </MenuItem>
+//                 ))}
+//             </>
+//           ) : (
+//             navItems.map((item) => (
+//               <MenuItem
+//                 key={item.role}
+//                 onClick={() => router.push(item.guestLink)}
+//                 className={
+//                   pathname?.includes(item.guestLink) ? "menu-active-link" : ""
+//                 }
+//               >
+//                 {item.label}
+//               </MenuItem>
+//             ))
+//           )}
+//           <SubMenu
+//             className={
+//               pagesMenu.some((item) => pathname?.includes(item.routePath))
+//                 ? "menu-active"
+//                 : ""
+//             }
+//             label="More"
+//           >
+//             {pagesMenu.map((page) => (
+//               <MenuItem
+//                 key={page.id}
+//                 onClick={() => router.push(page.routePath)}
+//                 className={
+//                   pathname?.includes(page.routePath) ? "menu-active-link" : ""
+//                 }
+//               >
+//                 {page.name}
+//               </MenuItem>
+//             ))}
+//           </SubMenu>
+//         </Menu>
+//       </Sidebar>
+//       <SidebarFooter />
+//     </div>
+//   );
+// };
+
+// export default Index;
+// "use client";
+
+// import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
+// import { useEffect, useState } from "react";
+// import { usePathname, useRouter } from "next/navigation";
+// import { auth } from "../../../firebase"; // Firebase instance
+// import axios from "axios";
+// import SidebarFooter from "./SidebarFooter";
+// import SidebarHeader from "./SidebarHeader";
+
+// const Index = () => {
+//   const pathname = usePathname();
+//   const router = useRouter();
+//   const [user, setUser] = useState(null);
+//   const [role, setRole] = useState(null);
+//   const [isAdmin, setIsAdmin] = useState(false);
+
+//   useEffect(() => {
+//     const unsubscribe = auth.onAuthStateChanged(async (currentUser) => {
+//       if (currentUser) {
+//         setUser(currentUser);
+//         try {
+//           const token = await currentUser.getIdToken();
+//           const response = await axios.get(
+//             "https://founders-clinic-backend.onrender.com/api/user/getRole",
+//             {
+//               headers: {
+//                 Authorization: `Bearer ${token}`,
+//               },
+//             }
+//           );
+//           const fetchedRole = response.data.role;
+//           setRole(fetchedRole);
+//           setIsAdmin(fetchedRole === "Admin");
+//         } catch (error) {
+//           console.error("Error fetching role:", error);
+//         }
+//       } else {
+//         setUser(null);
+//         setRole(null);
+//         setIsAdmin(false);
+//       }
+//     });
+//     return () => unsubscribe();
+//   }, []);
+
+//   const navItems = [
+//     {
+//       role: "Enterprise",
+//       label: "Enterprises",
+//       guestLink: "/employers-dashboard/overview",
+//     },
+//     {
+//       role: "Professional",
+//       label: "Professionals",
+//       guestLink: "/candidates-dashboard/overview",
+//     },
+//     {
+//       role: "Intern",
+//       label: "Interns",
+//       guestLink: "/intern-dashboard/overview",
+//     },
+//     {
+//       role: "Investor",
+//       label: "Investors",
+//       guestLink: "/investors-dashboard/overview",
+//     },
+//     {
+//       role: "Networking Community",
+//       label: "Networking Communities",
+//       guestLink: "/networking-dashboard/overview",
+//     },
+//   ];
+
+//   const pagesMenu = [
+//     { id: 1, name: "Events", routePath: "/events" },
+//     { id: 2, name: "Contact Us", routePath: "/contact" },
+//   ];
+
+//   return (
+//     <div
+//       className="offcanvas offcanvas-start mobile_menu-contnet"
+//       tabIndex="-1"
+//       id="offcanvasMenu"
+//       data-bs-scroll="true"
+//     >
+//       <SidebarHeader />
+//       <Sidebar>
+//         <Menu>
+//           {navItems.map((item) => (
+//             <MenuItem
+//               key={item.role}
+//               onClick={() => router.push(item.guestLink)}
+//               className={
+//                 pathname?.includes(item.guestLink) ? "menu-active-link" : ""
+//               }
+//             >
+//               {item.label}
+//             </MenuItem>
+//           ))}
+//           <SubMenu
+//             className={
+//               pagesMenu.some((item) => pathname?.includes(item.routePath))
+//                 ? "menu-active"
+//                 : ""
+//             }
+//             label="More"
+//           >
+//             {pagesMenu.map((page) => (
+//               <MenuItem
+//                 key={page.id}
+//                 onClick={() => router.push(page.routePath)}
+//                 className={
+//                   pathname?.includes(page.routePath) ? "menu-active-link" : ""
+//                 }
+//               >
+//                 {page.name}
+//               </MenuItem>
+//             ))}
+//           </SubMenu>
+//         </Menu>
+//       </Sidebar>
+//       <SidebarFooter />
+//     </div>
+//   );
+// };
+
+// export default Index;
+// "use client";
+
+// import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
+// import { useEffect, useState } from "react";
+// import { usePathname, useRouter } from "next/navigation";
+// import { auth } from "../../../firebase"; // Firebase instance
+// import axios from "axios";
+// import SidebarFooter from "./SidebarFooter";
+// import SidebarHeader from "./SidebarHeader";
+
+// const Index = () => {
+//   const pathname = usePathname();
+//   const router = useRouter();
+//   const [user, setUser] = useState(null);
+//   const [role, setRole] = useState(null);
+//   const [isAdmin, setIsAdmin] = useState(false);
+
+//   useEffect(() => {
+//     const unsubscribe = auth.onAuthStateChanged(async (currentUser) => {
+//       if (currentUser) {
+//         setUser(currentUser);
+//         try {
+//           const token = await currentUser.getIdToken();
+//           const response = await axios.get(
+//             "https://founders-clinic-backend.onrender.com/api/user/getRole",
+//             {
+//               headers: {
+//                 Authorization: `Bearer ${token}`,
+//               },
+//             }
+//           );
+//           const fetchedRole = response.data.role;
+//           setRole(fetchedRole);
+//           setIsAdmin(fetchedRole === "Admin");
+//         } catch (error) {
+//           console.error("Error fetching role:", error);
+//         }
+//       } else {
+//         setUser(null);
+//         setRole(null);
+//         setIsAdmin(false);
+//       }
+//     });
+//     return () => unsubscribe();
+//   }, []);
+
+//   const navItems = [
+//     {
+//       role: "Enterprise",
+//       label: "Enterprises",
+//       guestLink: "/employers-dashboard/overview",
+//       loggedInLink: "/employers-dashboard/dashboard",
+//     },
+//     {
+//       role: "Professional",
+//       label: "Professionals",
+//       guestLink: "/candidates-dashboard/overview",
+//       loggedInLink: "/candidates-dashboard/dashboard",
+//     },
+//     {
+//       role: "Intern",
+//       label: "Interns",
+//       guestLink: "/intern-dashboard/overview",
+//       loggedInLink: "/intern-dashboard/dashboard",
+//     },
+//     {
+//       role: "Investor",
+//       label: "Investors",
+//       guestLink: "/investors-dashboard/overview",
+//       loggedInLink: "/investors-dashboard/dashboard",
+//     },
+//     {
+//       role: "Networking Community",
+//       label: "Networking Communities",
+//       guestLink: "/networking-dashboard/overview",
+//       loggedInLink: "/networking-dashboard/dashboard",
+//     },
+//   ];
+
+//   const pagesMenu = [
+//     { id: 1, name: "Events", routePath: "/events" },
+//     { id: 2, name: "Contact Us", routePath: "/contact" },
+//   ];
+
+//   return (
+//     <div
+//       className="offcanvas offcanvas-start mobile_menu-contnet"
+//       tabIndex="-1"
+//       id="offcanvasMenu"
+//       data-bs-scroll="true"
+//     >
+//       <SidebarHeader />
+//       <Sidebar>
+//         <Menu>
+//           {user ? (
+//             <MenuItem
+//               onClick={() =>
+//                 router.push(
+//                   navItems.find((item) => item.role === role)?.loggedInLink ||
+//                     "/"
+//                 )
+//               }
+//               className={
+//                 pathname?.includes("dashboard") ? "menu-active-link" : ""
+//               }
+//             >
+//               Dashboard
+//             </MenuItem>
+//           ) : (
+//             navItems.map((item) => (
+//               <MenuItem
+//                 key={item.role}
+//                 onClick={() => router.push(item.guestLink)}
+//                 className={
+//                   pathname?.includes(item.guestLink) ? "menu-active-link" : ""
+//                 }
+//               >
+//                 {item.label}
+//               </MenuItem>
+//             ))
+//           )}
+//           <SubMenu
+//             className={
+//               pagesMenu.some((item) => pathname?.includes(item.routePath))
+//                 ? "menu-active"
+//                 : ""
+//             }
+//             label="More"
+//           >
+//             {pagesMenu.map((page) => (
+//               <MenuItem
+//                 key={page.id}
+//                 onClick={() => router.push(page.routePath)}
+//                 className={
+//                   pathname?.includes(page.routePath) ? "menu-active-link" : ""
+//                 }
+//               >
+//                 {page.name}
+//               </MenuItem>
+//             ))}
+//           </SubMenu>
+//         </Menu>
+//       </Sidebar>
+//       <SidebarFooter />
+//     </div>
+//   );
+// };
+
+// export default Index;
 "use client";
 
 import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import Link from "next/link";
 import { auth } from "../../../firebase"; // Firebase instance
 import axios from "axios";
 import SidebarFooter from "./SidebarFooter";
@@ -121,12 +569,9 @@ const Index = () => {
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
-    // Listen for Firebase auth state changes
     const unsubscribe = auth.onAuthStateChanged(async (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
-
-        // Fetch role from the backend
         try {
           const token = await currentUser.getIdToken();
           const response = await axios.get(
@@ -139,8 +584,6 @@ const Index = () => {
           );
           const fetchedRole = response.data.role;
           setRole(fetchedRole);
-
-          // Check if the fetched role is Admin
           setIsAdmin(fetchedRole === "Admin");
         } catch (error) {
           console.error("Error fetching role:", error);
@@ -151,7 +594,6 @@ const Index = () => {
         setIsAdmin(false);
       }
     });
-
     return () => unsubscribe();
   }, []);
 
@@ -159,32 +601,32 @@ const Index = () => {
     {
       role: "Enterprise",
       label: "Enterprises",
-      loggedInLink: "/employers-dashboard/dashboard",
       guestLink: "/employers-dashboard/overview",
+      loggedInLink: "/employers-dashboard/dashboard",
     },
     {
       role: "Professional",
       label: "Professionals",
-      loggedInLink: "/candidates-dashboard/dashboard",
       guestLink: "/candidates-dashboard/overview",
+      loggedInLink: "/candidates-dashboard/dashboard",
     },
     {
       role: "Intern",
       label: "Interns",
-      loggedInLink: "/intern-dashboard/dashboard",
       guestLink: "/intern-dashboard/overview",
+      loggedInLink: "/intern-dashboard/dashboard",
     },
     {
       role: "Investor",
       label: "Investors",
-      loggedInLink: "/investors-dashboard/dashboard",
       guestLink: "/investors-dashboard/overview",
+      loggedInLink: "/investors-dashboard/dashboard",
     },
     {
       role: "Networking Community",
       label: "Networking Communities",
-      loggedInLink: "/networking-dashboard/dashboard",
       guestLink: "/networking-dashboard/overview",
+      loggedInLink: "/networking-dashboard/dashboard",
     },
   ];
 
@@ -203,49 +645,34 @@ const Index = () => {
       <SidebarHeader />
       <Sidebar>
         <Menu>
-          {user ? (
-            <>
-              {isAdmin && (
-                <MenuItem
-                  onClick={() => router.push("/admin-dashboard/dashboard")}
-                  className={
-                    pathname?.includes("/admin-dashboard")
-                      ? "menu-active-link"
-                      : ""
-                  }
-                >
-                  Admin
-                </MenuItem>
-              )}
-              {navItems
-                .filter((item) => !isAdmin && item.role === role)
-                .map((item) => (
-                  <MenuItem
-                    key={item.role}
-                    onClick={() => router.push(item.loggedInLink)}
-                    className={
-                      pathname?.includes(item.loggedInLink)
-                        ? "menu-active-link"
-                        : ""
-                    }
-                  >
-                    {item.label}
-                  </MenuItem>
-                ))}
-            </>
-          ) : (
-            navItems.map((item) => (
-              <MenuItem
-                key={item.role}
-                onClick={() => router.push(item.guestLink)}
-                className={
-                  pathname?.includes(item.guestLink) ? "menu-active-link" : ""
+          {user && role && (
+            <MenuItem
+              onClick={() => {
+                const dashboardLink = navItems.find(
+                  (item) => item.role === role
+                )?.loggedInLink;
+                if (dashboardLink) {
+                  router.push(dashboardLink);
                 }
-              >
-                {item.label}
-              </MenuItem>
-            ))
+              }}
+              className={
+                pathname?.includes("dashboard") ? "menu-active-link" : ""
+              }
+            >
+              Dashboard
+            </MenuItem>
           )}
+          {navItems.map((item) => (
+            <MenuItem
+              key={item.role}
+              onClick={() => router.push(item.guestLink)}
+              className={
+                pathname?.includes(item.guestLink) ? "menu-active-link" : ""
+              }
+            >
+              {item.label}
+            </MenuItem>
+          ))}
           <SubMenu
             className={
               pagesMenu.some((item) => pathname?.includes(item.routePath))

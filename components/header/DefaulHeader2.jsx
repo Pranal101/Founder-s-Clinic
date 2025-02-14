@@ -1,83 +1,83 @@
-"use client";
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import HeaderNavContent from "./HeaderNavContent";
-import Image from "next/image";
+// "use client";
+// import Link from "next/link";
+// import { useEffect, useState } from "react";
+// import HeaderNavContent from "./HeaderNavContent";
+// import Image from "next/image";
 
-const DefaulHeader2 = () => {
-  const [navbar, setNavbar] = useState(false);
+// const DefaulHeader2 = () => {
+//   const [navbar, setNavbar] = useState(false);
 
-  const changeBackground = () => {
-    if (window.scrollY >= 10) {
-      setNavbar(true);
-    } else {
-      setNavbar(false);
-    }
-  };
+//   const changeBackground = () => {
+//     if (window.scrollY >= 10) {
+//       setNavbar(true);
+//     } else {
+//       setNavbar(false);
+//     }
+//   };
 
-  useEffect(() => {
-    window.addEventListener("scroll", changeBackground);
-  }, []);
+//   useEffect(() => {
+//     window.addEventListener("scroll", changeBackground);
+//   }, []);
 
-  return (
-    // <!-- Main Header-->
-    <header
-      className={`main-header  ${
-        navbar ? "fixed-header animated slideInDown" : ""
-      }`}
-    >
-      {/* <!-- Main box --> */}
-      <div className="main-box">
-        {/* <!--Nav Outer --> */}
-        <div className="nav-outer">
-          <div className="logo-box">
-            <div className="logo">
-              <Link href="/">
-                <Image
-                  width={154}
-                  height={50}
-                  src="/images/logo.svg"
-                  alt="brand"
-                />
-              </Link>
-            </div>
-          </div>
-          {/* End .logo-box */}
+//   return (
+//     // <!-- Main Header-->
+//     <header
+//       className={`main-header  ${
+//         navbar ? "fixed-header animated slideInDown" : ""
+//       }`}
+//     >
+//       {/* <!-- Main box --> */}
+//       <div className="main-box">
+//         {/* <!--Nav Outer --> */}
+//         <div className="nav-outer">
+//           <div className="logo-box">
+//             <div className="logo">
+//               <Link href="/">
+//                 <Image
+//                   width={154}
+//                   height={50}
+//                   src="/images/logo.svg"
+//                   alt="brand"
+//                 />
+//               </Link>
+//             </div>
+//           </div>
+//           {/* End .logo-box */}
 
-          <HeaderNavContent />
-          {/* <!-- Main Menu End--> */}
-        </div>
-        {/* End .nav-outer */}
+//           <HeaderNavContent />
+//           {/* <!-- Main Menu End--> */}
+//         </div>
+//         {/* End .nav-outer */}
 
-        <div className="outer-box">
-          {/* <!-- Add Listing --> */}
-          {/* <Link href="/candidates-dashboard/cv-manager" className="upload-cv">
-            Upload your CV
-          </Link> */}
-          {/* <!-- Login/Register --> */}
-          <div className="btn-box">
-            <a
-              href="#"
-              className="theme-btn btn-style-three call-modal"
-              data-bs-toggle="modal"
-              data-bs-target="#loginPopupModal"
-            >
-              Login / Register
-            </a>
-            {/* <Link
-              href="/employers-dashboard/post-jobs"
-              className="theme-btn btn-style-one"
-            >
-              Job Post
-            </Link> */}
-          </div>
-        </div>
-      </div>
-    </header>
-  );
-};
+//         <div className="outer-box">
+//           {/* <!-- Add Listing --> */}
+//           {/* <Link href="/candidates-dashboard/cv-manager" className="upload-cv">
+//             Upload your CV
+//           </Link> */}
+//           {/* <!-- Login/Register --> */}
+//           <div className="btn-box">
+//             <a
+//               href="#"
+//               className="theme-btn btn-style-three call-modal"
+//               data-bs-toggle="modal"
+//               data-bs-target="#loginPopupModal"
+//             >
+//               Login / Register
+//             </a>
+//             {/* <Link
+//               href="/employers-dashboard/post-jobs"
+//               className="theme-btn btn-style-one"
+//             >
+//               Job Post
+//             </Link> */}
+//           </div>
+//         </div>
+//       </div>
+//     </header>
+//   );
+// };
 
-export default DefaulHeader2;
+// export default DefaulHeader2;
 //******************TO BE USED LATER****************************************** */
 // "use client";
 // import Link from "next/link";
@@ -163,3 +163,113 @@ export default DefaulHeader2;
 // };
 
 // export default DefaulHeader2;
+"use client";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import HeaderNavContent from "./HeaderNavContent";
+import Image from "next/image";
+import axios from "axios";
+
+const DefaulHeader2 = () => {
+  const [navbar, setNavbar] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [dashboardLink, setDashboardLink] = useState("/dashboard");
+
+  const changeBackground = () => {
+    if (window.scrollY >= 10) {
+      setNavbar(true);
+    } else {
+      setNavbar(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", changeBackground);
+
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        setIsLoggedIn(true);
+        try {
+          const token = await user.getIdToken();
+          const response = await axios.get(
+            "https://founders-clinic-backend.onrender.com/api/user/getRole",
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          const role = response.data.role;
+
+          const navItems = {
+            Enterprise: "/employers-dashboard/dashboard",
+            Professional: "/candidates-dashboard/dashboard",
+            Intern: "/intern-dashboard/dashboard",
+            Investor: "/investors-dashboard/dashboard",
+            "Networking Community": "/networking-dashboard/dashboard",
+          };
+
+          setDashboardLink(navItems[role] || "/dashboard");
+        } catch (error) {
+          console.error("Error fetching role:", error);
+        }
+      } else {
+        setIsLoggedIn(false);
+        setDashboardLink("/dashboard");
+      }
+    });
+
+    return () => {
+      window.removeEventListener("scroll", changeBackground);
+      unsubscribe();
+    };
+  }, []);
+
+  return (
+    <header
+      className={`main-header ${
+        navbar ? "fixed-header animated slideInDown" : ""
+      }`}
+    >
+      <div className="main-box">
+        <div className="nav-outer">
+          <div className="logo-box">
+            <div className="logo">
+              <Link href="/">
+                <Image
+                  width={154}
+                  height={50}
+                  src="/images/logo.svg"
+                  alt="brand"
+                />
+              </Link>
+            </div>
+          </div>
+          <HeaderNavContent />
+        </div>
+        <div className="outer-box">
+          <div className="btn-box">
+            {isLoggedIn ? (
+              <Link href={dashboardLink} className="theme-btn btn-style-three">
+                Dashboard
+              </Link>
+            ) : (
+              <a
+                href="#"
+                className="theme-btn btn-style-three call-modal"
+                data-bs-toggle="modal"
+                data-bs-target="#loginPopupModal"
+              >
+                Login / Register
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+};
+
+export default DefaulHeader2;
