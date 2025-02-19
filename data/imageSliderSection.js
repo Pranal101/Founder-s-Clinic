@@ -8,7 +8,7 @@
 export const imageSliderText = [
   {
     key: 1,
-    imageUrl: "/images/slider1.jpg",
+    imageUrl: "/images/slider1.jpeg",
     textOne: "Welcome to Founders' Clinic",
     textTwo: "A Revolutionary B2P (Business to Professional) Platform",
     textThree:
@@ -16,7 +16,7 @@ export const imageSliderText = [
   },
   {
     key: 2,
-    imageUrl: "/images/slider2.jpg",
+    imageUrl: "/images/slider2.jpeg",
     textOne: "Welcome to Founders' Clinic",
     textTwo: "AI-Optimized Matchmaking of MSMEs and Professional Experts",
     textThree:
@@ -24,7 +24,7 @@ export const imageSliderText = [
   },
   {
     key: 3,
-    imageUrl: "/images/slider3.jpg",
+    imageUrl: "/images/slider3.jpeg",
     textOne: "Welcome to Founders' Clinic",
     textTwo: `An Ecosystem For Startups & MSME`,
     // textTwo:
@@ -34,7 +34,7 @@ export const imageSliderText = [
   },
   {
     key: 4,
-    imageUrl: "/images/slider4.jpg",
+    imageUrl: "/images/slider4.jpeg",
     textOne: "Welcome to Founders' Clinic",
     textTwo: `An Ecosystem For Startups & MSME`,
     // textTwo:
@@ -44,7 +44,7 @@ export const imageSliderText = [
   },
   {
     key: 5,
-    imageUrl: "/images/slider5.jpg",
+    imageUrl: "/images/slider5.jpeg",
     textOne: "Welcome to Founders' Clinic",
     textTwo: `An Ecosystem For Startups & MSME`,
     // textTwo:

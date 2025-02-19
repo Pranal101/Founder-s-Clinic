@@ -129,7 +129,7 @@ const index = () => {
       <section className="features-section">
         <div className="auto-container">
           <div className="sec-title text-center">
-            <h2 className="fw-700">User Segments</h2>
+            {/* <h2 className="fw-700">User Segments</h2> */}
             {/* <div className="text">
               Lorem ipsum dolor sit amet elit, sed do eiusmod tempor
             </div> */}
